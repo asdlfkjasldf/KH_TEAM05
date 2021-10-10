@@ -1,10 +1,11 @@
 package com.indimoa.board.model.dao;
 
+
+import static com.indimoa.board.comm.JDBCTemplate.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Statement;
-import java.util.ArrayList;
+import java.sql.SQLException;
 
 import com.indimoa.board.comm.JDBCTemplate;
 import com.indimoa.board.member.model.vo.Member;
@@ -12,160 +13,130 @@ import com.indimoa.board.member.model.vo.Member;
 public class MemberDao {
 
 	public MemberDao() {}
-	//login
-	public int login(Connection conn, String mm_id, String mm_pwd) {
-		int result = 0;
+	public Member loginMember(Connection conn, String id, String passwd) {
+		Member m = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
 		String query = "select mm_id, mm_pwd from member where mm_id like ? and mm_pwd like ?";
-		PreparedStatement ps = null;
-		ResultSet rs = null;
 		try {
-			ps = conn.prepareStatement(query);
-			ps.setString(1, mm_id);
-			ps.setString(2, mm_pwd);
-			rs = ps.executeQuery();
-			if(rs.next()) {
-				result = 1;  //로그인성공-1, 실패-0
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, id); // 첫번째 ‘?’ 에 id 값 대입
+			pstmt.setString(2, passwd); // 두번째 ‘?’ 에 passwd 값 대입
+			rset = pstmt.executeQuery();
+			if (rset.next()) { // 첫 열은 head 컬럼이므로 next() 로 실제 컬럼값을 가져온다.
+				m = new Member();
+				m.setMm_id(rset.getString("mm_id")); // 받아온 ID 컬럼 값을 member변수에 대입
+				m.setMm_pwd(rset.getString("mm_pwd"));
+				m.setMm_name(rset.getString("mm_name"));
+				m.setMm_email(rset.getString("mm_email"));
+				m.setMm_phn(rset.getString("mm_phn"));
+				m.setMm_com(rset.getString("mm_com"));
+				m.setMm_profile(rset.getString("mm_profile"));
+				m.setMm_nickname(rset.getString("mm_nickname"));
+				m.setMm_membership(rset.getString("mm_membership"));
 			}
-		} catch (Exception e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally {
-			JDBCTemplate.close(rs);
-			JDBCTemplate.close(ps);
-			
+		} finally { // ResultSet과 PreparedStatement 리소스를 반환
+			close(rset);
+			close(pstmt);
 		}
-		return result;
+		return m; // 조회하여 가져온 Member 객체를 반환한다
 	}
-	public int checkDuplicatedMember(Connection conn, Member vo) {
-		int result = -1;
+
+	// ID 값의 중복을 조회하는 메소드
+	public int dupIdChk(Connection conn, String id) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int result = 0;
+		// id로 테이블을 조회하여 있으면 1 이상, 없으면 0인 쿼리 작성
 		String query = "select mm_id from member where mm_id like ?";
-		PreparedStatement ps = null;
-		ResultSet rs = null;
 		try {
-			ps = conn.prepareStatement(query);
-			ps.setString(1, vo.getMm_id());
-			rs = ps.executeQuery();
-			if(rs.next()) {
-				result = 2;
-			}else {
-				result = 0;
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, id);
+			rset = pstmt.executeQuery();
+			if (rset.next()) {
+				result = rset.getInt(1); // rset의 첫 컬럼의 숫자값을 가져온다
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}finally {
-			JDBCTemplate.close(rs);
-			JDBCTemplate.close(ps);
-		}
-		return result;
-	}
-	//create
-	public int insertMember(Connection conn, Member vo) {
-		int result = -1;
-		String query = "insert into member(mm_id, mm_pwd, mm_email, mm_phn, mm_com, mm_enrolldate, mm_profile, mm_nickname, mm_membership) values (?, ?, ?, ?, ?, sysdate, ?, ?, ?)";
-		PreparedStatement ps = null;
-		try {
-			ps = conn.prepareStatement(query);
-			ps.setString(1, vo.getMm_id());
-			ps.setString(2, vo.getMm_pwd());
-			ps.setString(3, vo.getMm_email());
-			ps.setString(4, vo.getMm_phn());
-			ps.setString(5, vo.getMm_com());
-			ps.setString(6, vo.getMm_profile());
-			ps.setString(7, vo.getMm_nickname());
-			ps.setString(8, vo.getMm_membership());
-			result = ps.executeUpdate();
-		}catch (Exception e) {
-			//-1
-			System.out.println("연결 실패");
+		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			JDBCTemplate.close(ps);
+			close(rset);
+			close(pstmt);
 		}
 		return result;
 	}
-	//read
-	public ArrayList<Member> selectMember(Connection conn) {
-		ArrayList<Member> voList = null;
+
+	// DataBase에 Member 객체를 추가하는 메소드
+	public int insertMember(Connection conn, Member m) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = "insert into member(mm_id, mm_pwd, mm_name, mm_email, mm_phn, mm_com, mm_enrolldate, mm_profile, mm_nickname, mm_membership) values (?, ?, ?, ?, ?, ?, sysdate, ?, ?, ?)";
 		try {
-			Statement st = conn.createStatement();
-			String query = "SELECT * FROM member";
-			ResultSet rs = st.executeQuery(query);
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, m.getMm_id());
+			pstmt.setString(2, m.getMm_pwd());
+			pstmt.setString(3, m.getMm_name());
+			pstmt.setString(4, m.getMm_email());
+			pstmt.setString(5, m.getMm_phn());
+			pstmt.setString(6, m.getMm_com());
+			pstmt.setString(7, m.getMm_profile());
+			pstmt.setString(8, m.getMm_nickname());
+			pstmt.setString(9, m.getMm_membership());
 			
-			voList = new ArrayList<Member>();
-			while(rs.next()) {
-				Member vo = new Member();
-				vo.setMm_id(rs.getString("mm_id"));
-				vo.setMm_pwd(rs.getString("mm_pwd"));
-				vo.setMm_email(rs.getString("mm_email"));
-				vo.setMm_phn(rs.getString("mm_phn"));
-				vo.setMm_com(rs.getString("mm_com"));
-				vo.setMm_enrolldate(rs.getDate("mm_enroll_date"));
-				vo.setMm_profile(rs.getString("mm_profile"));
-				vo.setMm_nickname(rs.getString("mm_nickname"));
-				vo.setMm_membership(rs.getString("mm_membership"));
-				voList.add(vo);
-			}
-			rs.close();
-			st.close();
-		} catch (Exception e) {
+			// executeupdate() 는 실행 결과를 반영된 행의 개수로 리턴하므로
+			// 1 이상은 실행 성공, 0 이하(구문 에러 포함)는 실패이다.
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println(e.getMessage());
+		} finally {
+			close(pstmt);
 		}
-		return voList;
+		return result;
 	}
-	//update
-	public int updateMember(Connection conn, Member vo, String checkPwd) {
-		int result = -1;
+
+	// 기존 사용자의 정보를 수정하여 DataBase의 데이터를 수정하는 메소드
+	public int updateMember(Connection conn, Member m) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = "update member set mm_pwd = ?, mm_email = ?, mm_phn = ?, mm_com = ?, mm_enroll_date = ?, mm_profile = ?, mm_nickname = ?, mm_membership = ? where mm_id like ?";
 		try {
-			String check = "SELECT * FROM member WHERE mm_pwd like ?";
-			PreparedStatement ps = conn.prepareStatement(check);
-			ps.setString(1, vo.getMm_id());
-			ResultSet rs = ps.executeQuery();
-			/*
-			 * return : 0 - 변경 성공, 1 = pwd불일치, -1 에러
-			 */
-			if(rs.next()) {
-				String dbPwd = rs.getString(1);
-				if(checkPwd == dbPwd) {
-					String query = "update member set mm_pwd = ?, mm_email = ?, mm_phn = ?, mm_com = ?, mm_enroll_date = ?, mm_profile = ?, mm_nickname = ?, mm_membership = ? where mm_id like ?";
-					ps = conn.prepareStatement(query);
-					ps.setString(1, vo.getMm_pwd());
-					ps.setString(2, vo.getMm_email());
-					ps.setString(3, vo.getMm_phn());
-					ps.setString(4, vo.getMm_com());
-					ps.setDate(5, vo.getMm_enrolldate());
-					ps.setString(6, vo.getMm_profile());
-					ps.setString(7, vo.getMm_nickname());
-					ps.setString(8, vo.getMm_membership());
-					ps.close();
-					result = 0;
-				}else {
-					//mm_pwd 틀림
-					result = -1;
-				}
-			}
-		} catch (Exception e) {
-			System.out.println("연결 실패");
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, m.getMm_pwd());
+			pstmt.setString(2, m.getMm_name());
+			pstmt.setString(3, m.getMm_email());
+			pstmt.setString(4, m.getMm_phn());
+			pstmt.setString(5, m.getMm_com());
+			pstmt.setString(6, m.getMm_profile());
+			pstmt.setString(7, m.getMm_nickname());
+			pstmt.setString(8, m.getMm_membership());
+			pstmt.setString(9, m.getMm_id());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	// 기존 사용자를 DataBase에서 삭제하는 메소드
+	public int deleteMember(Connection conn, String id) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = "delete from member where mm_id like ? and mm_pwd like ?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, id);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
 		}
 		return result;
 	}
 	
-	//delete
-	public int deleteMember(Connection conn, String id, String pwd) {
-		int result = -1;
-		try {
-			String query = "delete from member where mm_id like ? and mm_pwd like ?";
-			PreparedStatement ps = conn.prepareStatement(query);
-			ps.setString(1, id);
-			ps.setString(2, pwd);
-			result = ps.executeUpdate();
-			ps.close();
-		} catch (Exception e) {
-			System.out.println("연결 실패");
-			e.printStackTrace();
-		}
-		return result;
-	}
 	public int updateMembershipMember(Connection conn, String id, String membership) {
 		int result = -1;
 		String query = "update member set membership = membership + ? where mm_id like ?";
@@ -178,8 +149,10 @@ public class MemberDao {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
-			JDBCTemplate.close(ps);
+			close(ps);
 		}
 		return result;
 	}
+	
+	
 }
