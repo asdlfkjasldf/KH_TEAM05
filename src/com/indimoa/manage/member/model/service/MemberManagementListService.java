@@ -34,6 +34,18 @@ public class MemberManagementListService {
 		return volist;
 	}
 	
+	
+	
+	public ArrayList<Member> selectBoardList(String membersearch) {
+		ArrayList<Member> volist = null;
+		Connection conn = JdbcTemplate.getConnection();
+		
+		volist = new MemberManagementListDao().searchMember(conn, membersearch);
+		
+		JdbcTemplate.close(conn);
+		return volist;
+	}
+	
 //	public ArrayList<Member> insertBoardList(Member vo) {
 //		int result = -1;
 //		Connection conn = JdbcTemplate.getConnection();

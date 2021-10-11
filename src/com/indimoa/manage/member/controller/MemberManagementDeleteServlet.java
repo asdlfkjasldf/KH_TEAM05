@@ -30,10 +30,10 @@ public class MemberManagementDeleteServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-//	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		doPost(request, response);
-//		
-//	}
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doPost(request, response);
+		
+	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
@@ -41,23 +41,47 @@ public class MemberManagementDeleteServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
+		
+		// 입력한 데이터 수신
+		// 여러개의 값을 수신할 때 getParameterValues()를 이용
+		String checkNames[] = request.getParameterValues("checkName");
+		
 		PrintWriter out = response.getWriter();
 		
-		// 화면입력 전달되어 옴. request - parameter (==변수명) : t, c
-		// http://localhost:8090/myBoard/boardwrite.kh?c=내용부분입력된값이지요&t=뭐라해야할지모를제목
-		String mm_id = (request.getParameter("id"));  //내용부분입력된값이지요
-		
-		out.println("입력된 id: "+ mm_id);
-
-
-		Member vo = new Member(mm_id);		
-		
-		int result = new MemberManagementListService().deleteMemberFromManagement(vo);
-		if(result == 0) {
-			out.println("<br>게시글 삭제되지 않았습니다.");
+		out.println("<html><head></head><body>");
+		if(checkNames == null) {
+			out.println("선택한 항목이 없습니다.");
 		} else {
-			out.println("<br>게시글 삭제되었습니다.");
+			out.println("당신이 선택한 항목입니다.<br>");
+			for(String checkName: checkNames) {
+				out.println("[" + checkName + "] ");
+				
+				
+//				String mm_id = checkName;
+//				mm_id ="testuser00";
+
+				Member vo = new Member(checkName);		
+				
+				int result = new MemberManagementListService().deleteMemberFromManagement(vo);
+				if(result == 0) {
+					out.println("<br>게시글 삭제되지 않았습니다.");
+				} else {
+					out.println("<br>게시글 삭제되었습니다.");
+				}
+				
+				
+				
+			}
 		}
+		out.println("<br><a href='javascript.history.go(-1)'>다시</a>");
+		out.println("</body></html>");
+		
+		
+//		 화면입력 전달되어 옴. request - parameter (==변수명) : t, c
+		// http://localhost:8090/myBoard/boardwrite.kh?c=내용부분입력된값이지요&t=뭐라해야할지모를제목
+		  //내용부분입력된값이지요
+		
+
 		
 	}
 

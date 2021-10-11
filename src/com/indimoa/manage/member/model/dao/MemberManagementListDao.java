@@ -38,6 +38,52 @@ public class MemberManagementListDao {
 
 		return result;
 	}
+	public ArrayList<Member> searchMember(Connection conn, String membersearch) {
+		ArrayList<Member> volist = null;
+		
+		String sql = "select * from MEMBER where mm_id like '%?%'";
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, membersearch);
+			rset = pstmt.executeQuery();
+			volist = new ArrayList<Member>();
+			if (rset.next()) {
+				do {
+					Member vo = new Member();
+					vo.setMm_id(rset.getString("mm_id"));
+					vo.setMm_pwd(rset.getString("mm_pwd"));
+					vo.setMm_email(rset.getString("mm_email"));
+					vo.setMm_phn(rset.getString("mm_phn"));
+					vo.setMm_com(rset.getString("mm_com"));
+					vo.setMm_enrolldate(rset.getTimestamp("mm_enrolldate"));
+					vo.setMm_profile(rset.getString("mm_profile"));
+					vo.setMm_nickname(rset.getString("mm_nickname"));
+					vo.setMm_membership(rset.getString("mm_membership"));
+					vo.setMm_name(rset.getString("mm_name"));
+					volist.add(vo);
+				} while (rset.next());
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				rset.close();
+				pstmt.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		System.out.println("[admin]-- 리턴은" + volist);
+		return volist;
+	}
+	
+	
+	
 
 	public ArrayList<Member> selectBoardList(Connection conn, int startRnum, int endRnum) {
 		ArrayList<Member> volist = null;
@@ -89,7 +135,7 @@ public class MemberManagementListDao {
 
 		String sqlInsert = "INSERT INTO MEMBER"
 				+ "(MM_ID, MM_PWD, MM_EMIAL, MM_PHN, MM_COM , MM_ENROLLDATE, MM_PROFILE, MM_NICKNAME, MM_MEMBERSHIP, MM_NAME)"
-				+ " VALUES(?,?,?,?,?,SYSTIMESTAMP, ?,?,?,?)";
+				+ " VALUES(?,?,?,?,?,SYSTIMESTAMP, ?,?,?,?,?)";
 		PreparedStatement pstmt = null;
 		
 
@@ -105,6 +151,7 @@ public class MemberManagementListDao {
 					pstmt.setString(7, vo.getMm_nickname());
 					pstmt.setString(8, vo.getMm_membership());
 					pstmt.setString(9, vo.getMm_name());
+					pstmt.setInt(10, vo.getMm_point());
 					
 					result = pstmt.executeUpdate();
 			}catch(Exception e){
@@ -121,8 +168,7 @@ public class MemberManagementListDao {
 		int result = -1;
 		ArrayList<Member> volist = null;
 		
-		String sqlDelete = "DELETE column from MEMBER"
-				+ "WHERE MM_ID = ?";
+		String sqlDelete = "DELETE FROM MEMBER WHERE MM_ID = ?";
 				
 				
 		

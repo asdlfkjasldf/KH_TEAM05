@@ -24,7 +24,8 @@ public class Member {
 	private String mm_nickname;
 	private String mm_membership;
 	private String mm_name;
-	private int mm_point;
+	private int	   mm_point;
+
 
 	public Member() {}
 
@@ -56,7 +57,9 @@ public class Member {
 	public String toString() {
 		return "Member [mm_id=" + mm_id + ", mm_pwd=" + mm_pwd + ", mm_email=" + mm_email + ", mm_phn="
 				+ mm_phn + ", mm_com=" + mm_com + ", mm_enrolldate=" + mm_enrolldate + ", mm_profile=" + mm_profile
-				+ ", mm_nickname=" + mm_nickname + ", mm_membership=" + mm_membership + ", mm_name=" + mm_name + ", mm_point=" + mm_point + "]";
+				+ ", mm_nickname=" + mm_nickname + ", mm_membership=" + mm_membership + ", mm_name=" + mm_name + 
+				", mm_point=" + mm_point + "]";
+
 	}
 
 	public String getMm_id() {
@@ -145,5 +148,14 @@ public class Member {
 	public void setPoint(int point) {
 		this.mm_point = point;
 	}
+
+	public int getMm_point() {
+		return mm_point;
+	}
+
+	public void setMm_point(int mm_point) {
+		this.mm_point = mm_point;
+	}
+	
 
 }
