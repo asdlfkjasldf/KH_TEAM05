@@ -13,7 +13,7 @@ import com.indimoa.member.model.vo.Member;
 /**
  * Servlet implementation class MemberInsertServlet
  */
-@WebServlet("/MemberInsertServlet")
+@WebServlet("/memberinsert")
 public class MemberInsertServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -37,9 +37,11 @@ public class MemberInsertServlet extends HttpServlet {
 		String email = request.getParameter("mm_email");
 		String phn = request.getParameter("mm_phn");
 		String com = request.getParameter("mm_com");
+		String enrolldate = request.getParameter("mm_enrolldate");
 		String profile = request.getParameter("mm_profile");
 		String nickname = request.getParameter("mm_nickname");
 		String membership = request.getParameter("mm_membership");
+		String point = request.getParameter("mm_point");
 		int result = mservice.insertMember(new Member());   //TODO
 		if (result > 0) {
 			response.sendRedirect("index.jsp");

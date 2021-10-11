@@ -13,7 +13,7 @@ import com.indimoa.member.model.service.MemberService;
 /**
  * Servlet implementation class MemberDeleteServlet
  */
-@WebServlet("/MemberDeleteServlet")
+@WebServlet("/memberdelete")
 public class MemberDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

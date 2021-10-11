@@ -17,7 +17,7 @@ import com.indimoa.member.model.vo.Member;
 /**
  * Servlet implementation class MemberUpdateServlet
  */
-@WebServlet("/MemberUpdateServlet")
+@WebServlet("/memberupdate")
 public class MemberUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -43,9 +43,11 @@ public class MemberUpdateServlet extends HttpServlet {
 				String email = request.getParameter("mm_email");
 				String phn = request.getParameter("mm_phn");
 				String com = request.getParameter("mm_com");
+				String enrolldate = request.getParameter("mm_enrolldate");
 				String profile = request.getParameter("mm_profile");
 				String nickname = request.getParameter("mm_nickname");
 				String membership = request.getParameter("mm_membership");
+				String point = request.getParameter("mm_point");
 				PrintWriter out = response.getWriter();
 
 				if (m != null && m.getMm_id().equals(id)) { // 만약 ID 값이 기존값과 일치한다면 수정 실행

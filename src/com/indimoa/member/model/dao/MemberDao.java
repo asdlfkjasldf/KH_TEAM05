@@ -33,6 +33,7 @@ public class MemberDao {
 				m.setMm_profile(rset.getString("mm_profile"));
 				m.setMm_nickname(rset.getString("mm_nickname"));
 				m.setMm_membership(rset.getString("mm_membership"));
+				m.setPoint(rset.getInt("mm_point"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -70,7 +71,7 @@ public class MemberDao {
 	public int insertMember(Connection conn, Member m) {
 		PreparedStatement pstmt = null;
 		int result = 0;
-		String query = "insert into member(mm_id, mm_pwd, mm_name, mm_email, mm_phn, mm_com, mm_enrolldate, mm_profile, mm_nickname, mm_membership) values (?, ?, ?, ?, ?, ?, sysdate, ?, ?, ?)";
+		String query = "insert into member(mm_id, mm_pwd, mm_name, mm_email, mm_phn, mm_com, mm_enrolldate, mm_profile, mm_nickname, mm_membership, mm_point) values (?, ?, ?, ?, ?, ?, sysdate, ?, ?, ?, ?)";
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, m.getMm_id());
@@ -82,6 +83,7 @@ public class MemberDao {
 			pstmt.setString(7, m.getMm_profile());
 			pstmt.setString(8, m.getMm_nickname());
 			pstmt.setString(9, m.getMm_membership());
+			pstmt.setInt(10, m.getPoint());
 			
 			// executeupdate() 는 실행 결과를 반영된 행의 개수로 리턴하므로
 			// 1 이상은 실행 성공, 0 이하(구문 에러 포함)는 실패이다.
@@ -98,7 +100,7 @@ public class MemberDao {
 	public int updateMember(Connection conn, Member m) {
 		PreparedStatement pstmt = null;
 		int result = 0;
-		String query = "update member set mm_pwd = ?, mm_email = ?, mm_phn = ?, mm_com = ?, mm_enroll_date = ?, mm_profile = ?, mm_nickname = ?, mm_membership = ? where mm_id like ?";
+		String query = "update member set mm_pwd = ?, mm_email = ?, mm_phn = ?, mm_com = ?, mm_enroll_date = ?, mm_profile = ?, mm_nickname = ?, mm_membership = ?, mm_point = ? where mm_id like ?";
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, m.getMm_pwd());
@@ -109,7 +111,8 @@ public class MemberDao {
 			pstmt.setString(6, m.getMm_profile());
 			pstmt.setString(7, m.getMm_nickname());
 			pstmt.setString(8, m.getMm_membership());
-			pstmt.setString(9, m.getMm_id());
+			pstmt.setInt(9, m.getPoint());
+			pstmt.setString(10, m.getMm_id());
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
