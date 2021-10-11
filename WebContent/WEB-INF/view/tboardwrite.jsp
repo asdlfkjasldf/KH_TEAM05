@@ -10,11 +10,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>BoardWrite</title>
+<title>팁공유 게시판</title>
 </head>
 <body>
     <h1>게시판</h1>
-<form method="get" action="./tboardWrite.do">
+<form method="get" action="./tboardwrite.do">
     <fieldset>
         <input type="hidden" name="bno" value="<%=bno%>" readonly>
       제목 :  <input type="text"  autofocus name="title" placeholder="제목" required><br>
