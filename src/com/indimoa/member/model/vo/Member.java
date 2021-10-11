@@ -29,7 +29,7 @@ public class Member {
 	public Member() {}
 
 	public Member(String mm_id, String mm_pwd, String mm_email, String mm_phn, String mm_com,
-			Timestamp mm_enrolldate, String mm_profile, String mm_nickname, String mm_membership, String mm_name) {
+			Timestamp mm_enrolldate, String mm_profile, String mm_nickname, String mm_membership, String mm_name, int mm_point) {
 		super();
 		this.mm_id = mm_id;
 		this.mm_pwd = mm_pwd;

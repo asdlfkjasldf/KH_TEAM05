@@ -1,6 +1,8 @@
 package com.indimoa.member.controller;
 
 import java.io.IOException;
+import java.sql.Timestamp;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,7 +15,7 @@ import com.indimoa.member.model.vo.Member;
 /**
  * Servlet implementation class EnrollMemberServlet
  */
-@WebServlet("/enrollmember")
+@WebServlet("/enrollmember")   //회원가입
 public class EnrollMemberServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -42,6 +44,7 @@ public class EnrollMemberServlet extends HttpServlet {
 		String nickname = request.getParameter("mm_nickname");
 		String membership = request.getParameter("mm_membership");
 		String point = request.getParameter("mm_point");
+		
 		int result = mservice.insertMember(new Member());   //TODO
 		if (result > 0) {
 			response.sendRedirect("index.jsp");
