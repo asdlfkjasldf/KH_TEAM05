@@ -7,12 +7,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
-import com.indimoa.game.model.vo.GameVO;
+import com.indimoa.game.model.vo.Game;
 
-public class GameDAO {
+public class GameDao {
 
-	public GameVO getGameVO(Connection conn, int bno) {
-		GameVO vo = null;
+	public Game getGame(Connection conn, int bno) {
+		Game vo = null;
 		String sql = "select GG_NO,GG_TITLE,GG_PRICE,GG_SYSTEM_REQUIREMENTS,GG_GENRE,GG_DEVELOPER,GG_RELEASE_DATE,GG_PUBLISHER,GG_LANGUAGES,GG_INFORMATION"
 				+ " from GameVO where GG_NO = ?";
 		// GG_NO
@@ -33,7 +33,7 @@ public class GameDAO {
 			pstmt.setInt(1, bno);
 			rset = pstmt.executeQuery();
 			if (rset.next()) {
-				vo = new GameVO();
+				vo = new Game();
 				vo.setGgNo(rset.getInt("GG_NO"));
 				vo.setGgTitle(rset.getNString("GG_TITLE"));
 				vo.setGgPrice(rset.getNString("GG_PRICE"));
@@ -79,8 +79,8 @@ public class GameDAO {
 	
 	
 	
-	public ArrayList<GameVO> selectGmaeList(Connection conn) {
-		ArrayList<GameVO> volist = null;
+	public ArrayList<Game> selectGmaeList(Connection conn) {
+		ArrayList<Game> volist = null;
 		String sql = "select * from game";
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -88,11 +88,11 @@ public class GameDAO {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			rset = pstmt.executeQuery();
-			volist = new ArrayList<GameVO>();
+			volist = new ArrayList<Game>();
 			if (rset.next()) {
 				do {
-					GameVO vo = new GameVO();
-					vo = new GameVO();
+					Game vo = new Game();
+					vo = new Game();
 					vo.setGgNo(rset.getInt("GG_NO"));
 					vo.setGgTitle(rset.getString("GG_TITLE"));
 					vo.setGgPrice(rset.getString("GG_PRICE"));
@@ -152,8 +152,8 @@ public class GameDAO {
 	
 	
 //게임 읽기 메소드
-	public ArrayList<GameVO> readGmaeListAll(Connection conn) {
-		ArrayList<GameVO> volist = null;
+	public ArrayList<Game> readGmaeListAll(Connection conn) {
+		ArrayList<Game> volist = null;
 		String sql = "select * from GAME";
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -163,9 +163,9 @@ public class GameDAO {
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				System.out.println("1");
-				volist = new ArrayList<GameVO>();
+				volist = new ArrayList<Game>();
 				do {
-					GameVO vo = new GameVO();
+					Game vo = new Game();
 					
 					vo.setGgNo(rs.getInt("GG_NO"));
 					vo.setGgTitle(rs.getString("GG_TITLE"));
@@ -198,9 +198,9 @@ public class GameDAO {
 		System.out.println("리턴은"+ volist);
 		return volist;
 	}
-	public int insertGameList(Connection conn, GameVO vo) {
+	public int insertGameList(Connection conn, Game vo) {
 		int result =-1;
-		ArrayList<GameVO> volist = null;
+		ArrayList<Game> volist = null;
 
 		String sqlInsert = "INSERT INTO GAME"
 				+ "(GG_NO, GG_TITLE, GG_PRICE, GG_SYSTEM_REQUIREMENTS, GG_GENRE , MM_ENRGG_DEVELOPEROLLDATE, GG_RELEASE_DATE, GG_PUBLISHER, GG_LANGUAGES, GG_INFORMATION)"
@@ -231,6 +231,9 @@ public class GameDAO {
 		System.out.println("[admin]-- 리턴은" + volist);
 		return result;
 	}
+	
+	
+	//다른 방법
 	
 
 }

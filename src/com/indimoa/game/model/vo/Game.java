@@ -2,7 +2,7 @@ package com.indimoa.game.model.vo;
 
 import java.sql.Date;
 
-public class GameVO {
+public class Game {
 	// GG_NO
 //	 GG_TITLE VARCHAR(20) NOT NULL,
 //    GG_PRICE NUMBER(11) NOT NULL,
@@ -25,7 +25,7 @@ public class GameVO {
 	private String ggLanguages;
 	private String ggInfomation;
 
-	public GameVO(String ggTitle, String ggPrice, String ggSystemRequirement, String ggGenre,
+	public Game(String ggTitle, String ggPrice, String ggSystemRequirement, String ggGenre,
 			String ggDeveloper, Date ggReleaseDate, String ggPublisher, String ggLanguages, String ggInfomation) {
 		super();
 		this.ggTitle = ggTitle;
@@ -39,7 +39,7 @@ public class GameVO {
 		this.ggInfomation = ggInfomation;
 	}
 	
-	public GameVO(int ggNo, String ggTitle, String ggPrice, String ggSystemRequirement, String ggGenre,
+	public Game(int ggNo, String ggTitle, String ggPrice, String ggSystemRequirement, String ggGenre,
 			String ggDeveloper, Date ggReleaseDate, String ggPublisher, String ggLanguages, String ggInfomation) {
 		super();
 		this.ggNo = ggNo;
@@ -54,7 +54,7 @@ public class GameVO {
 		this.ggInfomation = ggInfomation;
 	}
 	
-	public GameVO() {
+	public Game() {
 		
 	}
 
@@ -140,7 +140,7 @@ public class GameVO {
 
 	@Override
 	public String toString() {
-		return "GameVO [ggNo=" + ggNo + ", ggTitle=" + ggTitle + ", ggPrice=" + ggPrice + ", ggSystemRequirement="
+		return "Game [ggNo=" + ggNo + ", ggTitle=" + ggTitle + ", ggPrice=" + ggPrice + ", ggSystemRequirement="
 				+ ggSystemRequirement + ", ggGenre=" + ggGenre + ", ggDeveloper=" + ggDeveloper + ", ggReleaseDate="
 				+ ggReleaseDate + ", ggPublisher=" + ggPublisher + ", ggLanguages=" + ggLanguages + ", ggInfomation="
 				+ ggInfomation + "]";
