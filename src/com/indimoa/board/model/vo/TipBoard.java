@@ -1,7 +1,5 @@
 package com.indimoa.board.model.vo;
 
-import java.sql.Date;
-
 public class TipBoard {
 
 //	TIP_NO       NOT NULL NUMBER(11)    
@@ -17,31 +15,32 @@ public class TipBoard {
 	private String gdGamedevid;
 	private String tipTitle;
 	private String tipContent;
-	private String tipDatetime;   // Date 대신 DAO에서 TO_DATE(), TO_CHAR() 
+	private String tipDatetime; // Date 대신 DAO에서 TO_DATE(), TO_CHAR()
 	private int tipVisit;
 	private int tipReply;
-	private String tipReport;
-
-	public TipBoard(int tipNo, String gdGamedevid, String tipTitle, String tipContent, int tipVisit, int tipReply,
-			String tipReport) {
-		super();
-		this.tipNo = tipNo;
-		this.gdGamedevid = gdGamedevid;
-		this.tipTitle = tipTitle;
-		this.tipContent = tipContent;
-		this.tipVisit = tipVisit;
-		this.tipReply = tipReply;
-		this.tipReport = tipReport;
-	}
+	private int tipReport;
+	private int bref;
+	private int breLevel;
+	private int breStep;
 
 	public TipBoard() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public TipBoard(String tipTitle, String tipContent, String gdGamedevid) {
+	public TipBoard(int tipNo, String gdGamedevid, String tipTitle, String tipContent, String tipDatetime, int tipVisit,
+			int tipReply, int tipReport, int bref, int breLevel, int breStep) {
+		super();
+		this.tipNo = tipNo;
+		this.gdGamedevid = gdGamedevid;
 		this.tipTitle = tipTitle;
 		this.tipContent = tipContent;
-		this.gdGamedevid = gdGamedevid;
+		this.tipDatetime = tipDatetime;
+		this.tipVisit = tipVisit;
+		this.tipReply = tipReply;
+		this.tipReport = tipReport;
+		this.bref = bref;
+		this.breLevel = breLevel;
+		this.breStep = breStep;
 	}
 
 	public int getTipNo() {
@@ -100,19 +99,44 @@ public class TipBoard {
 		this.tipReply = tipReply;
 	}
 
-	public String getTipReport() {
+	public int getTipReport() {
 		return tipReport;
 	}
 
-	public void setTipReport(String tipReport) {
+	public void setTipReport(int tipReport) {
 		this.tipReport = tipReport;
+	}
+
+	public int getBref() {
+		return bref;
+	}
+
+	public void setBref(int bref) {
+		this.bref = bref;
+	}
+
+	public int getBreLevel() {
+		return breLevel;
+	}
+
+	public void setBreLevel(int breLevel) {
+		this.breLevel = breLevel;
+	}
+
+	public int getBreStep() {
+		return breStep;
+	}
+
+	public void setBreStep(int breStep) {
+		this.breStep = breStep;
 	}
 
 	@Override
 	public String toString() {
 		return "TipBoard [tipNo=" + tipNo + ", gdGamedevid=" + gdGamedevid + ", tipTitle=" + tipTitle + ", tipContent="
 				+ tipContent + ", tipDatetime=" + tipDatetime + ", tipVisit=" + tipVisit + ", tipReply=" + tipReply
-				+ ", tipReport=" + tipReport + "]";
+				+ ", tipReport=" + tipReport + ", bref=" + bref + ", breLevel=" + breLevel + ", breStep=" + breStep
+				+ "]";
 	}
 
 }

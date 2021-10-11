@@ -6,14 +6,14 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 
 import com.indimoa.common.JdbcTemplate;
-import com.indimoa.board.model.vo.TipBoard;
+import com.indimoa.board.model.vo.GbBoard;
 
-public class TipBoardDao {
-	public TipBoard getBoard(Connection conn, int bno) {
-		TipBoard vo = null;
-		String sql = "select TIP_NO,GD_GAMEDEVID,TIP_TITLE,TIP_CONTENT,TIP_DATETIME, TIP_VISIT,TIP_REPLY,TIP_REPORT,bref, bre_level, Bre_step "
-				+ " from Tip_Board where TIP_NO = ?";
-//TO_CHAR(TIP_DATETIME, 'yyyy-mm-dd')
+public class GbBoardDao {
+	public GbBoard getBoard(Connection conn, int bno) {
+		GbBoard vo = null;
+		String sql = "select GB_NO, GD_GAMEDEVID, HE_HEADING, GB_TITLE, GB_CONTENT, GB_DATETIME, GB_VISIT, GB_REPLY, GB_REPORT, bref, bre_level, Bre_step "
+				+ " from GAME_DEV_BOARD where GB_NO = ?";
+
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		try {
@@ -21,15 +21,16 @@ public class TipBoardDao {
 			pstmt.setInt(1, bno);
 			rset = pstmt.executeQuery();
 			if (rset.next()) {
-				vo = new TipBoard();
-				vo.setTipNo(rset.getInt("TIP_NO"));
+				vo = new GbBoard();
+				vo.setGbNo(rset.getInt("GB_NO"));
 				vo.setGdGamedevid(rset.getString("GD_GAMEDEVID"));
-				vo.setTipTitle(rset.getString("TIP_TITLE"));
-				vo.setTipContent(rset.getString("TIP_CONTENT"));
-				vo.setTipDatetime(rset.getString("TIP_DATETIME"));
-				vo.setTipVisit(rset.getInt("TIP_VISIT"));
-				vo.setTipReply(rset.getInt("TIP_REPLY"));
-				vo.setTipReport(rset.getInt("TIP_REPORT"));
+				vo.setHeHeading(rset.getString("HE_HEADING"));
+				vo.setGbTitle(rset.getString("GB_TITLE"));
+				vo.setGbContent(rset.getString("GB_CONTENT"));
+				vo.setGbDatetime(rset.getString("GB_DATETIME"));
+				vo.setGbVisit(rset.getInt("GB_VISIT"));
+				vo.setGbReply(rset.getInt("GB_REPLY"));
+				vo.setGbReport(rset.getInt("GB_REPORT"));
 				vo.setBref(rset.getInt("BREF"));
 				vo.setBreLevel(rset.getInt("BRE_LEVEL"));
 				vo.setBreStep(rset.getInt("BRE_STEP"));
@@ -45,7 +46,7 @@ public class TipBoardDao {
 
 	public int getBoardCount(Connection conn) {
 		int result = 0;
-		String sql = "select count(tip_no) from Tip_Board";
+		String sql = "select count(gb_no) from GAME_DEV_BOARD";
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		try {
@@ -63,29 +64,30 @@ public class TipBoardDao {
 		return result;
 	}
 
-	public ArrayList<TipBoard> selectBoardList(Connection conn) {
-		ArrayList<TipBoard> volist = null;
+	public ArrayList<GbBoard> selectBoardList(Connection conn) {
+		ArrayList<GbBoard> volist = null;
 
-		String sql = "select * from Tip_Board";
+		String sql = "select * from GAME_DEV_BOARD";
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 
 		try {
 			pstmt = conn.prepareStatement(sql);
 			rset = pstmt.executeQuery();
-			volist = new ArrayList<TipBoard>();
+			volist = new ArrayList<GbBoard>();
 			if (rset.next()) {
 				do {
-					TipBoard vo = new TipBoard();
-					vo = new TipBoard();
-					vo.setTipNo(rset.getInt("TIP_NO"));
+					GbBoard vo = new GbBoard();
+					vo = new GbBoard();
+					vo.setGbNo(rset.getInt("GB_NO"));
 					vo.setGdGamedevid(rset.getString("GD_GAMEDEVID"));
-					vo.setTipTitle(rset.getString("TIP_TITLE"));
-					vo.setTipContent(rset.getString("TIP_CONTENT"));
-					vo.setTipDatetime(rset.getString("TIP_DATETIME"));
-					vo.setTipVisit(rset.getInt("TIP_VISIT"));
-					vo.setTipReply(rset.getInt("TIP_REPLY"));
-					vo.setTipReport(rset.getInt("TIP_REPORT"));
+					vo.setHeHeading(rset.getString("HE_HEADING"));
+					vo.setGbTitle(rset.getString("GB_TITLE"));
+					vo.setGbContent(rset.getString("GB_CONTENT"));
+					vo.setGbDatetime(rset.getString("GB_DATETIME"));
+					vo.setGbVisit(rset.getInt("GB_VISIT"));
+					vo.setGbReply(rset.getInt("GB_REPLY"));
+					vo.setGbReport(rset.getInt("GB_REPORT"));
 					vo.setBref(rset.getInt("BREF"));
 					vo.setBreLevel(rset.getInt("BRE_LEVEL"));
 					vo.setBreStep(rset.getInt("BRE_STEP"));
@@ -102,11 +104,11 @@ public class TipBoardDao {
 		return volist;
 	}
 
-	public ArrayList<TipBoard> selectBoardList(Connection conn, int start, int end) {
-		ArrayList<TipBoard> volist = null;
+	public ArrayList<GbBoard> selectBoardList(Connection conn, int start, int end) {
+		ArrayList<GbBoard> volist = null;
 
 		String sql = "select * from (select Rownum r, t1.* from "
-				+ "(select * from Tip_Board order by TIP_NO desc) t1 ) t2 where r between ? and ?";
+				+ "(select * from GAME_DEV_BOARD order by FB_NO desc) t1 ) t2 where r between ? and ?";
 
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -116,19 +118,20 @@ public class TipBoardDao {
 			pstmt.setInt(1, start);
 			pstmt.setInt(2, end);
 			rset = pstmt.executeQuery();
-			volist = new ArrayList<TipBoard>();
+			volist = new ArrayList<GbBoard>();
 			if (rset.next()) {
 				do {
-					TipBoard vo = new TipBoard();
-					vo = new TipBoard();
-					vo.setTipNo(rset.getInt("TIP_NO"));
+					GbBoard vo = new GbBoard();
+					vo = new GbBoard();
+					vo.setGbNo(rset.getInt("GB_NO"));
 					vo.setGdGamedevid(rset.getString("GD_GAMEDEVID"));
-					vo.setTipTitle(rset.getString("TIP_TITLE"));
-					vo.setTipContent(rset.getString("TIP_CONTENT"));
-					vo.setTipDatetime(rset.getString("TIP_DATETIME"));
-					vo.setTipVisit(rset.getInt("TIP_VISIT"));
-					vo.setTipReply(rset.getInt("TIP_REPLY"));
-					vo.setTipReport(rset.getInt("TIP_REPORT"));
+					vo.setHeHeading(rset.getString("HE_HEADING"));
+					vo.setGbTitle(rset.getString("GB_TITLE"));
+					vo.setGbContent(rset.getString("GB_CONTENT"));
+					vo.setGbDatetime(rset.getString("GB_DATETIME"));
+					vo.setGbVisit(rset.getInt("GB_VISIT"));
+					vo.setGbReply(rset.getInt("GB_REPLY"));
+					vo.setGbReport(rset.getInt("GB_REPORT"));
 					vo.setBref(rset.getInt("BREF"));
 					vo.setBreLevel(rset.getInt("BRE_LEVEL"));
 					vo.setBreStep(rset.getInt("BRE_STEP"));
@@ -149,14 +152,14 @@ public class TipBoardDao {
 		return volist;
 	}
 
-	public int insertBoard(Connection conn, TipBoard vo) {
+	public int insertBoard(Connection conn, GbBoard vo) {
 		int result = -1;
 
-		String sqlUpdate = "update TipBoard set bre_step=bre_step+1 " + "where bref=? and bre_step>?";
+		String sqlUpdate = "update GbBoard set bre_step=bre_step+1 " + "where bref=? and bre_step>?";
 
-		String sqlInsert = "INSERT INTO  Tip_Board (TIP_NO, GD_GAMEDEVID, TIP_TITLE, TIP_CONTENT, TIP_DATETIME, TIP_VISIT, TIP_REPLY, TIP_REPORT,bref, bre_level, bre_step)"
-				+ " VALUES (?, ?, ?, ?, sysdate, ?, ?, ?, ?, ?, ?)";
-		String sqlSeqNextVal = "select seq_tip_board_tip_no.nextval from dual";
+		String sqlInsert = "INSERT INTO  GAME_DEV_BOARD (GB_NO, GD_GAMEDEVID, HE_HEADING, GB_TITLE, GB_CONTENT, GB_DATETIME, GB_VISIT, GB_REPLY, GB_REPORT,bref, bre_level, bre_step)"
+				+ " VALUES (?, ?, ?, ?, ?, sysdate, ?, ?, ?, ?, ?, ?)";
+		String sqlSeqNextVal = "select SEQ_GB_BOARD_NO.nextval from dual";
 
 		int bref = 0;
 		int bre_level = 0;
@@ -174,7 +177,7 @@ public class TipBoardDao {
 			JdbcTemplate.close(rset);
 			JdbcTemplate.close(pstmt);
 
-			if (vo.getTipNo() != 0) { // 답글
+			if (vo.getGbNo() != 0) { // 답글
 				bref = vo.getBref();
 				bre_step = vo.getBreStep();
 				pstmt = conn.prepareStatement(sqlUpdate);
@@ -186,24 +189,25 @@ public class TipBoardDao {
 				bre_level = vo.getBreLevel() + 1;
 				bre_step++;
 			}
-
-			
 			pstmt = conn.prepareStatement(sqlInsert);
-			if (vo.getTipNo() != 0) {
-				pstmt.setInt(8, bref);
+			if (vo.getGbNo() != 0) {
+				pstmt.setInt(9, bref);
 			} else {
-				pstmt.setInt(8, nextVal);
+				pstmt.setInt(9, nextVal);
 			}
+
+			pstmt = conn.prepareStatement(sqlInsert);
 			pstmt.setInt(1, nextVal);
 			pstmt.setString(2, vo.getGdGamedevid());
-			pstmt.setString(3, vo.getTipTitle());
-			pstmt.setString(4, vo.getTipContent());
-			pstmt.setInt(5, vo.getTipVisit());
-			pstmt.setInt(6, vo.getTipReply());
-			pstmt.setInt(7, vo.getTipReport());
-			pstmt.setInt(9, bre_level);
-			pstmt.setInt(10, bre_step);
-
+			pstmt.setString(3, vo.getHeHeading());
+			pstmt.setString(4, vo.getGbTitle());
+			pstmt.setString(5, vo.getGbContent());
+			pstmt.setInt(6, vo.getGbVisit());
+			pstmt.setInt(7, vo.getGbReply());
+			pstmt.setInt(8, vo.getGbReport());
+			pstmt.setInt(10, bre_level);
+			pstmt.setInt(11, bre_step);
+			
 			result = pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -211,7 +215,7 @@ public class TipBoardDao {
 			JdbcTemplate.close(rset);
 			JdbcTemplate.close(pstmt);
 		}
-		System.out.println("insert 결과 : "+ result);
+		System.out.println("insert 결과 : " + result);
 		return result;
 	}
 

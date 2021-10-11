@@ -6,14 +6,15 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 
 import com.indimoa.common.JdbcTemplate;
+import com.indimoa.board.model.vo.FbBoard;
 import com.indimoa.board.model.vo.TipBoard;
 
-public class TipBoardDao {
-	public TipBoard getBoard(Connection conn, int bno) {
-		TipBoard vo = null;
-		String sql = "select TIP_NO,GD_GAMEDEVID,TIP_TITLE,TIP_CONTENT,TIP_DATETIME, TIP_VISIT,TIP_REPLY,TIP_REPORT,bref, bre_level, Bre_step "
-				+ " from Tip_Board where TIP_NO = ?";
-//TO_CHAR(TIP_DATETIME, 'yyyy-mm-dd')
+public class FbBoardDao {
+	public FbBoard getBoard(Connection conn, int bno) {
+		FbBoard vo = null;
+		String sql = "select FB_NO,MM_ID,FB_TITLE,FB_CONTENT,FB_DATETIME,FB_VISIT,FB_REPLY,FB_REPORT, bref, bre_level, Bre_step "
+				+ " from FREE_BOARD_M where FB_NO = ?";
+
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		try {
@@ -21,15 +22,15 @@ public class TipBoardDao {
 			pstmt.setInt(1, bno);
 			rset = pstmt.executeQuery();
 			if (rset.next()) {
-				vo = new TipBoard();
-				vo.setTipNo(rset.getInt("TIP_NO"));
-				vo.setGdGamedevid(rset.getString("GD_GAMEDEVID"));
-				vo.setTipTitle(rset.getString("TIP_TITLE"));
-				vo.setTipContent(rset.getString("TIP_CONTENT"));
-				vo.setTipDatetime(rset.getString("TIP_DATETIME"));
-				vo.setTipVisit(rset.getInt("TIP_VISIT"));
-				vo.setTipReply(rset.getInt("TIP_REPLY"));
-				vo.setTipReport(rset.getInt("TIP_REPORT"));
+				vo = new FbBoard();
+				vo.setFbNo(rset.getInt("FB_NO"));
+				vo.setMmId(rset.getString("MM_ID"));
+				vo.setFbTitle(rset.getString("FB_TITLE"));
+				vo.setFbContent(rset.getString("FB_CONTENT"));
+				vo.setFbDatetime(rset.getString("FB_DATETIME"));
+				vo.setFbVisit(rset.getInt("FB_VISIT"));
+				vo.setFbReply(rset.getInt("FB_REPLY"));
+				vo.setFbReport(rset.getInt("FB_REPORT"));
 				vo.setBref(rset.getInt("BREF"));
 				vo.setBreLevel(rset.getInt("BRE_LEVEL"));
 				vo.setBreStep(rset.getInt("BRE_STEP"));
@@ -45,7 +46,7 @@ public class TipBoardDao {
 
 	public int getBoardCount(Connection conn) {
 		int result = 0;
-		String sql = "select count(tip_no) from Tip_Board";
+		String sql = "select count(fb_no) from FREE_BOARD_M";
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		try {
@@ -63,29 +64,29 @@ public class TipBoardDao {
 		return result;
 	}
 
-	public ArrayList<TipBoard> selectBoardList(Connection conn) {
-		ArrayList<TipBoard> volist = null;
+	public ArrayList<FbBoard> selectBoardList(Connection conn) {
+		ArrayList<FbBoard> volist = null;
 
-		String sql = "select * from Tip_Board";
+		String sql = "select * from FREE_BOARD_M";
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 
 		try {
 			pstmt = conn.prepareStatement(sql);
 			rset = pstmt.executeQuery();
-			volist = new ArrayList<TipBoard>();
+			volist = new ArrayList<FbBoard>();
 			if (rset.next()) {
 				do {
-					TipBoard vo = new TipBoard();
-					vo = new TipBoard();
-					vo.setTipNo(rset.getInt("TIP_NO"));
-					vo.setGdGamedevid(rset.getString("GD_GAMEDEVID"));
-					vo.setTipTitle(rset.getString("TIP_TITLE"));
-					vo.setTipContent(rset.getString("TIP_CONTENT"));
-					vo.setTipDatetime(rset.getString("TIP_DATETIME"));
-					vo.setTipVisit(rset.getInt("TIP_VISIT"));
-					vo.setTipReply(rset.getInt("TIP_REPLY"));
-					vo.setTipReport(rset.getInt("TIP_REPORT"));
+					FbBoard vo = new FbBoard();
+					vo = new FbBoard();
+					vo.setFbNo(rset.getInt("FB_NO"));
+					vo.setMmId(rset.getString("MM_ID"));
+					vo.setFbTitle(rset.getString("FB_TITLE"));
+					vo.setFbContent(rset.getString("FB_CONTENT"));
+					vo.setFbDatetime(rset.getString("FB_DATETIME"));
+					vo.setFbVisit(rset.getInt("FB_VISIT"));
+					vo.setFbReply(rset.getInt("FB_REPLY"));
+					vo.setFbReport(rset.getInt("FB_REPORT"));
 					vo.setBref(rset.getInt("BREF"));
 					vo.setBreLevel(rset.getInt("BRE_LEVEL"));
 					vo.setBreStep(rset.getInt("BRE_STEP"));
@@ -102,11 +103,11 @@ public class TipBoardDao {
 		return volist;
 	}
 
-	public ArrayList<TipBoard> selectBoardList(Connection conn, int start, int end) {
-		ArrayList<TipBoard> volist = null;
+	public ArrayList<FbBoard> selectBoardList(Connection conn, int start, int end) {
+		ArrayList<FbBoard> volist = null;
 
 		String sql = "select * from (select Rownum r, t1.* from "
-				+ "(select * from Tip_Board order by TIP_NO desc) t1 ) t2 where r between ? and ?";
+				+ "(select * from FREE_BOARD_M order by FB_NO desc) t1 ) t2 where r between ? and ?";
 
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -116,19 +117,19 @@ public class TipBoardDao {
 			pstmt.setInt(1, start);
 			pstmt.setInt(2, end);
 			rset = pstmt.executeQuery();
-			volist = new ArrayList<TipBoard>();
+			volist = new ArrayList<FbBoard>();
 			if (rset.next()) {
 				do {
-					TipBoard vo = new TipBoard();
-					vo = new TipBoard();
-					vo.setTipNo(rset.getInt("TIP_NO"));
-					vo.setGdGamedevid(rset.getString("GD_GAMEDEVID"));
-					vo.setTipTitle(rset.getString("TIP_TITLE"));
-					vo.setTipContent(rset.getString("TIP_CONTENT"));
-					vo.setTipDatetime(rset.getString("TIP_DATETIME"));
-					vo.setTipVisit(rset.getInt("TIP_VISIT"));
-					vo.setTipReply(rset.getInt("TIP_REPLY"));
-					vo.setTipReport(rset.getInt("TIP_REPORT"));
+					FbBoard vo = new FbBoard();
+					vo = new FbBoard();
+					vo.setFbNo(rset.getInt("FB_NO"));
+					vo.setMmId(rset.getString("MM_ID"));
+					vo.setFbTitle(rset.getString("FB_TITLE"));
+					vo.setFbContent(rset.getString("FB_CONTENT"));
+					vo.setFbDatetime(rset.getString("FB_DATETIME"));
+					vo.setFbVisit(rset.getInt("FB_VISIT"));
+					vo.setFbReply(rset.getInt("FB_REPLY"));
+					vo.setFbReport(rset.getInt("FB_REPORT"));
 					vo.setBref(rset.getInt("BREF"));
 					vo.setBreLevel(rset.getInt("BRE_LEVEL"));
 					vo.setBreStep(rset.getInt("BRE_STEP"));
@@ -149,14 +150,14 @@ public class TipBoardDao {
 		return volist;
 	}
 
-	public int insertBoard(Connection conn, TipBoard vo) {
+	public int insertBoard(Connection conn, FbBoard vo) {
 		int result = -1;
 
-		String sqlUpdate = "update TipBoard set bre_step=bre_step+1 " + "where bref=? and bre_step>?";
+		String sqlUpdate = "update FbBoard set bre_step=bre_step+1 " + "where bref=? and bre_step>?";
 
-		String sqlInsert = "INSERT INTO  Tip_Board (TIP_NO, GD_GAMEDEVID, TIP_TITLE, TIP_CONTENT, TIP_DATETIME, TIP_VISIT, TIP_REPLY, TIP_REPORT,bref, bre_level, bre_step)"
+		String sqlInsert = "INSERT INTO  FREE_BOARD_M (FB_NO,MM_ID,FB_TITLE,FB_CONTENT,FB_DATETIME,FB_VISIT,FB_REPLY,FB_REPORT,bref, bre_level, bre_step)"
 				+ " VALUES (?, ?, ?, ?, sysdate, ?, ?, ?, ?, ?, ?)";
-		String sqlSeqNextVal = "select seq_tip_board_tip_no.nextval from dual";
+		String sqlSeqNextVal = "select SEQ_FB_BOARD_NO.nextval from dual";
 
 		int bref = 0;
 		int bre_level = 0;
@@ -174,7 +175,7 @@ public class TipBoardDao {
 			JdbcTemplate.close(rset);
 			JdbcTemplate.close(pstmt);
 
-			if (vo.getTipNo() != 0) { // 답글
+			if (vo.getFbNo() != 0) { // 답글
 				bref = vo.getBref();
 				bre_step = vo.getBreStep();
 				pstmt = conn.prepareStatement(sqlUpdate);
@@ -187,23 +188,22 @@ public class TipBoardDao {
 				bre_step++;
 			}
 
-			
 			pstmt = conn.prepareStatement(sqlInsert);
-			if (vo.getTipNo() != 0) {
+			if (vo.getFbNo() != 0) {
 				pstmt.setInt(8, bref);
 			} else {
 				pstmt.setInt(8, nextVal);
 			}
+
 			pstmt.setInt(1, nextVal);
-			pstmt.setString(2, vo.getGdGamedevid());
-			pstmt.setString(3, vo.getTipTitle());
-			pstmt.setString(4, vo.getTipContent());
-			pstmt.setInt(5, vo.getTipVisit());
-			pstmt.setInt(6, vo.getTipReply());
-			pstmt.setInt(7, vo.getTipReport());
+			pstmt.setString(2, vo.getMmId());
+			pstmt.setString(3, vo.getFbTitle());
+			pstmt.setString(4, vo.getFbContent());
+			pstmt.setInt(5, vo.getFbVisit());
+			pstmt.setInt(6, vo.getFbReply());
+			pstmt.setInt(7, vo.getFbReport());
 			pstmt.setInt(9, bre_level);
 			pstmt.setInt(10, bre_step);
-
 			result = pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -211,7 +211,7 @@ public class TipBoardDao {
 			JdbcTemplate.close(rset);
 			JdbcTemplate.close(pstmt);
 		}
-		System.out.println("insert 결과 : "+ result);
+		System.out.println("insert 결과 : " + result);
 		return result;
 	}
 
