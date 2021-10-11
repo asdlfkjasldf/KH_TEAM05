@@ -1,31 +1,26 @@
-package com.indimoa.board.coltroller;
+package com.indimoa.member.controller;
 
 import java.io.IOException;
-import java.sql.Connection;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import com.indimoa.common.JdbcTemplate;
-
-
-
-
+import com.indimoa.member.model.service.MemberService;
 
 /**
- * Servlet implementation class NtBoardListServlet
+ * Servlet implementation class MemberDeleteServlet
  */
-@WebServlet("/NtBoardListServlet")
-public class NtBoardListServlet extends HttpServlet {
+@WebServlet("/MemberDeleteServlet")
+public class MemberDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public NtBoardListServlet() {
+    public MemberDeleteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,10 +29,15 @@ public class NtBoardListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-		
-		Connection conn = JdbcTemplate.getConnection();
+		MemberService mservice = new MemberService();
+		int result = mservice.deleteMember(request.getParameter("mm_id"));
+		if (result > 0) {
+			// 기존에 생성되어 있던 세션을 만료
+			HttpSession session = request.getSession(false);
+			session.invalidate();
+		}
+		// index 페이지로 이동
+		response.sendRedirect("index.jsp");
 	}
 
 	/**
@@ -49,3 +49,4 @@ public class NtBoardListServlet extends HttpServlet {
 	}
 
 }
+

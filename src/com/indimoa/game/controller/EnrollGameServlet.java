@@ -10,8 +10,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.indimoa.game.medel.service.GameListService;
-import com.indimoa.game.medel.vo.GameVO;
+import com.indimoa.game.model.service.GameListService;
+import com.indimoa.game.model.vo.GameVO;
+
+
 
 /**
  * Servlet implementation class EnrollGameServlet
