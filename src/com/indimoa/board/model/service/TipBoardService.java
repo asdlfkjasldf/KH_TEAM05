@@ -3,7 +3,7 @@ package com.indimoa.board.model.service;
 import java.sql.Connection;
 import java.util.ArrayList;
 
-import com.indimoa.board.common.JdbcTemplate;
+import com.indimoa.common.JdbcTemplate;
 import com.indimoa.board.model.dao.TipBoardDao;
 import com.indimoa.board.model.vo.TipBoard;
 

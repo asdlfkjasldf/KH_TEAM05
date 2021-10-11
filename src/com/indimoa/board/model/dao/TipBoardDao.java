@@ -5,7 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
-import com.indimoa.board.common.JdbcTemplate;
+import com.indimoa.common.JdbcTemplate;
 import com.indimoa.board.model.vo.TipBoard;
 
 public class TipBoardDao {

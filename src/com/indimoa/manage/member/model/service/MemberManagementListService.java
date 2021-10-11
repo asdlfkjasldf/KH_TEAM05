@@ -3,7 +3,7 @@ package com.indimoa.manage.member.model.service;
 import java.sql.Connection;
 import java.util.ArrayList;
 
-import com.indimoa.board.common.JdbcTemplate;
+import com.indimoa.common.JdbcTemplate;
 import com.indimoa.manage.member.model.dao.MemberManagementListDao;
 import com.indimoa.member.model.vo.Member;
 

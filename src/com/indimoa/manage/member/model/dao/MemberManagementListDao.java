@@ -5,7 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import com.indimoa.board.common.JdbcTemplate;
+import com.indimoa.common.JdbcTemplate;
 import com.indimoa.member.model.vo.Member;
 
 
