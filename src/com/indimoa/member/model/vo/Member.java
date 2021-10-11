@@ -25,6 +25,9 @@ public class Member {
 	private String mm_membership;
 	private String mm_name;
 	private int	   mm_point;
+	//이름,id,닉네임검색을 위해 추가
+	private String searchCondition;
+	private String searchKeyword;
 
 
 	public Member() {}
@@ -52,6 +55,11 @@ public class Member {
 
 
 
+
+	public Member(String searchCondition, String searchKeyword) {
+		this.searchCondition = searchCondition;
+		this.searchKeyword = searchKeyword;
+	}
 
 	@Override
 	public String toString() {
@@ -157,5 +165,21 @@ public class Member {
 		this.mm_point = mm_point;
 	}
 	
+	
+	public String getSearchCondition() {
+		return searchCondition;
+	}
+
+	public void setSearchCondition(String searchCondition) {
+		this.searchCondition = searchCondition;
+	}
+
+	public String getSearchKeyword() {
+		return searchKeyword;
+	}
+
+	public void setSearchKeyword(String searchKeyword) {
+		this.searchKeyword = searchKeyword;
+	}
 
 }

@@ -34,6 +34,28 @@ public class MemberManagementListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = response.getWriter();
+
+//		vo.setSearchCondition( "id" );
+//		vo.setSearchKeyword( "00" );
+		
+		String searchCondition = request.getParameter("searchCondition");  //내용부분입력된값이지요
+		String searchKeyword = request.getParameter("searchKeyword");  //뭐라해야할지모를제목
+		
+		
+		out.println("입력된 title: "+ searchCondition);
+		out.println("<br>입력된 content: "+ searchKeyword);
+
+		Member vo = new Member(searchCondition, searchKeyword);
+		
+		
+		if (vo != null) {
+			
+			ArrayList<Member> searchvolist = new MemberManagementListService().selectBoardList(vo);
+			request.setAttribute("boardvolist", searchvolist);
+		}
 		doPost(request, response);
 	}
 	
@@ -81,11 +103,7 @@ public class MemberManagementListServlet extends HttpServlet {
 //			
 //			
 //		
-		String membersearch = request.getParameter("membersearch");
-		if (membersearch != null) {
-			ArrayList<Member> volistfromsearch = new MemberManagementListService().selectBoardList(membersearch);
-			request.setAttribute("boardvolist", volistfromsearch);
-		}
+
 		 
 		
 		

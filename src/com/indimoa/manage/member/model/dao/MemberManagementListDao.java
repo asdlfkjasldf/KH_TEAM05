@@ -11,6 +11,7 @@ import com.indimoa.member.model.vo.Member;
 
 public class MemberManagementListDao {
 
+	
 	public int getBoardCount(Connection conn) {
 
 		int result = 0;
@@ -38,33 +39,59 @@ public class MemberManagementListDao {
 
 		return result;
 	}
-	public ArrayList<Member> searchMember(Connection conn, String membersearch) {
+	public ArrayList<Member> searchMember(Connection conn, Member vo) {
 		ArrayList<Member> volist = null;
 		
-		String sql = "select * from MEMBER where mm_id like '%?%'";
+		final String sqlselectwithId = "select * from MEMBER where mm_id like '%'||?||'%'";
+		final String sqlselectwithName = "select * from MEMBER where mm_name like '%'||?||'%'";
+		final String sqlselectwithNickname = "select * from MEMBER where mm_nickname like '%'||?||'%'"; 
+		
 		
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
+		String flagBoardListFromSearch = "N";
+		
+			
+		
+		
 		
 		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, membersearch);
+			pstmt = conn.prepareStatement(sqlselectwithId);
+			
+			if (vo.getSearchCondition() != null && vo.getSearchKeyword() != null) {
+				flagBoardListFromSearch = "Y";
+			}
+			
+			
+			if("Y".equals(flagBoardListFromSearch) && vo.getSearchCondition().equals("ik")) {
+				pstmt = conn.prepareStatement(sqlselectwithId);
+				pstmt.setString(1, vo.getSearchKeyword());
+			} else if("Y".equals(flagBoardListFromSearch) && vo.getSearchCondition().equals("nk") ) {
+				pstmt = conn.prepareStatement(sqlselectwithName);
+				pstmt.setString(1, vo.getSearchKeyword());
+			} else if ("Y".equals(flagBoardListFromSearch) && vo.getSearchCondition().equals("nik")) {
+				pstmt = conn.prepareStatement(sqlselectwithNickname);
+				pstmt.setString(1, vo.getSearchKeyword());
+			}
+			
+			
+			pstmt.setString(1, vo.getSearchKeyword());
 			rset = pstmt.executeQuery();
 			volist = new ArrayList<Member>();
 			if (rset.next()) {
 				do {
-					Member vo = new Member();
-					vo.setMm_id(rset.getString("mm_id"));
-					vo.setMm_pwd(rset.getString("mm_pwd"));
-					vo.setMm_email(rset.getString("mm_email"));
-					vo.setMm_phn(rset.getString("mm_phn"));
-					vo.setMm_com(rset.getString("mm_com"));
-					vo.setMm_enrolldate(rset.getTimestamp("mm_enrolldate"));
-					vo.setMm_profile(rset.getString("mm_profile"));
-					vo.setMm_nickname(rset.getString("mm_nickname"));
-					vo.setMm_membership(rset.getString("mm_membership"));
-					vo.setMm_name(rset.getString("mm_name"));
-					volist.add(vo);
+					Member vo2 = new Member();
+					vo2.setMm_id(rset.getString("mm_id"));
+					vo2.setMm_pwd(rset.getString("mm_pwd"));
+					vo2.setMm_email(rset.getString("mm_email"));
+					vo2.setMm_phn(rset.getString("mm_phn"));
+					vo2.setMm_com(rset.getString("mm_com"));
+					vo2.setMm_enrolldate(rset.getTimestamp("mm_enrolldate"));
+					vo2.setMm_profile(rset.getString("mm_profile"));
+					vo2.setMm_nickname(rset.getString("mm_nickname"));
+					vo2.setMm_membership(rset.getString("mm_membership"));
+					vo2.setMm_name(rset.getString("mm_name"));
+					volist.add(vo2);
 				} while (rset.next());
 			}
 			

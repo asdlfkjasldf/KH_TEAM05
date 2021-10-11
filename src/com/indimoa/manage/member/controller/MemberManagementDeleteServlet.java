@@ -73,7 +73,7 @@ public class MemberManagementDeleteServlet extends HttpServlet {
 				
 			}
 		}
-		out.println("<br><a href='javascript.history.go(-1)'>다시</a>");
+		out.println("<br><a href='javascript:history.back(-2);'>다시</a>");
 		out.println("</body></html>");
 		
 		

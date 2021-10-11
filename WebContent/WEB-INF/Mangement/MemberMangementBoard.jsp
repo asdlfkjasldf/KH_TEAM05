@@ -8,6 +8,12 @@
             int startPage = (int)request.getAttribute("startPage");
             int endPage = (int)request.getAttribute("endPage");
             int pageCount = (int)request.getAttribute("pageCount");
+            
+            Member vo2 = new Member();
+            vo2.setSearchCondition(request.getParameter("searchCondition"));
+            vo2.setSearchKeyword(request.getParameter("searchKeyword"));
+            
+
     %>
  
 <!DOCTYPE html>
@@ -17,17 +23,7 @@
 <title>관리자페이지  회원관리</title>
 <base href="/">
 <style type="text/css">
-<
-link
- 
-href
-="
-css
-/
-MemberMangement
-.css
-"
->
+<link href="css/MemberMangement.css">
 @import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
 
 * {
@@ -198,14 +194,14 @@ li {
 	<div class="Article">
 	<h1>회원</h1>
 	
-	<form method="post" action="indimoa/membermanagement?membersearch=" >					
-	<select class="members">
+	<form method="get" action="indimoa/membermanagement" >					
+	<select id="searchCondition" name="searchCondition">
         <option value="nk">이름</option>
         <option value="ik">ID</option>
-        <option value="nk">닉네임</option>
+        <option value="nik">닉네임</option>
 	</select>
 	
-	<input type="text" name="membersearch" id="membersearch">
+	<input type="text" name="searchKeyword" id="searchKeyword">
 	<button type="submit" id="btnMemberView">조회</button>
 	</form>  
 	<table border="1" collapse="coplapse">	

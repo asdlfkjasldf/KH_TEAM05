@@ -36,11 +36,11 @@ public class MemberManagementListService {
 	
 	
 	
-	public ArrayList<Member> selectBoardList(String membersearch) {
+	public ArrayList<Member> selectBoardList(Member vo) {
 		ArrayList<Member> volist = null;
 		Connection conn = JdbcTemplate.getConnection();
 		
-		volist = new MemberManagementListDao().searchMember(conn, membersearch);
+		volist = new MemberManagementListDao().searchMember(conn, vo);
 		
 		JdbcTemplate.close(conn);
 		return volist;
