@@ -233,7 +233,7 @@ public class GameDao {
 	}
 	
 	
-	//다른 방법
+	//다른 방법 찾아보기
 	
 
 }
