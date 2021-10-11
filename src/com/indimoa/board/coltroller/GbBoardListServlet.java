@@ -73,7 +73,7 @@ public class GbBoardListServlet extends HttpServlet {
 		endPage = startPage + PAGE_BLOCK - 1;
 		if (endPage > pageCount)
 			endPage = pageCount;
-		ArrayList<GbBoard> volist = new GbBoardService().selectBoardList();
+		ArrayList<GbBoard> volist = new GbBoardService().selectBoardList(startRnum, endRnum);
 		request.setAttribute("volist", volist);
 		request.setAttribute("startPage", startPage);
 		request.setAttribute("endPage", endPage);

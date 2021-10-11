@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import com.indimoa.common.JdbcTemplate;
 import com.indimoa.board.model.vo.FbBoard;
+import com.indimoa.board.model.vo.FbBoardR;
 import com.indimoa.board.model.vo.TipBoard;
 
 public class FbBoardDao {
@@ -153,7 +154,7 @@ public class FbBoardDao {
 	public int insertBoard(Connection conn, FbBoard vo) {
 		int result = -1;
 
-		String sqlUpdate = "update FbBoard set bre_step=bre_step+1 " + "where bref=? and bre_step>?";
+		String sqlUpdate = "update FREE_BOARD_M set bre_step=bre_step+1 " + "where bref=? and bre_step>?";
 
 		String sqlInsert = "INSERT INTO  FREE_BOARD_M (FB_NO,MM_ID,FB_TITLE,FB_CONTENT,FB_DATETIME,FB_VISIT,FB_REPLY,FB_REPORT,bref, bre_level, bre_step)"
 				+ " VALUES (?, ?, ?, ?, sysdate, ?, ?, ?, ?, ?, ?)";
@@ -214,5 +215,30 @@ public class FbBoardDao {
 		System.out.println("insert 결과 : " + result);
 		return result;
 	}
+	public int insertRBoard(Connection conn, FbBoardR vo) {
+		int result = -1;
+//		FB_R_NO       NOT NULL NUMBER(11)    
+//		FB_R_ID       NOT NULL VARCHAR2(20)  
+//		FB_R_CONTENT  NOT NULL VARCHAR2(100) 
+//		FB_R_DATETIME NOT NULL TIMESTAMP(6) 
+		String sqlInsert = "INSERT INTO  FREE_BOARD_M_R (FB_R_NO,FB_R_ID,FB_R_CONTENT,FB_R_DATETIME)"
+				+ " VALUES (?, ?, ?, sysdate)";
 
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		try {
+			pstmt = conn.prepareStatement(sqlInsert);
+			pstmt.setInt(1, vo.getFbRNo());
+			pstmt.setString(2, vo.getFbRId());
+			pstmt.setString(3, vo.getFbRContent());
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JdbcTemplate.close(rset);
+			JdbcTemplate.close(pstmt);
+		}
+		System.out.println("FREE_BOARD_M_R insert 결과 : " + result);
+		return result;
+	}
 }

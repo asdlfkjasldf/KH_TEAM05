@@ -38,7 +38,7 @@ public class TipBoardWriteDoServlet extends HttpServlet {
 
 		TipBoard oVo = null;
 		String viewBno = request.getParameter("bno");
-		System.out.println(viewBno);
+		System.out.println("viewBno:"+ viewBno);
 		if (viewBno == null || viewBno.equals("")) { // 기존 읽고 있던 글이 없다면 원본 새글쓰기로 인식
 			oVo = new TipBoard();
 		} else {

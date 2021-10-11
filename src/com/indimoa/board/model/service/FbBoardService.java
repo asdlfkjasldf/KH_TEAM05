@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import com.indimoa.common.JdbcTemplate;
 import com.indimoa.board.model.dao.FbBoardDao;
 import com.indimoa.board.model.vo.FbBoard;
+import com.indimoa.board.model.vo.FbBoardR;
 
 public class FbBoardService {
 	public FbBoard getBoard(int bno) {
@@ -53,5 +54,14 @@ public class FbBoardService {
 		JdbcTemplate.close(conn);
 		return result;
 	}
+ 
+	public int insertRBoard(FbBoardR vo) {
+		int result = -1;
+		Connection conn = JdbcTemplate.getConnection();
 
+		result = new FbBoardDao().insertRBoard(conn, vo);
+
+		JdbcTemplate.close(conn);
+		return result;
+	}
 }

@@ -2,15 +2,13 @@
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%-- <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
- --%>
-<%
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%--
 	ArrayList<TipBoard> volist = (ArrayList<TipBoard>)request.getAttribute("volist");
  	int startPage = (int) request.getAttribute("startPage");
 	int endPage = (int) request.getAttribute("endPage");
 	int pageCount = (int) request.getAttribute("pageCount"); 
-
-%>
+--%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,43 +24,41 @@
 			<td>작성자</td>
 			<td>날짜</td>
 		<tr>
-<%
+<%--
 		if(volist != null){
 		for(TipBoard vo : volist){
-%>
+--%>
+<c:if test="${volist != null}">
+	<c:forEach items="${volist }" var="vo" >
 		<tr>
-			<td><a href="tboardcontent?no=<%=vo.getTipNo()%>"> <%=vo.getTipNo()%> </a></td>
+			<td><a href="tboardcontent?no=${vo.tipNo }">${vo.tipNo } </a></td>
 			<td>
-			<% 
+			<%--
 			for(int i = 0;i<vo.getBreLevel();i++){
-			%>
+			--%>
+			<c:forEach begin="1" end="${vo.breLevel }" step="1">
 				Re :
-				<% 
+			</c:forEach>
+			<%--
 			}
-			%>
-			<%=vo.getTipTitle()%>
+			--%>
+			${vo.tipTitle }
 			</td>
-			<td><%=vo.getGdGamedevid()%></td>
-			<td><%=vo.getTipDatetime()%></td>
-		<tr>	
-<%
+			<td>[${vo.tipReply }]</td>
+			<td>${vo.gdGamedevid }</td>
+			<td>${vo.tipDatetime }</td>
+		</tr>
+	</c:forEach>
+</c:if>	
+<%--
 		}}
-%>
+--%>
 	</table>
-<%
-			if (startPage > 1)
-				%>	이전	<%
-			for (int i = startPage; i <= endPage; i++) {
-				%>
-				<a href="tboardlist?pagenum=<%= i %>"> <%= i %> </a>
-				<%
-				if (i != endPage) {
-					%> , <%				}
-			}
-			if (endPage < pageCount)
-				%>	다음	<%
-%>
-
+	<c:if test="${startPage >1 }"> 이전 </c:if>
+		<c:forEach begin="${startPage }" end="${endPage }" step="1" var="i">
+		<a href="tboardlist?pagenum=${i}">${i}</a>
+		</c:forEach>
+	<c:if test="${endPage < pageCount }"> 다음 </c:if>
 <br>
 <a href="tboardwrite">글쓰기</a>
 

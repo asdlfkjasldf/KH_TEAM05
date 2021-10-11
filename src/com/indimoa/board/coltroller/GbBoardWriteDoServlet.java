@@ -15,7 +15,7 @@ import com.indimoa.board.model.vo.GbBoard;
 /**
  * Servlet implementation class GbBoardWriteDoServlet
  */
-@WebServlet("/gbboardwrite.Do")
+@WebServlet("/gbboardwrite.do")
 public class GbBoardWriteDoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

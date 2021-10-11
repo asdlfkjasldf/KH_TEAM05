@@ -15,7 +15,7 @@ import com.indimoa.board.model.vo.FbBoard;
 /**
  * Servlet implementation class FbBoardWriteDoServlet
  */
-@WebServlet("/fbboardwrite.Do")
+@WebServlet("/fbboardwrite.do")
 public class FbBoardWriteDoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -55,7 +55,7 @@ public class FbBoardWriteDoServlet extends HttpServlet {
 		String writer = (String) request.getSession().getAttribute("memberLoginInfo");
 		// TODO 임시코드로 확인이 필요함
 		if (writer == null || writer.equals("")) {
-			writer = "testDev00"; // "user01";
+			writer = "testuser01"; // "user01";
 		}
 
 		FbBoard vo = new FbBoard(oVo.getFbNo(), writer, title, content, oVo.getFbDatetime(), oVo.getFbVisit(), oVo.getFbReply(),

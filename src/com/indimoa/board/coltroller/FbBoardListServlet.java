@@ -73,7 +73,7 @@ public class FbBoardListServlet extends HttpServlet {
 		endPage = startPage + PAGE_BLOCK - 1;
 		if (endPage > pageCount)
 			endPage = pageCount;
-		ArrayList<FbBoard> volist = new FbBoardService().selectBoardList();
+		ArrayList<FbBoard> volist = new FbBoardService().selectBoardList(startRnum, endRnum);
 		request.setAttribute("volist", volist);
 		request.setAttribute("startPage", startPage);
 		request.setAttribute("endPage", endPage);

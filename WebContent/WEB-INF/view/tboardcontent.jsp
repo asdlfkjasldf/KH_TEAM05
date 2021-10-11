@@ -24,5 +24,11 @@
 	</tr>
 	</table>
 	<a href="tboardwrite?bno=<%=vo.getTipNo()%>">답글작성</a>
+		<form action="#" method="post">
+	<table>
+	<tr><td> <input type="text"  name="reply" placeholder="댓글을 작성해주세요." autofocus></td></tr>
+	<tr><td><input type="submit" value="작성"></td></tr>
+	</table>
+	</form>
 </body>
 </html>
