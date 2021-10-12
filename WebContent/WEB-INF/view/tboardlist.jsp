@@ -23,7 +23,7 @@
 			<td>제목</td>
 			<td>작성자</td>
 			<td>날짜</td>
-		<tr>
+		</tr>
 <%--
 		if(volist != null){
 		for(TipBoard vo : volist){

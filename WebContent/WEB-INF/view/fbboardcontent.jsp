@@ -1,7 +1,13 @@
 <%@page import="com.indimoa.board.model.vo.FbBoard"%>
+<%@page import="com.indimoa.board.model.vo.FbBoardR"%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <% FbBoard vo = (FbBoard)request.getAttribute("boardvo"); %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    
+<% FbBoard vo = (FbBoard)request.getAttribute("boardvo"); %>
+<% FbBoardR vor = (FbBoardR)request.getAttribute("boardvor"); %>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,13 +37,31 @@
 	<tr><td><input type="button" value="작성" id="bntInsert"></td></tr>
 	</table>
 	
+	<table>
+	<c:if test="${vorlist != null}">
+	<c:forEach items="${vorlist }" var="vor" >
+		<tr>
+			<td>${vor.fbRId}</td>
+			<td>${vor.fbRContent }</td>
+			<td>${vor.fbRDatetime }</td>
+		</tr>
+	</c:forEach>
+</c:if>	
+
+<%-- 		<tr>
+		<td><%=vor.getFbRId()%></td>
+		<td><%=vor.getFbRContent()%></td>
+		</tr> --%>
+		
+	</table>
+	
 	<script>
 		$("#bntInsert").click(ajaxInsert);
 		
 		function ajaxInsert(){
 			var txt = $("#inputTxt").val().trim();
 			if(txt == ""){
-				alert("댓글이 입력하고 등록해주세요.");
+				alert("댓글을 입력하고 등록해주세요.");
 				$("#inputTxt").focus();
 				return;
 			}
@@ -51,20 +75,16 @@
 					//fbRNo: "<%=vo.getFbNo()%>"
 					fbRNo: "${boardvo.fbNo}"
 				},
-				// 기다림.. 응답이 올떄까지
 				success : function(data){
 					console.log(data);
 					if(data =="OK"){
-						
+						alert('댓글이 입력되었습니다.'); 
 					}
-					// TODO
 				},
 				error: function(){
-				// TODO: 교재 copy	
+					alert('오류 발생. 오류 코드: ' + error.code); 
 				}				
 			});
-			
-			
 		}
 	</script>
 </body>

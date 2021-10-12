@@ -1,16 +1,6 @@
 package com.indimoa.board.model.vo;
 
 public class FbBoardR {
-//	FB_NO       NOT NULL NUMBER(11)    
-//	MM_ID       NOT NULL VARCHAR2(20)  
-//	FB_TITLE    NOT NULL VARCHAR2(20)  
-//	FB_CONTENT  NOT NULL VARCHAR2(255) 
-//	FB_DATETIME NOT NULL TIMESTAMP(6)  
-//	FB_VISIT    NOT NULL NUMBER(10)    
-//	FB_REPLY    NOT NULL NUMBER(20)    
-//	FB_REPORT   NOT NULL NUMBER(5)   
-
-	
 //	FB_R_NO       NOT NULL NUMBER(11)    
 //	FB_R_ID       NOT NULL VARCHAR2(20)  
 //	FB_R_CONTENT  NOT NULL VARCHAR2(100) 

@@ -13,7 +13,7 @@ import com.indimoa.board.model.vo.TipBoard;
 public class FbBoardDao {
 	public FbBoard getBoard(Connection conn, int bno) {
 		FbBoard vo = null;
-		String sql = "select FB_NO,MM_ID,FB_TITLE,FB_CONTENT,FB_DATETIME,FB_VISIT,FB_REPLY,FB_REPORT, bref, bre_level, Bre_step "
+		String sql = "select FB_NO,MM_ID,FB_TITLE,FB_CONTENT,TO_CHAR(FB_DATETIME, 'yyyy-mm-dd') FB_DATETIME,FB_VISIT,FB_REPLY,FB_REPORT, bref, bre_level, Bre_step "
 				+ " from FREE_BOARD_M where FB_NO = ?";
 
 		PreparedStatement pstmt = null;
@@ -45,6 +45,39 @@ public class FbBoardDao {
 		return vo;
 	}
 
+	
+	public FbBoardR getBoardR(Connection conn, int bno) {
+		FbBoardR vor = null;
+		String sql = "select FB_R_NO, FB_R_ID, FB_R_CONTENT,TO_CHAR(FB_R_DATETIME, 'yyyy-mm-dd') FB_R_DATETIME"
+				+ " from FREE_BOARD_M_R where FB_R_NO = ?";
+//		FB_R_NO       NOT NULL NUMBER(11)    
+//		FB_R_ID       NOT NULL VARCHAR2(20)  
+//		FB_R_CONTENT  NOT NULL VARCHAR2(100) 
+//		FB_R_DATETIME NOT NULL TIMESTAMP(6) 
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, bno);
+			rset = pstmt.executeQuery();
+			if (rset.next()) {
+				vor = new FbBoardR();
+				vor.setFbRNo(rset.getInt("FB_R_NO"));
+				vor.setFbRId(rset.getString("FB_R_ID"));
+				vor.setFbRContent(rset.getString("FB_R_CONTENT"));
+				vor.setFbRDatetime(rset.getString("FB_R_DATETIME"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JdbcTemplate.close(rset);
+			JdbcTemplate.close(pstmt);
+		}
+		return vor;
+	}
+	
+	
 	public int getBoardCount(Connection conn) {
 		int result = 0;
 		String sql = "select count(fb_no) from FREE_BOARD_M";
@@ -104,10 +137,43 @@ public class FbBoardDao {
 		return volist;
 	}
 
+	public ArrayList<FbBoardR> selectBoardRList(Connection conn) {
+		ArrayList<FbBoardR> vorlist = null;
+
+		String sql = "select * from FREE_BOARD_M_R";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			vorlist = new ArrayList<FbBoardR>();
+			if (rset.next()) {
+				do {
+					FbBoardR vo = new FbBoardR();
+					vo = new FbBoardR();
+					vo.setFbRNo(rset.getInt("FB_R_NO"));
+					vo.setFbRId(rset.getString("FB_R_ID"));
+					vo.setFbRContent(rset.getString("FB_R_CONTENT"));
+					vo.setFbRDatetime(rset.getString("FB_R_DATETIME"));
+					vorlist.add(vo);
+				} while (rset.next());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JdbcTemplate.close(rset);
+			JdbcTemplate.close(pstmt);
+		}
+		System.out.println("[pearl]-- 리턴은" + vorlist);
+		return vorlist;
+	}
+
+	
 	public ArrayList<FbBoard> selectBoardList(Connection conn, int start, int end) {
 		ArrayList<FbBoard> volist = null;
 
-		String sql = "select * from (select Rownum r, t1.* from "
+		String sql = "select t2.*,TO_CHAR(FB_DATETIME, 'yyyy-mm-dd') FB_DATETIME_char from (select Rownum r, t1.* from "
 				+ "(select * from FREE_BOARD_M order by FB_NO desc) t1 ) t2 where r between ? and ?";
 
 		PreparedStatement pstmt = null;
@@ -127,7 +193,7 @@ public class FbBoardDao {
 					vo.setMmId(rset.getString("MM_ID"));
 					vo.setFbTitle(rset.getString("FB_TITLE"));
 					vo.setFbContent(rset.getString("FB_CONTENT"));
-					vo.setFbDatetime(rset.getString("FB_DATETIME"));
+					vo.setFbDatetime(rset.getString("FB_DATETIME_char"));
 					vo.setFbVisit(rset.getInt("FB_VISIT"));
 					vo.setFbReply(rset.getInt("FB_REPLY"));
 					vo.setFbReport(rset.getInt("FB_REPORT"));
@@ -156,7 +222,7 @@ public class FbBoardDao {
 
 		String sqlUpdate = "update FREE_BOARD_M set bre_step=bre_step+1 " + "where bref=? and bre_step>?";
 
-		String sqlInsert = "INSERT INTO  FREE_BOARD_M (FB_NO,MM_ID,FB_TITLE,FB_CONTENT,FB_DATETIME,FB_VISIT,FB_REPLY,FB_REPORT,bref, bre_level, bre_step)"
+		String sqlInsert = "INSERT INTO FREE_BOARD_M (FB_NO,MM_ID,FB_TITLE,FB_CONTENT,FB_DATETIME,FB_VISIT,FB_REPLY,FB_REPORT,bref, bre_level, bre_step)"
 				+ " VALUES (?, ?, ?, ?, sysdate, ?, ?, ?, ?, ?, ?)";
 		String sqlSeqNextVal = "select SEQ_FB_BOARD_NO.nextval from dual";
 

@@ -16,6 +16,14 @@ public class FbBoardService {
 		JdbcTemplate.close(conn);
 		return vo;
 	}
+	
+	public FbBoardR getBoardR(int bno) {
+		FbBoardR vor = null;
+		Connection conn = JdbcTemplate.getConnection();
+		vor = new FbBoardDao().getBoardR(conn, bno);
+		JdbcTemplate.close(conn);
+		return vor;
+	}
 
 	public int getBoardCount() {
 		int result = 0;
@@ -45,6 +53,16 @@ public class FbBoardService {
 		return volist;
 	}
 
+	public ArrayList<FbBoardR> selectBoardRList() {
+		ArrayList<FbBoardR> vorlist = null;
+		Connection conn = JdbcTemplate.getConnection();
+
+		vorlist = new FbBoardDao().selectBoardRList(conn);
+
+		JdbcTemplate.close(conn);
+		return vorlist;
+	}
+	
 	public int insertBoard(FbBoard vo) {
 		int result = -1;
 		Connection conn = JdbcTemplate.getConnection();

@@ -154,9 +154,9 @@ public class TipBoardDao {
 	public int insertBoard(Connection conn, TipBoard vo) {
 		int result = -1;
 
-		String sqlUpdate = "update Tip_Board set bre_step=bre_step+1 " + "where bref=? and bre_step>?";
+		String sqlUpdate = "update Tip_Board set bre_step=bre_step+1 where bref=? and bre_step>?";
 
-		String sqlInsert = "INSERT INTO  Tip_Board (TIP_NO, GD_GAMEDEVID, TIP_TITLE, TIP_CONTENT, TO_CHAR(TIP_DATETIME, 'yyyy-mm-dd') TIP_DATETIME, TIP_VISIT, TIP_REPLY, TIP_REPORT,bref, bre_level, bre_step)"
+		String sqlInsert = "INSERT INTO Tip_Board (TIP_NO, GD_GAMEDEVID, TIP_TITLE, TIP_CONTENT, TIP_DATETIME, TIP_VISIT, TIP_REPLY, TIP_REPORT,bref, bre_level, bre_step)"
 				+ " VALUES (?, ?, ?, ?, sysdate, ?, ?, ?, ?, ?, ?)";
 		String sqlSeqNextVal = "select seq_tip_board_tip_no.nextval from dual";
 

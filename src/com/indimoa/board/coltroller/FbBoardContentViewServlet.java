@@ -1,6 +1,8 @@
 package com.indimoa.board.coltroller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -9,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.indimoa.board.model.service.FbBoardService;
 import com.indimoa.board.model.vo.FbBoard;
+import com.indimoa.board.model.vo.FbBoardR;
 
 
 /**
@@ -39,7 +42,12 @@ public class FbBoardContentViewServlet extends HttpServlet {
 		String no = request.getParameter("no");
 		int bno = Integer.parseInt(no);
 		FbBoard vo = new FbBoardService().getBoard(bno);
+		FbBoardR vor = new FbBoardService().getBoardR(bno);
+
+		ArrayList<FbBoardR> vorlist = new FbBoardService().selectBoardRList();
+		request.setAttribute("vorlist", vorlist);
 		request.setAttribute("boardvo", vo);
+		request.setAttribute("boardvor", vor);
 		request.getRequestDispatcher("/WEB-INF/view/fbboardcontent.jsp").forward(request, response);
 	}
 

@@ -11,7 +11,7 @@ import com.indimoa.board.model.vo.GbBoard;
 public class GbBoardDao {
 	public GbBoard getBoard(Connection conn, int bno) {
 		GbBoard vo = null;
-		String sql = "select GB_NO, GD_GAMEDEVID, HE_HEADING, GB_TITLE, GB_CONTENT, GB_DATETIME, GB_VISIT, GB_REPLY, GB_REPORT, bref, bre_level, Bre_step "
+		String sql = "select GB_NO, GD_GAMEDEVID, HE_HEADING, GB_TITLE, GB_CONTENT, TO_CHAR(GB_DATETIME, 'yyyy-mm-dd') TIP_DATETIME, GB_VISIT, GB_REPLY, GB_REPORT, bref, bre_level, Bre_step "
 				+ " from GAME_DEV_BOARD where GB_NO = ?";
 
 		PreparedStatement pstmt = null;
@@ -107,7 +107,7 @@ public class GbBoardDao {
 	public ArrayList<GbBoard> selectBoardList(Connection conn, int start, int end) {
 		ArrayList<GbBoard> volist = null;
 
-		String sql = "select * from (select Rownum r, t1.* from "
+		String sql = "select t2.*,TO_CHAR(GB_DATETIME, 'yyyy-mm-dd') GB_DATETIME_char from (select Rownum r, t1.* from "
 				+ "(select * from GAME_DEV_BOARD order by FB_NO desc) t1 ) t2 where r between ? and ?";
 
 		PreparedStatement pstmt = null;
@@ -128,7 +128,7 @@ public class GbBoardDao {
 					vo.setHeHeading(rset.getString("HE_HEADING"));
 					vo.setGbTitle(rset.getString("GB_TITLE"));
 					vo.setGbContent(rset.getString("GB_CONTENT"));
-					vo.setGbDatetime(rset.getString("GB_DATETIME"));
+					vo.setGbDatetime(rset.getString("GB_DATETIME_char"));
 					vo.setGbVisit(rset.getInt("GB_VISIT"));
 					vo.setGbReply(rset.getInt("GB_REPLY"));
 					vo.setGbReport(rset.getInt("GB_REPORT"));
@@ -155,7 +155,7 @@ public class GbBoardDao {
 	public int insertBoard(Connection conn, GbBoard vo) {
 		int result = -1;
 
-		String sqlUpdate = "update GbBoard set bre_step=bre_step+1 " + "where bref=? and bre_step>?";
+		String sqlUpdate = "update GAME_DEV_BOARD set bre_step=bre_step+1 " + "where bref=? and bre_step>?";
 
 		String sqlInsert = "INSERT INTO  GAME_DEV_BOARD (GB_NO, GD_GAMEDEVID, HE_HEADING, GB_TITLE, GB_CONTENT, GB_DATETIME, GB_VISIT, GB_REPLY, GB_REPORT,bref, bre_level, bre_step)"
 				+ " VALUES (?, ?, ?, ?, ?, sysdate, ?, ?, ?, ?, ?, ?)";

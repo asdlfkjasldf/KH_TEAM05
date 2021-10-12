@@ -78,6 +78,7 @@ public class FbBoardListServlet extends HttpServlet {
 		request.setAttribute("startPage", startPage);
 		request.setAttribute("endPage", endPage);
 		request.setAttribute("pageCount", pageCount);
+		request.setAttribute("currentPage", currentPage);
 		request.getRequestDispatcher("/WEB-INF/view/fbboardlist.jsp").forward(request, response);
 
 	}

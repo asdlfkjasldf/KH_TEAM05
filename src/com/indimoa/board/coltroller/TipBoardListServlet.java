@@ -77,6 +77,7 @@ public class TipBoardListServlet extends HttpServlet {
 		request.setAttribute("startPage", startPage);
 		request.setAttribute("endPage", endPage);
 		request.setAttribute("pageCount", pageCount);
+		request.setAttribute("currentPage", currentPage);
 		request.getRequestDispatcher("/WEB-INF/view/tboardlist.jsp").forward(request, response);
 	}
 

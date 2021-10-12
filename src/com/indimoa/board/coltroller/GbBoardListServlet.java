@@ -77,7 +77,8 @@ public class GbBoardListServlet extends HttpServlet {
 		request.setAttribute("volist", volist);
 		request.setAttribute("startPage", startPage);
 		request.setAttribute("endPage", endPage);
-		request.setAttribute("pageCount", pageCount);		
+		request.setAttribute("pageCount", pageCount);	
+		request.setAttribute("currentPage", currentPage);
 		request.getRequestDispatcher("/WEB-INF/view/gbboardlist.jsp").forward(request, response);
 
 	}
