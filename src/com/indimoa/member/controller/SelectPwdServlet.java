@@ -41,6 +41,9 @@ public class SelectPwdServlet extends HttpServlet {
 		String page = "";
 		if (id.equals(id)) {
 			page = "/sendEmailforPwd?email=" + email + "&mm_id=" + mid;
+		}else {
+			//TODO
+			page = "/views/member/findPwd.jsp";
 		}
 		RequestDispatcher view = request.getRequestDispatcher(page);
 		view.forward(request, response);

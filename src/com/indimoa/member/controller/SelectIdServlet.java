@@ -33,7 +33,6 @@ public class SelectIdServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String name = request.getParameter("mm_name");
-		String enrollDate = request.getParameter("mm_enrolldate");
 		String email = request.getParameter("mm_email");
 		System.out.println("email : " + email);
 
@@ -44,11 +43,13 @@ public class SelectIdServlet extends HttpServlet {
 			page = "/views/member/showId.jsp";
 			request.setAttribute("mm_id", id);
 		} else {
+			//TODO
 			page = "/views/member/findId.jsp";
 		}
 		RequestDispatcher view = request.getRequestDispatcher(page);
 		view.forward(request, response);
 	}
+
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
