@@ -15,7 +15,7 @@ public class GameDao {
 	public Game getGame(Connection conn, int bno) {
 		Game vo = null;
 		String sql = "select GG_NO,GG_TITLE,GG_PRICE,GG_SYSTEM_REQUIREMENTS,GG_GENRE,GG_DEVELOPER,GG_RELEASE_DATE,GG_PUBLISHER,GG_LANGUAGES,GG_INFORMATION"
-				+ " from GameVO where GG_NO = ?";
+				+ " from Game where GG_NO = ?";
 		// GG_NO
 //		 GG_TITLE VARCHAR(20) NOT NULL,
 //	    GG_PRICE NUMBER(11) NOT NULL,
@@ -77,12 +77,13 @@ public class GameDao {
 	}
 
 	
-	
-	
-	
-	public ArrayList<Game> selectGmaeList(Connection conn) {
+	public ArrayList<Game> selectBoardList(Connection conn) {
 		ArrayList<Game> volist = null;
+
 		String sql = "select * from game";
+
+		
+		
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 
@@ -100,10 +101,57 @@ public class GameDao {
 					vo.setGgSystemRequirement(rset.getNString("GG_SYSTEM_REQUIREMENTS"));
 					vo.setGgGenre(rset.getString("GG_GENRE"));
 					vo.setGgDeveloper(rset.getString("GG_DEVELOPER"));
-//					vo.setGgReleaseDate(rset.getString("GG_RELEASE_DATE"));
+				vo.setGgReleaseDate(rset.getDate("GG_RELEASE_DATE"));
 					vo.setGgPublisher(rset.getString("GG_PUBLISHER"));
 					vo.setGgLanguages(rset.getString("GG_LANGUAGES"));
 					vo.setGgInfomation(rset.getString("GG_INFORMATION"));
+				} while (rset.next());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JdbcTemplate.close(rset);
+			JdbcTemplate.close(pstmt);
+		}
+		System.out.println("[pearl]-- 리턴은" + volist);
+		return volist;
+	}
+	
+	
+	public ArrayList<Game> selectGmaeList(Connection conn, int start, int end) {
+		ArrayList<Game> volist = null;
+		String sql = "select * from game";
+		sql ="select * from (select Rownum r, t1.* from (select * from game order by gg_no asc) t1 ) t2 where r between ? and ?";
+		//이게 뭘 의미 할까?????????????????
+		
+		
+		System.out.println("sql:" + sql);
+		System.out.println("start:" + start);
+		System.out.println("end:" + end);
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, start);
+			pstmt.setInt(2, end);
+			rset = pstmt.executeQuery();
+			volist = new ArrayList<Game>();
+			if (rset.next()) {
+				do {
+					Game vo = new Game();
+					vo = new Game();
+					vo.setGgNo(rset.getInt("GG_NO"));
+					vo.setGgTitle(rset.getString("GG_TITLE"));
+					vo.setGgPrice(rset.getString("GG_PRICE"));
+					vo.setGgSystemRequirement(rset.getNString("GG_SYSTEM_REQUIREMENTS"));
+					vo.setGgGenre(rset.getString("GG_GENRE"));
+					vo.setGgDeveloper(rset.getString("GG_DEVELOPER"));
+					vo.setGgReleaseDate(rset.getDate("GG_RELEASE_DATE"));
+					vo.setGgPublisher(rset.getString("GG_PUBLISHER"));
+					vo.setGgLanguages(rset.getString("GG_LANGUAGES"));
+					vo.setGgInfomation(rset.getString("GG_INFORMATION"));
+					volist.add(vo);
 				} while (rset.next());
 			}
 		} catch (Exception e) {
@@ -116,7 +164,7 @@ public class GameDao {
 				e.printStackTrace();
 			}
 		}
-		System.out.println("[pearl]--" + volist);
+		System.out.println("[gameDao selectGmaeList일껄?]--" + volist);
 		return volist;
 	}
 
@@ -157,30 +205,30 @@ public class GameDao {
 		ArrayList<Game> volist = null;
 		String sql = "select * from GAME";
 		PreparedStatement pstmt = null;
-		ResultSet rs = null;
+		ResultSet rset = null;
 		System.out.println("0");
 		try {
 			pstmt  = conn.prepareStatement(sql);
-			rs = pstmt.executeQuery();
-			if(rs.next()) {
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
 				System.out.println("1");
 				volist = new ArrayList<Game>();
 				do {
 					Game vo = new Game();
 					
-					vo.setGgNo(rs.getInt("GG_NO"));
-					vo.setGgTitle(rs.getString("GG_TITLE"));
-					vo.setGgPrice(rs.getString("GG_PRICE"));
-					vo.setGgSystemRequirement(rs.getNString("GG_SYSTEM_REQUIREMENTS"));
-					vo.setGgGenre(rs.getString("GG_GENRE"));
-					vo.setGgDeveloper(rs.getString("GG_DEVELOPER"));
-//					vo.setGgReleaseDate(rs.getString("GG_RELEASE_DATE"));
-					vo.setGgPublisher(rs.getString("GG_PUBLISHER"));
-					vo.setGgLanguages(rs.getString("GG_LANGUAGES"));
-					vo.setGgInfomation(rs.getString("GG_INFORMATION"));
+					vo.setGgNo(rset.getInt("GG_NO"));
+					vo.setGgTitle(rset.getString("GG_TITLE"));
+					vo.setGgPrice(rset.getString("GG_PRICE"));
+					vo.setGgSystemRequirement(rset.getString("GG_SYSTEM_REQUIREMENTS"));
+					vo.setGgGenre(rset.getString("GG_GENRE"));
+					vo.setGgDeveloper(rset.getString("GG_DEVELOPER"));
+				vo.setGgReleaseDate(rset.getDate("GG_RELEASE_DATE"));
+					vo.setGgPublisher(rset.getString("GG_PUBLISHER"));
+					vo.setGgLanguages(rset.getString("GG_LANGUAGES"));
+					vo.setGgInfomation(rset.getString("GG_INFORMATION"));
 					volist.add(vo);
 					System.out.println("3");
-				}while (rs.next());
+				}while (rset.next());
 				
 			}
 		} catch (Exception e) {
@@ -188,7 +236,7 @@ public class GameDao {
 			System.out.println("4");
 		}finally {
 			try {
-				rs.close();
+				rset.close();
 				pstmt.close();
 				
 			} catch (Exception e) {
@@ -196,9 +244,16 @@ public class GameDao {
 			}
 			
 		}
-		System.out.println("리턴은"+ volist);
+		System.out.println("DAO readGmaeListAll"+ volist);
 		return volist;
 	}
+	
+	
+	
+	
+	
+	
+	
 	public int insertGameList(Connection conn, Game vo) {
 		int result =-1;
 		ArrayList<Game> volist = null;
@@ -265,7 +320,78 @@ public class GameDao {
 		return result;
 	}
 
+	public int getBoardCount(Connection conn) {
+		int result = 0;
+		String sql = "select count(GG_NO) from game";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			if (rset.next()) {
+				result = rset.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JdbcTemplate.close(rset);
+			JdbcTemplate.close(pstmt);
+		}
+		return result;
+		
+		
+		
+	}
 
+	
+	public Game getGamee(Connection conn, int bno) {
+		Game vo = null;
+//		String sql = "select TIP_NO,GD_GAMEDEVID,TIP_TITLE,TIP_CONTENT,TO_CHAR(TIP_DATETIME, 'yyyy-mm-dd') TIP_DATETIME, TIP_VISIT,TIP_REPLY,TIP_REPORT,bref, bre_level, Bre_step "
+//				+ " from Tip_Board where TIP_NO = ?";
+		
+		String sql = "select GG_NO,GG_TITLE,GG_PRICE,GG_SYSTEM_REQUIREMENTS,GG_GENRE, GG_DEVELOPER, GG_RELEASE_DATE,GG_PUBLISHER,TIP_REPORT,GG_LANGUAGES, GG_INFORMATION "
+				+ " from GAME where GG_NO = ?";
+		
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, bno);
+			rset = pstmt.executeQuery();
+			if (rset.next()) {
+				vo = new Game();
+//				vo.setTipNo(rset.getInt("TIP_NO"));
+//				vo.setGdGamedevid(rset.getString("GD_GAMEDEVID"));
+//				vo.setTipTitle(rset.getString("TIP_TITLE"));
+//				vo.setTipContent(rset.getString("TIP_CONTENT"));
+//				vo.setTipDatetime(rset.getString("TIP_DATETIME"));
+//				vo.setTipVisit(rset.getInt("TIP_VISIT"));
+//				vo.setTipReply(rset.getInt("TIP_REPLY"));
+//				vo.setTipReport(rset.getInt("TIP_REPORT"));
+//				vo.setBref(rset.getInt("BREF"));
+//				vo.setBreLevel(rset.getInt("BRE_LEVEL"));
+//				vo.setBreStep(rset.getInt("BRE_STEP"));
+				
+				vo.setGgNo(rset.getInt("GG_NO"));
+				vo.setGgTitle(rset.getString("GG_TITLE"));
+				vo.setGgPrice(rset.getString("GG_PRICE"));
+				vo.setGgSystemRequirement(rset.getString("GG_SYSTEM_REQUIREMENTS"));
+				vo.setGgGenre(rset.getString("GG_GENRE"));
+				vo.setGgDeveloper(rset.getString("GG_DEVELOPER"));
+				vo.setGgReleaseDate(rset.getDate("GG_RELEASE_DATE"));
+				vo.setGgPublisher(rset.getString("GG_PUBLISHER"));
+				vo.setGgLanguages(rset.getString("GG_LANGUAGES"));
+				vo.setGgInfomation(rset.getString("GG_INFORMATION"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JdbcTemplate.close(rset);
+			JdbcTemplate.close(pstmt);
+		}
+		return vo;
+	}
 
 
 
