@@ -52,6 +52,10 @@ public class Member {
 		this.mm_id = mm_id;
 	}
 
+	public Member(int mm_point, String mm_id) {
+		this.mm_point = mm_point;
+		this.mm_id = mm_id;
+	}
 
 
 

@@ -45,20 +45,7 @@ public class MemberManagementListService {
 		JdbcTemplate.close(conn);
 		return volist;
 	}
-	
-//	public ArrayList<Member> insertBoardList(Member vo) {
-//		int result = -1;
-//		Connection conn = JdbcTemplate.getConnection();
-//		JdbcTemplate.setAutoCommit(conn, false);
-//		
-//		
-//			
-//		
-//		 reuslt = new MemberManagementListDao().insertMemberBoardList(conn, vo);
-//		
-//		JdbcTemplate.close(conn);
-//		return result;
-//	}
+
 	
 public int deleteMemberFromManagement(Member vo) {
 	int result = -1;
@@ -71,13 +58,23 @@ public int deleteMemberFromManagement(Member vo) {
 }
 	
 	
-	
-	 public Member userDetail(String userid) {
-		 Connection conn = JdbcTemplate.getConnection();
-		 Member m = new MemberManagementListDao().userDetail(conn, userid);
-		 JdbcTemplate.close(conn);
-		 return m;
-		}
+//	상세정보보기 기능으로 전환시 사용
+//	 public Member userDetail(String userid) {
+//		 Connection conn = JdbcTemplate.getConnection();
+//		 Member m = new MemberManagementListDao().userDetail(conn, userid);
+//		 JdbcTemplate.close(conn);
+//		 return m;
+//		}
+
+	public int insertPointFromManagement(Member vo) {
+		int result = -1;
+		Connection conn = JdbcTemplate.getConnection();
+		
+		result = new MemberManagementListDao().insertPointMemberBoard(conn, vo);
+		
+		JdbcTemplate.close(conn);
+		return 0;
+	}
 
 
 

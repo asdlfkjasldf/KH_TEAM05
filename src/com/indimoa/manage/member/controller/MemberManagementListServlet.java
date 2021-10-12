@@ -58,19 +58,13 @@ public class MemberManagementListServlet extends HttpServlet {
 		}
 
 		
-		
-		System.out.println("doget 검색문진입");
+//		System.out.println("doget 검색문진입");
 //		out.println("입력된 title: "+ searchCondition); 작동확인
 //		out.println("<br>입력된 content: "+ searchKeyword);
 
-		
-		
-
-		
-		
-			System.out.println("vo : "+ vo);
+//			System.out.println("vo : "+ vo);
 			ArrayList<Member> searchvolist = new MemberManagementListService().selectBoardList(vo);
-			System.out.println("searchvolist : " + searchvolist);	//검색 제대로 작동확인
+//			System.out.println("searchvolist : " + searchvolist);	//검색 제대로 작동확인
 			request.setAttribute("boardvolist", searchvolist);
 			
 			// 총 글수
@@ -137,26 +131,6 @@ public class MemberManagementListServlet extends HttpServlet {
 		if (pageNum != null) {
 			currentPage = Integer.parseInt(request.getParameter("pagenum"));// 눌려진 페이지
 		}
-		
-//		ajax용 추후 수정		
-//		String searchmember = request.getParameter("pagenum"); 
-//		String keywordoption = request.getParameter("keywordoption");
-//		String keyword = request.getParameter("keyword");
-//		System.out.println("keywordoption: " + keywordoption);
-//		System.out.println("keyword: " + keyword);
-//		
-//		List<Member> membervolist  = new ArrayList<Member>(); 
-//		Member m = keyword;
-//		if (m != null) {
-//			System.out.println("검색 준비 완료");
-//			
-//			
-//		
-
-		 
-		
-		
-		
 		
 				
 		// 총 글수
