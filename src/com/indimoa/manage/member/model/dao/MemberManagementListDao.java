@@ -91,7 +91,7 @@ public class MemberManagementListDao {
 					vo2.setMm_nickname(rset.getString("mm_nickname"));
 					vo2.setMm_membership(rset.getString("mm_membership"));
 					vo2.setMm_name(rset.getString("mm_name"));
-					vo2.setMm_name(rset.getString("mm_point"));
+					vo2.setMm_point(rset.getInt("mm_point"));
 					volist.add(vo2);
 				} while (rset.next());
 			}
