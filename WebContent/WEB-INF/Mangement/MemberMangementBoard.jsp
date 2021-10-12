@@ -2,6 +2,7 @@
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+        <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <%
     	//이곳은 자바 문법에 따른다.
         	ArrayList<Member> volist = (ArrayList<Member>)request.getAttribute("boardvolist");
@@ -10,12 +11,16 @@
             int pageCount = (int)request.getAttribute("pageCount");
             
             Member vo2 = new Member();
-            vo2.setSearchCondition(request.getParameter("searchCondition"));
-            vo2.setSearchKeyword(request.getParameter("searchKeyword"));
+            vo2.setSearchCondition(request.getParameter("sc"));
+            vo2.setSearchKeyword(request.getParameter("sk"));
             
 
     %>
- 
+
+ ${volist}
+ ${startPage}
+ ${endPage}
+ ${pageCount}
 <!DOCTYPE html>
 <html>
 <head>
@@ -194,14 +199,14 @@ li {
 	<div class="Article">
 	<h1>회원</h1>
 	
-	<form method="get" action="indimoa/membermanagement" >					
-	<select id="searchCondition" name="searchCondition">
+	<form method=get action="indimoa/membermanagement" >					
+	<select id="sc" name="sc">
         <option value="nk">이름</option>
         <option value="ik">ID</option>
         <option value="nik">닉네임</option>
 	</select>
 	
-	<input type="text" name="searchKeyword" id="searchKeyword">
+	<input type="text" name="sk" id="sk">
 	<button type="submit" id="btnMemberView">조회</button>
 	</form>  
 	<table border="1" collapse="coplapse">	
