@@ -28,6 +28,7 @@ public class CartDao {
 				c.setMm_id(rset.getString("mm_id"));
 				c.setCt_content(rset.getString("ct_content"));
 				c.setCt_date(rset.getTimestamp("ct_date"));
+				c.setCt_price(rset.getInt("ct_price"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -41,13 +42,14 @@ public class CartDao {
 	public int cartAdd(Connection conn, Cart c) {
 			PreparedStatement pstmt = null;
 			int result = 0;
-			String query = "insert into cart values(?, ?, ?, ?)";
+			String query = "insert into cart values(?, ?, ?, ?, ?)";
 			try {
 				pstmt = conn.prepareStatement(query);
 				pstmt.setInt(1, c.getCt_no());
 				pstmt.setString(2, c.getMm_id());
 				pstmt.setString(3, c.getCt_content());
 				pstmt.setTimestamp(4, c.getCt_date());
+				pstmt.setInt(5, c.getCt_price());
 				
 				result = pstmt.executeUpdate();
 			} catch (SQLException e) {
@@ -116,6 +118,7 @@ public class CartDao {
 					vo.setMm_id(rset.getString("mm_id"));
 					vo.setCt_content(rset.getString("ct_content"));
 					vo.setCt_date(rset.getTimestamp("ct_date"));
+					vo.setCt_price(rset.getInt("ct_price"));
 					volist.add(vo);
 				} while (rset.next());
 			}
@@ -152,6 +155,7 @@ public class CartDao {
 					vo.setMm_id(rset.getString("mm_id"));
 					vo.setCt_content(rset.getString("ct_content"));
 					vo.setCt_date(rset.getTimestamp("ct_date"));
+					vo.setCt_price(rset.getInt("ct_price"));
 					volist.add(vo);
 				} while (rset.next());
 			}

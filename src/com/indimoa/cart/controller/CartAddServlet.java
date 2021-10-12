@@ -68,6 +68,7 @@ public class CartAddServlet extends HttpServlet {
 		String id = request.getParameter("mm_id");
 		String content = request.getParameter("ct_content");
 		String date = request.getParameter("ct_date");
+		String price = request.getParameter("ct_price");
 		int result = cservice.cartAdd(new Cart());   //TODO
 		if (result > 0) {
 			response.sendRedirect("login.jsp");

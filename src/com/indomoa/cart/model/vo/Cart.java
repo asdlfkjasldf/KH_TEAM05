@@ -7,24 +7,28 @@ public class Cart {
 	private String mm_id;
 	private String ct_content;
 	private Timestamp ct_date;
+	private int ct_price;
 	public Cart() {}
 	
-	public Cart(int ct_no, String mm_id, String ct_content, Timestamp ct_date) {
+	public Cart(int ct_no, String mm_id, String ct_content, Timestamp ct_date, int ct_price) {
 		super();
 		this.ct_no = ct_no;
 		this.mm_id = mm_id;
 		this.ct_content = ct_content;
 		this.ct_date = ct_date;
+		this.ct_price = ct_price;
 	}
 	
 	public Cart(int ct_no) {
 		this.ct_no = ct_no;
 	}
 
+	
+
 	@Override
 	public String toString() {
 		return "Cart [ct_no=" + ct_no + ", mm_id=" + mm_id + ", ct_content=" + ct_content + ", ct_date=" + ct_date
-				+ "]";
+				+ ", ct_price=" + ct_price + "]";
 	}
 
 	public int getCt_no() {
@@ -57,6 +61,14 @@ public class Cart {
 
 	public void setCt_date(Timestamp ct_date) {
 		this.ct_date = ct_date;
+	}
+	
+	public int getCt_price() {
+		return ct_price;
+	}
+	
+	public void setCt_price(int ct_price) {
+		this.ct_price = ct_price;
 	}
 	
 	
