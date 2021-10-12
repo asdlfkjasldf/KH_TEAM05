@@ -9,7 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+//import com.google.gson.Gson;
 import com.indimoa.member.model.service.MemberService;
+
 
 /**
  * Servlet implementation class DupIdChkServlet
@@ -26,6 +28,27 @@ public class DupIdChkServlet extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
+    
+//	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//		String userId = request.getParameter("mm_id");
+//		System.out.println("얍얍얍 : "+ userId);
+//		int result = new MemberService().dupIdChk(userId);
+//		
+//		System.out.println("얍얍얍 : "+result);
+//		/*PrintWriter out = response.getWriter();
+//		if(result > 0 ){
+//			out.append("fail");
+//		}else{
+//			out.append("success");
+//		}
+//		out.flush();
+//		out.close();*/
+//		
+//		response.setContentType("application/json");
+//		 new Gson().toJson(result, response.getWriter());		
+//	}  
+    
+    
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */

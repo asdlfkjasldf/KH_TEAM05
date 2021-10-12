@@ -1,10 +1,14 @@
 package com.indimoa.member.model.service;
 
 import static com.indimoa.common.JdbcTemplate.*;
+
+
 import java.sql.Connection;
 
 import com.indimoa.member.model.dao.MemberDao;
 import com.indimoa.member.model.vo.Member;
+
+
 
 public class MemberService { 
 
@@ -55,5 +59,24 @@ public class MemberService {
 		 
 		 return result; 
 		 } 
+		 
+		 public String selectId(String name, String email) {
+				Connection conn = getConnection();
+				String userId = new MemberDao().selectId(conn, name, email);
+
+				close(conn);
+				return userId;
+		}
+		 
+		 public String selectPwd(String name, String id) {
+				Connection conn = getConnection();
+				String userPwd = new MemberDao().selectId(conn, name, id);
+
+				close(conn);
+				return userPwd;
+		}
+		
+		 
+		 
 	} 
 

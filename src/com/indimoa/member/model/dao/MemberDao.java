@@ -6,10 +6,14 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Properties;
 
 import com.indimoa.member.model.vo.Member;
 
 public class MemberDao {
+	
+	
+	private Properties prop = new Properties();
 
 	public MemberDao() {}
 	public Member loginMember(Connection conn, String id, String passwd) {
@@ -156,5 +160,52 @@ public class MemberDao {
 		return result;
 	}
 	
+	
+	public String selectId(Connection conn, String name, String email) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String Id = "";
+
+		String query = prop.getProperty("selectId");
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, name);
+			pstmt.setString(2, email);
+			rset = pstmt.executeQuery();
+
+			if (rset.next()) {
+				Id = rset.getString("mm_id");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return Id;
+	}
+	
+	
+	public String selectPwd(Connection conn, String name, String id) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String pwd = "";
+
+		String query = prop.getProperty("selectPwd");
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, name);
+			pstmt.setString(2, id);
+			rset = pstmt.executeQuery();
+
+			if (rset.next()) {
+				pwd = rset.getString("mm_pwd");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return pwd;
+	}
 	
 }
