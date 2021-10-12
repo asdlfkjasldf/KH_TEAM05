@@ -91,6 +91,7 @@ public class MemberManagementListDao {
 					vo2.setMm_nickname(rset.getString("mm_nickname"));
 					vo2.setMm_membership(rset.getString("mm_membership"));
 					vo2.setMm_name(rset.getString("mm_name"));
+					vo2.setMm_point(rset.getInt("mm_point"));
 					volist.add(vo2);
 				} while (rset.next());
 			}
@@ -140,6 +141,7 @@ public class MemberManagementListDao {
 					vo.setMm_nickname(rset.getString("mm_nickname"));
 					vo.setMm_membership(rset.getString("mm_membership"));
 					vo.setMm_name(rset.getString("mm_name"));
+					vo.setMm_point(rset.getInt("mm_point"));
 					volist.add(vo);
 				} while (rset.next());
 			}
@@ -161,7 +163,7 @@ public class MemberManagementListDao {
 		ArrayList<Member> volist = null;
 
 		String sqlInsert = "INSERT INTO MEMBER"
-				+ "(MM_ID, MM_PWD, MM_EMIAL, MM_PHN, MM_COM , MM_ENROLLDATE, MM_PROFILE, MM_NICKNAME, MM_MEMBERSHIP, MM_NAME)"
+				+ "(MM_ID, MM_PWD, MM_EMIAL, MM_PHN, MM_COM , MM_ENROLLDATE, MM_PROFILE, MM_NICKNAME, MM_MEMBERSHIP, MM_NAME, MM_POINT)"
 				+ " VALUES(?,?,?,?,?,SYSTIMESTAMP, ?,?,?,?,?)";
 		PreparedStatement pstmt = null;
 		
@@ -241,43 +243,69 @@ public class MemberManagementListDao {
 	
 	
 	
+//	상세정보 기능으로 전환시 사용
+//	public Member userDetail(Connection conn, String userid) {
+//		ArrayList<Member> volist = null;
+//		Member m = null;
+//		PreparedStatement pstmt = null;
+//		ResultSet rset = null;
+//		volist = new ArrayList<Member>();
+//		String sql = "select * from MEMBER where mm_id = ?";
+//		try {
+//			pstmt = conn.prepareStatement(sql);
+//			pstmt.setString(1, userid);
+//			rset = pstmt.executeQuery();
+//			volist = new ArrayList<Member>();
+//			if (rset.next()) {
+//				do {
+//					Member vo = new Member();
+//					vo.setMm_id(rset.getString("mm_id"));
+//					vo.setMm_pwd(rset.getString("mm_pwd"));
+//					vo.setMm_email(rset.getString("mm_email"));
+//					vo.setMm_phn(rset.getString("mm_phn"));
+//					vo.setMm_com(rset.getString("mm_com"));
+//					vo.setMm_enrolldate(rset.getTimestamp("mm_enrolldate"));
+//					vo.setMm_profile(rset.getString("mm_profile"));
+//					vo.setMm_nickname(rset.getString("mm_nickname"));
+//					vo.setMm_membership(rset.getString("mm_membership"));
+//					vo.setMm_name(rset.getString("mm_name"));
+//					volist.add(vo);
+//				} while (rset.next());
+//			}
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		} finally {
+//			JdbcTemplate.close(rset);
+//			JdbcTemplate.close(pstmt);
+//		}
+//
+//		return m;
+//	}
 
-	public Member userDetail(Connection conn, String userid) {
+	public int insertPointMemberBoard(Connection conn, Member vo) {
+		int result =-1;
 		ArrayList<Member> volist = null;
-		Member m = null;
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-		volist = new ArrayList<Member>();
-		String sql = "select * from MEMBER where mm_id = ?";
-		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, userid);
-			rset = pstmt.executeQuery();
-			volist = new ArrayList<Member>();
-			if (rset.next()) {
-				do {
-					Member vo = new Member();
-					vo.setMm_id(rset.getString("mm_id"));
-					vo.setMm_pwd(rset.getString("mm_pwd"));
-					vo.setMm_email(rset.getString("mm_email"));
-					vo.setMm_phn(rset.getString("mm_phn"));
-					vo.setMm_com(rset.getString("mm_com"));
-					vo.setMm_enrolldate(rset.getTimestamp("mm_enrolldate"));
-					vo.setMm_profile(rset.getString("mm_profile"));
-					vo.setMm_nickname(rset.getString("mm_nickname"));
-					vo.setMm_membership(rset.getString("mm_membership"));
-					vo.setMm_name(rset.getString("mm_name"));
-					volist.add(vo);
-				} while (rset.next());
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			JdbcTemplate.close(rset);
-			JdbcTemplate.close(pstmt);
-		}
 
-		return m;
+		String sqlInsert = "UPDATE MEMBER SET MM_POINT =  MM_POINT+? WHERE MM_ID = ?";
+		PreparedStatement pstmt = null;
+		
+
+		try {
+					pstmt = conn.prepareStatement(sqlInsert);
+					pstmt.setInt(1, vo.getPoint());
+					pstmt.setString(2, vo.getMm_id());
+					
+					result = pstmt.executeUpdate();
+					System.out.println(result);
+					JdbcTemplate.commit(conn);
+			}catch(Exception e){
+				e.printStackTrace();
+			} finally {
+				JdbcTemplate.close(pstmt);
+			}
+		System.out.println("[admin]-- 리턴은" + volist);
+		return result;
 	}
+	
 
 }

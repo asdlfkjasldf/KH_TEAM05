@@ -113,24 +113,8 @@ li {
 	height: 190px;
 }
 </style>
-<script type="text/javascript"
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<script>
-	$(function(){
-		$("#userid").on('click',function(){
-			
-			$.ajax({
-				type : "POST",
-				url : "membermanagement",
-				data : {
-					id : $("userid").val()
-				},
-				dataType : "json",
-				
-			})
-		})
-	});
-	</script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	
 	
 	<script type="text/javascript"> 
 	
@@ -234,7 +218,7 @@ li {
 		<form method="post" action="indimoa/delete/member-from-management">
 		<tr>
 		
-		<td><input type="checkbox" name="checkName" value="<%=vo.getMm_id() %>">
+		<td><input type="checkbox" id="checkName" name="checkName" value="<%=vo.getMm_id() %>">
 		<%=vo.getMm_id() %></td>
 
 		<td>
@@ -290,11 +274,39 @@ li {
 	<br>
 	<!--  <a href="bembermanagementboardwrite">회원생성 </a>-->
 	<!--  <a href="bembermanagementboard">회원수정 </a>-->
-	<input type="text" id="grantPoint">포인트지급
-	<button type="submit">회원강제탈퇴 </button>
+	
+	
+	
+	<input type="text" id="grantPoint" name="grantPoint">
+	<button type="button" id="btnGrantPoint" onclick="" >포인트지급</button>
+	
+	
+	<button type="submit" id="btnDeleteMember">회원강제탈퇴 </button>
 	</form>
+	
+	
+	<div class="box"></div>
 		</div>
 	</div>
+	<script>
+		$(document).ready(function(){
+			$(document).on("click", "#btnGrantPoint",function() {
+				$.ajax({
+					type : "post",
+					url : "indimoa/insert/point-from-management",
+					dataType : "html",
+					data : {
+						targetid: $("input:checkbox[name='checkName']:checked").val(),
+						pointvalue :  $("#grantPoint").val()
+					},
+				success : function(data){
+					$('.box').html(data);
+				}
+					
+				});
+			})
+		});
+	</script>
 	</body>
 </html>
 
