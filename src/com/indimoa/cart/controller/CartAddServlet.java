@@ -1,17 +1,20 @@
 package com.indimoa.cart.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
-import javax.servlet.RequestDispatcher;
+
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+
+
+
 
 import com.indimoa.cart.model.service.CartService;
+
 import com.indomoa.cart.model.vo.Cart;
 
 /**
@@ -33,8 +36,8 @@ public class CartAddServlet extends HttpServlet {
 //    	int gg_no = Integer.parseInt(request.getParameter("gg_no"));
 //    	
 //    	ArrayList<Game> game = null;
-//    	GameService = new GameService();
-//    	Game = GameService.getAllGame();
+//    	GameService gs = new GameService();
+//    	Game g = GameService.getAllGame();
 //    	request.setAttribute("game", game);
 //    	request.setAttribute("member", HttpSession.getAttribute("member"));
 //    	try {
@@ -71,7 +74,7 @@ public class CartAddServlet extends HttpServlet {
 		String price = request.getParameter("ct_price");
 		int result = cservice.cartAdd(new Cart());   //TODO
 		if (result > 0) {
-			response.sendRedirect("login.jsp");
+			response.sendRedirect("cart.jsp");
 		}else {
 			
 		}

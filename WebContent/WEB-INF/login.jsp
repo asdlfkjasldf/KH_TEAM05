@@ -116,11 +116,14 @@
     <title>로그인</title>
 </head>
 <body>
+
+
     <div id="header">
         <div id="logo">
             <img src=".jpg" width="200px" height="50px">
         </div>
     </div>
+
 
 
     <h1 class="h1">로그인</h1>
