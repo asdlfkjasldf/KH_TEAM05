@@ -109,7 +109,7 @@
         <img src=".jpg" width="200px" height="50px">
     </div>
 
-    <h1 class="h1">휴대폰 본인확인</h1>
+    <h1 class="h1">이메일로 찾기</h1>
     
     <div id="section">
         <form action="/search">
@@ -118,8 +118,8 @@
                 <input type="text" name="mm_name" id="name"  autocomplete="off" required>
             </p>
             <p class="int-area">
-                <label for="phn">휴대폰 번호</label>
-                <input type="text" name="mm_phn" id="phn"  autocomplete="off" required>
+                <label for="email">이메일</label>
+                <input type="text" name="mm_email" id="email"  autocomplete="off" required>
             </p>
             <p class="btn-area">
                 <button id="btn" type="submit">찾기</button>
@@ -133,7 +133,7 @@
 
     <script>
         let name = $("#name");
-        let pw = $("#phn");
+        let email = $("#email");
         let btn = $("#btn");
 
         $(btn).on('click', function(){

@@ -123,6 +123,10 @@
                 <label for="id">아이디</label>
                 <input type="text" name="mm_id" id="id"  autocomplete="off" required>
             </p>
+            <p class="int-area">
+                <label for="email">이메일</label>
+                <input type="text" name="mm_email" id="email"  autocomplete="off" required>
+            </p>
             <p class="btn-area">
                 <button id="btn" type="submit">찾기</button>
                 <button id="btn" type="reset">취소</button>
@@ -131,8 +135,9 @@
     </div>
 
     <script>
-        let id = $("#name");
-        let pw = $("#id");
+        let name = $("#name");
+        let id = $("#id");
+        let email = $("#email");
         let btn = $("#btn");
 
         $(btn).on('click', function(){
