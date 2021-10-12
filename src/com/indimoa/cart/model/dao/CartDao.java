@@ -5,7 +5,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
+import com.indimoa.common.JdbcTemplate;
 import com.indomoa.cart.model.vo.Cart;
 
 public class CartDao {
@@ -71,6 +73,100 @@ public class CartDao {
 			close(pstmt);
 		}
 		return result;
+	}
+	
+	
+	public int getCartCount(Connection conn) {
+		int result = 0;
+		String sql = "select count(ct_no) from CART";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			if (rset.next()) {
+				result = rset.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JdbcTemplate.close(rset);
+			JdbcTemplate.close(pstmt);
+		}
+		return result;
+	}
+	
+	
+	public ArrayList<Cart> selectCartList(Connection conn) {
+		ArrayList<Cart> volist = null;
+
+		String sql = "select * from Cart";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			volist = new ArrayList<Cart>();
+			if (rset.next()) {
+				do {
+					Cart vo = new Cart();
+					vo = new Cart();
+					vo.setCt_no(rset.getInt("ct_no"));
+					vo.setMm_id(rset.getString("mm_id"));
+					vo.setCt_content(rset.getString("ct_content"));
+					vo.setCt_date(rset.getTimestamp("ct_date"));
+					volist.add(vo);
+				} while (rset.next());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JdbcTemplate.close(rset);
+			JdbcTemplate.close(pstmt);
+		}
+		System.out.println("[pearl]-- 리턴은" + volist);
+		return volist;
+	}
+
+	public ArrayList<Cart> selectCartList(Connection conn, int start, int end) {
+		ArrayList<Cart> volist = null;
+
+		String sql = "select * from (select Rownum r, t1.* from "
+				+ "(select * from Cart order by CT_NO desc) t1 ) t2 where r between ? and ?";
+
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, start);
+			pstmt.setInt(2, end);
+			rset = pstmt.executeQuery();
+			volist = new ArrayList<Cart>();
+			if (rset.next()) {
+				do {
+					Cart vo = new Cart();
+					vo = new Cart();
+					vo.setCt_no(rset.getInt("ct_no"));
+					vo.setMm_id(rset.getString("mm_id"));
+					vo.setCt_content(rset.getString("ct_content"));
+					vo.setCt_date(rset.getTimestamp("ct_date"));
+					volist.add(vo);
+				} while (rset.next());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				rset.close();
+				pstmt.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		System.out.println("[pearl]--" + volist);
+		return volist;
 	}
 	
 }

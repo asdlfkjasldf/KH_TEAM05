@@ -3,8 +3,10 @@ package com.indimoa.cart.model.service;
 import static com.indimoa.common.JdbcTemplate.*;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 
 import com.indimoa.cart.model.dao.CartDao;
+import com.indimoa.common.JdbcTemplate;
 import com.indomoa.cart.model.vo.Cart;
 
 public class CartService {
@@ -40,6 +42,34 @@ public class CartService {
 		close(conn);
 		
 		return result;
+	}
+	
+	public int getCartCount() {
+		int result = 0;
+		Connection conn = JdbcTemplate.getConnection();
+		result = new CartDao().getCartCount(conn);
+		JdbcTemplate.close(conn);
+		return result;
+	}
+	
+	public ArrayList<Cart> selectCartList(int start, int end) {
+		ArrayList<Cart> volist = null;
+		Connection conn = JdbcTemplate.getConnection();
+
+		volist = new CartDao().selectCartList(conn, start, end);
+
+		JdbcTemplate.close(conn);
+		return volist;
+	}
+
+	public ArrayList<Cart> selectCartList() {
+		ArrayList<Cart> volist = null;
+		Connection conn = JdbcTemplate.getConnection();
+
+		volist = new CartDao().selectCartList(conn);
+
+		JdbcTemplate.close(conn);
+		return volist;
 	}
 
 }

@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.indimoa.board.model.service.FbBoardService;
 import com.indimoa.board.model.vo.FbBoard;
+import com.indimoa.cart.model.service.CartService;
+import com.indomoa.cart.model.vo.Cart;
 
 /**
  * Servlet implementation class CartListServlet
@@ -54,7 +56,7 @@ public class CartListServlet extends HttpServlet {
 			currentPage = Integer.parseInt(pageNum); // 눌려진 페이지
 		}
 		// 총 글수
-		bCount = new FbBoardService().getBoardCount();
+		bCount = new CartService().getCartCount();
 		// 총 페이지수 = (총글개수 / 페이지당글수) + (총글개수에서 페이지당글수로 나눈 나머지가 0이 아니라면 페이지개수를 1 증가)
 		pageCount = (bCount / PAGE_SIZE) + (bCount % PAGE_SIZE == 0 ? 0 : 1);
 		// rownum 조건 계산
@@ -71,10 +73,11 @@ public class CartListServlet extends HttpServlet {
 		endPage = startPage + PAGE_BLOCK - 1;
 		if (endPage > pageCount)
 			endPage = pageCount;
-		ArrayList<FbBoard> volist = new FbBoardService().selectBoardList();
+		ArrayList<Cart> volist = new CartService().selectCartList();
 		request.setAttribute("volist", volist);
 		request.setAttribute("startPage", startPage);
 		request.setAttribute("endPage", endPage);
+		request.setAttribute("currentPage", currentPage);
 		request.setAttribute("pageCount", pageCount);
 		request.getRequestDispatcher("/WEB-INF/view/cart.jsp").forward(request, response);
 
