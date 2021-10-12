@@ -1,7 +1,8 @@
-<%@page import="com.indimoa.game.model.vo.GameVO"%>
+<%@page import="com.indimoa.game.model.vo.Game"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+   <%@ taglib prefix=”c” uri="http://java.sun.com/jstl/core"%> 
 <%-- <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 --%>
 
@@ -9,7 +10,7 @@
     
     <%
     
-	ArrayList<GameVO> volist = (ArrayList<GameVO>)request.getAttribute("volist");
+	ArrayList<GameVO> volist = (ArrayList<Game>)request.getAttribute("volist");
 //TODO paging처리 후 제대로 열기
 /* 	int startPage = (int) request.getAttribute("startPage");
 	int endPage = (int) request.getAttribute("endPage");
@@ -59,6 +60,18 @@
 			
 		<tr>	
 <%
+		if(volist != null){
+		for(TipBoard vo : volist){
+%>
+		<tr>
+			<td><a href="boardcontent?no=<%=vo.getTipNo()%>"> <%=vo.getTipNo()%> </a></td>
+			<td>
+			<%=vo.getTipNo()%>
+			</td>
+			<td><%=vo.getGdGamedevid()%></td>
+			<td><%=vo.getTipDatetime()%></td>
+		<tr>	
+<%
 		}}
 %>
 	</table>
@@ -67,19 +80,17 @@
 				%>	이전	<%
 			for (int i = startPage; i <= endPage; i++) {
 				%>
-				<a href="gamelist?pagenum=<%= i %>"> <%= i %> </a>
+				<a href="boardlist?pagenum=<%= i %>"> <%= i %> </a>
 				<%
 				if (i != endPage) {
 					%> , <%				}
 			}
 			if (endPage < pageCount)
-				%>	다음	<%
+				%>	다음	 <%
 %>
 
 <br>
-</table>
-
-<body>
+<a href="tboardWrite">글쓰기</a>
 
 </body>
 </html>
