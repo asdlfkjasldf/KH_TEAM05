@@ -141,6 +141,7 @@ public class MemberManagementListDao {
 					vo.setMm_nickname(rset.getString("mm_nickname"));
 					vo.setMm_membership(rset.getString("mm_membership"));
 					vo.setMm_name(rset.getString("mm_name"));
+					vo.setMm_point(rset.getInt("mm_point"));
 					volist.add(vo);
 				} while (rset.next());
 			}
@@ -285,7 +286,7 @@ public class MemberManagementListDao {
 		int result =-1;
 		ArrayList<Member> volist = null;
 
-		String sqlInsert = "UPDATE MEMBER SET MM_POINT =  ? WHERE MM_ID = ?";
+		String sqlInsert = "UPDATE MEMBER SET MM_POINT =  MM_POINT+? WHERE MM_ID = ?";
 		PreparedStatement pstmt = null;
 		
 

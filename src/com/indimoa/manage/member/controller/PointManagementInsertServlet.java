@@ -66,7 +66,7 @@ public class PointManagementInsertServlet extends HttpServlet {
 //				System.out.println(point);
 				System.out.println(vo);
 				int result = new MemberManagementListService().insertPointFromManagement(vo);
-				if(result == 0) {
+				if(result == -1) {
 					out.println("<br>포인트가 입력되지 않았습니다.");
 				} else {
 					out.println("<br>포인트가 입력되었습니다.");
@@ -74,7 +74,7 @@ public class PointManagementInsertServlet extends HttpServlet {
 				
 				}
 			}	
-		out.println("<br><a href='javascript:history.back();'>다시</a>");
+		out.println("<br><a href='indimoa/membermanagement'>새로고침</a>");
 		out.println("</body></html>");
 
 		}
