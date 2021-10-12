@@ -10,15 +10,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.indimoa.game.model.service.GameListService;
-import com.indimoa.game.model.vo.GameVO;
-
-
+import com.indimoa.game.model.service.GameService;
+import com.indimoa.game.model.vo.Game;
 
 /**
  * Servlet implementation class GameListServlet
  */
-@WebServlet("/GameListServlet")
+@WebServlet("/GameList")
 public class GameListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -45,14 +43,9 @@ public class GameListServlet extends HttpServlet {
 		PrintWriter out  = response.getWriter();
 		
 		// member를 db에서 읽어와야함.
-		ArrayList<GameVO> volist  = new GameListService().readGameListAll();
-		
-		// member 리스트를 화면에 출력
-		for (GameVO vo : volist) {
-			out.println("<p>" + vo.toString() + "</p>");
-		}
-	
-	
+		ArrayList<Game> volist  = new GameService().readGameListAll();
+		request.setAttribute("volist", volist);		
+		request.getRequestDispatcher("/WEB-INF/view/gamelist.jsp").forward(request, response);
 	}
 
 	/**

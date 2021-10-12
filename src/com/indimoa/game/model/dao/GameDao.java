@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.indimoa.game.model.vo.Game;
@@ -234,6 +235,40 @@ public class GameDao {
 	
 	
 	//다른 방법
+	
+	public int insertMember(Connection conn, Game g) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = "insert into member(GG_TITLE, GG_PRICE, GG_SYSTEM_REQUIREMENTS, GG_DEVELOPER, GG_RELEASE_DATE, GG_PUBLISHER, GG_LANGUAGES, GG_INFORMATION) "
+				+ "values (?, ?, ?, ?, ?,sysdate, ?, ?, ?)";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, g.getGgTitle());
+			pstmt.setString(2, g.getGgPrice());
+			pstmt.setString(3, g.getGgSystemRequirement());
+			pstmt.setString(4, g.getGgGenre());
+			pstmt.setString(5, g.getGgDeveloper());
+			pstmt.setDate(6, g.getGgReleaseDate());
+			pstmt.setString(7, g.getGgPublisher());
+			pstmt.setString(8, g.getGgLanguages());
+			pstmt.setString(9, g.getGgInfomation());
+			
+			
+			// executeupdate() 는 실행 결과를 반영된 행의 개수로 리턴하므로
+			// 1 이상은 실행 성공, 0 이하(구문 에러 포함)는 실패이다.
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JdbcTemplate.close(pstmt);
+		}
+		return result;
+	}
+
+
+
+
+
 	
 
 }

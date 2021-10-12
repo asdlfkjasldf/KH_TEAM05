@@ -42,14 +42,14 @@ public class GameService {
 		return volist;
 	}
 	
-	public int insertGame(Game vo) {
+	public int insertGame(Game g) {
 		int result = -1;
 		int result2 = -1;
 		Connection conn = JdbcTemplate.getConnection();
 		JdbcTemplate.setAutoCommit(conn, false);
 		
 		if(result == 0) {  
-			result = new GameDao().insertGameList(conn, vo);
+//			result = new GameDao().insertGameList(conn, vo);
 		System.out.println(" game update before");
 		}
 		JdbcTemplate.close(conn);
