@@ -179,13 +179,13 @@
 <body>
     <div id="header">
         <div id="logo">
-        <img src=".jpg" width="200px" height="50px">
+        <img src="/image/.jpg" width="200px" height="50px">
         </div>     
     </div>
     
     <h1 class="h1">회원가입</h1><br><br>
     <div id="section">
-    <form action="" method="POST">
+    <form action="/newMember" method="POST">
         <p class="int-area">
             <label for="id">아이디 : </label>
             <input id="id" type="text" name="mm_id" class="input1">
@@ -231,6 +231,7 @@
         </p><br>
         <p class="btn-area">
             <input type="submit" id="signup" value="회원가입">
+            
         </p>
         </form>
     </div>

@@ -109,7 +109,7 @@
         <img src=".jpg" width="200px" height="50px">
     </div>
 
-    <h1 class="h1">이메일로 찾기</h1>
+    <h1 class="h1">아이디 찾기</h1>
     
     <div id="section">
         <form action="/search">
@@ -126,7 +126,7 @@
                 <button id="btn" type="reset">취소</button>
             </p>
             <p class="caption">
-                <a href="http://127.0.0.1:5500/INDIMOA/findPwd.html">비밀번호 찾기</a>
+                <a href="http://localhost:8090/indimoa/findPwd.jsp">비밀번호 찾기</a>
             </p>
         </form>
     </div>

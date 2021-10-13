@@ -58,7 +58,8 @@
     background-color: transparent;
     border: none;
     border-bottom: 1px solid #999;
-    font-size: 18px; color: #fff;
+    font-size: 18px; 
+    color: black;
     outline: none;
 }
 .int-area label{
@@ -141,10 +142,10 @@
                 <button id="btn" type="submit">로그인</button>
             </p>
             <p class="caption">
-                <a href="http://127.0.0.1:5500/INDIMOA/findid.html">아이디 찾기</a>
+                <a href="http://localhost:8090/indimoa/findId.jsp">아이디 찾기</a>
             </p>
             <p class="caption">
-                <a href="http://127.0.0.1:5500/INDIMOA/findPwd.html">비밀번호 찾기</a>
+                <a href="http://localhost:8090/indimoa/findPwd.jsp">비밀번호 찾기</a>
             </p>
         </form>
     </div>

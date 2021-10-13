@@ -89,14 +89,14 @@
     <h1 class="h1">아이디 찾기 결과</h1>
 
     <div id="section">
-		<form action="../../mupdate.lo" method="post">
+		<form action="WEB-INF/view/showId.jsp" method="post">
 				<p class="t1">
 					<label for="id">아이디 : </label>
-					<input type="text" name="mm_id" value="<%="m.getMm_id()"%>" readonly="readonly">  <!-- TODO -->
+					<input type="text" name="mm_id" value="<%="member.getMm_id()"%>" readonly="readonly">  <!-- TODO -->
 				</p>
 
                 <p class="caption">
-                    <a href="http://127.0.0.1:5500/INDIMOA/findPwd.html">비밀번호 찾기</a>
+                    <a href="http://localhost:8090/indimoa/findPwd.html">비밀번호 찾기</a>
                 </p>
         </form>
     </div>

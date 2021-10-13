@@ -29,6 +29,15 @@ public class MemberUpdateServlet extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
+    
+    
+    /**
+   	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+   	 */
+       protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+       	request.getRequestDispatcher("WEB-INF/view/myInfo.jsp").forward(request, response);
+       }
+       
     /**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -54,14 +63,21 @@ public class MemberUpdateServlet extends HttpServlet {
 					m.setMm_pwd(pwd);
 					m.setMm_name(name);
 					m.setMm_email(email);
+					m.setMm_phn(phn);
+					m.setMm_com(com);
+					m.setMm_profile(profile);
+					m.setMm_nickname(nickname);
+					m.setMm_membership(membership);
+					
+					
 					if (mservice.updateMember(m) > 0) {
 						session.setAttribute("member", m);
-						response.sendRedirect("index.jsp");
+						response.sendRedirect("WEB-INF/view/myInfo.jsp");
 					} else {
 						out.append("<script>alert('회원 정보 수정 오류!\n'+ '관리자에게 문의하세요!');</script>");
 					}
 				} else {
-					RequestDispatcher view = request.getRequestDispatcher("views/error/errorPage.jsp");
+					RequestDispatcher view = request.getRequestDispatcher("WEB-INF/view/errorPage.jsp");
 					request.setAttribute("msg", "회원 정보 수정 오류 발생!!");
 					view.forward(request, response);
 				}

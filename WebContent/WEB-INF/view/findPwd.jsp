@@ -131,6 +131,10 @@
                 <button id="btn" type="submit">찾기</button>
                 <button id="btn" type="reset">취소</button>
             </p>
+            
+            <p class="caption">
+                <a href="http://localhost:8090/indimoa/login.jsp">로그인하기</a>
+            </p>
         </form>     
     </div>
 

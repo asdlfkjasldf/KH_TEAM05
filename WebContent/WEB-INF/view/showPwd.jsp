@@ -89,14 +89,14 @@
     <h1 class="h1">비밀번호 찾기 결과</h1>
 
     <div id="section">
-		<form action="../../mupdate.lo" method="post">
+		<form action="WEB-INF/view/showPwd.jsp" method="post">
             <p class="t1">
                 <label for="pwd">비밀번호 : </label>
                 <input type="password" name="mm_pwd" value="<%="m.getMm_pwd()"%>" readonly="readonly">   <!-- TODO -->
             </p>
 
                 <p class="caption">
-                    <a href="http://127.0.0.1:5500/INDIMOA/login.html">로그인하기</a>
+                    <a href="http://localhost:8090/indimoa/login.html">로그인하기</a>
                 </p>
         </form>
     </div>

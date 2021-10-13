@@ -33,7 +33,7 @@ public class EnrollMemberServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	request.getRequestDispatcher("WEB-INF/view/newmember.jsp").forward(request, response);
+    	request.getRequestDispatcher("WEB-INF/view/newMember.jsp").forward(request, response);
     }
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
@@ -55,7 +55,7 @@ public class EnrollMemberServlet extends HttpServlet {
 		
 		int result = mservice.insertMember(new Member());   //TODO
 		if (result > 0) {
-			response.sendRedirect("index.jsp");
+			response.sendRedirect("main.jsp");
 		} else {
 			
 		}

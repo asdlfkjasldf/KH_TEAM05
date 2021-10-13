@@ -107,7 +107,7 @@ body {
 }
 </style>
 <title>My Info View</title>
-<link rel="stylesheet" href=""/>
+
 </head>
 <body>
 	<%
@@ -124,7 +124,7 @@ body {
 	<h1 class="h1">내 정보</h1>
 
 	<div id="section">
-		<form action="../../mupdate.lo" method="post">
+		<form action="/myInfo" method="post">
 				<p class="t1">
 					<label for="id">아이디 : </label>
 					<input type="text" name="id" value="<%=m.getMm_id()%>" readonly="readonly">
@@ -166,7 +166,7 @@ body {
 			<p class="btn1">
 				<button type="submit">회원 정보 수정</button>
 				&nbsp; &nbsp;
-				<button type="button" onclick="location.href='../../mdelete.lo?id=<%=m.getMm_id()%>';">회원탈퇴</button>
+				<button type="button" onclick="location.href='WEB-INF/view/deleteMember?id=<%=m.getMm_id()%>';">회원탈퇴</button>
 			</p>
 		</form>
 	</div>
@@ -174,7 +174,7 @@ body {
 	<%
 		} else {
 	%>
-	<jsp:forward page="enroll.html" />
+	<jsp:forward page=".jsp" />
 	<!-- 가입하지 않은 사용자가 접속할 경우 enroll.html로 forwarding -->
 	<%
 		}
@@ -184,7 +184,7 @@ body {
 	<br>
 	<br>
 	<p class="btn2">
-		<button type="button" onclick="location.href='../../index.jsp';">메인으로가기</button>
+		<button type="button" onclick="location.href='WEB-INF/view/main.jsp';">메인으로가기</button>
 	</p>
     <div id="footer">
 		<h1>footer</h1>
