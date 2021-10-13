@@ -50,7 +50,7 @@ public class UploadServlet extends HttpServlet {
 		
 		//enctype="multipart/form-data"로 전송되었는지 확인
 		if(!ServletFileUpload.isMultipartContent(request))
-			response.sendRedirect("view/error/Error.jsp");
+			response.sendRedirect("/WEB-INF/view/Error.jsp");
 		
 		ServletContext context = getServletContext();
 		String uploadPath = context.getRealPath(fileSavePath);

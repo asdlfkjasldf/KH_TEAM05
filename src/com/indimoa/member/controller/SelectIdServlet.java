@@ -43,17 +43,18 @@ public class SelectIdServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String name = request.getParameter("mm_name");
 		String email = request.getParameter("mm_email");
-		System.out.println("email : " + email);
+		System.out.println("mm_name : " + name);
+		System.out.println("mm_email : " + email);
 
 		int id = new MemberService().selectId(name, email);
 		System.out.println("mm_id : " + id);
 		String page = "";
 		if (email.equals(email)) {
-			page = "/views/member/showId.jsp";
+			page = "/WEB-INF/view/showId.jsp";
 			request.setAttribute("mm_id", id);
 		} else {
 			//TODO
-			page = "/views/member/findId.jsp";
+			page = "/WEB-INF/view/findId.jsp";
 		}
 		RequestDispatcher view = request.getRequestDispatcher(page);
 		view.forward(request, response);

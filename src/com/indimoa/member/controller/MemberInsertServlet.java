@@ -31,6 +31,8 @@ public class MemberInsertServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		MemberService mservice = new MemberService();
 		// 전달 받은 파라미터 값을 변수에 담아 새로운 객체를 생성한다
+		
+		//TODO
 		String id = request.getParameter("mm_id");
 		String pwd = request.getParameter("mm_pwd");
 		String name = request.getParameter("mm_name");
@@ -44,7 +46,7 @@ public class MemberInsertServlet extends HttpServlet {
 		String point = request.getParameter("mm_point");
 		int result = mservice.insertMember(new Member());   //TODO
 		if (result > 0) {
-			response.sendRedirect("index.jsp");
+			response.sendRedirect("main.jsp");
 		} else {
 		}
 	}

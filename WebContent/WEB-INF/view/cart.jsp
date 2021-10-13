@@ -20,10 +20,14 @@ if(obj == null) {	//세션 정보가 없으면 배열을 생성 : 주문한 제�
 }
 %>
 
+
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
+
+
 <title>장바구니</title>
 
 <script type="text/javascript">
@@ -37,7 +41,7 @@ function fnPay(){
 
 function fnClear(){
 	if(confirm("장바구니를 비우시겠습니까?")) {
-		location.href = "../pro/CartClear.jsp";	
+		location.href = "WEB-INF/view/CartClear.jsp";	
 	}
 }
 
@@ -87,14 +91,19 @@ function fnGo(){
 		%>
 		<tr align = 'center'>
 			<td colspan= '3'>
-				<input type='button' value='결제하기' onclick='fnPay()' />
+				<button id="btn" onclick='fnPay()'>결제하기</button>
+				<button id="btn" onclick='fnClear()'>장바구니 비우기</button>
+				<button id="btn" onclick='fnGo()'>쇼핑 계속하기</button>
+			
+			
+		<!--    <input type='button' value='결제하기' onclick='fnPay()' />
 				<input type='button' value='장바구니 비우기' onclick='fnClear()' />
-				<input type='button' value='쇼핑 계속하기' onclick='fnGo()' />
+				<input type='button' value='쇼핑 계속하기' onclick='fnGo()' />    -->
 			</td>
 		<td>
 		 <%=df.format(totalSum) %>
 		 </td>
-			</tr>
+		</tr>
 		<% 
 			}//if else
 		%>

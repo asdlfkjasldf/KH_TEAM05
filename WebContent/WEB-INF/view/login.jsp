@@ -139,13 +139,13 @@
                 <input type="password" name="mm_pwd" id="pwd" autocomplete="off" required>
             </p>
             <p class="btn-area">
-                <button id="btn" type="submit">로그인</button>
+                <button id="btn" type="submit" onclick="location.href ='main.jsp'">로그인</button>
             </p>
             <p class="caption">
-                <a href="http://localhost:8090/indimoa/findId.jsp">아이디 찾기</a>
+                <a href='WEB-INF/view/findId.jsp'>아이디 찾기</a>
             </p>
             <p class="caption">
-                <a href="http://localhost:8090/indimoa/findPwd.jsp">비밀번호 찾기</a>
+                <a href='WEB-INF/view/findPwd.jsp'>비밀번호 찾기</a>
             </p>
         </form>
     </div>
@@ -169,6 +169,8 @@
                 }, 1500);
             }
         });
+        
+        
     </script>
     <div id="footer">
         <h1>footer</h1>

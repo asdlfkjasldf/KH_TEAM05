@@ -43,15 +43,17 @@ public class SelectPwdServlet extends HttpServlet {
 		String name = request.getParameter("mm_name");
 		String email = request.getParameter("mm_email");
 		System.out.println("mm_id : " + id);
+		System.out.println("mm_name : " + name);
+		System.out.println("mm_email : " + email);
 		// id불러오기
 		int mid = new MemberService().selectId(name, email);
 		System.out.println("mm_id : " + mid);
 		String page = "";
 		if (id.equals(id)) {
-			page = "/views/member/showPwd.jsp";
+			page = "/WEB-INF/view/showPwd.jsp";
 		}else {
 			//TODO
-			page = "/views/member/findPwd.jsp";
+			page = "/WEB-INF/view/findPwd.jsp";
 		}
 		RequestDispatcher view = request.getRequestDispatcher(page);
 		view.forward(request, response);

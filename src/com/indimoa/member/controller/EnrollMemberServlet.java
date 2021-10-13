@@ -50,8 +50,9 @@ public class EnrollMemberServlet extends HttpServlet {
 		String enrolldate = request.getParameter("mm_enrolldate");
 		String profile = request.getParameter("mm_profile");
 		String nickname = request.getParameter("mm_nickname");
+		
 		String membership = request.getParameter("mm_membership");
-		String point = request.getParameter("mm_point");
+		String point = request.getParameter("mm_point");				//point, membership도 넣어야할까
 		
 		int result = mservice.insertMember(new Member());   //TODO
 		if (result > 0) {

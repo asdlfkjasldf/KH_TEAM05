@@ -73,7 +73,7 @@
     transition: top .5s ease;
 }
 .btn-area {margin-top: 30px;}
-.btn-area input{
+.btn-area button{
     width: 100%; height: 50px;
     background: #166cea;
     color: #fff;
@@ -82,7 +82,7 @@
     border-radius: 25px;
     cursor: pointer;
 }
-#signup {
+#btn {
     width: 100px; height: 40px;
     font-size: 20px;
 }
@@ -104,25 +104,11 @@
 
     <script>
         window.addEventListener('load', function() {
-		var signup = document.querySelector('#signup');
+		var btn = document.querySelector('#btn');
 		
 		//signup버튼을 클릭했을때
-		signup.addEventListener('click', function() {
-			// value로 사용시 객체 속성 사용이 불가능하여 포커스를 사용할 수가 없어서
-			// 변수를 아래로 바꿨습니다.
-			/* var id = document.querySelector('#id').value;
-			var pw1 = document.querySelector('#pw1').value;
-			var pw2 = document.querySelector('#pw2').value;
-			var gender = document.querySelectorAll(".gender");
-			var hobby = document.querySelectorAll(".hobby");
-			var birth = document.querySelector('#birth').value;
-			var age = document.querySelector('#age').value;
-			var email = document.querySelector('#email').value;
-			var memo = document.querySelector('#memo').value;
-			 */
-			 
-			
-			// 아이디와 비번,성별,취미,생일,나이,이메일,메모 객체 셋팅  
+		btn.addEventListener('click', function() {
+			// 아이디와 비번,이름,닉네임,이메일,전화번호,com,구분,프로필 객체 셋팅  
 			var id = document.querySelector('#id');
 			var pw1 = document.querySelector('#pw1');
 			var pw2 = document.querySelector('#pw2');
@@ -136,11 +122,10 @@
             
 			
 			
-
             //비밀번호 검사
             var regExp = /^[A-Z][A-Za-z0-9_!]{7,15}$/;
             if(!regExp.test(pw1value)){
-                alert("첫 글자는 영어 대문자, 소문자 + 숫자 + 특수문자(_,#) 조건에 맞게 입력해주세요");
+                alert("첫 글자는 영어 대문자, 소문자 + 숫자 + 특수문자(_,!) 조건에 맞게 입력해주세요");
                 return false;
             }
 
@@ -169,11 +154,31 @@
 				email.focus();
 			// 전부완료되면 indimoa카페로 이동
 			} else {
-				location.href = "";
+				location.href = "/WEB-INF/view/main.jsp";
 			}
 
 		});
 	});
+        
+        
+        let id = $("#id");
+        let pw = $("#pwd");
+        let signup = $("#signup");
+
+        $(signup).on('click', function(){
+            if($(id).val() == "") {
+                $(id).next('label').addClass('warning');
+                setTimeout(function(){
+                    $('label').removeClass('warning');
+                }, 1500);
+            }            
+            else if($(pw).val() == "") {
+                $(pw).next('label').addClass('warning');
+                setTimeout(function(){
+                    $('label').removeClass('warning');
+                }, 1500);
+            }
+        });
     </script>
 </head>
 <body>
@@ -230,8 +235,7 @@
             <div id="image_container"></div>
         </p><br>
         <p class="btn-area">
-            <input type="submit" id="signup" value="회원가입">
-            
+            <button id="btn" type="submit" onclick="location.href = 'main.jsp' ">회원가입</button>
         </p>
         </form>
     </div>
