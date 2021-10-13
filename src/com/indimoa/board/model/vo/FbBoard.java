@@ -41,6 +41,14 @@ public class FbBoard {
 	public FbBoard() {
 	}
 
+	@Override
+	public String toString() {
+		return "FbBoard [fbNo=" + fbNo + ", mmId=" + mmId + ", fbTitle=" + fbTitle + ", fbContent=" + fbContent
+				+ ", fbDatetime=" + fbDatetime + ", fbVisit=" + fbVisit + ", fbReply=" + fbReply + ", fbReport="
+				+ fbReport + ", bref=" + bref + ", breLevel=" + breLevel + ", breStep=" + breStep 
+				+ "]";
+	}
+
 	public int getFbNo() {
 		return fbNo;
 	}
@@ -129,11 +137,6 @@ public class FbBoard {
 		this.breStep = breStep;
 	}
 
-	@Override
-	public String toString() {
-		return "FbBoard [fbNo=" + fbNo + ", mmId=" + mmId + ", fbTitle=" + fbTitle + ", fbContent=" + fbContent
-				+ ", fbDatetime=" + fbDatetime + ", fbVisit=" + fbVisit + ", fbReply=" + fbReply + ", fbReport="
-				+ fbReport + ", bref=" + bref + ", breLevel=" + breLevel + ", breStep=" + breStep + "]";
-	}
+
 
 }

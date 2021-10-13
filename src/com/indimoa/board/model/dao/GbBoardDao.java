@@ -170,7 +170,9 @@ public class GbBoardDao {
 		ArrayList<GbBoard> volist = null;
 
 		String sql = "select t2.*,TO_CHAR(GB_DATETIME, 'yyyy-mm-dd') GB_DATETIME_char from (select Rownum r, t1.* from "
-				+ "(select * from GAME_DEV_BOARD order by GB_NO desc) t1 ) t2 where r between ? and ?";
+				+ "(select * from GAME_DEV_BOARD f1 left outer join (select count(gb_r_no) gbReply, gb_r_no from GAME_DEV_BOARD_R group by gb_r_no) f2 on f1.GB_NO = f2.gb_r_no order by GB_NO desc) t1 "
+				+ " ) t2"
+				+ " where r between ? and ?";
 
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -191,7 +193,7 @@ public class GbBoardDao {
 					vo.setGbContent(rset.getString("GB_CONTENT"));
 					vo.setGbDatetime(rset.getString("GB_DATETIME_char"));
 					vo.setGbVisit(rset.getInt("GB_VISIT"));
-					vo.setGbReply(rset.getInt("GB_REPLY"));
+					vo.setGbReply(rset.getInt("gbReply"));
 					vo.setGbReport(rset.getInt("GB_REPORT"));
 					vo.setBref(rset.getInt("BREF"));
 					vo.setBreLevel(rset.getInt("BRE_LEVEL"));

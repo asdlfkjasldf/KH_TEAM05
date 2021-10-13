@@ -11,7 +11,8 @@ import com.indimoa.board.model.vo.TipBoard;
 public class TipBoardDao {
 	public TipBoard getBoard(Connection conn, int bno) {
 		TipBoard vo = null;
-		String sql = "select TIP_NO,GD_GAMEDEVID,TIP_TITLE,TIP_CONTENT,TO_CHAR(TIP_DATETIME, 'yyyy-mm-dd') TIP_DATETIME, TIP_VISIT,TIP_REPLY,TIP_REPORT,bref, bre_level, Bre_step "
+		String sql = "select TIP_NO,GD_GAMEDEVID,TIP_TITLE,TIP_CONTENT,TO_CHAR(TIP_DATETIME, 'yyyy-mm-dd') TIP_DATETIME,"
+				+ " TIP_VISIT,TIP_REPLY,TIP_REPORT,bref, bre_level, Bre_step "
 				+ " from Tip_Board where TIP_NO = ?";
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -52,6 +53,7 @@ public class TipBoardDao {
 			rset = pstmt.executeQuery();
 			if (rset.next()) {
 				result = rset.getInt(1);
+
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

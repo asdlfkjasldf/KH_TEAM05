@@ -11,11 +11,11 @@
 <title>자유게시판</title>
 </head>
 <body>
-	<h1>게 시 판</h1>
+	<h1>자 유 게 시 판</h1>
 	<table>
 		<tr>
 			<td>번호</td>
-			<td>제목</td>
+			<td colspan=2>제목</td>
 			<td>작성자</td>
 			<td>날짜</td>
 		</tr>

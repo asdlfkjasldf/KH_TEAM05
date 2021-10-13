@@ -95,6 +95,7 @@ public class FbBoardDao {
 		return result;
 	}
 
+
 	public ArrayList<FbBoard> selectBoardList(Connection conn) {
 		ArrayList<FbBoard> volist = null;
 
@@ -170,7 +171,9 @@ public class FbBoardDao {
 		ArrayList<FbBoard> volist = null;
 
 		String sql = "select t2.*,TO_CHAR(FB_DATETIME, 'yyyy-mm-dd') FB_DATETIME_char from (select Rownum r, t1.* from "
-				+ "(select * from FREE_BOARD_M order by FB_NO desc) t1 ) t2 where r between ? and ?";
+				+ " (select * from FREE_BOARD_M f1 join (select count(fb_r_no) fbReply, fb_r_no from free_board_m_r group by fb_r_no) f2 on f1.FB_NO = f2.fb_r_no order by FB_NO desc) t1 "
+				+ " ) t2 "
+				+ " where r between ? and ?";
 
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -190,7 +193,7 @@ public class FbBoardDao {
 					vo.setFbContent(rset.getString("FB_CONTENT"));
 					vo.setFbDatetime(rset.getString("FB_DATETIME_char"));
 					vo.setFbVisit(rset.getInt("FB_VISIT"));
-					vo.setFbReply(rset.getInt("FB_REPLY"));
+					vo.setFbReply(rset.getInt("fbReply"));
 					vo.setFbReport(rset.getInt("FB_REPORT"));
 					vo.setBref(rset.getInt("BREF"));
 					vo.setBreLevel(rset.getInt("BRE_LEVEL"));
