@@ -15,9 +15,10 @@
 	<table>
 		<tr>
 			<td>번호</td>
-			<td>제목</td>
+			<td colspan=2>제목</td>
 			<td>작성자</td>
 			<td>날짜</td>
+			<td>카테고리</td>
 		</tr>
 <c:if test="${volist != null}">
 	<c:forEach items="${volist }" var="vo" >
@@ -29,6 +30,7 @@
 			<td>[${vo.gbReply }]</td>
 			<td>${vo.gdGamedevid }</td>
 			<td>${vo.gbDatetime }</td>
+			<td>${vo.heHeading }</td>
 		</tr>
 	</c:forEach>
 </c:if>	

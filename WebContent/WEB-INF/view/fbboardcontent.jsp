@@ -48,11 +48,6 @@
 	</c:forEach>
 </c:if>	
 
-<%-- 		<tr>
-		<td><%=vor.getFbRId()%></td>
-		<td><%=vor.getFbRContent()%></td>
-		</tr> --%>
-		
 	</table>
 	
 	<script>

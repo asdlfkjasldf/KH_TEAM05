@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import com.indimoa.common.JdbcTemplate;
 import com.indimoa.board.model.dao.GbBoardDao;
 import com.indimoa.board.model.vo.GbBoard;
+import com.indimoa.board.model.vo.GbBoardR;
 
 public class GbBoardService {
 	public GbBoard getBoard(int bno) {
@@ -16,6 +17,14 @@ public class GbBoardService {
 		return vo;
 	}
 
+	public GbBoardR getBoardR(int bno) {
+		GbBoardR vor = null;
+		Connection conn = JdbcTemplate.getConnection();
+		vor = new GbBoardDao().getBoardR(conn, bno);
+		JdbcTemplate.close(conn);
+		return vor;
+	}
+	
 	public int getBoardCount() {
 		int result = 0;
 		Connection conn = JdbcTemplate.getConnection();
@@ -32,6 +41,16 @@ public class GbBoardService {
 
 		JdbcTemplate.close(conn);
 		return volist;
+	}
+	
+	public ArrayList<GbBoardR> selectBoardRList(int bno) {
+		ArrayList<GbBoardR> vorlist = null;
+		Connection conn = JdbcTemplate.getConnection();
+
+		vorlist = new GbBoardDao().selectBoardRList(conn, bno);
+
+		JdbcTemplate.close(conn);
+		return vorlist;
 	}
 
 	public ArrayList<GbBoard> selectBoardList() {
@@ -53,5 +72,14 @@ public class GbBoardService {
 		JdbcTemplate.close(conn);
 		return result;
 	}
+	
+	public int insertRBoard(GbBoardR vo) {
+		int result = -1;
+		Connection conn = JdbcTemplate.getConnection();
 
+		result = new GbBoardDao().insertRBoard(conn, vo);
+
+		JdbcTemplate.close(conn);
+		return result;
+	}
 }

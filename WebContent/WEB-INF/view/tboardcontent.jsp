@@ -25,5 +25,5 @@
 	</tr>
 	</table>
 	<a href="tboardwrite?bno=<%=vo.getTipNo()%>">답글작성</a>
-</body>
+ </body>
 </html>

@@ -136,7 +136,8 @@ public class FbBoardDao {
 	public ArrayList<FbBoardR> selectBoardRList(Connection conn, int bno) {
 		ArrayList<FbBoardR> vorlist = null;
 
-		String sql = "select * from FREE_BOARD_M_R where FB_R_NO = ?";
+		String sql = "select FREE_BOARD_M_R.*,TO_CHAR(FB_R_DATETIME, 'yyyy-mm-dd')"
+				+ " FB_R_DATETIME_char from FREE_BOARD_M_R where FB_R_NO = ?";
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 
@@ -148,11 +149,10 @@ public class FbBoardDao {
 			if (rset.next()) {
 				do {
 					FbBoardR vor = new FbBoardR();
-					vor = new FbBoardR();
 					vor.setFbRNo(rset.getInt("FB_R_NO"));
 					vor.setFbRId(rset.getString("FB_R_ID"));
 					vor.setFbRContent(rset.getString("FB_R_CONTENT"));
-					vor.setFbRDatetime(rset.getString("FB_R_DATETIME"));
+					vor.setFbRDatetime(rset.getString("FB_R_DATETIME_char"));
 					vorlist.add(vor);
 				} while (rset.next());
 			}
@@ -184,7 +184,6 @@ public class FbBoardDao {
 			if (rset.next()) {
 				do {
 					FbBoard vo = new FbBoard();
-					vo = new FbBoard();
 					vo.setFbNo(rset.getInt("FB_NO"));
 					vo.setMmId(rset.getString("MM_ID"));
 					vo.setFbTitle(rset.getString("FB_TITLE"));
