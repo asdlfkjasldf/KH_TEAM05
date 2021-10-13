@@ -94,7 +94,7 @@ public class MemberManagementListServlet extends HttpServlet {
 //			request.setAttribute("pageCount", pageCount );
 			//Page 이동하면서 Data도 전달함.
 			if(searchKeyword != null) {
-			request.getRequestDispatcher("WEB-INF\\Mangement\\MemberMangementBoard.jsp").forward(request, response);
+			request.getRequestDispatcher("WEB-INF\\Management\\MemberMangementBoard.jsp").forward(request, response);
 			}
 			
 			
@@ -159,7 +159,7 @@ public class MemberManagementListServlet extends HttpServlet {
 		request.setAttribute("endPage", endPage);
 		request.setAttribute("pageCount", pageCount );
 		//Page 이동하면서 Data도 전달함.
-		request.getRequestDispatcher("WEB-INF\\Mangement\\MemberMangementBoard.jsp").forward(request, response);
+		request.getRequestDispatcher("WEB-INF\\Management\\MemberMangementBoard.jsp").forward(request, response);
 	}		
 	
 
