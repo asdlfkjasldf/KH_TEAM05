@@ -65,9 +65,9 @@ public class FbBoardWriteAjaxServlet extends HttpServlet {
 		int result = new FbBoardService().insertRBoard(vo);
 		System.out.println("result : " + result);
 		if(result > 0) {
-			out.println("OK");
+			out.print("OK");
 		} else {
-			out.println("fail");
+			out.print("fail");
 		}
 		out.flush();
 		out.close();   // ajax success 에 함수로 호출함.

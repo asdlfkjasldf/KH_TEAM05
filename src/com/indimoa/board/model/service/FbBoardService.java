@@ -53,11 +53,11 @@ public class FbBoardService {
 		return volist;
 	}
 
-	public ArrayList<FbBoardR> selectBoardRList() {
+	public ArrayList<FbBoardR> selectBoardRList(int bno) {
 		ArrayList<FbBoardR> vorlist = null;
 		Connection conn = JdbcTemplate.getConnection();
 
-		vorlist = new FbBoardDao().selectBoardRList(conn);
+		vorlist = new FbBoardDao().selectBoardRList(conn,bno);
 
 		JdbcTemplate.close(conn);
 		return vorlist;

@@ -44,7 +44,7 @@ public class FbBoardContentViewServlet extends HttpServlet {
 		FbBoard vo = new FbBoardService().getBoard(bno);
 		FbBoardR vor = new FbBoardService().getBoardR(bno);
 
-		ArrayList<FbBoardR> vorlist = new FbBoardService().selectBoardRList();
+		ArrayList<FbBoardR> vorlist = new FbBoardService().selectBoardRList(bno);
 		request.setAttribute("vorlist", vorlist);
 		request.setAttribute("boardvo", vo);
 		request.setAttribute("boardvor", vor);

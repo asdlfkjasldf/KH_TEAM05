@@ -78,6 +78,7 @@
 				success : function(data){
 					console.log(data);
 					if(data =="OK"){
+						location.reload();
 						alert('댓글이 입력되었습니다.'); 
 					}
 				},
