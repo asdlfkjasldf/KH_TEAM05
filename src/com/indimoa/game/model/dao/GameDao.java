@@ -254,50 +254,50 @@ public class GameDao {
 	
 	
 	
-	public int insertGameList(Connection conn, Game vo) {
-		int result =-1;
-		ArrayList<Game> volist = null;
-
-		String sqlInsert = "INSERT INTO GAME"
-				+ "(GG_NO, GG_TITLE, GG_PRICE, GG_SYSTEM_REQUIREMENTS, GG_GENRE , MM_ENRGG_DEVELOPEROLLDATE, GG_RELEASE_DATE, GG_PUBLISHER, GG_LANGUAGES, GG_INFORMATION)"
-				+ " VALUES(?,?,?,?,?,?, ?,?,?,?)";
-		PreparedStatement pstmt = null;
-		
-
-		try {
-					
-					pstmt = conn.prepareStatement(sqlInsert);
-					pstmt.setInt(1, vo.getGgNo());
-					pstmt.setString(2, vo.getGgTitle());
-					pstmt.setString(3, vo.getGgPrice());
-					pstmt.setString(4, vo.getGgSystemRequirement());
-					pstmt.setString(5, vo.getGgGenre());
-					pstmt.setString(6, vo.getGgDeveloper());
-//					pstmt.setString(7, vo.getGgReleaseDate());
-					pstmt.setString(8, vo.getGgPublisher());
-					pstmt.setString(9, vo.getGgLanguages());
-					pstmt.setString(10, vo.getGgInfomation());
-					
-					result = pstmt.executeUpdate();
-			}catch(Exception e){
-				e.printStackTrace();
-			} finally {
-				JdbcTemplate.close(pstmt);
-			}
-		System.out.println("[admin]-- 리턴은" + volist);
-		return result;
-	}
-	
+//	public int insertGameList(Connection conn, Game vo) {
+//		int result =-1;
+//		ArrayList<Game> volist = null;
+//
+//		String sqlInsert = "INSERT INTO GAME"
+//				+ "(GG_NO, GG_TITLE, GG_PRICE, GG_SYSTEM_REQUIREMENTS, GG_GENRE , MM_ENRGG_DEVELOPEROLLDATE, GG_RELEASE_DATE, GG_PUBLISHER, GG_LANGUAGES, GG_INFORMATION)"
+//				+ " VALUES(?,?,?,?,?,?, ?,?,?,?)";
+//		PreparedStatement pstmt = null;
+//		
+//
+//		try {
+//					
+//					pstmt = conn.prepareStatement(sqlInsert);
+//					pstmt.setInt(1, vo.getGgNo());
+//					pstmt.setString(2, vo.getGgTitle());
+//					pstmt.setString(3, vo.getGgPrice());
+//					pstmt.setString(4, vo.getGgSystemRequirement());
+//					pstmt.setString(5, vo.getGgGenre());
+//					pstmt.setString(6, vo.getGgDeveloper());
+////					pstmt.setString(7, vo.getGgReleaseDate());
+//					pstmt.setString(8, vo.getGgPublisher());
+//					pstmt.setString(9, vo.getGgLanguages());
+//					pstmt.setString(10, vo.getGgInfomation());
+//					
+//					result = pstmt.executeUpdate();
+//			}catch(Exception e){
+//				e.printStackTrace();
+//			} finally {
+//				JdbcTemplate.close(pstmt);
+//			}
+//		System.out.println("[admin]-- 리턴은" + volist);
+//		return result;
+//	}
+//	
 	
 	//다른 방법
-	
+	// DataBase에 Member 객체를 추가하는 메소드
 	public int insertMember(Connection conn, Game g) {
 		PreparedStatement pstmt = null;
 		int result = 0;
-		String query = "insert into member(GG_TITLE, GG_PRICE, GG_SYSTEM_REQUIREMENTS, GG_DEVELOPER, GG_RELEASE_DATE, GG_PUBLISHER, GG_LANGUAGES, GG_INFORMATION) "
-				+ "values (?, ?, ?, ?, ?,sysdate, ?, ?, ?)";
+		String sql = "insert into member(GG_TITLE, GG_PRICE, GG_SYSTEM_REQUIREMENTS, GG_DEVELOPER, GG_RELEASE_DATE, GG_PUBLISHER, GG_LANGUAGES, GG_INFORMATION) "
+				+ "values (?, ?, ?, ?, ?,?, ?, ?, ?)";
 		try {
-			pstmt = conn.prepareStatement(query);
+			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, g.getGgTitle());
 			pstmt.setString(2, g.getGgPrice());
 			pstmt.setString(3, g.getGgSystemRequirement());

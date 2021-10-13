@@ -1,6 +1,7 @@
 package com.indimoa.game.model.service;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.util.ArrayList;
 
 import com.indimoa.common.JdbcTemplate;
@@ -42,20 +43,6 @@ public class GameService {
 		return volist;
 	}
 	
-	public int insertGame(Game vo) {
-		int result = -1;
-		int result2 = -1;
-		Connection conn = JdbcTemplate.getConnection();
-		JdbcTemplate.setAutoCommit(conn, false);
-		
-		if(result == 0) {  
-			result = new GameDao().insertGameList(conn, vo);
-		System.out.println(" game update before");
-		}
-		JdbcTemplate.close(conn);
-		return result;
-	}
-	
 	public int getBoardCount() {
 		int result = 0;
 		Connection conn = JdbcTemplate.getConnection();
@@ -91,5 +78,36 @@ public class GameService {
 		JdbcTemplate.close(conn);
 		return vo;
 	}
+	
+	
+	
+	public int insertGame(Game ig) { 
+		Connection conn = JdbcTemplate.getConnection(); 
+		int result = new GameDao().insertMember(conn, ig); 
+ 
+		if(result == 0) {  
+			result = new GameDao().insertMember(conn, ig);
+		System.out.println(" game update before");
+		}
+		JdbcTemplate.close(conn);
+		return result;
+		}
+	
+	
+//	public int insertGame(Game vo) {
+//		int result = -1;
+//		int result2 = -1;
+//		Connection conn = JdbcTemplate.getConnection();
+//		JdbcTemplate.setAutoCommit(conn, false);
+//		
+//		if(result == 0) {  
+//			result = new GameDao().insertGameList(conn, vo);
+//		System.out.println(" game update before");
+//		}
+//		JdbcTemplate.close(conn);
+//		return result;
+//	}
+	
+	
 
 }

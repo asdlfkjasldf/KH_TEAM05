@@ -23,6 +23,7 @@ public class EnrollGameServlet extends HttpServlet {
     /**
      * @see HttpServlet#HttpServlet()
      */
+	
     public EnrollGameServlet() {
         super();
         // TODO Auto-generated constructor stub
@@ -45,19 +46,33 @@ public class EnrollGameServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		PrintWriter out = response.getWriter();
 		
-		GameService gameService = new GameService();
+		GameService gservice = new GameService(); 
+		
+				//화면에서 받아 올 데이터
+		String gTitle =request.getParameter("ggTitle");
+		String gPrice =request.getParameter("ggPrice");
+		String gSystemRequirement =request.getParameter("ggSystemRequirement");
+		String gGenre =request.getParameter("ggGenre");
+		String gDeveloper =request.getParameter("ggDeveloper");
+		String gReleaseDate = request.getParameter("ggReleaseDate");   //getParamater를 화면에 있는거 받아오니깐 무조건 String
+		String gPublisher =request.getParameter("ggPublisher");
+		String gLanguages =request.getParameter("ggLanguages");
+		String gInfomation =request.getParameter("ggInfomation");
 		
 		
-		//화면에서 받아 올 데이터
-		String ggTitle =request.getParameter("");
-		String ggPrice =request.getParameter("");
-		String ggSystemRequirement =request.getParameter("");
-		String ggGenre =request.getParameter("");
-		String ggDeveloper =request.getParameter("");
-//		Date ggReleaseDate = request.getParameter("");
-		String ggPublisher =request.getParameter("");
-		String ggLanguages =request.getParameter("");
-		String ggInfomation =request.getParameter("");
+		Game vo = new Game();
+		vo.setGgTitle(gTitle);
+		vo.setGgPrice(gPrice);
+		vo.setGgSystemRequirement(gSystemRequirement);
+		vo.setGgGenre(gGenre);
+		vo.setGgDeveloper(gDeveloper);
+//		vo.setGgReleaseDate(gReleaseDate); // 타입 변경해야 될것 같은데???????????????
+		vo.setGgPublisher(gPublisher);
+		vo.setGgLanguages(gLanguages);
+		vo.setGgInfomation(gInfomation);
+		
+		int result = gservice.insertGame(vo);
+		
 		
 		//화면 데이터를 vo에  넣기
 		
@@ -66,6 +81,8 @@ public class EnrollGameServlet extends HttpServlet {
 //		if(result == 1 ) {
 //			out.println("게임이 등록 되었습니다.");
 //		}
+		request.getRequestDispatcher("/WEB-INF/view/enrollgame.jsp").forward(request, response);
 	}
-
+	
+	
 }

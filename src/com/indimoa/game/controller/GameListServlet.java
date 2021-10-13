@@ -44,7 +44,7 @@ public class GameListServlet extends HttpServlet {
 		PrintWriter out  = response.getWriter();
 		
 		final int PAGE_SIZE = 10; // 한 페이지 당 글수
-		final int PAGE_BLOCK = 3; // 한 화면에 나타날 페이지 링크 수
+		final int PAGE_BLOCK = 5; // 한 화면에 나타날 페이지 링크 수
 		int bCount = 0; // 총 글수
 		int pageCount = 0; // 총 페이지수
 		int startPage = 1; // 화면에 나타날 시작페이지
@@ -79,15 +79,18 @@ public class GameListServlet extends HttpServlet {
 					endPage = pageCount;
 				System.out.println("startRnum : " + startRnum);
 				System.out.println("endRnum : "+ endRnum);
+				
+				
 				//
 				ArrayList<Game> volist = new GameService().selectBoardList(startRnum,endRnum );
-				for (Game vo : volist) {
-//					System.out.println("<p>"+vo.toString()+"</p>");
-					request.setAttribute("volist", volist);
-					request.setAttribute("startPage", startPage);
-					request.setAttribute("endPage", endPage);
-					request.setAttribute("pageCount", pageCount);
-				}
+				System.out.println(volist);
+				
+				
+				//한번만 작동해도되!!!!!!!!
+				request.setAttribute("volist", volist);
+				request.setAttribute("startPage", startPage);
+				request.setAttribute("endPage", endPage);
+				request.setAttribute("pageCount", pageCount);
 				
 				
 				request.getRequestDispatcher("/WEB-INF/view/gamelist.jsp").forward(request, response);
