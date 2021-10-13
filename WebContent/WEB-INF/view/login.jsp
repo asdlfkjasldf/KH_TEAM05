@@ -42,7 +42,11 @@
     height: 100vh;
     background-size: cover;
 }
-
+/* .login-form h1{
+    font-size: 32px; color: #fff;
+    text-align: center;  
+    margin-bottom: 60px;  
+} */
 .int-area {
     width: 400px;
     margin-top: 20px;
@@ -54,8 +58,7 @@
     background-color: transparent;
     border: none;
     border-bottom: 1px solid #999;
-    font-size: 18px; 
-    color: black;
+    font-size: 18px; color: #fff;
     outline: none;
 }
 .int-area label{
@@ -113,7 +116,7 @@
     <title>로그인</title>
 </head>
 <body>
-jhhhhh
+
 
     <div id="header">
         <div id="logo">
@@ -125,7 +128,7 @@ jhhhhh
 
     <h1 class="h1">로그인</h1>
     <div id="section">
-        <form action="/login">
+        <form action="/login" method="post">
             <p class="int-area">
                 <label for="id">아이디</label>
                 <input type="text" name="mm_id" id="id" autocomplete="off" required>
@@ -138,10 +141,10 @@ jhhhhh
                 <button id="btn" type="submit">로그인</button>
             </p>
             <p class="caption">
-                <a href="localhost:8090/indimoa/findid.html">아이디 찾기</a>
+                <a href="http://127.0.0.1:5500/INDIMOA/findid.html">아이디 찾기</a>
             </p>
             <p class="caption">
-                <a href="localhost:8090/indimoa/findPwd.html">비밀번호 찾기</a>
+                <a href="http://127.0.0.1:5500/INDIMOA/findPwd.html">비밀번호 찾기</a>
             </p>
         </form>
     </div>

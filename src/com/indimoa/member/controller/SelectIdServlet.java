@@ -27,19 +27,28 @@ public class SelectIdServlet extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-	/**
+	
+    
+    /**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	request.getRequestDispatcher("WEB-INF/view/findId.jsp").forward(request, response);
+    }
+
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String name = request.getParameter("mm_name");
 		String email = request.getParameter("mm_email");
 		System.out.println("email : " + email);
 
-		String id = new MemberService().selectId(name, email);
+		int id = new MemberService().selectId(name, email);
 		System.out.println("mm_id : " + id);
 		String page = "";
-		if (id != null) {
+		if (email.equals(email)) {
 			page = "/views/member/showId.jsp";
 			request.setAttribute("mm_id", id);
 		} else {
@@ -49,14 +58,5 @@ public class SelectIdServlet extends HttpServlet {
 		RequestDispatcher view = request.getRequestDispatcher(page);
 		view.forward(request, response);
 	}
-
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
-
+		
 }

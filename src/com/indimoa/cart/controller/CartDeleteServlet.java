@@ -13,7 +13,7 @@ import com.indimoa.cart.model.service.CartService;
 /**
  * Servlet implementation class CartDeleteServlet
  */
-@WebServlet("/CartDeleteServlet")
+@WebServlet("/cartdelete")
 public class CartDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

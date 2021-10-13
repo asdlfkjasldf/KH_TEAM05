@@ -20,7 +20,7 @@ import com.indomoa.cart.model.vo.Cart;
 /**
  * Servlet implementation class CartAddServlet
  */
-@WebServlet("/CartAddServlet")
+@WebServlet("/cartadd")
 public class CartAddServlet extends HttpServlet {
 //	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 //		processRequest(request, response);

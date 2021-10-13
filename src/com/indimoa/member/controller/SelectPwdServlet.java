@@ -27,20 +27,28 @@ public class SelectPwdServlet extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-	/**
+	
+
+    /**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	request.getRequestDispatcher("WEB-INF/view/findPwd.jsp").forward(request, response);
+    }
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String id = request.getParameter("mm_id");
 		String name = request.getParameter("mm_name");
 		String email = request.getParameter("mm_email");
 		System.out.println("mm_id : " + id);
 		// id불러오기
-		String mid = new MemberService().selectId(name, email);
+		int mid = new MemberService().selectId(name, email);
 		System.out.println("mm_id : " + mid);
 		String page = "";
 		if (id.equals(id)) {
-			page = "/sendEmailforPwd?email=" + email + "&mm_id=" + mid;
+			page = "/views/member/showPwd.jsp";
 		}else {
 			//TODO
 			page = "/views/member/findPwd.jsp";
@@ -48,13 +56,5 @@ public class SelectPwdServlet extends HttpServlet {
 		RequestDispatcher view = request.getRequestDispatcher(page);
 		view.forward(request, response);
 	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
-
 }
+

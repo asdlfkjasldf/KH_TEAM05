@@ -64,7 +64,7 @@ public class DupIdChkServlet extends HttpServlet {
 		}
 		out.flush();
 		out.close();
-		doGet(request, response);
+	//TODO test로 확인
 	}
 
 }

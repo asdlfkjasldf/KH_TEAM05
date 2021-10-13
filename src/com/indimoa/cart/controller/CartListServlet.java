@@ -18,7 +18,7 @@ import com.indomoa.cart.model.vo.Cart;
 /**
  * Servlet implementation class CartListServlet
  */
-@WebServlet("/CartListServlet")
+@WebServlet("/cartlist")
 public class CartListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

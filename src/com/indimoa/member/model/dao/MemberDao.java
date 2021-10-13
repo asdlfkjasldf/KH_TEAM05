@@ -161,12 +161,12 @@ public class MemberDao {
 	}
 	
 	
-	public String selectId(Connection conn, String name, String email) {
+	public int selectId(Connection conn, String name, String email) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String Id = "";
+		int result = 0;
 
-		String query = prop.getProperty("selectId");
+		String query = "select mm_id from member where mm_name like ? and mm_email like ?";
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, name);
@@ -174,23 +174,23 @@ public class MemberDao {
 			rset = pstmt.executeQuery();
 
 			if (rset.next()) {
-				Id = rset.getString("mm_id");
+				result = rset.getInt(1);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
-		return Id;
+		return result;
 	}
 	
 	
-	public String selectPwd(Connection conn, String name, String id) {
+	public int selectPwd(Connection conn, String name, String id) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String pwd = "";
+		int result = 0;
 
-		String query = prop.getProperty("selectPwd");
+		String query = "select mm_pwd from member where mm_name liek ? and mm_id like ?";
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, name);
@@ -198,14 +198,14 @@ public class MemberDao {
 			rset = pstmt.executeQuery();
 
 			if (rset.next()) {
-				pwd = rset.getString("mm_pwd");
+				result = rset.getInt(1);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
-		return pwd;
+		return result;
 	}
 	
 }
