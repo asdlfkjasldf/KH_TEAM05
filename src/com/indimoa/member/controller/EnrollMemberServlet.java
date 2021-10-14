@@ -54,7 +54,7 @@ public class EnrollMemberServlet extends HttpServlet {
 		String membership = request.getParameter("mm_membership");
 		String point = request.getParameter("mm_point");				//point, membership도 넣어야할까
 		
-		int result = mservice.insertMember(new Member());   //TODO
+		int result = mservice.enrollMember(new Member());   //TODO
 		if (result > 0) {
 			response.sendRedirect("main.jsp");
 		} else {
