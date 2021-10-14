@@ -16,7 +16,26 @@
  	table{
  	border: 1px solid black;
  	}
+ 	
+ 	input[type="text"]{
+ 	width: 800px;
+ 	height: 300px;
+ 	}
+ 	.description{
+ 	text-align: center;
+ 	}
  </style>
+ 
+ <script>
+		
+			
+			
+
+		
+
+//현재 문제가 no,title,content를 지칭하는 게시판 db의 컬럼명이 다다르다.
+	</script>
+ 
 </head>
 <body>
 <div class="Header"> </div>
@@ -57,12 +76,12 @@
 </div>
 
 <div class="Board-Article">
-	<div>
+	<div class="description">
 	<!--  제목칸의 데이터를 select option의 게시판의 글에 등록 -->
 	제목<br>
 	<input type="text" id="newTextTitle">
 	</div>
-	<div>
+	<div class="description">
 	<!--  내용칸의 데이터를 select option의 게시판의 글에 등록 -->
 	내용<br>
 	<input type="text" id="newTextContent">
@@ -74,49 +93,7 @@
 
 <div class="Footer"></div>
 
-	<script>
-		
-			
-			$(document).on("click", "#btnBoardView",function() {
-				
-
-				$.ajax({
-					type : "post",
-					url : "indimoa/indimoa/boardrmanagement",
-					dataType : "html",
-					data : {
-						targetvo: $("#bmselect").val(),
-						
-					},
-				success : function(data){
-					{
-						$newTbody = $("<tbody class='new-tbody'></tbody>")
-						$("#insertlist").append($newTbody)
-						
-						for(let list of data){
-							let $cellsOfRow = $("<tr>" +
-									"<td>"list.no<"</td>" +
-									"<td>"list.title<"</td>" +
-									"<td>"list.content<"</td>" +
-									"<td><button type=button onclick='updateColumn()'>수정</button>" +
-									"<td><button type=button onclick='deleteColumn()'삭제</button>" +
-									"</tr>");
-							$newTbody.append("$cellsOfRow");
-									
-						}
-					}
-					
-					$('.Board-Article').html(data);
-					
-				}
-					
-				});	
-			});
-
-		
-
-//현재 문제가 no,title,content를 지칭하는 게시판 db의 컬럼명이 다다르다.
-	</script>
+	
 	
 
 

@@ -15,7 +15,7 @@ import com.indimoa.member.model.vo.Member;
 /**
  * Servlet implementation class MemberManagementDeleteServlet
  */
-@WebServlet("/delete/member-from-management")
+@WebServlet("/admindeletemembers")
 public class MemberManagementDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

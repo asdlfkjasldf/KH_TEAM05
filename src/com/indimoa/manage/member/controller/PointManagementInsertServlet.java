@@ -16,7 +16,7 @@ import com.indimoa.member.model.vo.Member;
 /**
  * Servlet implementation class PointManagementInsertServlet
  */
-@WebServlet("/insert/point-from-management")
+@WebServlet("/adminupdatemembers")
 public class PointManagementInsertServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -32,14 +32,6 @@ public class PointManagementInsertServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doPost(request, response);
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
 		System.out.println("insertPoint진입");
@@ -74,10 +66,20 @@ public class PointManagementInsertServlet extends HttpServlet {
 				
 				}
 			}	
-		out.println("<br><a href='indimoa/membermanagement'>새로고침</a>");
+		
+		out.println("<br><a href='javascript:location.reload();'>새로고침</a>");
 		out.println("</body></html>");
 
 		}
+	
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doGet(request, response);
 	}
+	
+}
 
 

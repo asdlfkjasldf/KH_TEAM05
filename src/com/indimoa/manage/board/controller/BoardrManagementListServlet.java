@@ -80,10 +80,10 @@ public class BoardrManagementListServlet extends HttpServlet {
 			endPage = pageCount;
 		}
 		
-		System.out.println("메소드진입");
+//		System.out.println("메소드진입");
 		String bmselect = request.getParameter("bmselect");
 		out.println(bmselect);
-//		String optionValue = request.getParameter("bmselect"); 
+ 
 //		String strResult = "";
 		
 		if(bmselect == null) {
@@ -93,20 +93,21 @@ public class BoardrManagementListServlet extends HttpServlet {
 			out.println(bmselect);
 			
 		}
-//		if(optionValue.equals(anObject) ) {
-//			strResult = "fb";
-////			ArrayList<FbBoard> volist = new FbBoardService().selectBoardList(startRnum, endRnum);
-////			request.setAttribute("volist", volist);
-//		}else if(optionValue.equals("gdb")) {
-//			System.out.println("진입2");
-////			ArrayList<GbBoard> volist = new GbBoardService().selectBoardList(startRnum, endRnum);
-////			request.setAttribute("volist", volist);
-//		}else if(optionValue.equals("tipb")) {
-//			System.out.println("진입3");
-////			ArrayList<TipBoard> volist = new TipBoardService().selectBoardList(startRnum, endRnum);
-////			request.setAttribute("volist", volist);
-//		}
 		
+		
+//		if(bmselect.equals("fb") ) {
+//			ArrayList<FbBoard> volist = new FbBoardService().selectBoardList(startRnum, endRnum);
+//			request.setAttribute("volist", volist);
+//		}else if(bmselect.equals("gdb")) {
+//			System.out.println("진입2");
+//			ArrayList<GbBoard> volist = new GbBoardService().selectBoardList(startRnum, endRnum);
+//			request.setAttribute("volist", volist);
+//		}else if(bmselect.equals("tipb")) {
+//			System.out.println("진입3");
+//			ArrayList<TipBoard> volist = new TipBoardService().selectBoardList(startRnum, endRnum);
+//			request.setAttribute("volist", volist);
+//		}
+//		
 		
 		
 		
@@ -114,7 +115,7 @@ public class BoardrManagementListServlet extends HttpServlet {
 		request.setAttribute("endPage", endPage);
 		request.setAttribute("pageCount", pageCount);
 		request.setAttribute("currentPage", currentPage);
-		request.getRequestDispatcher("WEB-INF\\Management\\BoardManagementBoard.jsp").forward(request, response);
+		request.getRequestDispatcher("WEB-INF/Management/BoardManagementBoard.jsp").forward(request, response);
 				
 	}
 

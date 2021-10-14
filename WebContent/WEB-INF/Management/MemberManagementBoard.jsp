@@ -16,11 +16,6 @@
             
 
     %>
-
- ${volist}
- ${startPage}
- ${endPage}
- ${pageCount}
 <!DOCTYPE html>
 <html>
 <head>
@@ -173,7 +168,7 @@ li {
 	<div class="Asside-left">
 			<ul>
 				<li><a href="#">내 정보</a></li>
-				<li><a href="indimoa/membermanagement" id="liRedirect">회원</a></li>
+				<li><a href="<c:url value='/adminmembers'/>" id="liRedirect">회원</a></li>
 				<li><a href="#">FAQ</a></li>
 				<li><a href="#">게임</a></li>
 				<li><a href="#">통계</a></li>
@@ -183,7 +178,7 @@ li {
 	<div class="Article">
 	<h1>회원</h1>
 	
-	<form method=get action="indimoa/membermanagement" >					
+	<form method=get action="<c:url value='/adminmembers'/>" >					
 	<select id="sc" name="sc">
         <option value="nk">이름</option>
         <option value="ik">ID</option>
@@ -193,7 +188,7 @@ li {
 	<input type="text" name="sk" id="sk">
 	<button type="submit" id="btnMemberView">조회</button>
 	</form>  
-	<table border="1" collapse="coplapse">	
+	<table border="1" collapse="collapse">	
 		<tr>
 		<td>ID</td>
 		<td>비밀번호</td>
@@ -215,7 +210,7 @@ li {
 	%>
 
 	
-		<form method="post" action="indimoa/delete/member-from-management">
+		<form method="get" action="<c:url value='/admindeletemembers'/>">
 		<tr>
 		
 		<td><input type="checkbox" id="checkName" name="checkName" value="<%=vo.getMm_id() %>">
@@ -253,7 +248,7 @@ li {
 				}
 			for (int i = startPage; i <= endPage; i++) {
 			%>
-			<a href="indimoa/membermanagement?pagenum=<%=i%>"> <%=i%>
+			<a href="<c:url value='/adminmembers?pagenum='/><%=i%>"> <%=i%>
 			</a>
 			<%
 				if (i != endPage) {
@@ -290,16 +285,17 @@ li {
 	</div>
 	<script>
 		$(document).ready(function(){
-			$(document).on("click", "#btnGrantPoint",function() {
+			$("#btnGrantPoint").on("click",function() {
 				$.ajax({
-					type : "post",
-					url : "indimoa/insert/point-from-management",
-					dataType : "html",
+					type : "get",
+					url : "<c:url value='/adminupdatemembers'/>",
 					data : {
 						targetid: $("input:checkbox[name='checkName']:checked").val(),
 						pointvalue :  $("#grantPoint").val()
 					},
+					
 				success : function(data){
+					console.log("여기?진짜들어옴");
 					$('.box').html(data);
 				}
 					
