@@ -2,6 +2,8 @@ package com.indimoa.member.controller;
 
 import java.io.IOException;
 import java.sql.Timestamp;
+import java.io.PrintWriter;
+
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -39,6 +41,11 @@ public class EnrollMemberServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=UTF-8");
+		request.setCharacterEncoding("UTF-8");
+		PrintWriter out = response.getWriter();
+		
 		MemberService mservice = new MemberService();
 		// 전달 받은 파라미터 값을 변수에 담아 새로운 객체를 생성한다
 		String id = request.getParameter("mm_id");
@@ -50,16 +57,34 @@ public class EnrollMemberServlet extends HttpServlet {
 		String enrolldate = request.getParameter("mm_enrolldate");
 		String profile = request.getParameter("mm_profile");
 		String nickname = request.getParameter("mm_nickname");
-		
 		String membership = request.getParameter("mm_membership");
 		String point = request.getParameter("mm_point");				//point, membership도 넣어야할까
 		
-		int result = mservice.enrollMember(new Member());   //TODO
-		if (result > 0) {
-			response.sendRedirect("main.jsp");
-		} else {
-			
-		}
+		Member vo = new Member();
+		vo.setMm_id(id);
+		vo.setMm_pwd(pwd);
+		vo.setMm_name(name);
+		vo.setMm_email(email);
+		vo.setMm_phn(phn);
+		vo.setMm_com(com);
+//		vo.setMm_enrolldate(enrolldate);
+		vo.setMm_profile(profile);
+		vo.setMm_nickname(nickname);
+		vo.setMm_membership(membership);
+//		vo.setMm_point(0);
+		
+		int result = mservice.enrollMember(vo);
+		
+		
+		
+//		int result = mservice.enrollMember(new Member());   //TODO
+//		if (result > 1) {
+//			out.println("회원가입이 완료됐습니다.");
+//			response.sendRedirect("main.jsp");
+//		} else {
+//			
+//		}
+		
 		
 	}
 }

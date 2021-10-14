@@ -27,7 +27,50 @@ if(obj == null) {	//세션 정보가 없으면 배열을 생성 : 주문한 제�
 <head>
 <meta charset="UTF-8">
 
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap');
 
+* {
+	font-family: "Noto Sans KR", sans-serif;
+}  
+body {
+    margin: 0;
+}
+#header {
+    width: 100%;
+    margin: 0 auto; 
+    height: 220px;
+    position: relative;
+}
+a:link{
+  text-decoration: none!important;
+  color: green;
+}
+li {
+	list-style-type: none;
+}
+#logo{
+	width: 100px;
+	position: absolute;
+}
+#highmenu ul li {
+	float: left;
+	margin: 15px;
+	text-align: center;
+	position: relative;
+	padding-bottom: 0px;
+}
+#topmenu ul li{
+	
+	float: left;
+	margin: 15px;
+	padding: 10px;
+	position: relative;
+}
+    
+    
+
+</style>
 <title>장바구니</title>
 
 <script type="text/javascript">
@@ -51,6 +94,34 @@ function fnGo(){
 </script>
 </head>
 <body>
+    <div id="header">
+        <div id="logo">
+        <img src=".jpg" width="200px" height="50px">
+        
+        <div id="highmenu">
+	 	<span>
+	    	<ul>
+        	<li><a href="#">상점</a></li>
+        	<li><a href="#">커뮤니티</a></li>
+        	<li><a href="#">뉴스</a></li>
+        	<li><a href="#">카테고리</a></li>
+        	<li><a href="#">지원</a></li>
+        	<li><input type="text" id="btnSearchGame"></li>
+        	<li><button type="button" onclick="searchGame()">돋보기그림추가할것</button></li>
+    		</ul>
+		</span>
+		</div>
+		<span id="topmenu">
+	<ul>
+        <li><a href="#">회원가입</a></li>
+        <li><a href="#">로그인</a></li>
+        <li><a href="#">마이페이지</a></li>
+        <li><a href="#">장바구니</a></li>
+	</ul>     
+	</span>
+    </div>
+
+
 <div align="center">
 	<h3>[장바구니 보기]</h3>
 	<table border="1">
@@ -109,5 +180,9 @@ function fnGo(){
 		%>
 	</table>
 </div>
+
+<div id="footer">
+        <h1>footer</h1>
+    </div>
 </body>
 </html>

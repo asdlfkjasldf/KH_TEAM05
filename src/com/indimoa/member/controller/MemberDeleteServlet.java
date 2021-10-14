@@ -1,6 +1,8 @@
 package com.indimoa.member.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -9,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.indimoa.member.model.service.MemberService;
+import com.indimoa.member.model.vo.Member;
 
 /**
  * Servlet implementation class MemberDeleteServlet
@@ -37,14 +40,15 @@ public class MemberDeleteServlet extends HttpServlet {
 			session.invalidate();
 		}
 		// index 페이지로 이동
-		response.sendRedirect("index.jsp");
+		response.sendRedirect("main.jsp");
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
+		
 		doGet(request, response);
 	}
 

@@ -143,6 +143,8 @@ public class MemberDao {
 		return result;
 	}
 	
+	
+	//멤버쉽을 업데이트 하는 메소드
 	public int updateMembershipMember(Connection conn, String id, String membership) {
 		int result = -1;
 		String query = "update member set membership = membership + ? where mm_id = ?";
@@ -161,6 +163,8 @@ public class MemberDao {
 	}
 	
 	
+	
+	//database에서 해당 이름,이메일의 아이디를 찾아오는 메소드
 	public int selectId(Connection conn, String name, String email) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -185,6 +189,7 @@ public class MemberDao {
 	}
 	
 	
+	//database에서 해당 이름,아이디,이메일의 비밀번호를 찾아오는 메소드
 	public int selectPwd(Connection conn, String name, String id) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;

@@ -53,6 +53,7 @@ public class MemberLoginServlet extends HttpServlet {
 		response.setContentType("text/html; charset=UTF-8");
 		request.setCharacterEncoding("UTF-8");
 
+		
 		MemberService mservice = new MemberService();
 		String id = request.getParameter("mm_id");
 		String pwd = request.getParameter("mm_pwd");
@@ -103,6 +104,7 @@ public class MemberLoginServlet extends HttpServlet {
 			//예시1
 			Map<String, Object> map2 = new HashMap<String, Object>();
 			map2.put("result","fail");
+			gobStr = gob.toJson(map2);
 		}
 		System.out.println("gobStr : " + gobStr);
 		out.println(gobStr);

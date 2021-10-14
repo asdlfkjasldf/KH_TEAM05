@@ -13,12 +13,39 @@
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
 
-    body {
-        font-family: 'Noto Sans KR', sans-serif;
-        margin: 0;
-    }
+
+* {
+	font-family: "Noto Sans KR", sans-serif;
+}
+body {
+    margin: 0;
+}
+a:link{
+  text-decoration: none!important;
+  color: green;
+}
+li {
+	list-style-type: none;
+}
+#logo{
+	width: 100px;
+	position: absolute;
+}
+#highmenu ul li {
+	float: left;
+	margin: 15px;
+	text-align: center;
+	position: relative;
+	padding-bottom: 0px;
+}
+#topmenu ul li{
+	float: left;
+	margin: 15px;
+	padding: 10px;
+	position: relative;
+}
     #header {
-        width: 1110px; 
+        width: 100% 
         margin: 0 auto; 
         height: 220px;
         position: relative;
@@ -104,7 +131,7 @@
 
     #footer {
             clear: both;
-            width: 1110px;
+            width: 100%
             height: 190px;
             margin: 0 auto;
             margin-bottom: 10px;
@@ -120,9 +147,31 @@
 
 
     <div id="header">
-        <div id="logo">
+        <div id="logo">로고 추가할 곳
             <img src=".jpg" width="200px" height="50px">
         </div>
+        <div id="highmenu">
+	 	<span>
+	    	<ul>
+        	<li><a href="#">상점</a></li>
+        	<li><a href="#">커뮤니티</a></li>
+        	<li><a href="#">뉴스</a></li>
+        	<li><a href="#">카테고리</a></li>
+        	<li><a href="#">지원</a></li>
+        	<li><input type="text" id="btnSearchGame"></li>
+        	<li><button type="button" onclick="searchGame()">돋보기그림추가할것</button></li>
+    		</ul>
+		</span>
+		</div>
+		<span id="topmenu">
+	<ul>
+        <li><a href="#">회원가입</a></li>
+        <li><a href="#">로그인</a></li>
+        <li><a href="#">마이페이지</a></li>
+        <li><a href="#">장바구니</a></li>
+	</ul>     
+	</span>
+        
     </div>
 
 

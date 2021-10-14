@@ -62,6 +62,7 @@ public class MemberService {
 		 return result; 
 		 } 
 		 
+		 //멤버 아이디 찾기를 요청하는 메소드
 		 public int selectId(String name, String email) {
 				Connection conn = JdbcTemplate.getConnection();
 				int userId = new MemberDao().selectId(conn, name, email);
@@ -70,6 +71,7 @@ public class MemberService {
 				return userId;
 		}
 		 
+		//멤버 비밀번호 찾기를 요청하는 메소드
 		 public int selectPwd(String name, String id) {
 				Connection conn = JdbcTemplate.getConnection();
 				int userPwd = new MemberDao().selectId(conn, name, id);
