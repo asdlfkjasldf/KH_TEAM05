@@ -73,7 +73,7 @@ public class MemberLoginServlet extends HttpServlet {
 		if (m != null) { 			// 로그인 성공
 			System.out.println("로그인성공");
 			HttpSession session = request.getSession();
-			session.setAttribute("member", m);
+			session.setAttribute("loginInfo", m);
 			
 			
 			voList.add(m);

@@ -175,27 +175,27 @@ li {
 		<form action="/myInfo" method="post">
 				<p class="t1">
 					<label for="id">아이디 : </label>
-					<input type="text" name="id" value="<%=m.getMm_id()%>" readonly="readonly">
+					<input type="text" name="id" readonly="readonly" value="<%=m.getMm_id()%>" >
 				</p>
 				<p class="t1">
 					<label for="pwd">비밀번호 : </label>
-					<input type="password" name="pwd" value="<%=m.getMm_pwd()%>">
+					<input type="password" name="pwd" readonly="readonly" value="<%=m.getMm_pwd()%>">
 					</p>
 				<p class="t1">
 					<label for="name">이름 : </label>
-					<input type="text" name="name" value="<%=m.getMm_name()%>">
+					<input type="text" name="name" readonly="readonly" value="<%=m.getMm_name()%>">
 				</p>
 				<p class="t1">
 					<label for="email">이메일 : </label>
-					<input type="text" name="email" value="<%=m.getMm_email()%>">
+					<input type="text" name="email" readonly="readonly" value="<%=m.getMm_email()%>">
 				</p>
 				<p class="t1">
 					<label for="phn">전화번호 : </label>
-					<input type="text" name="phn" value="<%=m.getMm_phn()%>">
+					<input type="text" name="phn" readonly="readonly" value="<%=m.getMm_phn()%>">
 				</p>
 				<p class="t1">
 					<label for="com">OS : </label>
-					<input type="text" name="com" value="<%=m.getMm_com()%>">
+					<input type="text" name="com" readonly="readonly" value="<%=m.getMm_com()%>">
 				</p>
 				<p class="t2">
 					<label for="profile">프로필 : </label>
@@ -204,11 +204,11 @@ li {
 				</p>
 				<p class="t1">
 					<label for="nickname">닉네임 : </label>
-					<input type="text" name="nickname" value="<%=m.getMm_nickname()%>">
+					<input type="text" name="nickname" readonly="readonly" value="<%=m.getMm_nickname()%>">
 				</p>
 				<p class="t1">
 					<label for="membership">멤버쉽 : </label>
-					<input type="text" name="membership" value="<%=m.getMm_membership()%>">
+					<input type="text" name="membership" readonly="readonly" value="<%=m.getMm_membership()%>">
 				</p>
 				
 			<p class="btn1">

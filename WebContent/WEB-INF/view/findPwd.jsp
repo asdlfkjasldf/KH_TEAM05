@@ -178,12 +178,12 @@ li {
                 <input type="text" name="mm_email" id="email"  autocomplete="off" required>
             </p>
             <p class="btn-area">
-                <button id="btn" type="submit">찾기</button>
-                <button id="btn" type="reset">취소</button>
+                <button id="btn" type="submit" onclick="">찾기</button>
+                <button id="btn" type="reset" onclick="">취소</button>
             </p>
             
             <p class="caption">
-                <a href="http://localhost:8090/indimoa/login.jsp">로그인하기</a>
+                <a href='WEB-INF/view/login.jsp'>로그인하기</a>
             </p>
         </form>     
     </div>
@@ -200,8 +200,7 @@ li {
                 setTimeout(function(){
                     $('label').removeClass('warning');
                 }, 1500);
-            }            
-            else if($(pw).val() == "") {
+            } else if($(pw).val() == "") {
                 $(pw).next('label').addClass('warning');
                 setTimeout(function(){
                     $('label').removeClass('warning');

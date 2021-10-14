@@ -65,9 +65,11 @@ public class MemberUpdateServlet extends HttpServlet {
 					m.setMm_email(email);
 					m.setMm_phn(phn);
 					m.setMm_com(com);
+//					m.setMm_enrolldate(enrolldate);
 					m.setMm_profile(profile);
 					m.setMm_nickname(nickname);
 					m.setMm_membership(membership);
+//					m.setMm_point(point);
 					
 					
 					if (mservice.updateMember(m) > 0) {

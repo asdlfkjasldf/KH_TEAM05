@@ -171,11 +171,11 @@ li {
                 <input type="text" name="mm_email" id="email"  autocomplete="off" required>
             </p>
             <p class="btn-area">
-                <button id="btn" type="submit">찾기</button>
-                <button id="btn" type="reset">취소</button>
+                <button id="btn" type="submit" onlick="">찾기</button>
+                <button id="btn" type="reset" onclick="">취소</button>
             </p>
             <p class="caption">
-                <a href="http://localhost:8090/indimoa/findPwd.jsp">비밀번호 찾기</a>
+                <a href='WEB-INF/view/findPwd.jsp'>비밀번호 찾기</a>
             </p>
         </form>
     </div>
@@ -191,8 +191,7 @@ li {
                 setTimeout(function(){
                     $('label').removeClass('warning');
                 }, 1500);
-            }            
-            else if($(pw).val() == "") {
+            } else if($(pw).val() == "") {
                 $(pw).next('label').addClass('warning');
                 setTimeout(function(){
                     $('label').removeClass('warning');
