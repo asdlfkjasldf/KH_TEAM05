@@ -95,7 +95,6 @@ public class FbBoardDao {
 		return result;
 	}
 
-
 	public ArrayList<FbBoard> selectBoardList(Connection conn) {
 		ArrayList<FbBoard> volist = null;
 
@@ -171,9 +170,8 @@ public class FbBoardDao {
 		ArrayList<FbBoard> volist = null;
 
 		String sql = "select t2.*,TO_CHAR(FB_DATETIME, 'yyyy-mm-dd') FB_DATETIME_char from (select Rownum r, t1.* from "
-				+ " (select * from FREE_BOARD_M f1 join (select count(fb_r_no) fbReply, fb_r_no from free_board_m_r group by fb_r_no) f2 on f1.FB_NO = f2.fb_r_no order by FB_NO desc) t1 "
-				+ " ) t2 "
-				+ " where r between ? and ?";
+				+ " (select * from FREE_BOARD_M f1 left outer join (select count(fb_r_no) fbReply, fb_r_no from free_board_m_r group by fb_r_no) f2 on f1.FB_NO = f2.fb_r_no order by FB_NO desc) t1 "
+				+ " ) t2 " + " where r between ? and ? and fb_report<10";
 
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -215,6 +213,63 @@ public class FbBoardDao {
 		return volist;
 	}
 
+	public int updateBoard(Connection conn, FbBoard vo) {
+		int result = -1;
+		String sql = "update free_board_m set fb_title=?, fb_content=? where fb_no=?";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, vo.getFbTitle());
+			pstmt.setString(2, vo.getFbContent());
+			pstmt.setInt(3, vo.getFbNo());
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JdbcTemplate.close(rset);
+			JdbcTemplate.close(pstmt);
+		}
+		System.out.println("update 결과 : " + result);
+		return result;
+	}
+		
+	public int deleteBoard(Connection conn, int bno) {
+		int result = -1;
+		String sql = "update free_board_m set fb_report=10 where fb_no=?";
+		PreparedStatement pstmt = null;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, bno);
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JdbcTemplate.close(pstmt);
+		}
+		System.out.println("delete 결과 : " + result);
+		return result;
+	}
+
+	public int reportBoard(Connection conn, int bno) {
+		int result = -1;
+		String sql = "update free_board_m set fb_report=fb_report+1 where fb_no=?";
+		PreparedStatement pstmt = null;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, bno);
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JdbcTemplate.close(pstmt);
+		}
+		System.out.println("report 결과 : " + result);
+		return result;
+	}
+	
 	public int insertBoard(Connection conn, FbBoard vo) {
 		int result = -1;
 

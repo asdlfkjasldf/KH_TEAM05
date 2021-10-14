@@ -63,6 +63,36 @@ public class FbBoardService {
 		return vorlist;
 	}
 	
+	public int updateBoard(FbBoard vo) {
+		int result = -1;
+		Connection conn = JdbcTemplate.getConnection();
+
+		result = new FbBoardDao().updateBoard(conn, vo);
+
+		JdbcTemplate.close(conn);
+		return result;
+	}
+	
+	public int deleteBoard(int bno) {
+		int result = -1;
+		Connection conn = JdbcTemplate.getConnection();
+
+		result = new FbBoardDao().deleteBoard(conn, bno);
+
+		JdbcTemplate.close(conn);
+		return result;
+	}
+	
+	public int reportBoard(int bno) {
+		int result = -1;
+		Connection conn = JdbcTemplate.getConnection();
+
+		result = new FbBoardDao().reportBoard(conn, bno);
+
+		JdbcTemplate.close(conn);
+		return result;
+	}
+	
 	public int insertBoard(FbBoard vo) {
 		int result = -1;
 		Connection conn = JdbcTemplate.getConnection();

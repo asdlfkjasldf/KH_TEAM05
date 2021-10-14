@@ -21,7 +21,7 @@
 		</tr>
 
 <c:if test="${volist != null}">
-	<c:forEach items="${volist }" var="vo" >
+	<c:forEach items="${volist}" var="vo" >
 		<tr>
 			<td><a href="fbboardcontent?no=${vo.fbNo }">${vo.fbNo } </a></td>
 			<td>
