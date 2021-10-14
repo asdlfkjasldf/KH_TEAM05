@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.indimoa.board.model.service.FbBoardService;
 import com.indimoa.board.model.vo.FbBoard;
+import com.indimoa.member.model.vo.Member;
 
 /**
  * Servlet implementation class FbBoardWriteDoServlet
@@ -52,10 +53,12 @@ public class FbBoardWriteDoServlet extends HttpServlet {
 		System.out.println("oVo: " + oVo);
 		String title = request.getParameter("title"); // 내용부분입력된값이지요
 		String content = request.getParameter("content"); // 뭐라해야할지모를제목
-		String writer = (String) request.getSession().getAttribute("memberLoginInfo");
+		Member memberSS = (Member) request.getSession().getAttribute("member");
+		String writer = memberSS.getMm_id();
 		// TODO 임시코드로 확인이 필요함
 		if (writer == null || writer.equals("")) {
-			writer = "testuser01"; // "user01";
+			System.out.println("!!!!!임시 아이디!!!! testuser03");
+			writer = "testuser03"; // "user01";
 		}
 
 		FbBoard vo = new FbBoard(oVo.getFbNo(), writer, title, content, oVo.getFbDatetime(), oVo.getFbVisit(), oVo.getFbReply(),

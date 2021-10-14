@@ -1,3 +1,4 @@
+<%@page import="com.indimoa.member.model.vo.Member"%>
 <%@page import="com.indimoa.board.model.vo.FbBoard"%>
 <%@page import="com.indimoa.board.model.vo.FbBoardR"%>
 
@@ -25,7 +26,11 @@
 			<td>글번호</td>
 			<td><%=vo.getFbNo()%></td>
 			<td><%=vo.getFbDatetime()%></td>
-			<td><input type="button" value="삭제" id="btnDelete"></td>
+			<td>
+				<c:if test="${sessionScope.member.mm_id != null && sessionScope.member.mm_id == boardvo.mmId }">
+				<input type="button" value="삭제" id="btnDelete">
+				</c:if>
+			</td>
 		</tr>
 		<tr>
 			<td>제목</td>
@@ -36,7 +41,16 @@
 		</tr>
 		<tr>
 			<td>신고수 : <%=vo.getFbReport()%></td>
-			<td><input type="button" value="신고" id="btnReport"></td>
+		</tr>
+		<tr>		
+			<td>
+				<c:if test="${sessionScope.member.mm_id != null && sessionScope.member.mm_id == boardvo.mmId }">
+				<input type="button" value="수정" id="btnUpdate">
+				</c:if>
+			</td>
+			<td>
+				<input type="button" value="신고" id="btnReport">
+			</td>
 		</tr>
 	</table>
 
@@ -68,21 +82,22 @@
 		$("#bntInsert").click(ajaxInsert);
 		$("#btnReport").click(ajaxReport);
 		$("#btnDelete").click(ajaxDelete);
-		
-		function ajaxInsert(){
+		$("#btnUpdate").click(goUpdate);
+
+		function ajaxInsert() {
 			var txt = $("#inputTxt").val().trim();
-			if(txt == ""){
+			if (txt == "") {
 				alert("댓글을 입력하고 등록해주세요.");
 				$("#inputTxt").focus();
 				return;
 			}
-			console.log("fbNo: "+ "${boardvo.fbNo}");
-			console.log("txt: "+ txt);
+			console.log("fbNo: " + "${boardvo.fbNo}");
+			console.log("txt: " + txt);
 			$.ajax({
-				type: "post",
-				url: "fbboardwrite.ajax",
-				data: { 
-					fbRContent: txt,		
+				type : "post",
+				url : "fbboardwrite.ajax",
+				data : {
+					fbRContent : txt,
 					fbRNo : "${boardvo.fbNo}"
 				},
 				success : function(data) {
@@ -118,7 +133,7 @@
 			});
 		}
 		function ajaxDelete() {
-			console.log("삭제 완료 : " + "${boardvo.fbNo}");
+			console.log("삭제 중..: " + "${boardvo.fbNo}");
 			$.ajax({
 				type : "post",
 				url : "fbboarddelete.ajax",
@@ -128,13 +143,18 @@
 				success : function(data) {
 					console.log(data);
 					if (data == "OK") {
+						console.log("삭제 완료..: " + "${boardvo.fbNo}");
 						alert('게시글이 삭제되었습니다.');
+						location.href = "fbboardlist";
 					}
 				},
 				error : function() {
 					alert('오류 발생. 오류 코드: ' + error.code);
 				}
 			});
+		}
+		function goUpdate() {
+			location.href = "fbboardupdate?no=${boardvo.fbNo}";
 		}
 	</script>
 </body>

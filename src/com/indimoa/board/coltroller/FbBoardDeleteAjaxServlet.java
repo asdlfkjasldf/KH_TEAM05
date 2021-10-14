@@ -47,7 +47,7 @@ public class FbBoardDeleteAjaxServlet extends HttpServlet {
 		response.setContentType("text/html; charset=UTF-8");
 		request.setCharacterEncoding("UTF-8");
 		PrintWriter out = response.getWriter();
-
+		
 		String fbDstr = request.getParameter("fbNo");
 		int fbDelete = 0;
 		try {
@@ -56,6 +56,7 @@ public class FbBoardDeleteAjaxServlet extends HttpServlet {
 			System.out.println("숫자변경 실패!!!");
 			e.printStackTrace();
 		}
+		System.out.println("fbDelete:"+fbDelete);
 		// TODO
 		// String fbRId = request.getSession().getAttribute("로그인 attr 명");
 		int result = new FbBoardService().deleteBoard(fbDelete);

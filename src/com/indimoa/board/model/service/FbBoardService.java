@@ -75,10 +75,23 @@ public class FbBoardService {
 	
 	public int deleteBoard(int bno) {
 		int result = -1;
+		int result2 = -1;
 		Connection conn = JdbcTemplate.getConnection();
-
-		result = new FbBoardDao().deleteBoard(conn, bno);
-
+//		JdbcTemplate.setAutoCommit(conn,false);
+		System.out.println("여기여기");
+		result = new FbBoardDao().deleteRBoard(conn, bno);   // 1  // -1   // 3
+		result2 = new FbBoardDao().deleteBoard(conn, bno);   // 0  // 1   // -1
+		System.out.println("댓글삭제갯수:" + result);
+		System.out.println("원본삭제갯수:" + result2);
+		if(result > 0  && result2 < 0) {
+			JdbcTemplate.rollback(conn);
+			result = 1;
+		}
+		else {
+			JdbcTemplate.commit(conn);
+			result = 1;
+		}
+		
 		JdbcTemplate.close(conn);
 		return result;
 	}

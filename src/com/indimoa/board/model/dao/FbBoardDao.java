@@ -237,9 +237,28 @@ public class FbBoardDao {
 		
 	public int deleteBoard(Connection conn, int bno) {
 		int result = -1;
-		String sql = "update free_board_m set fb_report=10 where fb_no=?";
+		String sql = "delete from free_board_m where fb_no=?";
+		
 		PreparedStatement pstmt = null;
 
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, bno);
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JdbcTemplate.close(pstmt);
+		}
+		System.out.println("delete 결과 : " + result);
+		return result;
+	}
+	
+	public int deleteRBoard(Connection conn, int bno) {
+		int result = -1;
+		String sql = "delete from free_board_m_r where fb_r_no=?";
+		PreparedStatement pstmt = null;
+		System.out.println("durldurl : ");
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, bno);
