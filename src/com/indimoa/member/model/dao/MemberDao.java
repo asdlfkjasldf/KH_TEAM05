@@ -20,7 +20,7 @@ public class MemberDao {
 		Member m = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String query = "select mm_id, mm_pwd from member where mm_id like ? and mm_pwd like ?";
+		String query = "select * from member where mm_id = ? and mm_pwd = ?";
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, id); // 첫번째 ‘?’ 에 id 값 대입
@@ -54,7 +54,7 @@ public class MemberDao {
 		ResultSet rset = null;
 		int result = 0;
 		// id로 테이블을 조회하여 있으면 1 이상, 없으면 0인 쿼리 작성
-		String query = "select mm_id from member where mm_id like ?";
+		String query = "select * from member where mm_id = ?";
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, id);
@@ -72,10 +72,10 @@ public class MemberDao {
 	}
 
 	// DataBase에 Member 객체를 추가하는 메소드
-	public int insertMember(Connection conn, Member m) {
+	public int enrollMember(Connection conn, Member m) {
 		PreparedStatement pstmt = null;
 		int result = 0;
-		String query = "insert into member(mm_id, mm_pwd, mm_name, mm_email, mm_phn, mm_com, mm_enrolldate, mm_profile, mm_nickname, mm_membership, mm_point) values (?, ?, ?, ?, ?, ?, sysdate, ?, ?, ?, ?)";
+		String query = "insert into member values (?, ?, ?, ?, ?, ?, sysdate, ?, ?, ?, ?)";
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, m.getMm_id());
@@ -104,7 +104,7 @@ public class MemberDao {
 	public int updateMember(Connection conn, Member m) {
 		PreparedStatement pstmt = null;
 		int result = 0;
-		String query = "update member set mm_pwd = ?, mm_email = ?, mm_phn = ?, mm_com = ?, mm_enroll_date = ?, mm_profile = ?, mm_nickname = ?, mm_membership = ?, mm_point = ? where mm_id like ?";
+		String query = "update member set " + "mm_pwd = ?, mm_email = ?, mm_phn = ?, mm_com = ?, mm_enroll_date = ?, mm_profile = ?, mm_nickname = ?, mm_membership = ?, mm_point = ? where mm_id = ?";
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, m.getMm_pwd());
@@ -130,7 +130,7 @@ public class MemberDao {
 	public int deleteMember(Connection conn, String id) {
 		PreparedStatement pstmt = null;
 		int result = 0;
-		String query = "delete from member where mm_id like ? and mm_pwd like ?";
+		String query = "delete from member where mm_id = ? and mm_pwd = ?";
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, id);
@@ -145,7 +145,7 @@ public class MemberDao {
 	
 	public int updateMembershipMember(Connection conn, String id, String membership) {
 		int result = -1;
-		String query = "update member set membership = membership + ? where mm_id like ?";
+		String query = "update member set membership = membership + ? where mm_id = ?";
 		PreparedStatement ps = null;
 		try {
 			ps = conn.prepareStatement(query);
@@ -166,7 +166,7 @@ public class MemberDao {
 		ResultSet rset = null;
 		int result = 0;
 
-		String query = "select mm_id from member where mm_name like ? and mm_email like ?";
+		String query = "select mm_id from member where mm_name = ? and mm_email = ?";
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, name);
@@ -190,7 +190,7 @@ public class MemberDao {
 		ResultSet rset = null;
 		int result = 0;
 
-		String query = "select mm_pwd from member where mm_name liek ? and mm_id like ?";
+		String query = "select mm_pwd from member where mm_name = ? and mm_id = ?";
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, name);
