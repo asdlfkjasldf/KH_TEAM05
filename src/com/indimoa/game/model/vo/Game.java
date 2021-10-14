@@ -1,6 +1,6 @@
 package com.indimoa.game.model.vo;
 
-import java.sql.Date;
+
 
 public class Game {
 	// GG_NO
@@ -16,31 +16,19 @@ public class Game {
 
 	private int ggNo;
 	private String ggTitle;
-	private String ggPrice;
+	private int ggPrice;
 	private String ggSystemRequirement;
 	private String ggGenre;
 	private String ggDeveloper;
-	private Date ggReleaseDate;
+	private String ggReleaseDate;
 	private String ggPublisher;
 	private String ggLanguages;
 	private String ggInfomation;
 
-	public Game(String ggTitle, String ggPrice, String ggSystemRequirement, String ggGenre,
-			String ggDeveloper, Date ggReleaseDate, String ggPublisher, String ggLanguages, String ggInfomation) {
-		super();
-		this.ggTitle = ggTitle;
-		this.ggPrice = ggPrice;
-		this.ggSystemRequirement = ggSystemRequirement;
-		this.ggGenre = ggGenre;
-		this.ggDeveloper = ggDeveloper;
-		this.ggReleaseDate = ggReleaseDate;
-		this.ggPublisher = ggPublisher;
-		this.ggLanguages = ggLanguages;
-		this.ggInfomation = ggInfomation;
-	}
+
 	
-	public Game(int ggNo, String ggTitle, String ggPrice, String ggSystemRequirement, String ggGenre,
-			String ggDeveloper, Date ggReleaseDate, String ggPublisher, String ggLanguages, String ggInfomation) {
+	public Game(int ggNo, String ggTitle, int ggPrice, String ggSystemRequirement, String ggGenre,
+			String ggDeveloper, String ggReleaseDate, String ggPublisher, String ggLanguages, String ggInfomation) {
 		super();
 		this.ggNo = ggNo;
 		this.ggTitle = ggTitle;
@@ -74,11 +62,11 @@ public class Game {
 		this.ggTitle = ggTitle;
 	}
 
-	public String getGgPrice() {
+	public int getGgPrice() {
 		return ggPrice;
 	}
 
-	public void setGgPrice(String ggPrice) {
+	public void setGgPrice(int ggPrice) {
 		this.ggPrice = ggPrice;
 	}
 
@@ -106,11 +94,11 @@ public class Game {
 		this.ggDeveloper = ggDeveloper;
 	}
 
-	public Date getGgReleaseDate() {
+	public String getGgReleaseDate() {
 		return ggReleaseDate;
 	}
 
-	public void setGgReleaseDate(Date ggReleaseDate) {
+	public void setGgReleaseDate(String ggReleaseDate) {
 		this.ggReleaseDate = ggReleaseDate;
 	}
 

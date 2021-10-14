@@ -291,6 +291,11 @@ li {
 %>
 
 	</table>
+<c:if test="${startPage >1 }"> 이전 </c:if>
+		<c:forEach begin="${startPage }" end="${endPage }" step="1" var="i">
+		<a href="GameList?pagenum=${i}">${i}</a>
+		</c:forEach>
+		
 <%
 			if (startPage > 1)
 				%>	이전	<%
@@ -305,8 +310,11 @@ li {
 				%>	다음	 <%
 %>
 
+	<!--  <c:if test="${endPage < pageCount }"> 다음 </c:if> -->
 <br>
-<a href=GameInfoWrite>게임등록하러 가기</a>
+<a href=EnrollGame>게임등록하러 가기!</a>
+
+<!--  a href= get 방식으로 보냄 servlet에서 무조건 get으로 받아야됨!!-->
 
 </body>
 </html>

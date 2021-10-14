@@ -17,13 +17,13 @@ public class GameService {
 		JdbcTemplate.close(conn);
 		return vo;
 	}
-	public int getGameCount() {
-		int result = 0;
-		Connection conn = JdbcTemplate.getConnection();
-		result = new GameDao().getGameCount(conn);
-		JdbcTemplate.close(conn);
-		return result;
-	}
+//	public int getGameCount() {
+//		int result = 0;
+//		Connection conn = JdbcTemplate.getConnection();
+//		result = new GameDao().getGameCount(conn);
+//		JdbcTemplate.close(conn);
+//		return result;
+//	}
 //	public ArrayList<Game> selectGameList() {
 //		ArrayList<Game> volist = null;
 //		Connection conn = JdbcTemplate.getConnection();
@@ -43,15 +43,15 @@ public class GameService {
 		return volist;
 	}
 	
-	public int getBoardCount() {
+	public int getGameCount() {
 		int result = 0;
 		Connection conn = JdbcTemplate.getConnection();
-		result = new GameDao().getBoardCount(conn);
+		result = new GameDao().getGameCount(conn);
 		JdbcTemplate.close(conn);
 		return result;
 	}
 	
-	public ArrayList<Game> selectBoardList(int start, int end) {
+	public ArrayList<Game> selectGameList(int start, int end) {
 		ArrayList<Game> volist = null;
 		Connection conn = JdbcTemplate.getConnection();
 
@@ -82,13 +82,15 @@ public class GameService {
 	
 	
 	public int insertGame(Game ig) { 
+		int result = -1;
 		Connection conn = JdbcTemplate.getConnection(); 
-		int result = new GameDao().insertMember(conn, ig); 
- 
-		if(result == 0) {  
-			result = new GameDao().insertMember(conn, ig);
-		System.out.println(" game update before");
-		}
+		//int result = new GameDao().insertGame(conn, ig); 
+		result = new GameDao().insertGame(conn, ig);
+
+		//		if(result == 1) {  
+//			result = new GameDao().insertGame(conn, ig);
+//		System.out.println(" GameService.insertGame 입니다.");
+//		}
 		JdbcTemplate.close(conn);
 		return result;
 		}

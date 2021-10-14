@@ -5,7 +5,12 @@
    <%--@ taglib prefix=”c” uri="http://java.sun.com/jstl/core"--%> 
 
 
-    
+    <%-- 
+	String ggNo = request.getParameter("ggNO"); 
+	if(ggNo==null || ggNo.equals("")){
+		ggNo="";
+	}
+--%>
     
     
 <!DOCTYPE html>
@@ -21,7 +26,8 @@
     <h2 align="center">게임 등록 하기</h2>
     <hr>
     <section id="myinfo">
-        <form action="EnrollGameServlet" id="enrollForm" method="post">
+    
+        <form action="EnrollGameDo" id="enrollForm" method="post">
             <table>
                 <tr>
                     <td>게임 타이틀 :</td>
@@ -59,8 +65,8 @@
 
             </table>
             <p align="center">
-                <button type="submit"><a href="EnrollGameServlet"></a>게임 등록하기</button> &nbsp; &nbsp;
-                <button type="reset">작성 양식 초기화</button>
+                <button type="submit" value="등록">게임 등록하기</button> &nbsp; &nbsp;
+                <button type="reset">초기화</button>&nbsp; &nbsp;
                 <button type="button"><a href="GameList">취소</a></button>
             </p>
         </form>
