@@ -111,6 +111,7 @@ li {
 				<tr>
 					<td>아이디 :</td>
 					<td><input type="text" name="mm_id" id="id"></td>
+					<td><button type="button">아이디 중복확인</button></td>
 				</tr>
 				<tr>
 					<td>비밀번호 :</td>
@@ -152,6 +153,7 @@ li {
                 <tr>
 					<td>닉네임 :</td>
 					<td><input type="nickname" name="mm_nickname" placeholder="개발사는 회사 이름을 작성"></td>
+					<td><button type="button">닉네임 중복확인</button></td>
 				</tr>
 			</table>
 			<p align="center">

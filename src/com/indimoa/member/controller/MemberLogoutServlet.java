@@ -18,10 +18,7 @@ public class MemberLogoutServlet extends HttpServlet {
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MemberLogoutServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+    public MemberLogoutServlet() {}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)

@@ -29,6 +29,14 @@ public class MemberService {
 		JdbcTemplate.close(conn);
 		return result; 
 	} 
+	// 닉네임 중복 체크를 위한 메소드 
+	public int dupNicknameChk(String nickname) { 
+		Connection conn = JdbcTemplate.getConnection(); 
+		int result = new MemberDao().dupNicknameChk(conn, nickname);
+		JdbcTemplate.close(conn);
+		return result; 
+	} 
+	
 	// Member 객체를 추가하는 메소드 
 	public int enrollMember(Member m) { 
 		Connection conn = JdbcTemplate.getConnection(); 

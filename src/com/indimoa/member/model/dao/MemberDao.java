@@ -70,6 +70,29 @@ public class MemberDao {
 		}
 		return result;
 	}
+	
+	// 닉네임 값의 중복을 조회하는 메소드
+		public int dupNicknameChk(Connection conn, String id) {
+			PreparedStatement pstmt = null;
+			ResultSet rset = null;
+			int result = 0;
+			// 닉네임으로 테이블을 조회하여 있으면 1 이상, 없으면 0인 쿼리 작성
+			String query = "select * from member where mm_nickname = ?";
+			try {
+				pstmt = conn.prepareStatement(query);
+				pstmt.setString(1, id);
+				rset = pstmt.executeQuery();
+				if (rset.next()) {
+					result = rset.getInt(1); // rset의 첫 컬럼의 숫자값을 가져온다
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(rset);
+				close(pstmt);
+			}
+			return result;
+		}
 
 	// DataBase에 Member 객체를 추가하는 메소드
 	public int enrollMember(Connection conn, Member m) {

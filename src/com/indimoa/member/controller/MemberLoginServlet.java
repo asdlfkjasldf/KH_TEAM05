@@ -124,11 +124,14 @@ public class MemberLoginServlet extends HttpServlet {
 //		Member m = mservice.loginMember(id, passwd);
 //		if (m != null) {
 //			HttpSession session = request.getSession();
-//			session.setAttribute("member", m);
+//			session.setAttribute("loginInfo", m);
 //			job.put("result", "ok");
 //			job.put("name", m.getName());
 //		} else {
 //			job.put("result", "fail");
 //		}
-//
+//		
+//		PrintWriter out = resopnse.getWriter();
 //		out.println(job.toJSONString());
+//		out.flush();
+//		out.close();

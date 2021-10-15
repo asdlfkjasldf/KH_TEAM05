@@ -9,34 +9,36 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-//import com.google.gson.Gson;
 import com.indimoa.member.model.service.MemberService;
 
-
 /**
- * Servlet implementation class DupIdChkServlet
+ * Servlet implementation class DupNicknameChkServlet
  */
-@WebServlet("/dupidchk")
-public class DupIdChkServlet extends HttpServlet {
+@WebServlet("/DupNicknameChkServlet")
+public class DupNicknameChkServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DupIdChkServlet() {}
+    public DupNicknameChkServlet() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
 
-    
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("WEB-INF/view/newMember.jsp").forward(request, response);		
-	}  
-    
-    
+		request.getRequestDispatcher("WEB-INF/view/newMember.jsp").forward(request, response);
+	}
+
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		MemberService mservice = new MemberService();
-		int result = mservice.dupIdChk(request.getParameter("mm_id"));
+		int result = mservice.dupNicknameChk(request.getParameter("mm_id"));
 		PrintWriter out = response.getWriter();
 		
 		if(result > 0) {
@@ -46,7 +48,6 @@ public class DupIdChkServlet extends HttpServlet {
 		}
 		out.flush();
 		out.close();
-	//TODO test로 확인
 	}
 
 }
