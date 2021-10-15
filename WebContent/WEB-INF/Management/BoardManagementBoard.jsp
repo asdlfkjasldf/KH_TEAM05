@@ -1,9 +1,9 @@
+<%@page import="javax.xml.crypto.Data"%>
 <%@page import="com.indimoa.board.model.vo.*"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
 
 
 <!DOCTYPE html>
@@ -27,11 +27,28 @@
  </style>
  
  <script>
-		
-			
-			
+ $(document).ready(function(){
+		$("#btnBoardView").on("click",function() {
+	$.ajax({
+		url : "<c:url value='/boardrmanagement'/>",
+		data :{
+			bmselect : $("#bmselect option:selected").val()
+		},
+		dataType : "json",
+		success : function(data){
+			var results = data.volist;
+			var str = '<tr>';
+			 $.each(results , function(i){
+	                str += '<td>' + results[i].getFbTitle()  + '</td>';
+	                str += '</tr>';
+	           });
+	           $("#dynamicTbody").append(str); 
+	           $('#dynamicTbody').html(data);
+	        }
+		});
+	});
+ });
 
-		
 
 //현재 문제가 no,title,content를 지칭하는 게시판 db의 컬럼명이 다다르다.
 	</script>
@@ -45,7 +62,7 @@
 <hr>
 <div id="select">
 	
-	<select id="bmselect" name="bmselect">
+	<select id="bmselect" name="bmselect" ">
 		<option value="fb">자유게시판(회원)</option>
 		<option value="gdb">개발사게시판</option>
 		<option value="tipb">팁게시판</option>
@@ -70,9 +87,28 @@
 		<th></th>
 	</tr>
 	</thead>
+	<tbody id="dynamicTbody">
+	티바디부분	
+	
+	</tbody>
+	
+	<c:if test="${volist != null}">
+	<c:forEach items="${volist}" var="vo" >
+		<tr>
+			<td><a href="fbboardcontent?no=${vo.fbNo }">${vo.fbNo } </a></td>
+			<td>
+			${vo.fbTitle }
+			</td>
+			<td>[${vo.fbReply}]</td>
+			<td>${vo.mmId }</td>
+			<td>${vo.fbDatetime }</td>
+		</tr>
+	</c:forEach>
+</c:if>	
+	
 	
 </table>
-목록들어 갈곳 
+
 </div>
 
 <div class="Board-Article">

@@ -82,7 +82,7 @@ public class BoardrManagementListServlet extends HttpServlet {
 		
 //		System.out.println("메소드진입");
 		String bmselect = request.getParameter("bmselect");
-		out.println(bmselect);
+//		out.println(bmselect);
  
 //		String strResult = "";
 		
@@ -94,20 +94,20 @@ public class BoardrManagementListServlet extends HttpServlet {
 			
 		}
 		
+		System.out.println(bmselect);
+		if("fb".equals(bmselect) ) {
+			ArrayList<FbBoard> volist = new FbBoardService().selectBoardList(startRnum, endRnum);
+			request.setAttribute("volist", volist);
+		}else if("gdb".equals(bmselect)) {
+			System.out.println("진입2");
+			ArrayList<GbBoard> volist = new GbBoardService().selectBoardList(startRnum, endRnum);
+			request.setAttribute("volist", volist);
+		}else if("tipb".equals(bmselect)) {
+			System.out.println("진입3");
+			ArrayList<TipBoard> volist = new TipBoardService().selectBoardList(startRnum, endRnum);
+			request.setAttribute("volist", volist);
+		}
 		
-//		if(bmselect.equals("fb") ) {
-//			ArrayList<FbBoard> volist = new FbBoardService().selectBoardList(startRnum, endRnum);
-//			request.setAttribute("volist", volist);
-//		}else if(bmselect.equals("gdb")) {
-//			System.out.println("진입2");
-//			ArrayList<GbBoard> volist = new GbBoardService().selectBoardList(startRnum, endRnum);
-//			request.setAttribute("volist", volist);
-//		}else if(bmselect.equals("tipb")) {
-//			System.out.println("진입3");
-//			ArrayList<TipBoard> volist = new TipBoardService().selectBoardList(startRnum, endRnum);
-//			request.setAttribute("volist", volist);
-//		}
-//		
 		
 		
 		
