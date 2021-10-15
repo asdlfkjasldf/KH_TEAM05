@@ -209,7 +209,7 @@ public class FbBoardDao {
 				e.printStackTrace();
 			}
 		}
-		System.out.println("[pearl] fb--" + volist);
+		System.out.println("[pearl]-- 리턴은" + volist);
 		return volist;
 	}
 
