@@ -73,7 +73,7 @@ public class EnrollMemberServlet extends HttpServlet {
 		vo.setMm_membership(membership);
 //		vo.setMm_point(0);
 		
-		int result = mservice.enrollMember(vo);
+		int result = mservice.insertMember(vo);
 		
 		
 		

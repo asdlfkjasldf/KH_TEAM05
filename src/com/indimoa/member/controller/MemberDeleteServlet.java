@@ -39,7 +39,7 @@ public class MemberDeleteServlet extends HttpServlet {
 			HttpSession session = request.getSession(false);
 			session.invalidate();
 		}
-		// index 페이지로 이동
+		// main 페이지로 이동
 		response.sendRedirect("main.jsp");
 	}
 

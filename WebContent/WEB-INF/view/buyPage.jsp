@@ -22,6 +22,28 @@ body {
         margin: 0;
     }
 
+.modal {
+        display: none;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        position: fixed;
+        z-index: 1;
+        background-color: rgba(12, 12, 12, .3);
+    }
+    .modal-content {
+        width: 200px;
+        height: 300px;
+        top: 50px;
+        margin: auto;
+        position: relative;
+        background-color: lightsteelblue;
+        padding: 10px;
+    }
+
+
+
 #header {
         width: 100%;
         margin: 0 auto; 
@@ -102,7 +124,7 @@ li {
     cursor: pointer;
     
 }
-#signup {
+#pay {
     width: 100px; height: 40px;
     font-size: 20px;
 }
@@ -121,9 +143,32 @@ li {
     </style>
 </head>
 <body>
+    <!-- modal box -->
+    <div id="modal_01" class="modal">
+        <div class="modal-content">
+                <p class="close"> &times; &nbsp; &#10006;</p>
+            <p>카드결제</p>
+            <form action="ex-01.html" method="get">
+                카드사<select size="1" id="bank" class="input1">
+                    <option value="">선택하세요.</option>
+                    <option value="10">하나은행</option>
+                    <option value="11">신한은행</option>
+                    <option value="12">국민은행</option>
+                </select>
+                카드번호<input type="text" name="a1">
+                <br>
+                결제 비밀번호<input type="text" name="a1">
+                <br>
+                <input type="submit" value="결제">
+            </form>
+        </div>
+    </div>
+
+
     <div id="header">
         <div id="logo">
-        <img src=".jpg" width="200px" height="50px">
+        <img src="" width="200px" height="50px">
+        </div>
         
          <div id="highmenu">
 	 	<span>
@@ -165,7 +210,7 @@ li {
         
         <p class="int-area">
         <label for="pay">결제 수단</label>
-        <select size="1" id="pay" class="input1">
+        <select size="1" id="howpay" class="input1">
             <option value="">선택하세요.</option>
             <option value="10">카드</option>
             <option value="11">핸드폰 결제</option>
@@ -174,15 +219,23 @@ li {
         </p><br><br>
 
         <p class="btn-area">
-            <input type="submit" id="signup" value="결제하기">
+            <button id="pay">결제하기</button>
         </p>
     </form>
 </div> 
         
-
-
 <div id="footer">
+
+    
     <h1>footer</h1>
 </div>
+    <script>
+        $("#pay").click(function() {
+            $(".modal").show();
+        });
+        $(".close").click(function() {
+            $(".modal").hide();
+        });
+    </script>
 </body>
 </html>

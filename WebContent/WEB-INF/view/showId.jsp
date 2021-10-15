@@ -111,6 +111,7 @@ li {
     <div id="header">
 		<div id="logo">로고 추가할 곳
 		<img src=".jpg" width="200px" height="50px">
+		</div>
 		
 		<div id="highmenu">
 	 	<span>

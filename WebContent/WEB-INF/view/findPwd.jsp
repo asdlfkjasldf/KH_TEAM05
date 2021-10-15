@@ -137,6 +137,7 @@ li {
     <div id="header">
         <div id="logo">
         <img src=".jpg" width="200px" height="50px">
+        </div>
         
         <div id="highmenu">
 	 	<span>

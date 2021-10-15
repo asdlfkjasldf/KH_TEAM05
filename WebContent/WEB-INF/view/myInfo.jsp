@@ -145,6 +145,7 @@ li {
     <div id="header">
 		<div id="logo">
 		<img src=".jpg" width="200px" height="50px">
+		</div>
 		
 		<div id="highmenu">
 	 	<span>
@@ -222,8 +223,8 @@ li {
 	<%
 		} else {
 	%>
-	<jsp:forward page=".jsp" />
-	<!-- 가입하지 않은 사용자가 접속할 경우 enroll.html로 forwarding -->
+	<jsp:forward page="newMember.jsp" />
+	<!-- 가입하지 않은 사용자가 접속할 경우 newMember.jsp로 forwarding -->
 	<%
 		}
 	%>
@@ -237,5 +238,7 @@ li {
     <div id="footer">
 		<h1>footer</h1>
 	</div>
+	
+	
 </body>
 </html>
