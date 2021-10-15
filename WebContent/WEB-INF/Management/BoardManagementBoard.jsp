@@ -31,26 +31,42 @@
 		$("#btnBoardView").on("click",function() {
 	$.ajax({
 		url : "<c:url value='/boardrmanagement'/>",
+		type : "post",
 		data :{
 			bmselect : $("#bmselect option:selected").val()
 		},
-		dataType : "json",
+		dataType : 'html',
 		success : function(data){
-			var results = data.volist;
-			var str = '<tr>';
-			 $.each(results , function(i){
-	                str += '<td>' + results[i].getFbTitle()  + '</td>';
-	                str += '</tr>';
-	           });
-	           $("#dynamicTbody").append(str); 
-	           $('#dynamicTbody').html(data);
-	        }
-		});
+			const rowCnt = 1;
+			const columnCnt = 5;
+			
+			//테이블 비우기
+			document.getElementById('listTable').innerHTML = "";
+			for (var i = 0; i < rowCnt; i++) {
+				document.getElementById('listTable').innerHTML += ('<tr>');
+			  for (var j = 0; j < columnCnt; j++)  {
+				  <% ArrayList<FbBoard> volist = (ArrayList<FbBoard>)request.getAttribute("volist"); %>
+				  document.getElementById('listTable').innerHTML += ('<td>' );
+				  document.getElementById('listTable').innerHTML += ($("#listTable").html(data) + ", ");
+				  document.getElementById('listTable').innerHTML += ('<button>수정</button>');
+				  document.getElementById('listTable').innerHTML += ('<button>삭제</button>');
+				  document.getElementById('listTable').innerHTML += ('</td>');
+			  }
+			  document.getElementById('listTable').innerHTML +=('</tr>')
+			}
+			
+
+								},
+								error : function(request,status,error) {
+									 alert("code:"+request.status+"\n"+"message:"+request.responseText+
+									"\n"+"error:"+error);
+									 } 
+
+					});
+				});
 	});
- });
 
-
-//현재 문제가 no,title,content를 지칭하는 게시판 db의 컬럼명이 다다르다.
+		//현재 문제가 no,title,content를 지칭하는 게시판 db의 컬럼명이 다다르다.
 	</script>
  
 </head>
@@ -77,38 +93,14 @@
 
 <div class="Board-list">
 <!--  jstl을 이용해 ajax를 거친 데이터를 테이블로 보이게한다. -->
-<table id="insertlist">
-	<thead>
-	<tr>
-		<th>번호</th>
-		<th>제목</th>
-		<th>내용</th>
-		<th></th>
-		<th></th>
-	</tr>
-	</thead>
-	<tbody id="dynamicTbody">
-	티바디부분	
-	
-	</tbody>
-	
-	<c:if test="${volist != null}">
-	<c:forEach items="${volist}" var="vo" >
-		<tr>
-			<td><a href="fbboardcontent?no=${vo.fbNo }">${vo.fbNo } </a></td>
-			<td>
-			${vo.fbTitle }
-			</td>
-			<td>[${vo.fbReply}]</td>
-			<td>${vo.mmId }</td>
-			<td>${vo.fbDatetime }</td>
-		</tr>
-	</c:forEach>
-</c:if>	
-	
-	
-</table>
+	<table id="listTable">
 
+	</table>
+	<c:if test="${startPage >1 }"> 이전 </c:if>
+		<c:forEach begin="${startPage }" end="${endPage }" step="1" var="i">
+		<a href="boardrmanagement?pagenum=${i}">${i}</a>
+		</c:forEach>
+	<c:if test="${endPage < pageCount }"> 다음 </c:if>
 </div>
 
 <div class="Board-Article">

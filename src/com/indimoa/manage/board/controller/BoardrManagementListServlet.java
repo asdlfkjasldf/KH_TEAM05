@@ -45,6 +45,7 @@ public class BoardrManagementListServlet extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
 		request.setCharacterEncoding("UTF-8");
+		String bmselect = request.getParameter("bmselect"); //선택 옵션 파라미터 받기
 		
 		PrintWriter out = response.getWriter();
 		
@@ -58,11 +59,21 @@ public class BoardrManagementListServlet extends HttpServlet {
 		int startRnum = 1;
 		int endRnum;
 		
+		
 		String pageNum = request.getParameter("p");
 		if(pageNum != null) {
 			currentPage = Integer.parseInt(pageNum);
 		}
-		bCount = new BManagementService().getBoardCount();
+		
+		bCount = new BManagementService().fbGetBoardCount();
+		if("fb".equals(bmselect) ) {
+			bCount = new BManagementService().fbGetBoardCount();
+		}else if("gdb".equals(bmselect)) {
+			bCount = new BManagementService().gbGetBoardCount();
+		}else if("tipb".equals(bmselect)) {
+			bCount = new BManagementService().tipGetBoardCount();
+		}
+		
 		pageCount = (bCount / PAGE_SIZE) + (bCount % PAGE_SIZE == 0 ? 0 : 1);
 		// rownum 조건 계산
 		startRnum =  (currentPage - 1) * PAGE_SIZE + 1; 
@@ -81,7 +92,7 @@ public class BoardrManagementListServlet extends HttpServlet {
 		}
 		
 //		System.out.println("메소드진입");
-		String bmselect = request.getParameter("bmselect");
+		
 //		out.println(bmselect);
  
 //		String strResult = "";
