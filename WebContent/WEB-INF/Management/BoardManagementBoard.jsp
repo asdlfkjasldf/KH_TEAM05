@@ -5,7 +5,6 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,9 +20,10 @@
  	width: 800px;
  	height: 300px;
  	}
- 	.description{
+ 	.description, #btnBoardWriteBox{
  	text-align: center;
  	}
+
  </style>
  
  <script>
@@ -35,35 +35,52 @@
 		data :{
 			bmselect : $("#bmselect option:selected").val()
 		},
-		dataType : 'html',
+		dataType : 'json',
 		success : function(data){
 			const rowCnt = 1;
 			const columnCnt = 5;
 			
+			console.log(data);
+			var tabEle = document.getElementById('listTable');
 			//테이블 비우기
-			document.getElementById('listTable').innerHTML = "";
-			for (var i = 0; i < rowCnt; i++) {
-				document.getElementById('listTable').innerHTML += ('<tr>');
+			tabEle.innerHTML = "";
+			tabEle.innerHTML += ('<tr>');
 			  for (var j = 0; j < columnCnt; j++)  {
-				  <% ArrayList<FbBoard> volist = (ArrayList<FbBoard>)request.getAttribute("volist"); %>
-				  document.getElementById('listTable').innerHTML += ('<td>' );
-				  document.getElementById('listTable').innerHTML += ($("#listTable").html(data) + ", ");
-				  document.getElementById('listTable').innerHTML += ('<button>수정</button>');
-				  document.getElementById('listTable').innerHTML += ('<button>삭제</button>');
-				  document.getElementById('listTable').innerHTML += ('</td>');
-			  }
-			  document.getElementById('listTable').innerHTML +=('</tr>')
+				  
+				  
+				  if (!(data.volist[j].fbTitle == null)) {
+					  tabEle.innerHTML += ('<td>' );
+					  tabEle.innerHTML += (data.volist[j].fbTitle + ", ");
+					  tabEle.innerHTML += ('<button>수정</button>');
+					  tabEle.innerHTML += ('<button>삭제</button>');
+					  tabEle.innerHTML += ('</td>');
+				}else if (!(data.volist[j].gbTitle == null)) {
+					tabEle.innerHTML += ('<td>' );
+					tabEle.innerHTML += (data.volist[j].gbTitle + ", ");
+					tabEle.innerHTML += ('<button>수정</button>');
+					tabEle.innerHTML += ('<button>삭제</button>');
+					tabEle.innerHTML += ('</td>');
+				}else if (!(data.volist[j].tipTitle == null)) {
+					tabEle.innerHTML += ('<td>' );
+					tabEle.innerHTML += (data.volist[j].tipTitle + ", ");
+					tabEle.innerHTML += ('<button>수정</button>');
+					tabEle.innerHTML += ('<button>삭제</button>');
+					tabEle.innerHTML += ('</td>');
+				}
+				  
+				  
+				  tabEle.innerHTML +=('</tr>')
 			}
-			
 
-								},
-								error : function(request,status,error) {
-									 alert("code:"+request.status+"\n"+"message:"+request.responseText+
-									"\n"+"error:"+error);
-									 } 
 
-					});
-				});
+		},
+		error : function(request,status,error) {
+			 alert("code:"+request.status+"\n"+"message:"+request.responseText+
+			"\n"+"error:"+error);
+			 } 
+
+		});
+	});
 	});
 
 		//현재 문제가 no,title,content를 지칭하는 게시판 db의 컬럼명이 다다르다.
@@ -116,14 +133,12 @@
 	</div>
 	
 </div>
+<div id="btnBoardWriteBox">
 <button type="button" id="btnBoardWrite">등록</button>
 </div>
 
+</div>
+
 <div class="Footer"></div>
-
-	
-	
-
-
 </body>
 </html>
