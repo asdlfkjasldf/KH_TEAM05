@@ -42,9 +42,9 @@ public class DupNicknameChkServlet extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		
 		if(result > 0) {
-			out.append("fail");   // 만약 dupIdChk()의 결과값이 0 이상이면 ‘fail’
+			System.out.println("이미 있는 닉네임입니다.");
 		} else {
-			out.append("ok");    // 결과값이 0 보다 크지 않으면, ‘ok’를 담아서 보낸다.
+			System.out.println("사용 가능한 닉네임입니다.");
 		}
 		out.flush();
 		out.close();

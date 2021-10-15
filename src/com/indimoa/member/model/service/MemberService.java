@@ -38,9 +38,9 @@ public class MemberService {
 	} 
 	
 	// Member 객체를 추가하는 메소드 
-	public int enrollMember(Member m) { 
+	public int insertMember(Member m) { 
 		Connection conn = JdbcTemplate.getConnection(); 
-		int result = new MemberDao().enrollMember(conn, m); 
+		int result = new MemberDao().insertMember(conn, m); 
  
 		if(result > 0) commit(conn); 
 		else rollback(conn);

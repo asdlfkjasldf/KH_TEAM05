@@ -95,7 +95,7 @@ public class MemberDao {
 		}
 
 	// DataBase에 Member 객체를 추가하는 메소드
-	public int enrollMember(Connection conn, Member m) {
+	public int insertMember(Connection conn, Member m) {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		String query = "insert into member values (?, ?, ?, ?, ?, ?, sysdate, ?, ?, ?, ?)";

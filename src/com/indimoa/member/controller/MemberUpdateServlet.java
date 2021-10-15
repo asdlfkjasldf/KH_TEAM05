@@ -42,9 +42,9 @@ public class MemberUpdateServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 기존의 생성된 세션과 세션에 담겨있던 “member” 객체를 불러온다.
+		// 기존의 생성된 세션과 세션에 담겨있던 “loginInfo” 객체를 불러온다.
 				HttpSession session = request.getSession(false);
-				Member m = (Member) session.getAttribute("member");
+				Member m = (Member) session.getAttribute("loginInfo");
 				MemberService mservice = new MemberService();
 				String id = request.getParameter("mm_id");
 				String pwd = request.getParameter("mm_pwd");
