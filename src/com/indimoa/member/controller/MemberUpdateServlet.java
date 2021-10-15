@@ -73,7 +73,7 @@ public class MemberUpdateServlet extends HttpServlet {
 					
 					
 					if (mservice.updateMember(m) > 0) {
-						session.setAttribute("member", m);
+						session.setAttribute("loginInfo", m);
 						response.sendRedirect("WEB-INF/view/myInfo.jsp");
 					} else {
 						out.append("<script>alert('회원 정보 수정 오류!\n'+ '관리자에게 문의하세요!');</script>");

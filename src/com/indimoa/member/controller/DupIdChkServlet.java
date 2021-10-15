@@ -40,9 +40,9 @@ public class DupIdChkServlet extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		
 		if(result > 0) {
-			System.out.println("이미 있는 아이디입니다.");
+			out.append("<script>alert('이미 있는 아이디 입니다!);</script>");
 		} else {
-			System.out.println("사용 가능한 아이디입니다.");
+			out.append("<script>alert('사용 가능한 아이디 입니다!);</script>");
 		}
 		out.flush();
 		out.close();
