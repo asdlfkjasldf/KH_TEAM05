@@ -106,7 +106,7 @@ li {
 	<h2 align="center">회원 가입 하기</h2>
 	<hr>
 	<section id="myinfo">
-		<form action="../../minsert.lo" id="enrollForm" method="post">
+		<form action="WEB-INF/view/login.jsp" id="enrollForm" method="post" enctype="multipart/form-data">
 			<table align="center">
 				<tr>
 					<td>아이디 :</td>
@@ -115,7 +115,7 @@ li {
 				</tr>
 				<tr>
 					<td>비밀번호 :</td>
-					<td><input type="pwd" name="mm_pwd"></td>
+					<td><input type="password" name="mm_pwd"></td>
 				</tr>
 				<tr>
 					<td>이름 :</td>
@@ -157,7 +157,7 @@ li {
 				</tr>
 			</table>
 			<p align="center">
-				<button type="submit" >회원 가입하기</button>
+				<button type="submit"  >회원 가입하기</button>
 				&nbsp; &nbsp;
 				<button type="reset">작성 양식 초기화</button>
 			</p>

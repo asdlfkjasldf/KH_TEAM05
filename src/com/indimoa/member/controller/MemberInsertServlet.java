@@ -26,8 +26,7 @@ public class MemberInsertServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		request.getRequestDispatcher("WEB-INF/view/myInfo.jsp").forward(request, response);
 	}
 
 	/**
@@ -42,11 +41,8 @@ public class MemberInsertServlet extends HttpServlet {
 		String email = request.getParameter("mm_email");
 		String phn = request.getParameter("mm_phn");
 		String com = request.getParameter("mm_com");
-		String enrolldate = request.getParameter("mm_enrolldate");
 		String profile = request.getParameter("mm_profile");
 		String nickname = request.getParameter("mm_nickname");
-		String membership = request.getParameter("mm_membership");
-		String point = request.getParameter("mm_point");
 		
 		int result = mservice.insertMember(new Member());
 		if(result > 0) {

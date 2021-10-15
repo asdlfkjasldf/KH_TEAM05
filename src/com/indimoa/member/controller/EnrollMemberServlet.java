@@ -54,11 +54,8 @@ public class EnrollMemberServlet extends HttpServlet {
 		String email = request.getParameter("mm_email");
 		String phn = request.getParameter("mm_phn");
 		String com = request.getParameter("mm_com");
-		String enrolldate = request.getParameter("mm_enrolldate");
 		String profile = request.getParameter("mm_profile");
 		String nickname = request.getParameter("mm_nickname");
-		String membership = request.getParameter("mm_membership");
-		String point = request.getParameter("mm_point");				//point, membership도 넣어야할까
 		
 		Member vo = new Member();
 		vo.setMm_id(id);
@@ -67,23 +64,16 @@ public class EnrollMemberServlet extends HttpServlet {
 		vo.setMm_email(email);
 		vo.setMm_phn(phn);
 		vo.setMm_com(com);
-//		vo.setMm_enrolldate(enrolldate);
 		vo.setMm_profile(profile);
 		vo.setMm_nickname(nickname);
-		vo.setMm_membership(membership);
-//		vo.setMm_point(0);
 		
 		int result = mservice.insertMember(vo);
-		
-		
-		
-//		int result = mservice.enrollMember(new Member());   //TODO
-//		if (result > 1) {
-//			out.println("회원가입이 완료됐습니다.");
-//			response.sendRedirect("main.jsp");
-//		} else {
-//			
-//		}
+		if (result > 1) {
+			out.println("회원가입이 완료됐습니다.");
+			response.sendRedirect("main.jsp");
+		} else {
+			
+		}
 		
 		
 	}

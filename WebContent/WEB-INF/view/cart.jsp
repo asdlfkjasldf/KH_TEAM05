@@ -84,7 +84,8 @@ function fnPay(){
 
 function fnClear(){
 	if(confirm("장바구니를 비우시겠습니까?")) {
-		location.href = "WEB-INF/view/CartClear.jsp";	
+		alert("장바구니가 삭제되었습니다.");
+		location.href = "WEB-INF/view/Cart.jsp";	
 	}
 }
 

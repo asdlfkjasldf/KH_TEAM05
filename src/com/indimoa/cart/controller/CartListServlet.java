@@ -85,6 +85,7 @@ public class CartListServlet extends HttpServlet {
 		request.setAttribute("startPage", startPage);
 		request.setAttribute("endPage", endPage);
 		request.setAttribute("pageCount", pageCount);
+		request.setAttribute("currentPage", currentPage);
 		
 		request.getRequestDispatcher("/WEB-INF/view/cart.jsp").forward(request, response);
 

@@ -188,7 +188,7 @@ li {
                 <input type="password" name="mm_pwd" id="pwd" autocomplete="off" required>
             </p>
             <p class="btn-area">
-                <button id="btn" type="submit" onclick="location.href ='main.jsp'">로그인</button>
+                <button id="btn" type="submit" onclick="location.href ='/WEB-INF/view/login.jsp'">로그인</button>
             </p>
             <p class="caption">
                 <a href='WEB-INF/view/findId.jsp'>아이디 찾기</a>

@@ -52,11 +52,8 @@ public class MemberUpdateServlet extends HttpServlet {
 				String email = request.getParameter("mm_email");
 				String phn = request.getParameter("mm_phn");
 				String com = request.getParameter("mm_com");
-				String enrolldate = request.getParameter("mm_enrolldate");
 				String profile = request.getParameter("mm_profile");
 				String nickname = request.getParameter("mm_nickname");
-				String membership = request.getParameter("mm_membership");
-				String point = request.getParameter("mm_point");
 				PrintWriter out = response.getWriter();
 
 				if (m != null && m.getMm_id().equals(id)) { // 만약 ID 값이 기존값과 일치한다면 수정 실행
@@ -65,11 +62,8 @@ public class MemberUpdateServlet extends HttpServlet {
 					m.setMm_email(email);
 					m.setMm_phn(phn);
 					m.setMm_com(com);
-//					m.setMm_enrolldate(enrolldate);
 					m.setMm_profile(profile);
 					m.setMm_nickname(nickname);
-					m.setMm_membership(membership);
-//					m.setMm_point(point);
 					
 					
 					if (mservice.updateMember(m) > 0) {

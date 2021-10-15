@@ -2,11 +2,15 @@ package com.indimoa.member.model.dao;
 
 
 import static com.indimoa.common.JdbcTemplate.*;
+
+import java.beans.Statement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Properties;
+
 
 import com.indimoa.member.model.vo.Member;
 
@@ -16,6 +20,10 @@ public class MemberDao {
 	private Properties prop = new Properties();
 
 	public MemberDao() {}
+	
+	
+	
+	
 	public Member loginMember(Connection conn, String id, String passwd) {
 		Member m = null;
 		PreparedStatement pstmt = null;
