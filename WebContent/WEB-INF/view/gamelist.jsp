@@ -2,11 +2,9 @@
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-   <%--@ taglib prefix=”c” uri="http://java.sun.com/jstl/core"--%> 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 
-  
-    
     <%
     
 	ArrayList<Game> volist = (ArrayList<Game>)request.getAttribute("volist");
@@ -215,7 +213,7 @@ li {
 						<td>언어</td>
 			
 			
-		<tr>
+		</tr>
 <%
 		if(volist != null){
 		for(Game vo : volist){
@@ -285,32 +283,38 @@ li {
 			<td>  
 			-->
 			
-		<tr>	
+		</tr>	
 <%
 		}}
 %>
 
 	</table>
-<c:if test="${startPage >1 }"> 이전 </c:if>
+ <!--   EL를 사용할떄  
+     <c:if test="${startPage > 1 }"> <a href="GameList?pagenum=${startPage-1 }">이전</a> </c:if>
 		<c:forEach begin="${startPage }" end="${endPage }" step="1" var="i">
 		<a href="GameList?pagenum=${i}">${i}</a>
 		</c:forEach>
-		
+	  <c:if test="${endPage < pageCount }"> <a href="GameList?pagenum=${endPage+1 }">다음</a> </c:if> 
+ -->
+	 
+	 	
 <%
-			if (startPage > 1)
-				%>	이전	<%
+			if (startPage > 1){
+%>				<a href="GameList?pagenum=<%= startPage-1 %>">이전</a>	
+<% }
 			for (int i = startPage; i <= endPage; i++) {
-				%>
+%>
 				<a href="GameList?pagenum=<%= i %>"> <%= i %> </a>
 				<%
 				if (i != endPage) {
 					%> , <%				}
 			}
-			if (endPage < pageCount)
-				%>	다음	 <%
+			if (endPage < pageCount){
+				%>	<a href="GameList?pagenum=<%= endPage+1 %>">다음</a>	 
+<%
+			}
 %>
 
-	<!--  <c:if test="${endPage < pageCount }"> 다음 </c:if> -->
 <br>
 <a href=EnrollGame>게임등록하러 가기!</a>
 

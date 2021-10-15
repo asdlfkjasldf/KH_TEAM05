@@ -102,9 +102,9 @@ public class GameDao {
 		//이게 뭘 의미 할까?????????????????
 		
 		
-		System.out.println("sql:" + sql);
-		System.out.println("start:" + start);
-		System.out.println("end:" + end);
+		//System.out.println("sql:" + sql);
+		//System.out.println("start:" + start);
+		//System.out.println("end:" + end);
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 
@@ -117,11 +117,11 @@ public class GameDao {
 			if (rset.next()) {
 				do {
 					Game vo = new Game();
-					vo = new Game();
+					//vo = new Game();
 					vo.setGgNo(rset.getInt("GG_NO"));
 					vo.setGgTitle(rset.getString("GG_TITLE"));
 					vo.setGgPrice(rset.getInt("GG_PRICE"));
-					vo.setGgSystemRequirement(rset.getNString("GG_SYSTEM_REQUIREMENTS"));
+					vo.setGgSystemRequirement(rset.getString("GG_SYSTEM_REQUIREMENTS"));
 					vo.setGgGenre(rset.getString("GG_GENRE"));
 					vo.setGgDeveloper(rset.getString("GG_DEVELOPER"));
 					vo.setGgReleaseDate(rset.getString("GG_RELEASE_DATE"));
@@ -141,7 +141,7 @@ public class GameDao {
 				e.printStackTrace();
 			}
 		}
-		System.out.println("[gameDao selectGmaeList일껄?]--" + volist);
+		//System.out.println("[gameDao selectGmaeList일껄?]--" + volist);
 		return volist;
 	}
 
@@ -149,27 +149,27 @@ public class GameDao {
 	
 	
 	// 게임 등록 메소드
-	public int enrollGame(  Game vo) { 
-
-		String sql = "INSERT INTO GAME VALUES(?,?,?,?,?,?,?,?,?)";
-		try {
-			Connection conn = JdbcTemplate.getConnection();
-			PreparedStatement pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, vo.getGgTitle());
-			pstmt.setInt(2, vo.getGgPrice());
-			pstmt.setString(3, vo.getGgSystemRequirement());
-			pstmt.setString(4, vo.getGgGenre());
-			pstmt.setString(5, vo.getGgDeveloper());
-		pstmt.setString(6, vo.getGgReleaseDate());
-			pstmt.setString(7, vo.getGgPublisher());
-			pstmt.setString(8, vo.getGgLanguages());
-			pstmt.setString(9, vo.getGgInfomation());
-			return pstmt.executeUpdate();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return -1;
-	}
+//	public int enrollGame(  Game vo) { 
+//
+//		String sql = "INSERT INTO GAME VALUES(?,?,?,?,?,?,?,?,?)";
+//		try {
+//			Connection conn = JdbcTemplate.getConnection();
+//			PreparedStatement pstmt = conn.prepareStatement(sql);
+//			pstmt.setString(1, vo.getGgTitle());
+//			pstmt.setInt(2, vo.getGgPrice());
+//			pstmt.setString(3, vo.getGgSystemRequirement());
+//			pstmt.setString(4, vo.getGgGenre());
+//			pstmt.setString(5, vo.getGgDeveloper());
+//		pstmt.setString(6, vo.getGgReleaseDate());
+//			pstmt.setString(7, vo.getGgPublisher());
+//			pstmt.setString(8, vo.getGgLanguages());
+//			pstmt.setString(9, vo.getGgInfomation());
+//			return pstmt.executeUpdate();
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//		return -1;
+//	}
 
 	
 	
@@ -264,10 +264,36 @@ public class GameDao {
 //	}
 //	
 	
-	//다른 방법
+	public int testInsertGame(Connection conn, Game vo) {
+		int result = -1;
+		String sql = "INSERT INTO GAME(GG_NO,GG_TITLE,GG_PRICE,GG_SYSTEM_REQUIREMENTS,GG_GENRE,GG_DEVELOPER,GG_RELEASE_DATE,GG_PUBLISHER,GG_LANGUAGES,GG_INFORMATION) "
+				+ "value(SEQ_GAME_GG_NO.nextval,?,?,?,?,?,TO_DATE(?,'YY/MM/DD'),?,?,?)";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		try {
+			pstmt =conn.prepareStatement(sql);
+			pstmt.setInt(1, vo.getGgNo());
+			pstmt.setString(2, vo.getGgTitle());
+			pstmt.setInt(3, vo.getGgPrice());
+			pstmt.setString(4, vo.getGgSystemRequirement());
+			pstmt.setString(5, vo.getGgGenre());
+			pstmt.setString(6, vo.getGgDeveloper());
+			pstmt.setString(7, vo.getGgReleaseDate());
+			pstmt.setString(8, vo.getGgPublisher());
+			pstmt.setString(9, vo.getGgLanguages());
+			pstmt.setString(10, vo.getGgInfomation());
+			result=pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			JdbcTemplate.close(rset);
+			JdbcTemplate.close(pstmt);	
+		}
+		 return result;
+	}
+	
 	// DataBase에 Member 객체를 추가하는 메소드
 	public int insertGame(Connection conn, Game g) {
-		PreparedStatement pstmt = null;
 		int result = -1;
 		String sql = "INSERT INTO GAME"	 
 				+ "(GG_NO,"
@@ -279,14 +305,15 @@ public class GameDao {
 				+ "GG_RELEASE_DATE,"
 				+ "GG_PUBLISHER,"
 				+ "GG_LANGUAGES,"
-				+ "GG_INFORMATION) "
+				+ "GG_INFORMATION)"
 				+ "values (SEQ_GAME_GG_NO.nextval,?,?,?,?,"
 				+ "?,TO_DATE(?,'YY/MM/DD'),?,?,?)";
 				//SEQ_GAME_GG_NO.nextval,"
 		System.out.println("insertGame sql:"+ sql);
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
 		try {
 			pstmt = conn.prepareStatement(sql);
-			
 			pstmt.setInt(1, g.getGgNo());
 			pstmt.setString(2, g.getGgTitle());
 			pstmt.setInt(3, g.getGgPrice());
@@ -297,20 +324,32 @@ public class GameDao {
 			pstmt.setString(8, g.getGgPublisher());
 			pstmt.setString(9, g.getGgLanguages());
 			pstmt.setString(10, g.getGgInfomation());
+			result = pstmt.executeUpdate();
 			
 			
 			// executeupdate() 는 실행 결과를 반영된 행의 개수로 리턴하므로
 			// 1 이상은 실행 성공, 0 이하(구문 에러 포함)는 실패이다.
-			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
+			JdbcTemplate.close(rset);
 			JdbcTemplate.close(pstmt);
+			
 		}
-		System.out.println("insert 결과 : "+ result);
+		System.out.println("게임 등록 insert 결과 : "+ result);
 		return result;
 	}
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	public int getGameCount(Connection conn) {
 		int result = 0;
 		String sql = "select count(GG_NO) from game";

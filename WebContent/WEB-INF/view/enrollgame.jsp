@@ -1,76 +1,112 @@
 <%@page import="com.indimoa.game.model.vo.Game"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-   <%--@ taglib prefix=”c” uri="http://java.sun.com/jstl/core"--%> 
+	pageEncoding="UTF-8"%>
+<%--@ taglib prefix=”c” uri="http://java.sun.com/jstl/core"--%>
 
 
-    <%-- 
+<%-- 
 	String ggNo = request.getParameter("ggNO"); 
 	if(ggNo==null || ggNo.equals("")){
 		ggNo="";
 	}
 --%>
-    
-    
+
+
 <!DOCTYPE html>
 <html>
 
 <head>
-    <meta charset="UTF-8">
-    <title>Enroll Game</title>
-    <link rel="stylesheet" href="../../css/myStyle.css" />
+<meta charset="UTF-8">
+<title>Enroll Game</title>
+<link rel="stylesheet" href="../../css/myStyle.css" />
 </head>
 
 <body>
-    <h2 align="center">게임 등록 하기</h2>
-    <hr>
-    <section id="myinfo">
-    
-        <form action="EnrollGameDo" id="enrollForm" method="post">
-            <table>
-                <tr>
-                    <td>게임 타이틀 :</td>
-                    <td><input type="text" name="id" id="title"></td>
-                </tr>
-                <tr>
-                    <td>가격 :</td>
-                    <td><input type="text" name="price"></td>
-                </tr>
-                <tr>
-                    <td>시스템 요구사항 :</td>
-                    <td><input type="text" name="SystemRequirement"></td>
-                </tr>
-                <tr>
-                    <td>장르 :</td>
-                    <td><input type="text" name="Genre"></td>
-                </tr>
+	<h2 align="center">게임 등록 하기</h2>
+	<hr>
+	<section id="myinfo"> 
+	
 
-                
-                <td>개발사 :</td>
-                <td><input type="text" name="Developer"></td>
-                </tr>
-                <td>발매일 :</td>
-                <td><input type="text" name="ReleaseDate"></td>
-                </tr>
-                <td>공급사 :</td>
-                <td><input type="text" name="Publisher"></td>
-                </tr>
-                <td>언어 :</td>
-                <td><input type="text" name="Languages"></td>
-                </tr>
-                <td>정보 :</td>
-                <td><input type="text" name="Infomation"></td>
-                </tr>
+		<form action="EnrollGameDo" id="enrollForm" method="post"
+			enctype="multipart/form-data">
+			<table>
+				<tr>
+					<td>게임 타이틀 :</td>
+					<td><input type="text" name="id" id="title"></td>
+				</tr>
 
-            </table>
-            <p align="center">
-                <button type="submit" value="등록">게임 등록하기</button> &nbsp; &nbsp;
-                <button type="reset">초기화</button>&nbsp; &nbsp;
-                <button type="button"><a href="GameList">취소</a></button>
-            </p>
-        </form>
-   <!-- </section>
+				<tr>
+					<td>가격 :</td>
+					<td><input type="text" name="price"></td>
+				</tr>
+
+				<tr>
+					<td>시스템 요구사항 :</td>
+					<td><input type="text" name="SystemRequirement"></td>
+				</tr>
+
+				<tr>
+					<td>장르 :</td>
+					<td><input type="text" name="Genre"></td>
+				</tr>
+
+				<tr>
+					<td>개발사 :</td>
+					<td><input type="text" name="Developer"></td>
+				</tr>
+
+				<tr>
+					<td>발매일 :</td>
+					<td><input type="text" name="ReleaseDate"></td>
+				</tr>
+
+				<tr>
+					<td>공급사 :</td>
+					<td><input type="text" name="Publisher"></td>
+				</tr>
+
+				<tr>
+					<td>언어 :</td>
+					<td><input type="text" name="Languages"></td>
+				</tr>
+
+				<tr>
+					<td>정보 :</td>
+					<td><input type="text" name="Infomation"></td>
+				</tr>
+				
+				
+
+					<tr>
+						<td>게임 이미지 파일 첨부1(대표이미지) :</td>
+						<td><input type="file" name="image1"></td>
+						<td>게임 이미지 파일 첨부2 :</td>
+						<td><input type="file" name="image2"></td>
+					</tr>
+
+					<tr>
+						<td>게임 이미지 파일 첨부3 :</td>
+						<td><input type="file" name="image3"></td>
+						<td>게임 이미지 파일 첨부4 :</td>
+						<td><input type="file" name="image4"></td>
+					</tr>
+
+				</section>
+
+
+			</table>
+			<p align="center">
+				<button type="submit" value="등록">게임 등록하기</button>
+				&nbsp; &nbsp;
+				<button type="reset">초기화</button>
+				&nbsp; &nbsp;
+				<button type="button">
+					<a href="GameList">취소</a>
+				</button>
+			</p>
+		</form>
+		<!-- </section>
     <br> <br>
     <p align="center">
         <button type="button" onclick="location.href='../../index.jsp';">메인으로 가기</button>
@@ -108,8 +144,6 @@
         });
     </script>
     -->
-    
-    
 </body>
 
 </html>

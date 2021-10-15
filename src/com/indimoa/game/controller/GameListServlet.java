@@ -78,13 +78,13 @@ public class GameListServlet extends HttpServlet {
 				if (endPage > pageCount)
 					endPage = pageCount;
 				
-				System.out.println("startRnum : " + startRnum);
-				System.out.println("endRnum : "+ endRnum);
+				//System.out.println("startRnum : " + startRnum);
+				//System.out.println("endRnum : "+ endRnum);
 				
 				
 				
 				ArrayList<Game> volist = new GameService().selectGameList(startRnum,endRnum );
-				System.out.println("GameServlet:"+volist);
+				//System.out.println("GameServlet:"+volist);
 				
 				
 				//한번만 작동해도되!!!!!!!!

@@ -60,12 +60,12 @@ public class EnrollGameDoServlet extends HttpServlet {
 		String gLanguages =request.getParameter("ggLanguages");
 		String gInfomation =request.getParameter("ggInfomation");
 
-		//int gNo = 0;
-		//try {
+//		int gNo = 0;
+//		try {
 //			gNo= Integer.parseInt(gNostr);
-		//} catch (Exception e) {
+//		} catch (Exception e) {
 //			e.printStackTrace();
-		//}
+//		}
 
 		//입력받는 값은 스트링이지만 이걸 숫자로 바꿀거야 만약에 숫자가 아니면 0이 뜨고 걸릴거야 하지만 작업은 쭉쭉 진행되
 		int gPrice =0;
