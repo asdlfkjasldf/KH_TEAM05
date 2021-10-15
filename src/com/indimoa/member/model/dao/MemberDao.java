@@ -59,45 +59,83 @@ public class MemberDao {
 	// ID 값의 중복을 조회하는 메소드
 	public int dupIdChk(Connection conn, String id) {
 		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-		int result = 0;
-		// id로 테이블을 조회하여 있으면 1 이상, 없으면 0인 쿼리 작성
-		String query = "select * from member where mm_id = ?";
+		ResultSet rs = null;
+		int result = -1;
+
+		String sql = "select mm_id from member where mm_id=?";
+
 		try {
-			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, id);
-			rset = pstmt.executeQuery();
-			if (rset.next()) {
-				result = rset.getInt(1); // rset의 첫 컬럼의 숫자값을 가져온다
+			conn = getConnection(); // DB 연결 시도
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1,id);
+
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) { // 조회 결과가 있으면 id가 존재한다는 의미
+				result = 1;
+			} else {
+				// 조회한 결과가 값이 없으므로 id가 존재하지 않음.
+				result = -1;
 			}
-		} catch (SQLException e) {
+
+		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			close(rset);
-			close(pstmt);
+			try {
+				if (conn != null) {
+					conn.close();
+				}
+				if (pstmt != null) {
+					pstmt.close();
+				}
+				if (rs != null) {
+					rs.close();
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 		return result;
 	}
 	
 	// 닉네임 값의 중복을 조회하는 메소드
-		public int dupNicknameChk(Connection conn, String id) {
+		public int dupNicknameChk(Connection conn, String nickname) {
 			PreparedStatement pstmt = null;
-			ResultSet rset = null;
-			int result = 0;
-			// 닉네임으로 테이블을 조회하여 있으면 1 이상, 없으면 0인 쿼리 작성
-			String query = "select * from member where mm_nickname = ?";
+			ResultSet rs = null;
+			int result = -1;
+
+			String sql = "select mm_nickname from member where mm_nickname=?";
+
 			try {
-				pstmt = conn.prepareStatement(query);
-				pstmt.setString(1, id);
-				rset = pstmt.executeQuery();
-				if (rset.next()) {
-					result = rset.getInt(1); // rset의 첫 컬럼의 숫자값을 가져온다
+				conn = getConnection(); // DB 연결 시도
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1,nickname);
+
+				rs = pstmt.executeQuery();
+
+				if (rs.next()) { // 조회 결과가 있으면 id가 존재한다는 의미
+					result = 1;
+				} else {
+					// 조회한 결과가 값이 없으므로 id가 존재하지 않음.
+					result = -1;
 				}
-			} catch (SQLException e) {
+
+			} catch (Exception e) {
 				e.printStackTrace();
 			} finally {
-				close(rset);
-				close(pstmt);
+				try {
+					if (conn != null) {
+						conn.close();
+					}
+					if (pstmt != null) {
+						pstmt.close();
+					}
+					if (rs != null) {
+						rs.close();
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 			}
 			return result;
 		}

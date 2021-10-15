@@ -42,7 +42,7 @@ public class DupIdChkServlet extends HttpServlet {
 		if(result > 0) {
 			out.append("<script>alert('이미 있는 아이디 입니다!);</script>");
 		} else {
-			out.append("<script>alert('사용 가능한 아이디 입니다!);</script>");
+			out.append("<script>alert('사용 가능 아이디 입니다!);</script>");
 		}
 		out.flush();
 		out.close();

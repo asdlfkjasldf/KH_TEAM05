@@ -110,8 +110,7 @@ li {
 			<table align="center">
 				<tr>
 					<td>아이디 :</td>
-					<td><input type="text" name="mm_id" id="id"></td>
-					<td><button type="button">아이디 중복확인</button></td>
+					<td><input type="text" name="mm_id" id="id"><input type="hidden" name="reid"><input type="button" value="중복확인" onclick="return idCheck()"></td>
 				</tr>
 				<tr>
 					<td>비밀번호 :</td>
@@ -152,8 +151,7 @@ li {
 				</tr>
                 <tr>
 					<td>닉네임 :</td>
-					<td><input type="nickname" name="mm_nickname" placeholder="개발사는 회사 이름을 작성"></td>
-					<td><button type="button">닉네임 중복확인</button></td>
+					<td><input type="nickname" name="mm_nickname" placeholder="개발사는 회사 이름을 작성"><input type="hidden" name="renickname"><input type="button" value="중복확인" onclick="return idCheck()"></td>
 				</tr>
 			</table>
 			<p align="center">
@@ -172,41 +170,71 @@ li {
 	<script type="text/javascript"
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script type="text/javascript">
-		$("#enrollForm").submit(
-				function(event) {
-					var regex = /^[A-Za-z0-9]{5,14}$/; // 정규식을 통한 문자열 패턴 분석 
-					var chk = 0;
-					if ($('#userid').val().length < 5) {
-						alert("아이디는 5자 이상이어야 합니다.");
-					} else if (!regex.test($('#userid').val())) {
-						alert("아이디는 영문자와 숫자만 가능합니다.");
-					} else {
-						$.ajax({ // ajax를 통한 아이디 중복 값 체크 
-							url : "WEB-INF/view/dupidchk.jsp",
-							type : "post",
-							async : false,
-							data : {
-								id : $('#userid').val()
-							},
-							dataType : "text",
-							success : function(value) {
-								if (value == "fail") {
-									alert("이미 존재하는 아이디입니다.\n 다른 아이디로 정하십시오.");
-								} else {
-									alert("정상 가입이 되었습니다.");
-									chk++;
-								}
-							},
-							error : function(request, status, error) {
-								alert("code:" + request.status + "\n"
-										+ "message:" + request.responseText
-										+ "\n" + "error:" + error);
-							}
-						});
-					}
-					if (chk == 0)
-						event.preventDefault();
-				});
+		/**
+회원정보 입력 필수 입력 사항 확인
+이름, 아이디, 암호, 암호확인
+아이디 4글자 이상
+암호와 암호확인이 일치 확인
+re id의 값이 존재하는지 확인하여 중복체크여부를 검사
+ */
+
+function joinCheck() {
+	if (document.joinform.mm_name.value == "") {
+		alert("이름을 입력해주세요.");
+		document.joinform.name.focus();
+		return false;
+	}
+
+	if (document.joinform.mm_id.value == "") {
+		alert("아이디를 입력해주세요.");
+		document.joinform.userid.focus();
+		return false;
+	}
+
+	if (document.joinform.mm_id.value.length < 4) {
+		alert("아이디는 4글자 이상이어야 합니다.");
+		document.joinform.name.focus();
+		return false;
+	}
+
+	if (document.joinform.mm_pwd.value == "") {
+		alert("비밀번호를 입력해주세요.");
+		document.joinform.pwd.focus();
+		return false;
+	}
+
+
+	if (document.joinform.reid.value == "") {
+		alert("아이디 중복체크를 하지 않았습니다.");
+		return false;
+	}
+
+	if (document.joinform.pwd.value != document.joinform.pwdpwd.value) {
+		alert("비밀번호가 일치하지 않습니다.");
+		document.joinform.pwdpwd.focus();
+		return false;
+	}
+
+
+    if (document.joinform.renickname.value == "") {
+		alert("아이디 중복체크를 하지 않았습니다.");
+		return false;
+	}
+
+	return true;
+}
+
+function idCheck() {
+	// 사용자 아이디가 입력되었는지 확인 루틴 구현
+	if (document.joinform.userid.value == "") {
+		alert("사용자 아이디를 입력해주세요.");
+		document.joinform.userid.focus();
+		return false;
+	}
+	// 아이디 중복 체크를 위한 페이지는 새로운 창에 출력한다.(idcheck.jsp)
+	var url = "idCheck.do?userid=" + document.joinform.userid.value;
+	window.open(url, "_blank_1", "toolbar=no, menubar=no, scrollbars=yes, resizable=no, width=450, height=200");
+}
 	</script>
 
 <div id="footer">
