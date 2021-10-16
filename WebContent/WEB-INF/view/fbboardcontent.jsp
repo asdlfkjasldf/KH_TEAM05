@@ -40,6 +40,9 @@
 			<td colspan="3"><%=vo.getFbContent()%></td>
 		</tr>
 		<tr>
+			<td></td>
+		</tr>
+		<tr>
 			<td>신고수 : <%=vo.getFbReport()%></td>
 		</tr>
 		<tr>		
