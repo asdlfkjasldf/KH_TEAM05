@@ -21,7 +21,55 @@ public class MemberDao {
 
 	public MemberDao() {}
 	
-	
+	public int userCheck(String id, String pwd) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int result = -1;
+
+		// member 테이블에서 사용자 아이디가 id인 레코드의 pwd column을 조회
+		String sql = "select mm_id, pwd from member where mm_id=?";
+
+		try {
+			conn = getConnection(); // DB 연결 시도
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				String pwd_in_db = rs.getString("pwd");
+				if (pwd_in_db != null && pwd.equals(pwd_in_db)) {
+					// id를 조건으로 pwd가 조회되면 입력받은 id가 존재한다는 의미.
+					result = 1;
+				} else {
+					result = 0;
+				}
+			} else {
+				// 조회한 결과가 값이 없으므로 id가 존재하지 않음.
+				result = -1;
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (conn != null) {
+					conn.close();
+				}
+				if (pstmt != null) {
+					pstmt.close();
+				}
+				if (rs != null) {
+					rs.close();
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+
+		return result;
+	}
 	
 	
 	public Member loginMember(Connection conn, String id, String passwd) {
@@ -30,6 +78,8 @@ public class MemberDao {
 		ResultSet rset = null;
 		String query = "select * from member where mm_id = ? and mm_pwd = ?";
 		try {
+			
+			conn = getConnection(); // DB 연결 시도
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, id); // 첫번째 ‘?’ 에 id 값 대입
 			pstmt.setString(2, passwd); // 두번째 ‘?’ 에 passwd 값 대입

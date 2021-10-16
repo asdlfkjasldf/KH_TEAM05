@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.indimoa.member.model.service.MemberService;
 import com.indimoa.member.model.vo.Member;
@@ -68,11 +69,12 @@ public class EnrollMemberServlet extends HttpServlet {
 		vo.setMm_nickname(nickname);
 		
 		int result = mservice.insertMember(vo);
-		if (result > 1) {
-			out.println("회원가입이 완료됐습니다.");
-			response.sendRedirect("main.jsp");
-		} else {
-			
+		if(result == 1) {
+			HttpSession session = request.getSession();
+			session.setAttribute("userid", id);
+			request.setAttribute("message", "회원 가입 성공");
+		}else {
+			request.setAttribute("message", "회원 가입 실패");
 		}
 		
 		

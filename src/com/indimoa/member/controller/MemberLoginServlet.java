@@ -61,6 +61,7 @@ public class MemberLoginServlet extends HttpServlet {
 		System.out.println("mm_pwd: " + pwd);
 		
 		PrintWriter out = response.getWriter();
+
 		
 		Gson gob = new GsonBuilder().setPrettyPrinting().create();   //console창에 보이게끔
 
