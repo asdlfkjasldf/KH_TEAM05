@@ -43,6 +43,10 @@
 			
 			console.log(data);
 			var tabEle = document.getElementById('listTable');
+			//Articel 비우기
+			$('.Board-Article').empty();
+			$('#btnBoardWriteBox').empty();
+			
 			//테이블 비우기
 			tabEle.innerHTML = "";
 			tabEle.innerHTML += ('<tr>');
@@ -73,14 +77,20 @@
 				  
 				  tabEle.innerHTML +=('</tr>')
 				  $(".btnUpdate").click(function () { 
-						var $divTitle = $('<div class="description">제목<br><input type="text" id="newTextTitle"></div>');
+					  $('.Board-Article').empty();
+					  $('#btnBoardWriteBox').empty();
+						var $divTitle = $('<div class="description">제목<br><input type="text" id="newTextTitle" value=""></div>');
 							$('.Board-Article').append($divTitle);
 
-							var $divContent = $('<div class="description">내용<br><input type="text" id="newTextContent"></div>');
+							var $divContent = $('<div class="description">내용<br><input type="text" id="newTextContent" value=""></div>');
 							$('.Board-Article').append($divContent);
 							var $divWriteBtn = $('<button type="button" id="btnBoardWrite">등록</button>');
 							$('#btnBoardWriteBox').append($divWriteBtn);
 						});
+				  
+				  $("#btnBoardWrite").click(function () {
+					  
+				})
 				  
 			}
 
