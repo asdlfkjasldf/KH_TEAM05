@@ -1,4 +1,4 @@
-package com.indomoa.cart.model.vo;
+package com.indimoa.cart.model.vo;
 
 import java.sql.Timestamp;
 
@@ -74,5 +74,3 @@ public class Cart {
 	
 	
 }
-
-	

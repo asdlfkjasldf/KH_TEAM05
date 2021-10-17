@@ -13,7 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.indimoa.board.model.service.FbBoardService;
 import com.indimoa.board.model.vo.FbBoard;
 import com.indimoa.cart.model.service.CartService;
-import com.indomoa.cart.model.vo.Cart;
+import com.indimoa.cart.model.vo.Cart;
+
 
 /**
  * Servlet implementation class CartListServlet

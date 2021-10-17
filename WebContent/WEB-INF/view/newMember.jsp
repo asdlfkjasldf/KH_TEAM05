@@ -151,7 +151,7 @@ li {
 				</tr>
                 <tr>
 					<td>닉네임 :</td>
-					<td><input type="nickname" name="mm_nickname" placeholder="개발사는 회사 이름을 작성"><input type="hidden" name="renickname"><input type="button" value="중복확인" onclick="return idCheck()"></td>
+					<td><input type="nickname" name="mm_nickname" placeholder="개발사는 회사 이름을 작성"><input type="hidden" name="renickname"></td>
 				</tr>
 			</table>
 			<p align="center">
@@ -172,9 +172,8 @@ li {
 	<script type="text/javascript">
 		/**
 회원정보 입력 필수 입력 사항 확인
-이름, 아이디, 암호, 암호확인
+이름, 아이디, 암호
 아이디 4글자 이상
-암호와 암호확인이 일치 확인
 re id의 값이 존재하는지 확인하여 중복체크여부를 검사
  */
 
@@ -187,7 +186,7 @@ function joinCheck() {
 
 	if (document.joinform.mm_id.value == "") {
 		alert("아이디를 입력해주세요.");
-		document.joinform.userid.focus();
+		document.joinform.id.focus();
 		return false;
 	}
 
@@ -209,18 +208,6 @@ function joinCheck() {
 		return false;
 	}
 
-	if (document.joinform.pwd.value != document.joinform.pwdpwd.value) {
-		alert("비밀번호가 일치하지 않습니다.");
-		document.joinform.pwdpwd.focus();
-		return false;
-	}
-
-
-    if (document.joinform.renickname.value == "") {
-		alert("아이디 중복체크를 하지 않았습니다.");
-		return false;
-	}
-
 	return true;
 }
 
@@ -232,9 +219,9 @@ function idCheck() {
 		return false;
 	}
 	// 아이디 중복 체크를 위한 페이지는 새로운 창에 출력한다.(idcheck.jsp)
-	var url = "idCheck.do?userid=" + document.joinform.userid.value;
+	var url = "idCheck.do?id=" + document.joinform.id.value;
 	window.open(url, "_blank_1", "toolbar=no, menubar=no, scrollbars=yes, resizable=no, width=450, height=200");
-}
+	}
 	</script>
 
 <div id="footer">
