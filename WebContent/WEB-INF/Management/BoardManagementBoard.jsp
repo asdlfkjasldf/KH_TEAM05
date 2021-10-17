@@ -31,7 +31,7 @@
  $(document).ready(function(){
 		$("#btnBoardView").on("click",function() {
 	$.ajax({
-		url : "<c:url value='/boardrmanagement'/>",
+		url : "<c:url value='/boardmanagement'/>",
 		type : "post",
 		data :{
 			bmselect : $("#bmselect option:selected").val()
@@ -40,7 +40,7 @@
 		success : function(data){
 			const rowCnt = 1;
 			const columnCnt = 5;
-			
+			var btnUpdateValue ="";
 			console.log(data);
 			var tabEle = document.getElementById('listTable');
 			//Articel 비우기
@@ -55,19 +55,22 @@
 				  
 				  if (!(data.volist[j].fbTitle == null)) {
 					  tabEle.innerHTML += ('<td>' );
-					  tabEle.innerHTML += (data.volist[j].fbTitle + ", ");
+					  tabEle.innerHTML += (data.volist[j].fbNo +" ");
+					  tabEle.innerHTML += (data.volist[j].fbTitle + " ");
 					  tabEle.innerHTML += ('<button  class="btnUpdate">수정</button>');
 					  tabEle.innerHTML += ('<button>삭제</button>');
 					  tabEle.innerHTML += ('</td>');
 				}else if (!(data.volist[j].gbTitle == null)) {
 					tabEle.innerHTML += ('<td>' );
-					tabEle.innerHTML += (data.volist[j].gbTitle + ", ");
+					tabEle.innerHTML += (data.volist[j].gbNo+" ");
+					tabEle.innerHTML += (data.volist[j].gbTitle + " ");
 					tabEle.innerHTML += ('<button  class="btnUpdate">수정</button>');
 					tabEle.innerHTML += ('<button>삭제</button>');
 					tabEle.innerHTML += ('</td>');
 				}else if (!(data.volist[j].tipTitle == null)) {
 					tabEle.innerHTML += ('<td>' );
-					tabEle.innerHTML += (data.volist[j].tipTitle + ", ");
+					tabEle.innerHTML += (data.volist[j].tipNo+" ");
+					tabEle.innerHTML += (data.volist[j].tipTitle + " ");
 					tabEle.innerHTML += ('<button class="btnUpdate" >수정</button>');
 					tabEle.innerHTML += ('<button>삭제</button>');
 					tabEle.innerHTML += ('</td>');
@@ -77,6 +80,8 @@
 				  
 				  tabEle.innerHTML +=('</tr>')
 				  $(".btnUpdate").click(function () { 
+					  btnUpdateValue = $(this).parent();
+					  console.log(btnUpdateValue);
 					  $('.Board-Article').empty();
 					  $('#btnBoardWriteBox').empty();
 						var $divTitle = $('<div class="description">제목<br><input type="text" id="newTextTitle" value=""></div>');
@@ -88,21 +93,55 @@
 							$('#btnBoardWriteBox').append($divWriteBtn);
 						});
 				  
+				  
+				  
+				  
 				  $("#btnBoardWrite").click(function () {
 					  
-				})
+					})
 				  
-			}
-
-
+			} //반목문 끝
+			
+			
+			$("#btnBoardWrite").click(function () {
+				$.ajax({
+					url : "<c:url value='/boardmanagementupdate'/>",
+					type : "post",
+					data :{
+						bmselect : $("#bmselect option:selected").val(),
+						t : $("#newTextTitle").val(),
+						c : $("#newTextContent").val(),
+						bno : $(btnUpdateValue).data.volist[btnUpdateValue].val()
+						
+						},
+						dataType : "json",
+						
+						
+						
+						error : function(request,status,error) {
+							 alert("code:"+request.status+"\n"+"message:"+request.responseText+
+							"\n"+"error:"+error);
+							 } 
+						
+					});
+				}); //a작스안의 a작스끝
+			
 		},
 		error : function(request,status,error) {
 			 alert("code:"+request.status+"\n"+"message:"+request.responseText+
 			"\n"+"error:"+error);
 			 } 
 
+		
+		
+	
+	
+			
+	
 		});
 	});
+		
+		
 		
 		
 		
@@ -145,7 +184,7 @@
 	</table>
 	<c:if test="${startPage >1 }"> 이전 </c:if>
 		<c:forEach begin="${startPage }" end="${endPage }" step="1" var="i">
-		<a href="boardrmanagement?pagenum=${i}">${i}</a>
+		<a href="boardmanagement?pagenum=${i}">${i}</a>
 		</c:forEach>
 	<c:if test="${endPage < pageCount }"> 다음 </c:if>
 </div>

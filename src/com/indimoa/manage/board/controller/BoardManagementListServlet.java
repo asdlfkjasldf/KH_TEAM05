@@ -23,7 +23,7 @@ import com.indimoa.manage.board.service.BManagementService;
 /**
  * Servlet implementation class BoardrManagementListServlet
  */
-@WebServlet("/boardrmanagement")
+@WebServlet("/boardmanagement")
 public class BoardManagementListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

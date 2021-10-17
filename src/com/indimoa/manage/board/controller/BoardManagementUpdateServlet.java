@@ -24,7 +24,7 @@ import com.indimoa.manage.board.service.BoardManagementUpdateService;
 /**
  * Servlet implementation class BoardrManagementUpdateServlet
  */
-@WebServlet("/BoardrManagementUpdateServlet")
+@WebServlet("/boardmanagementupdate")
 public class BoardManagementUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -52,7 +52,7 @@ public class BoardManagementUpdateServlet extends HttpServlet {
 		response.setContentType("text/html; charset=UTF-8");
 		request.setCharacterEncoding("UTF-8");
 		String bmselect = request.getParameter("bmselect"); //선택 옵션 파라미터 받기
-		int bno = Integer.parseInt(request.getParameter("bno")); //바꿀 글번호
+		int bno = Integer.valueOf(request.getParameter("bno")); //바꿀 글번호
 		String title = request.getParameter("t");	//받은 제목내용
 		String content = request.getParameter("c"); //받은 글내용
 		
