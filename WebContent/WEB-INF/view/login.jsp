@@ -188,7 +188,7 @@ li {
                 <input type="password" name="mm_pwd" id="pwd" autocomplete="off" required>
             </p>
             <p class="btn-area">
-                <button id="btn" type="submit" onclick="location.href ='/WEB-INF/view/login.jsp'">로그인</button>
+                <button id="btn" type="submit" onclick="location.href ='"return loginCheck()'">로그인</button>
             </p>
             <p class="caption">
                 <a href='WEB-INF/view/findId.jsp'>아이디 찾기</a>
@@ -200,24 +200,42 @@ li {
     </div>
 
     <script>
-        let id = $("#id");
-        let pw = $("#pwd");
-        let btn = $("#btn");
-
-        $(btn).on('click', function(){
-            if($(id).val() == "") {
-                $(id).next('label').addClass('warning');
-                setTimeout(function(){
-                    $('label').removeClass('warning');
-                }, 1500);
-            }            
-            else if($(pw).val() == "") {
-                $(pw).next('label').addClass('warning');
-                setTimeout(function(){
-                    $('label').removeClass('warning');
-                }, 1500);
-            }
-        });
+    function loginCheck(){
+    	if (document.loginform.userid.value == ""){
+    		alert("아이디를 입력해 주세요.");
+    		document.loginform.userid.focus();
+    		return false;
+    	} else if (document.loginform.pwd.value == ""){
+    		alert("비밀번호를 입력해주세요.");
+    		document.loginform.pwd.focus();
+    		return false;
+    	} else {
+    		return true;
+    	}
+    }
+    
+    
+    
+    
+    
+//        let id = $("#id");
+//        let pw = $("#pwd");
+//        let btn = $("#btn");
+//
+//        $(btn).on('click', function(){
+//            if($(id).val() == "") {
+//                $(id).next('label').addClass('warning');
+//                setTimeout(function(){
+//                    $('label').removeClass('warning');
+//                }, 1500);
+//            }            
+//            else if($(pw).val() == "") {
+//                $(pw).next('label').addClass('warning');
+//                setTimeout(function(){
+//                    $('label').removeClass('warning');
+//                }, 1500);
+//           }
+//        });
         
         
     </script>

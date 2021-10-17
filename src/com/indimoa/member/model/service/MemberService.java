@@ -16,9 +16,9 @@ public class MemberService {
 	public MemberService() {} 
 // 로그인 시 Member 객체를 받아오는 메소드 
  
-	public Member loginMember(String id, String passwd) { 
+	public Member loginMember(String id, String passwd) throws Exception { 
 		Connection conn = JdbcTemplate.getConnection(); 
-		Member m = new MemberDao().loginMember(conn, id, passwd);
+		Member m = new MemberDao().loginMember( id, passwd);
 		JdbcTemplate.close(conn);
 		return m; 
 	} 
@@ -73,7 +73,7 @@ public class MemberService {
 		 //멤버 아이디 찾기를 요청하는 메소드
 		 public int selectId(String name, String email) {
 				Connection conn = JdbcTemplate.getConnection();
-				int userId = new MemberDao().selectId(conn, name, email);
+				int userId = new MemberDao().selectId( name, email);
 
 				JdbcTemplate.close(conn);
 				return userId;
@@ -82,7 +82,7 @@ public class MemberService {
 		//멤버 비밀번호 찾기를 요청하는 메소드
 		 public int selectPwd(String name, String id) {
 				Connection conn = JdbcTemplate.getConnection();
-				int userPwd = new MemberDao().selectId(conn, name, id);
+				int userPwd = new MemberDao().selectPwd( name, id);
 
 				JdbcTemplate.close(conn);
 				return userPwd;

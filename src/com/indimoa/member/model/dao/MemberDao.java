@@ -12,6 +12,10 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.sql.DataSource;
+
 import com.indimoa.member.model.vo.Member;
 
 public class MemberDao {
@@ -20,6 +24,23 @@ public class MemberDao {
 	private Properties prop = new Properties();
 
 	public MemberDao() {}
+	
+	private static MemberDao instance = new MemberDao();
+
+	public static MemberDao getInstance() {
+		return instance;
+	}
+	
+	public Connection getConnection() throws Exception {
+		Connection conn = null;
+		Context initContext = new InitialContext();
+		Context envContent = (Context)initContext.lookup("java:/comp/env");   //TODO
+		DataSource ds = (DataSource)envContent.lookup("jdbc/INDIMOA");
+		conn = ds.getConnection();
+		return conn;
+		}
+
+
 	
 	public int userCheck(String id, String pwd) {
 		Connection conn = null;
@@ -72,8 +93,9 @@ public class MemberDao {
 	}
 	
 	
-	public Member loginMember(Connection conn, String id, String passwd) {
+	public Member loginMember( String id, String passwd) throws Exception {
 		Member m = null;
+		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		String query = "select * from member where mm_id = ? and mm_pwd = ?";
@@ -284,7 +306,8 @@ public class MemberDao {
 	
 	
 	//database에서 해당 이름,이메일의 아이디를 찾아오는 메소드
-	public int selectId(Connection conn, String name, String email) {
+	public int selectId( String name, String email) {
+		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		int result = 0;
@@ -309,7 +332,8 @@ public class MemberDao {
 	
 	
 	//database에서 해당 이름,아이디,이메일의 비밀번호를 찾아오는 메소드
-	public int selectPwd(Connection conn, String name, String id) {
+	public int selectPwd(String name, String id) {
+		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		int result = 0;

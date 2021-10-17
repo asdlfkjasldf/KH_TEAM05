@@ -9,7 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.indimoa.member.model.dao.MemberDao;
 import com.indimoa.member.model.service.MemberService;
+import com.indimoa.member.model.vo.Member;
 
 
 /**
@@ -41,6 +43,10 @@ public class SelectIdServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		
+		
+		
 		String name = request.getParameter("mm_name");
 		String email = request.getParameter("mm_email");
 		System.out.println("mm_name : " + name);
