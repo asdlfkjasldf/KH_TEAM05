@@ -45,31 +45,32 @@ public class PointManagementInsertServlet extends HttpServlet {
 		
 		out.println("<html><head></head><body>");
 		if(targetids == null) {
-			out.println("선택한 항목이 없습니다.");
+			out.print("선택한 항목이 없습니다.");
 		} else {
-			out.println("당신이 선택한 항목입니다.<br>");
+			out.print("당신이 선택한 항목입니다.<br>");
 			for(String checkName: targetids) {
-				out.println("[" + checkName + "] ");
+				out.print("[" + checkName + "] ");
 				
 
 				
 				Member vo = new Member(Integer.parseInt(point),checkName);		
 //				System.out.println(checkName);
 //				System.out.println(point);
-				System.out.println(vo);
+				System.out.print(vo);
 				int result = new MemberManagementListService().insertPointFromManagement(vo);
 				if(result == -1) {
-					out.println("<br>포인트가 입력되지 않았습니다.");
+					out.print("<br>포인트가 입력되지 않았습니다.");
 				} else {
-					out.println("<br>포인트가 입력되었습니다.");
+					out.print("<br>포인트가 입력되었습니다.");
 				}
 				
 				}
 			}	
 		
-		out.println("<br><a href='javascript:location.reload();'>새로고침</a>");
-		out.println("</body></html>");
-
+		out.print("<br><a href='javascript:location.reload();'>새로고침</a>");
+		out.print("</body></html>");
+		out.flush();
+		out.close();
 		}
 	
 

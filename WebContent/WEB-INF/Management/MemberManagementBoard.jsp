@@ -295,7 +295,7 @@ li {
 					},
 					
 				success : function(data){
-					console.log("여기?진짜들어옴");
+					console.log("포인트확인");
 					$('.box').html(data);
 				}
 					

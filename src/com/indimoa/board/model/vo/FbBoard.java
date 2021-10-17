@@ -39,6 +39,7 @@ public class FbBoard {
 	}
 
 	public FbBoard() {
+		super();
 	}
 
 	@Override
@@ -138,5 +139,10 @@ public class FbBoard {
 	}
 
 
-
+	public FbBoard(String title, String content, int bno) {
+		this.fbTitle = title;
+		this.fbContent = content;
+		this.fbNo = bno;
+		//게시물관리에서 수정하기 위해 추가
+	}
 }

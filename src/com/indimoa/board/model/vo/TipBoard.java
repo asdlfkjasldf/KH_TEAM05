@@ -24,7 +24,7 @@ public class TipBoard {
 	private int breStep;
 
 	public TipBoard() {
-		// TODO Auto-generated constructor stub
+		super();
 	}
 
 	public TipBoard(int tipNo, String gdGamedevid, String tipTitle, String tipContent, String tipDatetime, int tipVisit,
@@ -138,5 +138,14 @@ public class TipBoard {
 				+ ", tipReport=" + tipReport + ", bref=" + bref + ", breLevel=" + breLevel + ", breStep=" + breStep
 				+ "]";
 	}
+	
+	public TipBoard(String title, String content, int bno) {
+		this.tipTitle = title;
+		this.tipContent = content;
+		this.tipNo = bno;
+		//게시물관리에서 수정하기 위해 추가
+	}
+
+	
 
 }

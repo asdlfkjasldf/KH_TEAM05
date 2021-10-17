@@ -24,6 +24,10 @@ public class GbBoard {
 	private int breLevel;
 	private int breStep;
 
+	public GbBoard() {
+		super();
+	}
+	
 	public GbBoard(int gbNo, String gdGamedevid, String heHeading, String gbTitle, String gbContent, String gbDatetime,
 			int gbVisit, int gbReply, int gbReport, int bref, int breLevel, int breStep) {
 		super();
@@ -39,10 +43,6 @@ public class GbBoard {
 		this.bref = bref;
 		this.breLevel = breLevel;
 		this.breStep = breStep;
-	}
-
-	public GbBoard() {
-
 	}
 
 	public int getGbNo() {
@@ -147,6 +147,13 @@ public class GbBoard {
 				+ gbTitle + ", gbContent=" + gbContent + ", gbDatetime=" + gbDatetime + ", gbVisit=" + gbVisit
 				+ ", gbReply=" + gbReply + ", gbReport=" + gbReport + ", bref=" + bref + ", breLevel=" + breLevel
 				+ ", breStep=" + breStep + "]";
+	}
+	
+	public GbBoard(String title, String content, int bno) {
+		this.gbTitle = title;
+		this.gbContent = content;
+		this.gbNo = bno; 
+		//게시물관리에서 수정하기 위해 추가
 	}
 
 }

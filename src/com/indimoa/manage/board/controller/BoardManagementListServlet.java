@@ -24,13 +24,13 @@ import com.indimoa.manage.board.service.BManagementService;
  * Servlet implementation class BoardrManagementListServlet
  */
 @WebServlet("/boardrmanagement")
-public class BoardrManagementListServlet extends HttpServlet {
+public class BoardManagementListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BoardrManagementListServlet() {
+    public BoardManagementListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -138,20 +138,7 @@ public class BoardrManagementListServlet extends HttpServlet {
 		if(endPage > pageCount) {
 			endPage = pageCount;
 		}
-		
-//		System.out.println("메소드진입");
-		
-//		out.println(bmselect);
- 
-//		String strResult = "";
-		
-//		if(bmselect == null) {
-//			out.println("선택한 항목이 없습니다.");
-//		}else {
-//			out.println("당신이 선택한 항목입니다.<br>");
-//			out.println("선택한 option의 값 : " +  bmselect);
-//			
-//		}
+
 		
 		System.out.println(bmselect);
 		
