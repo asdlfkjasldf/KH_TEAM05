@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import com.indimoa.game.model.vo.Game;
 
@@ -54,51 +55,17 @@ public class GameDao {
 	}
 
 	
-	public ArrayList<Game> selectBoardList(Connection conn) {
-		ArrayList<Game> volist = null;
 
-		String sql = "select * from game";
-
-		
-		
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-
-		try {
-			pstmt = conn.prepareStatement(sql);
-			rset = pstmt.executeQuery();
-			volist = new ArrayList<Game>();
-			if (rset.next()) {
-				do {
-					Game vo = new Game();
-					vo = new Game();
-					vo.setGgNo(rset.getInt("GG_NO"));
-					vo.setGgTitle(rset.getString("GG_TITLE"));
-					vo.setGgPrice(rset.getInt("GG_PRICE"));
-					vo.setGgSystemRequirement(rset.getNString("GG_SYSTEM_REQUIREMENTS"));
-					vo.setGgGenre(rset.getString("GG_GENRE"));
-					vo.setGgDeveloper(rset.getString("GG_DEVELOPER"));
-				vo.setGgReleaseDate(rset.getString("GG_RELEASE_DATE"));
-					vo.setGgPublisher(rset.getString("GG_PUBLISHER"));
-					vo.setGgLanguages(rset.getString("GG_LANGUAGES"));
-					vo.setGgInfomation(rset.getString("GG_INFORMATION"));
-				} while (rset.next());
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			JdbcTemplate.close(rset);
-			JdbcTemplate.close(pstmt);
-		}
-		System.out.println("[pearl]-- 리턴은" + volist);
-		return volist;
-	}
 	
-	
+						//게임 리스트업하는 메소드
 	public ArrayList<Game> selectGmaeList(Connection conn, int start, int end) {
 		ArrayList<Game> volist = null;
 		//String sql = "select * from game";
-		String sql ="select * from (select Rownum r, t1.* from (select * from game order by gg_no asc) t1 ) t2 where r between ? and ?";
+		//게임이미지 테이블과 조인한것
+		//String sql ="select * from game t1 left outer join game_image t2 on t1.gg_no = t2.gg_no";
+		
+		String sql ="select * from (select Rownum r, t1.* from (select * from game t1 left outer join game_image t2 using (gg_no) order by gg_no desc) t1 ) t2 where r between ? and ?";
+		//String sql ="select * from (select Rownum r, t1.* from (select * from game order by gg_no asc) t1 ) t2 where r between ? and ?";
 		//이게 뭘 의미 할까?????????????????
 		
 		
@@ -128,7 +95,13 @@ public class GameDao {
 					vo.setGgPublisher(rset.getString("GG_PUBLISHER"));
 					vo.setGgLanguages(rset.getString("GG_LANGUAGES"));
 					vo.setGgInfomation(rset.getString("GG_INFORMATION"));
+					
+					//파일관ㄴ련해서넣ㄹ어야되
+					vo.setGiNo(rset.getInt("GI_NO"));
+				    vo.setOriginFileAddress(rset.getString("ORIGIN_FILE_ADDRESS"));
+				    
 					volist.add(vo);
+					
 				} while (rset.next());
 			}
 		} catch (Exception e) {
@@ -141,160 +114,22 @@ public class GameDao {
 				e.printStackTrace();
 			}
 		}
-		//System.out.println("[gameDao selectGmaeList일껄?]--" + volist);
+		System.out.println("[gameDao selectGmaeList일껄?]--" + volist);
 		return volist;
 	}
 
 	
 	
 	
-	// 게임 등록 메소드
-//	public int enrollGame(  Game vo) { 
-//
-//		String sql = "INSERT INTO GAME VALUES(?,?,?,?,?,?,?,?,?)";
-//		try {
-//			Connection conn = JdbcTemplate.getConnection();
-//			PreparedStatement pstmt = conn.prepareStatement(sql);
-//			pstmt.setString(1, vo.getGgTitle());
-//			pstmt.setInt(2, vo.getGgPrice());
-//			pstmt.setString(3, vo.getGgSystemRequirement());
-//			pstmt.setString(4, vo.getGgGenre());
-//			pstmt.setString(5, vo.getGgDeveloper());
-//		pstmt.setString(6, vo.getGgReleaseDate());
-//			pstmt.setString(7, vo.getGgPublisher());
-//			pstmt.setString(8, vo.getGgLanguages());
-//			pstmt.setString(9, vo.getGgInfomation());
-//			return pstmt.executeUpdate();
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//		return -1;
-//	}
+	
 
 	
 	
-	
-	
-//게임 읽기 메소드
-	public ArrayList<Game> readGmaeListAll(Connection conn) {
-		ArrayList<Game> volist = null;
-		String sql = "select * from GAME";
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-		System.out.println("0");
-		try {
-			pstmt  = conn.prepareStatement(sql);
-			rset = pstmt.executeQuery();
-			if(rset.next()) {
-				System.out.println("1");
-				volist = new ArrayList<Game>();
-				do {
-					Game vo = new Game();
-					
-					vo.setGgNo(rset.getInt("GG_NO"));
-					vo.setGgTitle(rset.getString("GG_TITLE"));
-					vo.setGgPrice(rset.getInt("GG_PRICE"));
-					vo.setGgSystemRequirement(rset.getString("GG_SYSTEM_REQUIREMENTS"));
-					vo.setGgGenre(rset.getString("GG_GENRE"));
-					vo.setGgDeveloper(rset.getString("GG_DEVELOPER"));
-				vo.setGgReleaseDate(rset.getString("GG_RELEASE_DATE"));
-					vo.setGgPublisher(rset.getString("GG_PUBLISHER"));
-					vo.setGgLanguages(rset.getString("GG_LANGUAGES"));
-					vo.setGgInfomation(rset.getString("GG_INFORMATION"));
-					volist.add(vo);
-					System.out.println("3");
-				}while (rset.next());
-				
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			System.out.println("4");
-		}finally {
-			try {
-				rset.close();
-				pstmt.close();
-				
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			
-		}
-		System.out.println("DAO readGmaeListAll"+ volist);
-		return volist;
-	}
-	
-	
-	
-	
-	
-	
-	
-//	public int insertGameList(Connection conn, Game vo) {
-//		int result =-1;
-//		ArrayList<Game> volist = null;
-//
-//		String sqlInsert = "INSERT INTO GAME"
-//				+ "(GG_NO, GG_TITLE, GG_PRICE, GG_SYSTEM_REQUIREMENTS, GG_GENRE , MM_ENRGG_DEVELOPEROLLDATE, GG_RELEASE_DATE, GG_PUBLISHER, GG_LANGUAGES, GG_INFORMATION)"
-//				+ " VALUES(?,?,?,?,?,?, ?,?,?,?)";
-//		PreparedStatement pstmt = null;
-//		
-//
-//		try {
-//					
-//					pstmt = conn.prepareStatement(sqlInsert);
-//					pstmt.setInt(1, vo.getGgNo());
-//					pstmt.setString(2, vo.getGgTitle());
-//					pstmt.setString(3, vo.getGgPrice());
-//					pstmt.setString(4, vo.getGgSystemRequirement());
-//					pstmt.setString(5, vo.getGgGenre());
-//					pstmt.setString(6, vo.getGgDeveloper());
-////					pstmt.setString(7, vo.getGgReleaseDate());
-//					pstmt.setString(8, vo.getGgPublisher());
-//					pstmt.setString(9, vo.getGgLanguages());
-//					pstmt.setString(10, vo.getGgInfomation());
-//					
-//					result = pstmt.executeUpdate();
-//			}catch(Exception e){
-//				e.printStackTrace();
-//			} finally {
-//				JdbcTemplate.close(pstmt);
-//			}
-//		System.out.println("[admin]-- 리턴은" + volist);
-//		return result;
-//	}
-//	
-	
-	public int testInsertGame(Connection conn, Game vo) {
-		int result = -1;
-		String sql = "INSERT INTO GAME(GG_NO,GG_TITLE,GG_PRICE,GG_SYSTEM_REQUIREMENTS,GG_GENRE,GG_DEVELOPER,GG_RELEASE_DATE,GG_PUBLISHER,GG_LANGUAGES,GG_INFORMATION) "
-				+ "value(SEQ_GAME_GG_NO.nextval,?,?,?,?,?,TO_DATE(?,'YY/MM/DD'),?,?,?)";
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-		try {
-			pstmt =conn.prepareStatement(sql);
-			pstmt.setInt(1, vo.getGgNo());
-			pstmt.setString(2, vo.getGgTitle());
-			pstmt.setInt(3, vo.getGgPrice());
-			pstmt.setString(4, vo.getGgSystemRequirement());
-			pstmt.setString(5, vo.getGgGenre());
-			pstmt.setString(6, vo.getGgDeveloper());
-			pstmt.setString(7, vo.getGgReleaseDate());
-			pstmt.setString(8, vo.getGgPublisher());
-			pstmt.setString(9, vo.getGgLanguages());
-			pstmt.setString(10, vo.getGgInfomation());
-			result=pstmt.executeUpdate();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}finally {
-			JdbcTemplate.close(rset);
-			JdbcTemplate.close(pstmt);	
-		}
-		 return result;
-	}
 	
 	// DataBase에 Member 객체를 추가하는 메소드
-	public int insertGame(Connection conn, Game g) {
+	public int insertGame(Connection conn, Game g, List<String> fileNames) { 
 		int result = -1;
+	
 		String sql = "INSERT INTO GAME"	 
 				+ "(GG_NO,"
 				+ "GG_TITLE,"
@@ -306,29 +141,66 @@ public class GameDao {
 				+ "GG_PUBLISHER,"
 				+ "GG_LANGUAGES,"
 				+ "GG_INFORMATION)"
-				+ "values (SEQ_GAME_GG_NO.nextval,?,?,?,?,"
+				+ "values (?,?,?,?,?,"
 				+ "?,TO_DATE(?,'YY/MM/DD'),?,?,?)";
-				//SEQ_GAME_GG_NO.nextval,"
-		System.out.println("insertGame sql:"+ sql);
+		
+		String sqlSeqNextVal = "select SEQ_GAME_GG_NO.nextval from dual";
+		
+		//TODO
+//		GI_NO               NOT NULL NUMBER(11)    
+//		GG_NO               NOT NULL NUMBER(11)    
+//		ORIGIN_FILE_ADDRESS NOT NULL VARCHAR2(300) 
+		
+		String sql2 = "INSERT INTO GAME_IMAGE"	 
+				+ "(GI_NO,GG_NO,ORIGIN_FILE_ADDRESS)"
+				+ "values (SEQ_GAME_IMAGE_GI_NO.nextval,?,?)";
+		
+		int nextVal = 0;
+		
+		//SEQ_GAME_GG_NO.nextval,"
+		//System.out.println("insertGame sql:"+ sql);
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		try {
+			//sqlSeqNextVal
+			pstmt = conn.prepareStatement(sqlSeqNextVal);
+			rset = pstmt.executeQuery();
+			if (rset.next()) {
+				nextVal = rset.getInt(1);
+			}
+			JdbcTemplate.close(rset);
+			JdbcTemplate.close(pstmt);
+			
+			System.out.println("nextval: "+ nextVal);
+			
+			//sql
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, g.getGgNo());
-			pstmt.setString(2, g.getGgTitle());
-			pstmt.setInt(3, g.getGgPrice());
-			pstmt.setString(4, g.getGgSystemRequirement());
-			pstmt.setString(5, g.getGgGenre());
-			pstmt.setString(6, g.getGgDeveloper());
-			pstmt.setString(7, g.getGgReleaseDate());
-			pstmt.setString(8, g.getGgPublisher());
-			pstmt.setString(9, g.getGgLanguages());
-			pstmt.setString(10, g.getGgInfomation());
+			int i = 0;
+			pstmt.setInt(++i, nextVal);  
+			pstmt.setString(++i,g.getGgTitle());
+			pstmt.setInt(++i, g.getGgPrice());
+			pstmt.setString(++i, g.getGgSystemRequirement());
+			pstmt.setString(++i, g.getGgGenre());
+			pstmt.setString(++i, g.getGgDeveloper());
+			pstmt.setString(++i, g.getGgReleaseDate());
+			pstmt.setString(++i, g.getGgPublisher());
+			pstmt.setString(++i, g.getGgLanguages());
+			pstmt.setString(++i, g.getGgInfomation());
 			result = pstmt.executeUpdate();
 			
-			
-			// executeupdate() 는 실행 결과를 반영된 행의 개수로 리턴하므로
-			// 1 이상은 실행 성공, 0 이하(구문 에러 포함)는 실패이다.
+			//sql2
+			//SEQ_GAME_IMAGE_GI_NO.nextval
+			System.out.println("fileNames: " + fileNames);
+			for(String filename :  fileNames) {
+				pstmt = conn.prepareStatement(sql2);
+				pstmt.setInt(1,nextVal);
+				pstmt.setString(2, filename);
+
+				result = pstmt.executeUpdate();
+				System.out.println("game_image table에 insert 성공");
+				JdbcTemplate.close(pstmt);
+			}
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -343,12 +215,7 @@ public class GameDao {
 	
 	
 	
-	
-	
-	
-	
-	
-	
+
 	
 	public int getGameCount(Connection conn) {
 		int result = 0;
@@ -374,54 +241,54 @@ public class GameDao {
 	}
 
 	
-	public Game getGamee(Connection conn, int bno) {
-		Game vo = null;
-//		String sql = "select TIP_NO,GD_GAMEDEVID,TIP_TITLE,TIP_CONTENT,TO_CHAR(TIP_DATETIME, 'yyyy-mm-dd') TIP_DATETIME, TIP_VISIT,TIP_REPLY,TIP_REPORT,bref, bre_level, Bre_step "
-//				+ " from Tip_Board where TIP_NO = ?";
-		
-		String sql = "select GG_NO,GG_TITLE,GG_PRICE,GG_SYSTEM_REQUIREMENTS,GG_GENRE, GG_DEVELOPER, GG_RELEASE_DATE,GG_PUBLISHER,TIP_REPORT,GG_LANGUAGES, GG_INFORMATION "
-				+ " from GAME where GG_NO = ?";
-		
-		
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, bno);
-			rset = pstmt.executeQuery();
-			if (rset.next()) {
-				vo = new Game();
-//				vo.setTipNo(rset.getInt("TIP_NO"));
-//				vo.setGdGamedevid(rset.getString("GD_GAMEDEVID"));
-//				vo.setTipTitle(rset.getString("TIP_TITLE"));
-//				vo.setTipContent(rset.getString("TIP_CONTENT"));
-//				vo.setTipDatetime(rset.getString("TIP_DATETIME"));
-//				vo.setTipVisit(rset.getInt("TIP_VISIT"));
-//				vo.setTipReply(rset.getInt("TIP_REPLY"));
-//				vo.setTipReport(rset.getInt("TIP_REPORT"));
-//				vo.setBref(rset.getInt("BREF"));
-//				vo.setBreLevel(rset.getInt("BRE_LEVEL"));
-//				vo.setBreStep(rset.getInt("BRE_STEP"));
-				
-				vo.setGgNo(rset.getInt("GG_NO"));
-				vo.setGgTitle(rset.getString("GG_TITLE"));
-				vo.setGgPrice(rset.getInt("GG_PRICE"));
-				vo.setGgSystemRequirement(rset.getString("GG_SYSTEM_REQUIREMENTS"));
-				vo.setGgGenre(rset.getString("GG_GENRE"));
-				vo.setGgDeveloper(rset.getString("GG_DEVELOPER"));
-				vo.setGgReleaseDate(rset.getString("GG_RELEASE_DATE"));
-				vo.setGgPublisher(rset.getString("GG_PUBLISHER"));
-				vo.setGgLanguages(rset.getString("GG_LANGUAGES"));
-				vo.setGgInfomation(rset.getString("GG_INFORMATION"));
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			JdbcTemplate.close(rset);
-			JdbcTemplate.close(pstmt);
-		}
-		return vo;
-	}
+//	public Game getGamee(Connection conn, int bno) {
+//		Game vo = null;
+////		String sql = "select TIP_NO,GD_GAMEDEVID,TIP_TITLE,TIP_CONTENT,TO_CHAR(TIP_DATETIME, 'yyyy-mm-dd') TIP_DATETIME, TIP_VISIT,TIP_REPLY,TIP_REPORT,bref, bre_level, Bre_step "
+////				+ " from Tip_Board where TIP_NO = ?";
+//		
+//		String sql = "select GG_NO,GG_TITLE,GG_PRICE,GG_SYSTEM_REQUIREMENTS,GG_GENRE, GG_DEVELOPER, GG_RELEASE_DATE,GG_PUBLISHER,TIP_REPORT,GG_LANGUAGES, GG_INFORMATION "
+//				+ " from GAME where GG_NO = ?";
+//		
+//		
+//		PreparedStatement pstmt = null;
+//		ResultSet rset = null;
+//		try {
+//			pstmt = conn.prepareStatement(sql);
+//			pstmt.setInt(1, bno);
+//			rset = pstmt.executeQuery();
+//			if (rset.next()) {
+//				vo = new Game();
+////				vo.setTipNo(rset.getInt("TIP_NO"));
+////				vo.setGdGamedevid(rset.getString("GD_GAMEDEVID"));
+////				vo.setTipTitle(rset.getString("TIP_TITLE"));
+////				vo.setTipContent(rset.getString("TIP_CONTENT"));
+////				vo.setTipDatetime(rset.getString("TIP_DATETIME"));
+////				vo.setTipVisit(rset.getInt("TIP_VISIT"));
+////				vo.setTipReply(rset.getInt("TIP_REPLY"));
+////				vo.setTipReport(rset.getInt("TIP_REPORT"));
+////				vo.setBref(rset.getInt("BREF"));
+////				vo.setBreLevel(rset.getInt("BRE_LEVEL"));
+////				vo.setBreStep(rset.getInt("BRE_STEP"));
+//				
+//				vo.setGgNo(rset.getInt("GG_NO"));
+//				vo.setGgTitle(rset.getString("GG_TITLE"));
+//				vo.setGgPrice(rset.getInt("GG_PRICE"));
+//				vo.setGgSystemRequirement(rset.getString("GG_SYSTEM_REQUIREMENTS"));
+//				vo.setGgGenre(rset.getString("GG_GENRE"));
+//				vo.setGgDeveloper(rset.getString("GG_DEVELOPER"));
+//				vo.setGgReleaseDate(rset.getString("GG_RELEASE_DATE"));
+//				vo.setGgPublisher(rset.getString("GG_PUBLISHER"));
+//				vo.setGgLanguages(rset.getString("GG_LANGUAGES"));
+//				vo.setGgInfomation(rset.getString("GG_INFORMATION"));
+//			}
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		} finally {
+//			JdbcTemplate.close(rset);
+//			JdbcTemplate.close(pstmt);
+//		}
+//		return vo;
+//	}
 
 
 

@@ -33,63 +33,62 @@
 			<table>
 				<tr>
 					<td>게임 타이틀 :</td>
-					<td><input type="text" name="id" id="title"></td>
+					<td><input type="text" name="ggTitle" id="title" autofocus="autofocus"></td>
 				</tr>
-
 				<tr>
 					<td>가격 :</td>
-					<td><input type="text" name="price"></td>
+					<td><input type="text" name="ggPrice"></td>
 				</tr>
 
 				<tr>
 					<td>시스템 요구사항 :</td>
-					<td><input type="text" name="SystemRequirement"></td>
+					<td><input type="text" name="ggSystemRequirement"></td>
 				</tr>
 
 				<tr>
 					<td>장르 :</td>
-					<td><input type="text" name="Genre"></td>
+					<td><input type="text" name="ggGenre"></td>
 				</tr>
 
 				<tr>
 					<td>개발사 :</td>
-					<td><input type="text" name="Developer"></td>
+					<td><input type="text" name="ggDeveloper"></td>
 				</tr>
 
 				<tr>
 					<td>발매일 :</td>
-					<td><input type="text" name="ReleaseDate"></td>
+					<td><input type="text" name="ggReleaseDate"></td>
 				</tr>
 
 				<tr>
 					<td>공급사 :</td>
-					<td><input type="text" name="Publisher"></td>
+					<td><input type="text" name="ggPublisher"></td>
 				</tr>
 
 				<tr>
 					<td>언어 :</td>
-					<td><input type="text" name="Languages"></td>
+					<td><input type="text" name="ggLanguages"></td>
 				</tr>
 
 				<tr>
 					<td>정보 :</td>
-					<td><input type="text" name="Infomation"></td>
+					<td><input type="text" name="ggInfomation"></td>
 				</tr>
 				
 				
 
 					<tr>
 						<td>게임 이미지 파일 첨부1(대표이미지) :</td>
-						<td><input type="file" name="image1"></td>
+						<td><input type="file" name="image1" class="gameimage"></td>
 						<td>게임 이미지 파일 첨부2 :</td>
-						<td><input type="file" name="image2"></td>
+						<td><input type="file" name="image2" class="gameimage"></td>
 					</tr>
 
 					<tr>
 						<td>게임 이미지 파일 첨부3 :</td>
-						<td><input type="file" name="image3"></td>
+						<td><input type="file" name="image3" class="gameimage"></td>
 						<td>게임 이미지 파일 첨부4 :</td>
-						<td><input type="file" name="image4"></td>
+						<td><input type="file" name="image4" class="gameimage"></td>
 					</tr>
 
 				</section>
@@ -97,7 +96,7 @@
 
 			</table>
 			<p align="center">
-				<button type="submit" value="등록">게임 등록하기</button>
+				<button type="submit">게임 등록하기</button>
 				&nbsp; &nbsp;
 				<button type="reset">초기화</button>
 				&nbsp; &nbsp;

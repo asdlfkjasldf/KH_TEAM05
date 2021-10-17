@@ -224,7 +224,8 @@ li {
 			<%=vo.getGgNo()%>
 			</td>
 			
-			<td>게임 이미지</td>	
+			<td>게임 이미지
+			<%=vo.getOriginFileAddress()%></td>	
 		
 			<td>
 			<a href="gamecontent?no=<%=vo.getGgNo()%>"> <%=vo.getGgTitle()%> </a>

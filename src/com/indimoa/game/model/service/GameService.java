@@ -1,14 +1,22 @@
 package com.indimoa.game.model.service;
 
+import static com.indimoa.common.JdbcTemplate.*;
+
 import java.sql.Connection;
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.List;
 
+import com.indimoa.common.JdbcTemplate;
 import com.indimoa.common.JdbcTemplate;
 import com.indimoa.game.model.dao.GameDao;
 import com.indimoa.game.model.vo.Game;
 
 public class GameService {
+	
+	 public GameService() {
+		 
+	 }
 	
 	public Game getGame(int bno) {
 		Game vo = null;
@@ -34,14 +42,14 @@ public class GameService {
 //		return volist;
 //	}
 	
-	public ArrayList<Game> readGameListAll(){
-		ArrayList<Game> volist = null;
-		Connection conn = JdbcTemplate.getConnection();
-		volist = new GameDao().readGmaeListAll(conn);
-		
-		JdbcTemplate.close(conn);
-		return volist;
-	}
+//	public ArrayList<Game> readGameListAll(){
+//		ArrayList<Game> volist = null;
+//		Connection conn = JdbcTemplate.getConnection();
+//		volist = new GameDao().readGmaeListAll(conn);
+//		
+//		JdbcTemplate.close(conn);
+//		return volist;
+//	}
 	
 	public int getGameCount() {
 		int result = 0;
@@ -61,38 +69,44 @@ public class GameService {
 		return volist;
 	}
 	
-	public ArrayList<Game> selectBoardList() {
-		ArrayList<Game> volist = null;
+//	public ArrayList<Game> selectBoardList() {
+//		ArrayList<Game> volist = null;
+//		Connection conn = JdbcTemplate.getConnection();
+//
+//		volist = new GameDao().selectBoardList(conn);
+//
+//		JdbcTemplate.close(conn);
+//		return volist;
+//	}
+	
+//	public Game getBoard(int bno) {
+//		Game vo = null;
+//		Connection conn = JdbcTemplate.getConnection();
+//		vo = new GameDao().getGamee(conn, bno);
+//		JdbcTemplate.close(conn);
+//		return vo;
+//	}
+	
+	
+	
+	public int insertGame(Game ig, List<String> fileNames) { 
+//		int result = -1;
 		Connection conn = JdbcTemplate.getConnection();
-
-		volist = new GameDao().selectBoardList(conn);
-
-		JdbcTemplate.close(conn);
-		return volist;
-	}
 	
-	public Game getBoard(int bno) {
-		Game vo = null;
-		Connection conn = JdbcTemplate.getConnection();
-		vo = new GameDao().getGamee(conn, bno);
-		JdbcTemplate.close(conn);
-		return vo;
-	}
-	
-	
-	
-	public int insertGame(Game ig) { 
-		int result = -1;
-		Connection conn = JdbcTemplate.getConnection(); 
 		//int result = new GameDao().insertGame(conn, ig); 
-		result = new GameDao().insertGame(conn, ig);
+		int result = new GameDao().insertGame(conn, ig, fileNames);
+		//int result2 = new GameDao().insertGameImage(conn, fileNames);
 
-		//		if(result == 1) {  
+		if(result > 0) commit(conn);
+		else rollback(conn);
+		JdbcTemplate.close(conn);
+		return result;
+				
 //			result = new GameDao().insertGame(conn, ig);
 //		System.out.println(" GameService.insertGame 입니다.");
 //		}
-		JdbcTemplate.close(conn);
-		return result;
+//		JdbcTemplate.close(conn);
+//		return result;
 		}
 	
 	
