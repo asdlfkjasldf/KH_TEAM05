@@ -11,6 +11,7 @@
 <meta charset="UTF-8">
 <title> 게시판 관리</title>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
  <style>
  	table{
  	border: 1px solid black;
@@ -51,25 +52,36 @@
 				  if (!(data.volist[j].fbTitle == null)) {
 					  tabEle.innerHTML += ('<td>' );
 					  tabEle.innerHTML += (data.volist[j].fbTitle + ", ");
-					  tabEle.innerHTML += ('<button>수정</button>');
+					  tabEle.innerHTML += ('<button  class="btnUpdate">수정</button>');
 					  tabEle.innerHTML += ('<button>삭제</button>');
 					  tabEle.innerHTML += ('</td>');
 				}else if (!(data.volist[j].gbTitle == null)) {
 					tabEle.innerHTML += ('<td>' );
 					tabEle.innerHTML += (data.volist[j].gbTitle + ", ");
-					tabEle.innerHTML += ('<button>수정</button>');
+					tabEle.innerHTML += ('<button  class="btnUpdate">수정</button>');
 					tabEle.innerHTML += ('<button>삭제</button>');
 					tabEle.innerHTML += ('</td>');
 				}else if (!(data.volist[j].tipTitle == null)) {
 					tabEle.innerHTML += ('<td>' );
 					tabEle.innerHTML += (data.volist[j].tipTitle + ", ");
-					tabEle.innerHTML += ('<button>수정</button>');
+					tabEle.innerHTML += ('<button class="btnUpdate" >수정</button>');
 					tabEle.innerHTML += ('<button>삭제</button>');
 					tabEle.innerHTML += ('</td>');
 				}
 				  
 				  
+				  
 				  tabEle.innerHTML +=('</tr>')
+				  $(".btnUpdate").click(function () { 
+						var $divTitle = $('<div class="description">제목<br><input type="text" id="newTextTitle"></div>');
+							$('.Board-Article').append($divTitle);
+
+							var $divContent = $('<div class="description">내용<br><input type="text" id="newTextContent"></div>');
+							$('.Board-Article').append($divContent);
+							var $divWriteBtn = $('<button type="button" id="btnBoardWrite">등록</button>');
+							$('#btnBoardWriteBox').append($divWriteBtn);
+						});
+				  
 			}
 
 
@@ -81,9 +93,17 @@
 
 		});
 	});
+		
+		
+		
+
 	});
+ 
 
 		//현재 문제가 no,title,content를 지칭하는 게시판 db의 컬럼명이 다다르다.
+	</script>
+	<script>
+
 	</script>
  
 </head>
@@ -121,20 +141,12 @@
 </div>
 
 <div class="Board-Article">
-	<div class="description">
-	<!--  제목칸의 데이터를 select option의 게시판의 글에 등록 -->
-	제목<br>
-	<input type="text" id="newTextTitle">
-	</div>
-	<div class="description">
-	<!--  내용칸의 데이터를 select option의 게시판의 글에 등록 -->
-	내용<br>
-	<input type="text" id="newTextContent">
-	</div>
+
+	
 	
 </div>
 <div id="btnBoardWriteBox">
-<button type="button" id="btnBoardWrite">등록</button>
+
 </div>
 
 </div>
