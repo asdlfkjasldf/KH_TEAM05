@@ -50,10 +50,7 @@ public class MemberLoginServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 사용자의 정보를 JSON형식으로 전달하기 위해 ContentType 변경
-		response.setContentType("application/json;charset=UTF-8");
-		response.setCharacterEncoding("UTF-8");
-		response.setContentType("text/html; charset=UTF-8");
-		request.setCharacterEncoding("UTF-8");
+	
 
 		
 		MemberService mservice = new MemberService();

@@ -1,0 +1,93 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap');
+
+* {
+	font-family: "Noto Sans KR", sans-serif;
+}
+
+body {
+	margin: 20px;
+	font: 15px;
+}
+
+a:link{
+  text-decoration: none!important;
+  color: green;
+}
+
+li {
+	list-style-type: none;
+	
+}
+#logo{
+	width: 100px;
+    height: 100px;
+	float: left;
+	position: absolute;
+}
+
+#logo > img {
+            position: absolute;
+            right: 5px;
+            top: 35px;
+        }
+
+#highmenu ul li {
+	
+	display: inline-block;
+	float: left;
+	margin: 15px;
+	text-align: center;
+	position: relative;
+	padding-bottom: 0px;
+}
+#topmenu ul li{
+	display: inline-block;
+	float: left;
+	margin: 15px;
+	padding: 10px;
+	position: relative;
+}
+
+.Header {
+	width: 1110px;
+	height: 220px;
+	font: 16px;
+	font-weight: bold;
+	background-color: white;
+    margin-bottom: 20px;
+}
+
+
+/* section */
+.section {
+    width: 1110px;
+    margin-bottom: 20px;
+}
+
+.Asside-left {
+	width: 200px;
+	font: 16px;
+	float: left;
+    margin-right: 20px;
+	background-color: gainsboro;	 
+}
+.Article {
+    width: 890px;
+
+}
+
+#Middle-page{
+	
+	
+	 
+}
+
+.Footer {
+    clear: both;
+    width: 1110px;
+    height: 190px;
+    background-color: #eee;
+    text-align: center;
+    padding: 20px;
+}
