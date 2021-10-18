@@ -140,20 +140,20 @@ public class BoardManagementListServlet extends HttpServlet {
 		}
 
 		
-		System.out.println(bmselect);
+//		System.out.println(bmselect);
 		
 		Map<String, Object> map1 = new HashMap<String, Object>();
 		
 		if("fb".equals(bmselect) ) {
-			System.out.println("진입1");
+//			System.out.println("진입1");
 			ArrayList<FbBoard> volist = new FbBoardService().selectBoardList(startRnum, endRnum);
 			map1.put("volist", volist);
 		}else if("gdb".equals(bmselect)) {
-			System.out.println("진입2");
+//			System.out.println("진입2");
 			ArrayList<GbBoard> volist = new GbBoardService().selectBoardList(startRnum, endRnum);
 			map1.put("volist", volist);
 		}else if("tipb".equals(bmselect)) {
-			System.out.println("진입3");
+//			System.out.println("진입3");
 			ArrayList<TipBoard> volist = new TipBoardService().selectBoardList(startRnum, endRnum);
 			map1.put("volist", volist);
 		}

@@ -51,8 +51,9 @@ public class BoardManagementUpdateServlet extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
 		request.setCharacterEncoding("UTF-8");
+		System.out.println("업데이트서블릿진입확인");
 		String bmselect = request.getParameter("bmselect"); //선택 옵션 파라미터 받기
-		int bno = Integer.valueOf(request.getParameter("bno")); //바꿀 글번호
+		int bno = Integer.parseInt(request.getParameter("bno")); //바꿀 글번호
 		String title = request.getParameter("t");	//받은 제목내용
 		String content = request.getParameter("c"); //받은 글내용
 		
@@ -69,9 +70,9 @@ public class BoardManagementUpdateServlet extends HttpServlet {
 			
 			int result = new BoardManagementUpdateService().updateFBoardList(vo);
 			if(result == -1) {
-				out.println("<br>게시글 수정되지 않았습니다. <br>작성된 글에 비속어가 포함되어 있습니다. <br>다시 작성해 주세요.");
+				mapBoardUpdate.put("result", -1);
 			} else {
-				out.println("<br>게시글 수정되었습니다.");
+				mapBoardUpdate.put("result", 0);
 			}
 		}else if("gdb".equals(bmselect)) {
 //			System.out.println("진입2");
@@ -79,9 +80,9 @@ public class BoardManagementUpdateServlet extends HttpServlet {
 			
 			int result = new BoardManagementUpdateService().updateGBoardList(vo);
 			if(result == -1) {
-				out.println("<br>게시글 수정되지 않았습니다. <br>작성된 글에 비속어가 포함되어 있습니다. <br>다시 작성해 주세요.");
+				mapBoardUpdate.put("result", -1);
 			} else {
-				out.println("<br>게시글 수정되었습니다.");
+				mapBoardUpdate.put("result", 0);
 			}
 		}else if("tipb".equals(bmselect)) {
 //			System.out.println("진입3");
@@ -89,9 +90,9 @@ public class BoardManagementUpdateServlet extends HttpServlet {
 			
 			int result = new BoardManagementUpdateService().updateTipBoardList(vo);
 			if(result == -1) {
-				out.println("<br>게시글 수정되지 않았습니다. <br>작성된 글에 비속어가 포함되어 있습니다. <br>다시 작성해 주세요.");
+				mapBoardUpdate.put("result", -1);
 			} else {
-				out.println("<br>게시글 수정되었습니다.");
+				mapBoardUpdate.put("result", 0);
 			}
 		}
 		

@@ -28,6 +28,7 @@
  </style>
  
  <script>
+ var btnUpdateValue = "";
  $(document).ready(function(){
 		$("#btnBoardView").on("click",function() {
 	$.ajax({
@@ -36,11 +37,12 @@
 		data :{
 			bmselect : $("#bmselect option:selected").val()
 		},
+		async : false,
 		dataType : 'json',
 		success : function(data){
 			const rowCnt = 1;
 			const columnCnt = 5;
-			var btnUpdateValue ="";
+			
 			console.log(data);
 			var tabEle = document.getElementById('listTable');
 			//Articel 비우기
@@ -54,77 +56,93 @@
 				  
 				  
 				  if (!(data.volist[j].fbTitle == null)) {
-					  tabEle.innerHTML += ('<td>' );
-					  tabEle.innerHTML += (data.volist[j].fbNo +" ");
-					  tabEle.innerHTML += (data.volist[j].fbTitle + " ");
-					  tabEle.innerHTML += ('<button  class="btnUpdate">수정</button>');
-					  tabEle.innerHTML += ('<button>삭제</button>');
-					  tabEle.innerHTML += ('</td>');
+					  //여러줄로 나뉘니 테그도 원하는대로 되지 않다가 한줄로 만들어서 +로 이어주니 원하는 대로 테그가 속해졌다.
+					  tabEle.innerHTML += ('<td class="boardNo">' + data.volist[j].fbNo+ " ");
+					  tabEle.innerHTML += ('</td><td class="boardTitle">' + data.volist[j].fbTitle + " " 
+							 	+ '<button  class="btnUpdate">수정</button>'
+							  	+ '<button>삭제</button>'
+							  	+ '</td>');
 				}else if (!(data.volist[j].gbTitle == null)) {
-					tabEle.innerHTML += ('<td>' );
-					tabEle.innerHTML += (data.volist[j].gbNo+" ");
-					tabEle.innerHTML += (data.volist[j].gbTitle + " ");
-					tabEle.innerHTML += ('<button  class="btnUpdate">수정</button>');
-					tabEle.innerHTML += ('<button>삭제</button>');
-					tabEle.innerHTML += ('</td>');
+					tabEle.innerHTML += ('<td class="boardNo">' + data.volist[j].gbNo+" " );
+					tabEle.innerHTML += ('</td><td class="boardTitle">' + data.volist[j].gbTitle + " " 
+								+ '<button  class="btnUpdate">수정</button>'
+								+ '<button>삭제</button>'
+								+ '</td>');
 				}else if (!(data.volist[j].tipTitle == null)) {
-					tabEle.innerHTML += ('<td>' );
-					tabEle.innerHTML += (data.volist[j].tipNo+" ");
-					tabEle.innerHTML += (data.volist[j].tipTitle + " ");
-					tabEle.innerHTML += ('<button class="btnUpdate" >수정</button>');
-					tabEle.innerHTML += ('<button>삭제</button>');
-					tabEle.innerHTML += ('</td>');
+					tabEle.innerHTML += ('<td class="boardNo">' + data.volist[j].tipNo+" ");
+							tabEle.innerHTML += ('</td><td class="boardTitle">' + data.volist[j].tipTitle+" "
+								+ '<button  class="btnUpdate">수정</button>'
+								+ '<button>삭제</button>'
+								+ '</td>');
 				}
 				  
 				  
 				  
 				  tabEle.innerHTML +=('</tr>')
-				  $(".btnUpdate").click(function () { 
-					  btnUpdateValue = $(this).parent();
-					  console.log(btnUpdateValue);
-					  $('.Board-Article').empty();
-					  $('#btnBoardWriteBox').empty();
-						var $divTitle = $('<div class="description">제목<br><input type="text" id="newTextTitle" value=""></div>');
-							$('.Board-Article').append($divTitle);
-
-							var $divContent = $('<div class="description">내용<br><input type="text" id="newTextContent" value=""></div>');
-							$('.Board-Article').append($divContent);
-							var $divWriteBtn = $('<button type="button" id="btnBoardWrite">등록</button>');
-							$('#btnBoardWriteBox').append($divWriteBtn);
-						});
 				  
 				  
 				  
 				  
-				  $("#btnBoardWrite").click(function () {
-					  
-					})
 				  
 			} //반목문 끝
 			
-			
-			$("#btnBoardWrite").click(function () {
-				$.ajax({
-					url : "<c:url value='/boardmanagementupdate'/>",
-					type : "post",
-					data :{
-						bmselect : $("#bmselect option:selected").val(),
-						t : $("#newTextTitle").val(),
-						c : $("#newTextContent").val(),
-						bno : $(btnUpdateValue).data.volist[btnUpdateValue].val()
-						
-						},
-						dataType : "json",
-						
-						
-						
-						error : function(request,status,error) {
-							 alert("code:"+request.status+"\n"+"message:"+request.responseText+
-							"\n"+"error:"+error);
-							 } 
-						
+			$(document).on('click', ".btnUpdate", function (){ 
+				  //$(this).text("바뀌는지 확인");
+				  $(this).parents("tbody").prev().find(".boardNo").css("color","red");
+				  console.log($(this).parent().parent().parent().prev().children().children(".boardNo").html()); //작동확인
+				  console.log(typeof(btnUpdateValue));
+				  btnUpdateValue =  $(this).parents("tbody").prev().find(".boardNo").html().trim();
+				    //디버깅 용 console.log
+				  //console.log("업데이트버튼의 this값: "+ String($(btnUpdateValue).val())  );
+				  //console.log("업데이트버튼의 this값 노벨류: "+$(btnUpdateValue) );
+				  //console.log("업데이트버튼의 this값 텍스트: "+$(btnUpdateValue).html() );
+				  $('.Board-Article').empty();
+				  $('#btnBoardWriteBox').empty();
+					var $divTitle = $('<div class="description">제목<br><input type="text" id="newTextTitle" value=""></div>');
+						$('.Board-Article').append($divTitle);
+
+						var $divContent = $('<div class="description">내용<br><input type="text" id="newTextContent" value=""></div>');
+						$('.Board-Article').append($divContent);
+						var $divWriteBtn = $('<button type="button" class="btnBoardWrite">등록</button>');
+						$('#btnBoardWriteBox').append($divWriteBtn);
 					});
-				}); //a작스안의 a작스끝
+			  
+			  
+				//기존 (엘리먼트).click을 사용했을 때 ajax가 생성된 엘리먼트의 버튼 생성자를 인지하지 못해서 변경
+				$(document).on('click', ".btnBoardWrite", function (){
+					//alert("확인?");
+					
+					console.log("let : "+$(btnUpdateValue).val());
+					//console.log("업데이트버튼의 부모: "+$(this).perent().val());
+					$.ajax({
+						url : "<c:url value='/boardmanagementupdate'/>",
+						type : "post",
+						async : false,
+						data :{
+							bmselect : $("#bmselect option:selected").val(),
+							t : $("#newTextTitle").val(),
+							c : $("#newTextContent").val(),
+							bno : btnUpdateValue
+							//bno : 23
+							
+							
+							},
+							dataType : "json",
+							success : function(data){
+								console.log("업데이트 ajax 리턴확인");
+								if (data.result == -1) {
+									console.log("게시글이 수정되지 않았습니다.");	
+								}else {
+									console.log("게시글이 수정되었습니다.");
+								}
+							},error : function(request,status,error) {
+								 alert("code:"+request.status+"\n"+"message:"+request.responseText+
+								"\n"+"error:"+error);
+								 } 
+							
+						});
+					}); //a작스안의 a작스끝
+			
 			
 		},
 		error : function(request,status,error) {
@@ -135,21 +153,20 @@
 		
 		
 	
-	
-			
-	
 		});
 	});
 		
-		
-		
-		
+
 		
 
 	});
  
+	
 
-		//현재 문제가 no,title,content를 지칭하는 게시판 db의 컬럼명이 다다르다.
+		
+ 
+
+		//현재 문제가 no가 특정되서 ajax로 보내지지 않는다.
 	</script>
 	<script>
 
