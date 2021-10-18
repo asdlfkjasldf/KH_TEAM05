@@ -42,8 +42,8 @@ public class MemberManagementListServlet extends HttpServlet {
 		
 		Member vo = new Member(searchCondition, searchKeyword);
 		if (vo != null) {
-		response.setCharacterEncoding("UTF-8");
-		response.setContentType("text/html; charset=UTF-8");
+//		response.setCharacterEncoding("UTF-8");
+//		response.setContentType("text/html; charset=UTF-8");
 	
 
 		final int PAGE_SIZE = 5;

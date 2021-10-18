@@ -33,5 +33,13 @@ public class NtBoardService {
 		JdbcTemplate.close(conn);
 		return result;
 	}
+	
+	public NtBoard getNtBoard(int bno) {
+		NtBoard vo = null;
+		Connection conn = JdbcTemplate.getConnection();
+		vo = new NtBoardDao().getNtBoard(conn, bno);
+		JdbcTemplate.close(conn);
+		return vo;
+	}
 
 }

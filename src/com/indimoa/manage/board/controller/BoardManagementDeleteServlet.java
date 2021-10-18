@@ -43,9 +43,9 @@ public class BoardManagementDeleteServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setCharacterEncoding("UTF-8");
-		response.setContentType("text/html; charset=UTF-8");
-		request.setCharacterEncoding("UTF-8");
+//		response.setCharacterEncoding("UTF-8");
+//		response.setContentType("text/html; charset=UTF-8");
+//		request.setCharacterEncoding("UTF-8");
 		System.out.println("딜리트서블릿진입확인");
 		String bmselect = request.getParameter("bmselect");
 		int bno = Integer.parseInt(request.getParameter("bno"));

@@ -65,6 +65,45 @@ public class NtBoardDao {
 		}
 		return result;
 	}
+	
+	public NtBoard getNtBoard(Connection conn, int bno) {
+		NtBoard vo = null;
+		
+//		private int ntNo;
+//		private String adId;
+//		private	String ntTitle;
+//		private String ntContent;
+//		private String ntDatetime;
+		
+		String sql = "select nt_No, ad_Id , nt_Title, nt_Content, to_char(nt_datetime, 'YYYY-MM-DD hh:mm') nt_datetime from NOTICE_BOARD where nt_no = ?";
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, bno);
+			rset = pstmt.executeQuery();
+			if (rset.next()) {
+				vo = new NtBoard();
+				vo.setNtNo(rset.getInt("nt_no"));
+				vo.setAdId(rset.getString("ad_id"));
+				vo.setNtTitle(rset.getString("nt_title"));
+				vo.setNtContent(rset.getString("nt_content"));
+				vo.setNtDatetime(rset.getString("nt_datetime"));
+				
+			}
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JdbcTemplate.close(rset);
+			JdbcTemplate.close(pstmt);
+		}
+		
+		
+		return vo;
+	}
+	
 
 	
 

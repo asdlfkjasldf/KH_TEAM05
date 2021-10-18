@@ -32,8 +32,8 @@ public class PointManagementInsertServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setCharacterEncoding("UTF-8");
-		response.setContentType("text/html; charset=UTF-8");
+//		response.setCharacterEncoding("UTF-8");
+//		response.setContentType("text/html; charset=UTF-8");
 		System.out.println("insertPoint진입");
 		// 입력한 데이터 수신
 		// 여러개의 값을 수신할 때 getParameterValues()를 이용

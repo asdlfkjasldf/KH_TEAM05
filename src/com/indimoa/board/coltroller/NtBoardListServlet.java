@@ -37,9 +37,9 @@ public class NtBoardListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setCharacterEncoding("UTF-8");
-		response.setContentType("text/html; charset=UTF-8");
-		request.setCharacterEncoding("UTF-8");
+//		response.setCharacterEncoding("UTF-8");
+//		response.setContentType("text/html; charset=UTF-8");
+//		request.setCharacterEncoding("UTF-8");
 		System.out.println("공지사항 게시판 리스트서블릿진입확인");
 		String bno =  request.getParameter("no");
 		
