@@ -3,15 +3,14 @@ package com.indimoa.cart.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
-
-
+import com.indimoa.cart.model.dao.CartDao;
 import com.indimoa.cart.model.service.CartService;
 import com.indimoa.cart.model.vo.Cart;
 
@@ -57,7 +56,10 @@ public class CartAddServlet extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
   
-    
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/view/cart.jsp");
+    	rd.forward(request, response);
+    }
     
 
 	/**
@@ -68,30 +70,36 @@ public class CartAddServlet extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
 		request.setCharacterEncoding("UTF-8");
+		
+		Cart cart = new Cart();
+		cart.setMm_id(request.getParameter("mm_id"));
+		CartDao dao = CartDao.getInstance();
+		int result = dao.cartAdd(cart);
 		PrintWriter out = response.getWriter();
+		out.println(result);
 		
 		
-		CartService cservice = new CartService();
-		String no = request.getParameter("ct_no");
-		String id = request.getParameter("mm_id");
-		String content = request.getParameter("ct_content");
-		String date = request.getParameter("ct_date");
-		String price = request.getParameter("ct_price");
 		
-		Cart vo = new Cart();
-//		vo.setCt_no(no);
-		vo.setMm_id(id);
-		vo.setCt_content(content);
-//		vo.setCt_date(ct_date);
-//		vo.setCt_price(ct_price);
 		
-		int result = cservice.cartAdd(new Cart());   //TODO
-		if (result > 1) {
-			out.println("장바구니에 들어갔습니다.");
-			response.sendRedirect("cart.jsp");
-		}else {
-			
-		}
+//		CartService cservice = new CartService();
+//		String no = request.getParameter("ct_no");
+//		String id = request.getParameter("mm_id");
+//		String content = request.getParameter("ct_content");
+//		String date = request.getParameter("ct_date");
+//		String price = request.getParameter("ct_price");
+//		
+//		Cart vo = new Cart();
+//		vo.setMm_id(id);
+//		vo.setCt_content(content);
+//
+//		
+//		int result = cservice.cartAdd(new Cart());   //TODO
+//		if (result > 1) {
+//			out.println("장바구니에 들어갔습니다.");
+//			response.sendRedirect("cart.jsp");
+//		}else {
+//			
+//		}
 		
 		
 	}

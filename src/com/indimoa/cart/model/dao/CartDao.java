@@ -7,6 +7,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import javax.activation.DataSource;
+import javax.naming.Context;
+import javax.naming.InitialContext;
+
 import com.indimoa.cart.model.vo.Cart;
 import com.indimoa.common.JdbcTemplate;
 
@@ -14,8 +18,24 @@ import com.indimoa.common.JdbcTemplate;
 public class CartDao {
 	
 	public CartDao() {}
-	public Cart cartRetrieve(Connection conn, String id) {
+	
+	private static CartDao instance = new CartDao();
+	public static CartDao getInstance() {
+		return instance;
+	}
+	
+	private Connection getConnection() throws Exception{
+		Context initCtx = new InitialContext();
+		Context envCtx=(Context) initCtx.lookup("java:comp/env");
+		DataSource ds = (DataSource) envCtx.lookup("jdbc/INDIMOA");
+		return ( (JdbcTemplate) ds).getConnection();
+	}
+	
+	
+	public Cart cartRetrieve(String id) {
+		
 		Cart c = null;
+		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		String query = "select * from cart where mm_id = ?";
@@ -40,7 +60,8 @@ public class CartDao {
 		return c;
 	}
 	
-	public int cartAdd(Connection conn, Cart c) {
+	public int cartAdd(Cart c) {
+			Connection conn = null;
 			PreparedStatement pstmt = null;
 			int result = 0;
 			String query = "insert into cart values(?, ?, ?, ?, ?)";
@@ -81,11 +102,11 @@ public class CartDao {
 	
 	public int getCartCount(Connection conn) {
 		int result = 0;
-		String sql = "select count(ct_no) from CART";
+		String query = "select count(ct_no) from CART";
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		try {
-			pstmt = conn.prepareStatement(sql);
+			pstmt = conn.prepareStatement(query);
 			rset = pstmt.executeQuery();
 			if (rset.next()) {
 				result = rset.getInt(1);
@@ -103,12 +124,12 @@ public class CartDao {
 	public ArrayList<Cart> selectCartList(Connection conn) {
 		ArrayList<Cart> volist = null;
 
-		String sql = "select * from Cart";
+		String query = "select * from Cart where mm_id = ?";
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 
 		try {
-			pstmt = conn.prepareStatement(sql);
+			pstmt = conn.prepareStatement(query);
 			rset = pstmt.executeQuery();
 			volist = new ArrayList<Cart>();
 			if (rset.next()) {
@@ -133,17 +154,18 @@ public class CartDao {
 		return volist;
 	}
 
-	public ArrayList<Cart> selectCartList(Connection conn, int start, int end) {
+	public ArrayList<Cart> selectCartList(int start, int end) {
 		ArrayList<Cart> volist = null;
-
-		String sql = "select * from (select Rownum r, t1.* from "
+		Connection conn = null;
+		
+		String query = "select * from (select Rownum r, t1.* from "
 				+ "(select * from Cart order by CT_NO desc) t1 ) t2 where r between ? and ?";
 
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 
 		try {
-			pstmt = conn.prepareStatement(sql);
+			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, start);
 			pstmt.setInt(2, end);
 			rset = pstmt.executeQuery();
