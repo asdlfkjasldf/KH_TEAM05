@@ -243,11 +243,13 @@
 	<table id="listTable">
 
 	</table>
+	<!-- 페이지 확인은 일단 보류
 	<c:if test="${startPage >1 }"> 이전 </c:if>
 		<c:forEach begin="${startPage }" end="${endPage }" step="1" var="i">
 		<a href="boardmanagement?pagenum=${i}">${i}</a>
 		</c:forEach>
 	<c:if test="${endPage < pageCount }"> 다음 </c:if>
+	 -->
 </div>
 
 <div class="Board-Article">
