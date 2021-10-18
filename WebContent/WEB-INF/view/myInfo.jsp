@@ -233,7 +233,7 @@ li {
 	<br>
 	<br>
 	<p class="btn2">
-		<button type="button" onclick="location.href='WEB-INF/view/main.jsp';">메인으로가기</button>
+		<button type="button" onclick="location.href='WEB-INF/view/index.jsp';">메인으로가기</button>
 	</p>
     <div id="footer">
 		<h1>footer</h1>

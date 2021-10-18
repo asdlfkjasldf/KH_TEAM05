@@ -24,12 +24,12 @@ public class CartDao {
 		return instance;
 	}
 	
-	private Connection getConnection() throws Exception{
-		Context initCtx = new InitialContext();
-		Context envCtx=(Context) initCtx.lookup("java:comp/env");
-		DataSource ds = (DataSource) envCtx.lookup("jdbc/INDIMOA");
-		return ( (JdbcTemplate) ds).getConnection();
-	}
+//	private Connection getConnection() throws Exception{
+//		Context initCtx = new InitialContext();
+//		Context envCtx=(Context) initCtx.lookup("java:comp/env");
+//		DataSource ds = (DataSource) envCtx.lookup("jdbc/INDIMOA");
+//		return ( (JdbcTemplate) ds).getConnection();
+//	}
 	
 	
 	public Cart cartRetrieve(String id) {
@@ -117,6 +117,7 @@ public class CartDao {
 			JdbcTemplate.close(rset);
 			JdbcTemplate.close(pstmt);
 		}
+		System.out.println("리턴1" + result);
 		return result;
 	}
 	
@@ -150,7 +151,7 @@ public class CartDao {
 			JdbcTemplate.close(rset);
 			JdbcTemplate.close(pstmt);
 		}
-		System.out.println("[pearl]-- 리턴은" + volist);
+		System.out.println("리턴2" + volist);
 		return volist;
 	}
 
@@ -192,7 +193,7 @@ public class CartDao {
 				e.printStackTrace();
 			}
 		}
-		System.out.println("[pearl]--" + volist);
+		System.out.println("리턴3" + volist);
 		return volist;
 	}
 	

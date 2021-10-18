@@ -83,20 +83,20 @@ public class MemberLoginServlet extends HttpServlet {
 					HttpSession session = request.getSession();
 					session.setAttribute("loginUser", member);
 					request.setAttribute("message", "로그인에 성공하였습니다.");
-					url = "/WEB-INF/view/index.jsp";
+					response.sendRedirect("index");
 					break;
 				case 0: // userid 일치 pwd 불일치
 					request.setAttribute("message", "비밀번호가 맞지 않습니다.");
-					url = "/WEB-INF/view/login.jsp";
+					response.sendRedirect("login");
 					break;
 				case -1: // userid가 존재하지 않음
 					request.setAttribute("message", "존재하지않는 회원입니다.");
-					url = "/WEB-INF/view/login.jsp";
+					response.sendRedirect("enrollmember");
 					break;
 				}
 
-				RequestDispatcher dispatcher = request.getRequestDispatcher(url);
-				dispatcher.forward(request, response);
+//				RequestDispatcher dispatcher = request.getRequestDispatcher(url);
+//				dispatcher.forward(request, response);
 			}
 		
 		

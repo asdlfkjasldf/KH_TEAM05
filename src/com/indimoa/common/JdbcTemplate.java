@@ -17,11 +17,9 @@ public class JdbcTemplate {
 		Connection conn = null;
 	
 		try {
-			Context initContext = new InitialContext();
-			Context envContext = (Context)initContext.lookup("java:/comp/env");  //Tomcat resource 설정을 찾기 server.xml;
-			DataSource ds = (DataSource)envContext.lookup("jdbc/indimoaDclass");   // jdbc/indimoaDclass   // jdbc/indimoaLocal
-			conn = ds.getConnection();
+			
 			if(conn!=null) System.out.println("2021 10 08 DBCP JNDI 연결성공");
+			
 			else System.out.println("2021 10 08 DBCP JNDI 연결실패");
 			//톰캣에 있는 설정파일 위치에서 찾아주란 뜻
 			//javax.naming 
@@ -64,9 +62,9 @@ public class JdbcTemplate {
 //			e.printStackTrace();
 //		}
 //	}
-	public static void close(ResultSet s) {
+	public static void close(ResultSet rset) {
 		try {
-			if(s!=null) s.close();
+			if(rset!=null && !rset.isClosed()) rset.close();
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -81,14 +79,14 @@ public class JdbcTemplate {
 	
 	public static void commit(Connection conn) {
 		try {
-			conn.commit();
+			if(conn != null && !conn.isClosed())  conn.commit();
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
 	}
 	public static void rollback(Connection conn) {
 		try {
-			conn.rollback();
+			if(conn!= null && !conn.isClosed()) conn.rollback();
 		}catch(Exception e) {
 			e.printStackTrace();
 		}

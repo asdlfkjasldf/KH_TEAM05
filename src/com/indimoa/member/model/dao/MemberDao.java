@@ -28,6 +28,8 @@ public class MemberDao {
 	private static MemberDao instance = new MemberDao();
 
 	public static MemberDao getInstance() {
+		if(instance == null)
+			instance = new MemberDao();
 		return instance;
 	}
 	
