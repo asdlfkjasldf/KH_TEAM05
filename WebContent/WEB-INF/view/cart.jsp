@@ -1,5 +1,5 @@
 <%@page import="java.util.ArrayList"%>
-<%@page import="com.indomoa.cart.model.vo.Cart"%>
+<%@page import="com.indimoa.cart.model.vo.Cart"%>
 <%@page import="java.text.DecimalFormat"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -73,26 +73,7 @@ li {
 </style>
 <title>장바구니</title>
 
-<script type="text/javascript">
 
-
-function fnPay(){
-	if(confirm("결제하시겠습니까?")) {
-        location.href = "WEB-INF/view/buyPage.jsp";
-    }
-}
-
-function fnClear(){
-	if(confirm("장바구니를 비우시겠습니까?")) {
-		alert("장바구니가 삭제되었습니다.");
-		location.href = "WEB-INF/view/Cart.jsp";	
-	}
-}
-
-function fnGo(){
-	location.href = "WEB-INF/view/gamelist.jsp";
-}
-</script>
 </head>
 <body>
     <div id="header">
@@ -133,22 +114,22 @@ function fnGo(){
 			<th>가격</th>
 			<th>총액</th>
 		</tr>
-<%
+	<%
 		if(cart.size() == 0) {
-%>
+	%>
 		<tr align='center'>
 			<td colspan= '3'>
 				장바구니에 담긴 상품이 없습니다.
 				<a href= 'WEB-INF/view/gamelist.jsp'>쇼핑하기</a>
 			</td>
 		</tr>
-<%
+	<%
 		} else {
 			int totalSum = 0, total = 0;
 			DecimalFormat df = new DecimalFormat("￦#,##0");
 			for(int i = 0; i < cart.size(); i++) {
 				Cart ct = cart.get(i);
-		%>
+	%>
 		<tr align= 'center'>
 			<td><%=ct.getCt_no() %></td>
 			<td><%=ct.getCt_content() %></td>
@@ -163,10 +144,7 @@ function fnGo(){
 		}
 		%>
 		<tr align = 'center'>
-			<td colspan= '3'>
-				<button id="btn" onclick='fnPay()'>결제하기</button>
-				<button id="btn" onclick='fnClear()'>장바구니 비우기</button>
-				<button id="btn" onclick='fnGo()'>쇼핑 계속하기</button>
+			
 			
 			
 		<!--    <input type='button' value='결제하기' onclick='fnPay()' />
@@ -181,7 +159,33 @@ function fnGo(){
 			}//if else
 		%>
 	</table>
+			<div align = 'center'>
+				<button id="btn" onclick='fnPay()'>결제하기</button>
+				<button id="btn" onclick='fnClear()'>장바구니 비우기</button>
+				<button id="btn" onclick='fnGo()'>쇼핑 계속하기</button>
+			</div>
+			
 </div>
+<script>
+
+
+function fnPay(){
+	if(confirm("결제하시겠습니까?")) {
+        location.href = "WEB-INF/view/buyPage.jsp";
+    }
+}
+
+function fnClear(){
+	if(confirm("장바구니를 비우시겠습니까?")) {
+		alert("장바구니가 삭제되었습니다.");
+		location.href = "WEB-INF/view/cartClear.jsp";	
+	}
+}
+
+function fnGo(){
+	location.href = "WEB-INF/view/gamelist.jsp";
+}
+</script>
 
 <div id="footer">
         <h1>footer</h1>

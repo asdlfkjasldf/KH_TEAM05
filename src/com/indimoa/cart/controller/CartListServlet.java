@@ -58,6 +58,7 @@ public class CartListServlet extends HttpServlet {
 		}
 		// 총 글수
 		cCount = new CartService().getCartCount();
+		System.out.println("cCount : " + cCount);
 		// 총 페이지수 = (총글개수 / 페이지당글수) + (총글개수에서 페이지당글수로 나눈 나머지가 0이 아니라면 페이지개수를 1 증가)
 		pageCount = (cCount / PAGE_SIZE) + (cCount % PAGE_SIZE == 0 ? 0 : 1);
 		// rownum 조건 계산
