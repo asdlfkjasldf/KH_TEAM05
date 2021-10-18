@@ -28,7 +28,7 @@
  </style>
  
  <script>
- var btnUpdateValue = "";
+ var btnUpdateValue = ""; 	//업데이트 버튼 클릭시 글번호 저장후 등록 버튼때 불러와서 사용하기 위해 선언
  $(document).ready(function(){
 		$("#btnBoardView").on("click",function() {
 	$.ajax({
@@ -38,6 +38,7 @@
 			bmselect : $("#bmselect option:selected").val()
 		},
 		async : false,
+		//ajax를 sucess 오브젝트 안에 중복해서 쓰므로 하나의 ajax가 동기로 계속 붙잡는 것을 막기 위해 사용함
 		dataType : 'json',
 		success : function(data){
 			const rowCnt = 1;
@@ -60,19 +61,19 @@
 					  tabEle.innerHTML += ('<td class="boardNo">' + data.volist[j].fbNo+ " ");
 					  tabEle.innerHTML += ('</td><td class="boardTitle">' + data.volist[j].fbTitle + " " 
 							 	+ '<button  class="btnUpdate">수정</button>'
-							  	+ '<button>삭제</button>'
+							  	+ '<button class="btnDelete">삭제</button>'
 							  	+ '</td>');
 				}else if (!(data.volist[j].gbTitle == null)) {
 					tabEle.innerHTML += ('<td class="boardNo">' + data.volist[j].gbNo+" " );
 					tabEle.innerHTML += ('</td><td class="boardTitle">' + data.volist[j].gbTitle + " " 
 								+ '<button  class="btnUpdate">수정</button>'
-								+ '<button>삭제</button>'
+								+ '<button class="btnDelete">삭제</button>'
 								+ '</td>');
 				}else if (!(data.volist[j].tipTitle == null)) {
 					tabEle.innerHTML += ('<td class="boardNo">' + data.volist[j].tipNo+" ");
 							tabEle.innerHTML += ('</td><td class="boardTitle">' + data.volist[j].tipTitle+" "
 								+ '<button  class="btnUpdate">수정</button>'
-								+ '<button>삭제</button>'
+								+ '<button class="btnDelete">삭제</button>'
 								+ '</td>');
 				}
 				  
@@ -86,16 +87,15 @@
 				  
 			} //반목문 끝
 			
+			
+			//기존 (엘리먼트).click을 사용했을 때 ajax가 생성된 엘리먼트의 버튼 생성자를 인지하지 못해서 변경
 			$(document).on('click', ".btnUpdate", function (){ 
-				  //$(this).text("바뀌는지 확인");
+				  //$(this).text("수정중인 게시물");
 				  $(this).parents("tbody").prev().find(".boardNo").css("color","red");
-				  console.log($(this).parent().parent().parent().prev().children().children(".boardNo").html()); //작동확인
-				  console.log(typeof(btnUpdateValue));
+				  console.log("수정할 글 번호 : " +$(this).parent().parent().parent().prev().children().children(".boardNo").html()); //작동확인
+				  //console.log(typeof(btnUpdateValue));
 				  btnUpdateValue =  $(this).parents("tbody").prev().find(".boardNo").html().trim();
-				    //디버깅 용 console.log
-				  //console.log("업데이트버튼의 this값: "+ String($(btnUpdateValue).val())  );
-				  //console.log("업데이트버튼의 this값 노벨류: "+$(btnUpdateValue) );
-				  //console.log("업데이트버튼의 this값 텍스트: "+$(btnUpdateValue).html() );
+		
 				  $('.Board-Article').empty();
 				  $('#btnBoardWriteBox').empty();
 					var $divTitle = $('<div class="description">제목<br><input type="text" id="newTextTitle" value=""></div>');
@@ -108,41 +108,9 @@
 					});
 			  
 			  
-				//기존 (엘리먼트).click을 사용했을 때 ajax가 생성된 엘리먼트의 버튼 생성자를 인지하지 못해서 변경
-				$(document).on('click', ".btnBoardWrite", function (){
-					//alert("확인?");
+				
 					
-					console.log("let : "+$(btnUpdateValue).val());
-					//console.log("업데이트버튼의 부모: "+$(this).perent().val());
-					$.ajax({
-						url : "<c:url value='/boardmanagementupdate'/>",
-						type : "post",
-						async : false,
-						data :{
-							bmselect : $("#bmselect option:selected").val(),
-							t : $("#newTextTitle").val(),
-							c : $("#newTextContent").val(),
-							bno : btnUpdateValue
-							//bno : 23
-							
-							
-							},
-							dataType : "json",
-							success : function(data){
-								console.log("업데이트 ajax 리턴확인");
-								if (data.result == -1) {
-									console.log("게시글이 수정되지 않았습니다.");	
-								}else {
-									console.log("게시글이 수정되었습니다.");
-								}
-							},error : function(request,status,error) {
-								 alert("code:"+request.status+"\n"+"message:"+request.responseText+
-								"\n"+"error:"+error);
-								 } 
-							
-						});
-					}); //a작스안의 a작스끝
-			
+					
 			
 		},
 		error : function(request,status,error) {
@@ -157,7 +125,83 @@
 	});
 		
 
-		
+		//기존 (엘리먼트).click을 사용했을 때 ajax가 생성된 엘리먼트의 버튼 생성자를 인지하지 못해서 변경
+		$(document).on('click', ".btnBoardWrite", function (){
+			//alert("확인?");
+			
+			console.log("let : "+$(btnUpdateValue).val());
+			//console.log("업데이트버튼의 부모: "+$(this).perent().val());
+			$.ajax({
+				url : "<c:url value='/boardmanagementupdate'/>",
+				type : "post",
+				async : false,
+				data :{
+					bmselect : $("#bmselect option:selected").val(),
+					t : $("#newTextTitle").val(),
+					c : $("#newTextContent").val(),
+					bno : btnUpdateValue
+					//bno : 23
+					
+					
+					},
+					dataType : "json",
+					success : function(data){
+						console.log("업데이트 ajax 리턴확인");
+						if (data.result == -1) {
+							alert("게시글이 수정되지 않았습니다.");	
+						}else {
+							alert("게시글이 수정되었습니다.");
+						}
+					},error : function(request,status,error) {
+						 alert("code:"+request.status+"\n"+"message:"+request.responseText+
+						"\n"+"error:"+error);
+						 } 
+					
+				});
+			}); //a작스안의 a작스끝
+	
+			
+		$(document).on('click', ".btnDelete", function () {
+			var confirmDelete = confirm("정말로 삭제하시겠습니까?");
+			
+			
+			if (confirmDelete == true) {
+				var btnDeleteValue = $(this).parents("tbody").prev().find(".boardNo").html().trim();
+				//삭제여부가 확인,취소창이 뜨며 확인은 그대로 진행, 취소 누를시 return으로 메소드 탈출
+				console.log("삭제할 글 번호 : " + $(this).parent().parent().parent().prev().children().children(".boardNo").html()); 
+				  $.ajax({
+					  url : "<c:url value='/boardmanagementdelete'/>",
+					  type : "post",
+					  async : false,
+					  data : {
+						  bmselect : $("#bmselect option:selected").val(),
+						  bno : btnDeleteValue
+					  },
+					  dataType : "json",
+					  success : function (data) {
+						  console.log("업데이트 ajax 리턴확인");
+							if (data.result == -1) {
+								alert("게시글이 삭제되지 않았습니다.");	
+							}else {
+								alert("게시글이 삭제되었습니다.");
+							}
+						
+					},error : function (request, status, error) {
+						alert("code:"+request.status+"\n"+"message:"+request.responseText+
+								"\n"+"error:"+error);
+					}
+					  
+				  
+				  		});
+				
+			}else{
+				return;
+			}
+			
+			
+			
+				});
+			
 
 	});
  

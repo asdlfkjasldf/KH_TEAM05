@@ -145,4 +145,8 @@ public class FbBoard {
 		this.fbNo = bno;
 		//게시물관리에서 수정하기 위해 추가
 	}
+	public FbBoard(int bno) {
+		this.fbNo = bno;
+		//게시물관리에서 삭제하기 위해 추가
+	}
 }

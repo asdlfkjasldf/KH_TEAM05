@@ -77,4 +77,59 @@ public class BoardManageMentDao {
 		return result;
 	}
 
+	public int deleteFBoard(Connection conn, FbBoard vo) {
+		int result = -1;
+		
+		String sqlDelete = "DELETE FROM free_board_m WHERE FB_NO = ?";
+		PreparedStatement pstmt = null;
+		try {
+			pstmt = conn.prepareStatement(sqlDelete);
+			pstmt.setInt(1, vo.getFbNo());
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			JdbcTemplate.close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int deleteGBoard(Connection conn, GbBoard vo) {
+		int result = -1;
+		
+		String sqlDelete = "DELETE FROM game_dev_board WHERE GB_NO = ?";
+		PreparedStatement pstmt = null;
+		try {
+			pstmt = conn.prepareStatement(sqlDelete);
+			pstmt.setInt(1, vo.getGbNo());
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JdbcTemplate.close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int deleteTipBoard(Connection conn, TipBoard vo) {
+		int result = -1;
+		
+		String sqlDelete = "DELETE FROM tip_board WHERE TIP_NO = ?";
+		PreparedStatement pstmt = null;
+		try {
+			pstmt = conn.prepareStatement(sqlDelete);
+			pstmt.setInt(1, vo.getTipNo());
+			result = pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JdbcTemplate.close(pstmt);
+		}
+		
+		return result;
+	}
+
 }

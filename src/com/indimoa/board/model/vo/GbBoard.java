@@ -156,4 +156,9 @@ public class GbBoard {
 		//게시물관리에서 수정하기 위해 추가
 	}
 
+	public GbBoard(int bno) {
+		this.gbNo = bno;
+		//게시물관리에서 삭제하기 위해 추가
+	}
+
 }

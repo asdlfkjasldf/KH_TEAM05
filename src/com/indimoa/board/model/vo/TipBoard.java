@@ -146,6 +146,11 @@ public class TipBoard {
 		//게시물관리에서 수정하기 위해 추가
 	}
 
+	public TipBoard(int bno) {
+		this.tipNo = bno;
+		//게시물관리에서 삭제하기 위해 추가
+	}
+
 	
 
 }

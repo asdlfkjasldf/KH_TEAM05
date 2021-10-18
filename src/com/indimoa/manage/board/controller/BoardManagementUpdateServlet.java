@@ -48,9 +48,8 @@ public class BoardManagementUpdateServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setCharacterEncoding("UTF-8");
-		response.setContentType("text/html; charset=UTF-8");
-		request.setCharacterEncoding("UTF-8");
+
+
 		System.out.println("업데이트서블릿진입확인");
 		String bmselect = request.getParameter("bmselect"); //선택 옵션 파라미터 받기
 		int bno = Integer.parseInt(request.getParameter("bno")); //바꿀 글번호
