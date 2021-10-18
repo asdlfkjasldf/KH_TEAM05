@@ -307,6 +307,7 @@ public class MemberDao {
 	
 	//database에서 해당 이름,이메일의 아이디를 찾아오는 메소드
 	public int selectId( String name, String email) {
+				
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -323,7 +324,7 @@ public class MemberDao {
 				result = rset.getInt(1);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 
@@ -332,17 +333,18 @@ public class MemberDao {
 	
 	
 	//database에서 해당 이름,아이디,이메일의 비밀번호를 찾아오는 메소드
-	public int selectPwd(String name, String id) {
+	public int selectPwd(String name, String id, String email) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		int result = 0;
 
-		String query = "select mm_pwd from member where mm_name = ? and mm_id = ?";
+		String query = "select mm_pwd from member where mm_name = ? and mm_id = ? and mm_email = ?";
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, name);
 			pstmt.setString(2, id);
+			pstmt.setString(3, email);
 			rset = pstmt.executeQuery();
 
 			if (rset.next()) {

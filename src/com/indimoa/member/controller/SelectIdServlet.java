@@ -43,15 +43,13 @@ public class SelectIdServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		
-		
-		
+
 		String name = request.getParameter("mm_name");
 		String email = request.getParameter("mm_email");
 		System.out.println("mm_name : " + name);
 		System.out.println("mm_email : " + email);
 
+		//id 불러오기
 		int id = new MemberService().selectId(name, email);
 		System.out.println("mm_id : " + id);
 		String page = "";

@@ -80,9 +80,9 @@ public class MemberService {
 		}
 		 
 		//멤버 비밀번호 찾기를 요청하는 메소드
-		 public int selectPwd(String name, String id) {
+		 public int selectPwd(String name, String id, String email) {
 				Connection conn = JdbcTemplate.getConnection();
-				int userPwd = new MemberDao().selectPwd( name, id);
+				int userPwd = new MemberDao().selectPwd(name, id, email);
 
 				JdbcTemplate.close(conn);
 				return userPwd;

@@ -172,8 +172,8 @@ li {
                 <input type="text" name="mm_email" id="email"  autocomplete="off" required>
             </p>
             <p class="btn-area">
-                <button id="btn" type="submit" onlick="">찾기</button>
-                <button id="btn" type="reset" onclick="">취소</button>
+                <button id="btn" type="submit" onlick="id_search()">찾기</button>
+                <button id="btn" type="reset" onclick="history.back()">취소</button>
             </p>
             <p class="caption">
                 <a href='WEB-INF/view/findPwd.jsp'>비밀번호 찾기</a>
@@ -182,23 +182,43 @@ li {
     </div>
 
     <script>
-        let name = $("#name");
-        let email = $("#email");
-        let btn = $("#btn");
-
-        $(btn).on('click', function(){
-            if($(id).val() == "") {
-                $(id).next('label').addClass('warning');
-                setTimeout(function(){
-                    $('label').removeClass('warning');
-                }, 1500);
-            } else if($(pw).val() == "") {
-                $(pw).next('label').addClass('warning');
-                setTimeout(function(){
-                    $('label').removeClass('warning');
-                }, 1500);
-            }
-        });
+    function id_search() {
+    	var frm = document.idfindscreen;
+    	
+    	if(frm.mm_name.value.length < 1) {
+    		alert("이름을 입력해주세요");
+    		return;
+    	}
+    	if (frm.mm_email.value.length < 1) {
+    		alert("이메일을 입력해주세요");
+    		return;
+    	}
+    	frm.method = "post";
+    	frm.action = "showId.jsp";
+    	frm.submit();
+    }
+    
+    
+    
+    
+    
+//        let name = $("#name");
+//        let email = $("#email");
+//        let btn = $("#btn");
+//
+//        $(btn).on('click', function(){
+//            if($(id).val() == "") {
+//                $(id).next('label').addClass('warning');
+//                setTimeout(function(){
+//                    $('label').removeClass('warning');
+//                }, 1500);
+//            } else if($(pw).val() == "") {
+//                $(pw).next('label').addClass('warning');
+//                setTimeout(function(){
+//                    $('label').removeClass('warning');
+//                }, 1500);
+//            }
+//        });
     </script>
     <div id="footer">
         <h1>footer</h1>

@@ -1,7 +1,10 @@
+<%@page import="com.indimoa.member.model.dao.MemberDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
     
+    
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -70,7 +73,7 @@ li {
             margin-top: 10px;
         }
         .t1:first-child{margin-top: 0;}
-        .t1 input{
+        #find-id{
             width: 100%;
             padding: 20px 10px 10px;
             background-color: transparent;
@@ -108,6 +111,17 @@ li {
     <title>아이디찾기결과</title>
 </head>
 <body>
+
+<%
+request.setCharacterEncoding("UTF-8");
+String mm_name = request.getParameter("mm_name");
+String mm_email = request.getParameter("mm_email");
+
+MemberDao dao = new MemberDao();
+int mm_id = dao.selectId(mm_name, mm_email);   //TODO
+
+%>
+
     <div id="header">
 		<div id="logo">로고 추가할 곳
 		<img src=".jpg" width="200px" height="50px">
@@ -138,18 +152,49 @@ li {
 
     <h1 class="h1">아이디 찾기 결과</h1>
 
+<form action="WEB-INF/view/showId.jsp" method="post">
+	<%
+	if (mm_id != 0) {
+	%>
     <div id="section">
-		<form action="WEB-INF/view/showId.jsp" method="post">
+    	<div class = "found-success">
 				<p class="t1">
-					<label for="id">아이디 : </label>
-					<input type="text" name="mm_id" readonly="readonly" value="<%="member.getMm_id()"%>" >  <!-- TODO -->
+					<label for="id">아이디: </label>
+					<div class="find-id"><%=mm_id%></div>
+				</p>
+				<p class="caption">
+					<input type="button" id="btnLogin" value="로그인" onClick = "location.href='WEB-INF/view/login.jsp';"/>
 				</p>
 
                 <p class="caption">
                     <a href='WEB-INF/view/findPwd.jsp'>비밀번호 찾기</a>
                 </p>
-        </form>
+        
+        </div>
+        
     </div>
+    <%
+	} else {
+    %>
+    
+    
+    <div id="section">
+    	<div class="found-fail">
+    		<form action="WEB-INF/view/showId.jsp" method="post">
+    		<h4> 등록된 정보가 없습니다.</h4>
+    		
+    		<p class="caption">
+    			<input type="button" id="btnback" value="다시 찾기" onClick = "history.back()"/>
+    			<input type="button" id="btnjoin" value="회원가입" onClick="location.href='WEB-INF/view/newMember.jsp';"/>
+    		</p>
+    	</div>
+    	
+    </div>
+    
+    <%
+	}
+    %>
+   </form>
     <div id="footer">
         <h1>footer</h1>
     </div>

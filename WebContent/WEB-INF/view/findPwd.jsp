@@ -179,8 +179,8 @@ li {
                 <input type="text" name="mm_email" id="email"  autocomplete="off" required>
             </p>
             <p class="btn-area">
-                <button id="btn" type="submit" onclick="">찾기</button>
-                <button id="btn" type="reset" onclick="">취소</button>
+                <button id="btn" type="submit" onclick="pwd_search()">찾기</button>
+                <button id="btn" type="reset" onclick="history.back()">취소</button>
             </p>
             
             <p class="caption">
@@ -190,24 +190,46 @@ li {
     </div>
 
     <script>
-        let name = $("#name");
-        let id = $("#id");
-        let email = $("#email");
-        let btn = $("#btn");
-
-        $(btn).on('click', function(){
-            if($(id).val() == "") {
-                $(id).next('label').addClass('warning');
-                setTimeout(function(){
-                    $('label').removeClass('warning');
-                }, 1500);
-            } else if($(pw).val() == "") {
-                $(pw).next('label').addClass('warning');
-                setTimeout(function(){
-                    $('label').removeClass('warning');
-                }, 1500);
-            }
-        });
+    function pwd_search() {
+    	var frm = document.pwdfindscreen;
+    	
+    	if(frm.mm_name.value.length < 1) {
+    		alert("이름을 입력해주세요");
+    		return;
+    	}
+    	if(frm.mm_id.value.length < 1) {
+    		alert("아이디를 입력해주세요");
+    		return;
+    	}
+    	if(frm.mm_email.value.length < 1) {
+    		alert("이메일을 입력해주세요");
+    		return;
+    	}
+    	frm.method = "post";
+    	frm.action = "showPwd.jsp";
+    	frm.submit();
+    }
+    
+    
+    
+//        let name = $("#name");
+//        let id = $("#id");
+//        let email = $("#email");
+//        let btn = $("#btn");
+//
+//        $(btn).on('click', function(){
+//            if($(id).val() == "") {
+//                $(id).next('label').addClass('warning');
+//                setTimeout(function(){
+//                    $('label').removeClass('warning');
+//                }, 1500);
+//            } else if($(pw).val() == "") {
+//                $(pw).next('label').addClass('warning');
+//                setTimeout(function(){
+//                    $('label').removeClass('warning');
+//                }, 1500);
+//            }
+//        });
     </script>
     <div id="footer">
         <h1>footer</h1>

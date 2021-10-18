@@ -1,3 +1,4 @@
+<%@page import="com.indimoa.member.model.dao.MemberDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
@@ -106,9 +107,23 @@ li {
     }
 
     </style>
-    <title>아이디찾기결과</title>
+    <title>비밀번호 찾기결과</title>
 </head>
 <body>
+<%
+request.setCharacterEncoding("UTF-8");
+String mm_name = request.getParameter("mm_name");
+String mm_id = request.getParameter("mm_id");
+String mm_email = request.getParameter("mm_email");
+
+MemberDao dao = new MemberDao();
+int mm_pwd = dao.selectPwd(mm_name, mm_id, mm_email);   //TODO
+
+%>
+
+
+
+
     <div id="header">
 		<div id="logo">로고 추가할 곳
 		<img src=".jpg" width="200px" height="50px">
@@ -139,19 +154,43 @@ li {
 	</div>
 
     <h1 class="h1">비밀번호 찾기 결과</h1>
+    
+<form action="WEB-INF/view/showPwd.jsp" method="post">
+	<%
+	if (mm_pwd != 0) {
+	%>
 
     <div id="section">
-		<form action="WEB-INF/view/showPwd.jsp" method="post">
+    	<div class = "found-success">
             <p class="t1">
                 <label for="pwd">비밀번호 : </label>
-                <input type="password" name="mm_pwd" readonly="readonly" value="<%="m.getMm_pwd()"%>" >   <!-- TODO -->
+                <div class="find-pwd"><%=mm_pwd%></div>
             </p>
 
                 <p class="caption">
-                    <a href='WEB-INF/view/login.jsp'>로그인하기</a>
+                    <input type="button" id="btnLogin" value="로그인" onClick = "location.href='WEB-INF/view/login.jsp';"/>
                 </p>
-        </form>
+        
+    	</div>
     </div>
+    <%
+	} else {
+    %>
+    <div id="section">
+    	<div class="found-fail">
+    		<form action="WEB-INF/view/showpwd.jsp" method="post">
+    		<h4> 등록된 정보가 없습니다.</h4>
+    		
+    		<p class="caption">
+    			<input type="button" id="btnback" value="다시 찾기" onClick = "history.back()"/>
+    		</p>
+    	</div>
+    	
+    </div>
+     <%
+	}
+    %>
+</form>
     <div id="footer">
         <h1>footer</h1>
     </div>

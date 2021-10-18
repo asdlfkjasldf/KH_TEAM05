@@ -164,7 +164,7 @@ li {
 	<br>
 	<br>
 	<p align="center">
-		<button type="button" onclick="location.href='../../index.jsp';">메인으로
+		<button type="button" onclick="location.href='WEB-INF/view/index.jsp';">메인으로
 			가기</button>
 	</p>
 	<script type="text/javascript"
