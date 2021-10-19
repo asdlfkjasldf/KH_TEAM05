@@ -59,11 +59,11 @@ public class NtBoardUpdateServlet extends HttpServlet {
 		
 		NtBoard vo = new NtBoard(title, content,bno);
 		
-		int result = new NtBoardService().updateNtBoardUpdate(vo);
+		int result = new NtBoardService().updateNtBoard(vo);
 		if(result == -1) {
-			out.print("<script>alert('글의 수정이 실패되었습니다.');</script>");
+			//out.println("<script>alert('글의 수정이 실패되었습니다.');</script>");
 		} else {
-			out.print("<br>글의 수정이 성공");
+			//out.println("<br>글의 수정이 성공");
 		}
 		
 		

@@ -60,7 +60,7 @@ public class NtBoardWriteServlet extends HttpServlet {
 		}else {
 			out.println("<br>게시글 입력되었습니다.");
 		}
-		out.print("<a href=\"notice\">목록</a>");
+		out.print("<a href='./notice'>목록</a>");
 		
 		
 	}

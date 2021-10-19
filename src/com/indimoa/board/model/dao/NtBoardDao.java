@@ -184,6 +184,23 @@ public class NtBoardDao {
 		
 		return result;
 	}
+
+	public int deleteNtBoard(Connection conn, NtBoard vo) {
+		int result = -1;
+		String sqlDelete = "delete from notice_board where nt_no = ?";
+		PreparedStatement pstmt = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sqlDelete);
+			pstmt.setInt(1, vo.getNtNo());
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+		return result;
+	}
 	
 
 	

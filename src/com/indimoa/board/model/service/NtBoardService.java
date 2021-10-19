@@ -62,13 +62,22 @@ public class NtBoardService {
 	}
 	
 	//업데이트 페이지에서 적용시키깆
-	public int updateNtBoardUpdate(NtBoard vo) {
+	public int updateNtBoard(NtBoard vo) {
 		int result = -1;
 		Connection conn = JdbcTemplate.getConnection();
 		
 		result = new NtBoardDao().updateNtBoard(conn,vo);
 		
-		return 0;
+		return result;
+	}
+
+	public int deleteNtBoard(NtBoard vo) {
+		int result = -1;
+		Connection conn = JdbcTemplate.getConnection();
+		
+		result = new NtBoardDao().deleteNtBoard(conn,vo);
+		
+		return result;
 	}
 
 }
