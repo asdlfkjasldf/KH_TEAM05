@@ -110,52 +110,58 @@ li {
 			<table align="center">
 				<tr>
 					<td>아이디 :</td>
-					<td><input type="text" name="mm_id" id="id"><input type="hidden" name="reid"><input type="button" value="중복확인" onclick="return idCheck()"></td>
+					<td><input type="text" name="mm_id" id="id"><input type="hidden" name="reid" class="input"><input type="button" value="중복확인" onclick="return idCheck()"></td>
 				</tr>
 				<tr>
 					<td>비밀번호 :</td>
-					<td><input type="password" name="mm_pwd"></td>
+					<td><input type="password" id="pwd" name="mm_pwd" class="input"></td>
+				</tr>
+				<tr>
+					<td>비밀번호 확인 :</td>
+					<td><input type="password" id="repwd" name="mm_pwd" class="input"></td>
 				</tr>
 				<tr>
 					<td>이름 :</td>
-					<td><input type="text" name="mm_name"></td>
+					<td><input type="text" name="mm_name" id="name" class="input"></td>
 				</tr>
 				<tr>
 					<td>이메일 :</td>
-					<td><input type="email" name="mm_email"></td>
+					<td><input type="email" name="mm_email" id="email" class="input"></td>
 				</tr>
                 <tr>
 					<td>전화번호 :</td>
-					<td><input type="phn" name="mm_phn"></td>
+					<td><input type="text" name="mm_phn1" id="phn1" class="input" required></td> -
+					<td><input type="text" name="mm_phn2" id="phn2" class="input" required></td> -
+					<td><input type="text" name="mm_phn3" id="phn3" class="input" required></td> -
 				</tr>
                 <tr>
 					<td>OS :</td>
 					<td>
-                        <input id="os" type="radio" value="window" name="mm_com" class="input2">WINDOW<br>
-                        <input id="os" type="radio" value="mac" name="mm_com" class="input2">MAC<br>
+                        <input id="os" type="radio" value="window" name="mm_com" class="input">WINDOW<br>
+                        <input id="os" type="radio" value="mac" name="mm_com" class="input">MAC<br>
                     </td>
 				</tr>
                 <tr>
 					<td>구분 :</td>
 					<td>
-                        <input id="os" type="radio" value="개인" name="separate" class="input2">개인<br>
-                        <input id="os" type="radio" value="개발사" name="separate" class="input2">개발사<br>
+                        <input id="os" type="radio" value="개인" name="separate" class="input">개인<br>
+                        <input id="os" type="radio" value="개발사" name="separate" class="input">개발사<br>
                     </td>
 				</tr>
                 <tr>
 					<td>프로필 :</td>
 					<td>
-                        <input type="file" id="image" name="mm_profile" class="input1" accept="image/*" onchange="setThumbnail(event);">
+                        <input type="file" id="profile" name="mm_profile" class="input" accept="image/*" onchange="setThumbnail(event);">
                         <img id="profile_img" src="" width="200px">
                     </td>
 				</tr>
                 <tr>
 					<td>닉네임 :</td>
-					<td><input type="nickname" name="mm_nickname" placeholder="개발사는 회사 이름을 작성"><input type="hidden" name="renickname"></td>
+					<td><input type="text" id="nickname" name="mm_nickname" placeholder="개발사는 회사 이름을 작성" class="input"><input type="hidden" name="renickname"></td>
 				</tr>
 			</table>
 			<p align="center">
-				<button type="submit"  >회원 가입하기</button>
+				<button type="button" id="btn1"  >회원 가입하기</button>
 				&nbsp; &nbsp;
 				<button type="reset">작성 양식 초기화</button>
 			</p>
@@ -164,12 +170,11 @@ li {
 	<br>
 	<br>
 	<p align="center">
-		<button type="button" onclick="location.href='WEB-INF/view/index.jsp';">메인으로
+		<button type="button"><a href="index">메인으로</a>
 			가기</button>
 	</p>
-	<script type="text/javascript"
-		src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<script type="text/javascript">
+	
+	<script>
 		/**
 회원정보 입력 필수 입력 사항 확인
 이름, 아이디, 암호
@@ -177,51 +182,159 @@ li {
 re id의 값이 존재하는지 확인하여 중복체크여부를 검사
  */
 
-function joinCheck() {
-	if (document.joinform.mm_name.value == "") {
-		alert("이름을 입력해주세요.");
-		document.joinform.name.focus();
-		return false;
-	}
+ window.addEventListener("load", pageLoadedHandler);
+ function pageLoadedHandler(){
+     //submit 버튼이 눌려지면 이벤트 등록
+     // document.getElementById("submit").addEventListener("click", btnSubmit);
+     document.getElementById("btn1").addEventListener("click", btnSubmit);
+ }
 
-	if (document.joinform.mm_id.value == "") {
-		alert("아이디를 입력해주세요.");
-		document.joinform.id.focus();
-		return false;
-	}
-
-	if (document.joinform.mm_id.value.length < 4) {
-		alert("아이디는 4글자 이상이어야 합니다.");
-		document.joinform.name.focus();
-		return false;
-	}
-
-	if (document.joinform.mm_pwd.value == "") {
-		alert("비밀번호를 입력해주세요.");
-		document.joinform.pwd.focus();
-		return false;
-	}
+ // common function
+ function checkNullValue( n1, index, arr) {
+     console.log("1:" +  n1 + ", 2:"+index + ", 3:"+arr );
+     if(n1.value.length == 0){
+         alert("입력해주세요.");
+         n1.focus();
+         return false;
+     } else 
+         return true;
+ }
 
 
-	if (document.joinform.reid.value == "") {
-		alert("아이디 중복체크를 하지 않았습니다.");
-		return false;
-	}
+ // submit 클릭 관련 함수는 onload 밖에 정의하는 경우가 많음. why? 인라인 형태로 호출될 가능성이 높으므로..
+ function btnSubmit(){
+     console.log("btnSubmit 진입");
 
-	return true;
-}
+     var pw1 = document.getElementById("pwd");
+     var pw2 = document.getElementById("repwd");
 
-function idCheck() {
-	// 사용자 아이디가 입력되었는지 확인 루틴 구현
-	if (document.joinform.userid.value == "") {
-		alert("사용자 아이디를 입력해주세요.");
-		document.joinform.userid.focus();
-		return false;
-	}
-	// 아이디 중복 체크를 위한 페이지는 새로운 창에 출력한다.(idcheck.jsp)
-	var url = "idCheck.do?id=" + document.joinform.id.value;
-	window.open(url, "_blank_1", "toolbar=no, menubar=no, scrollbars=yes, resizable=no, width=450, height=200");
-	}
+     var pw1value = pw1.value;
+     var pw2value = pw2.value;
+
+     // 입력되지 않은 칸이 있는지 확인
+     // 방법 3
+     var inputElements = document.getElementsByClassName("input");
+     // element 형태인 경우 foreach 메소드 동작되지 않음. inputElements.forEach(checkNullValue);
+     // 해결 기존 for 사용
+     for(var i=0; i<inputElements.length; i++){
+         var cnv = checkNullValue(inputElements[i]);
+         if(cnv == false){ return false; }
+     }
+     
+     
+     var id = document.getElementById("id").value;
+     var regExpId = /^[a-zA-Z0-9]{5,15}$/;
+     if( !regExpId.test(id) ){
+         alert("영어 대소문자 + 숫자 + 특수문자(_#) 조건에 맞게 입력해주세요");
+         return false;
+     }
+     
+     
+     // 방법 2
+     // var cnv = checkNullValue(document.getElementById("id"));
+     // if(cnv == false){ return false; }
+     // var cnv = checkNullValue(document.getElementById("pwd"));
+     // if(cnv == false){ return false; }
+     // var cnv = checkNullValue(document.getElementById("repwd"));
+     // if(cnv == false){ return false; }
+     // var cnv = checkNullValue(document.getElementById("name"));
+     // if(cnv == false){ return false; }
+
+     // 방법 1
+     // if(document.getElementById("id").value.length == 0) {
+     //     alert("입력해주세요.");
+     //     document.getElementById("id").focus();
+     //     return false;
+     // }
+     // if(document.getElementById("pwd").value.length == 0) {
+     //     alert("입력해주세요.");
+     //     document.getElementById("pwd").focus();
+     //     return false;
+     // }
+     // if(document.getElementById("repwd").value.length == 0) {
+     //     alert("입력해주세요.");
+     //     document.getElementById("repwd").focus();
+     //     return false;
+     // }
+     // if(document.getElementById("name").value.length == 0) {
+     //     alert("입력해주세요.");
+     //     document.getElementById("name").focus();
+     //     return false;
+     // }
+
+     // 비밀번호 6글자이상, 12글자 이하  ==> 정상
+     // 경고 popup “조건에 맞게 입력해주세요”  // action 으로 이동되지 않음.
+     // if(pw1value.length < 6 || pw1value.length > 12) {
+     //     alert("6~12자 조건에 맞게 입력해주세요");
+     //     return false;
+     // } 
+     // 비밀번호와 비밀번호 확인란이 
+     // 동일하지 않으면 alert창으로 “동일하게 입력해주세요”  // action 으로 이동되지 않음.
+     if(pw1value != pw2value) {
+         alert("동일하게 입력해주세요");
+         return false;
+     } 
+     // 영어 대소문자 + 숫자 + 특수문자(_#) 유효, 6글자이상, 12글자 이하
+     // 정규표현식 RegExp 
+     // /패턴/ 
+     // ^ 시작문자, $ 끝부분
+     // []  문자 1개, 그 안에 유효한 문자, 예) [0123456789] [0-9]
+     // {3} 자릿수
+     // var regExp = /^[A-Za-z0-9_#]{6,12}$/;
+     // 첫글자는 영어 대문자이고 영문자+ 숫자 + 특수문자(_!) 유효, 8글자이상, 16글자 이하
+     var regExp = /^[A-Z][A-Za-z0-9_!]{7,15}$/;
+     if( !regExp.test(pw1value) ){
+         alert("영어 대소문자 + 숫자 + 특수문자(_#) 조건에 맞게 입력해주세요");
+         return false;
+     }
+
+     // 이름 입력은 한글입력만 가능 2글자 이상 10글자 이하
+     var name = document.getElementById("name").value;
+     var regExpName = /^[가-힣]{2,10}$/;
+     if( !regExpName.test(name) ){
+         alert("영어 대소문자 + 숫자 + 특수문자(_#) 조건에 맞게 입력해주세요");
+         return false;
+     }
+
+     // 휴대폰번호 입력은 
+     // 첫번째 입력란에 010, 011, 016, 017, 018, 019 유효, 
+     // 두번째 입력란은 숫자 3-4글자 입력
+     // 세번째 입력란은 숫자 4글자 입력
+     var phn1 = document.getElementById("phn1").value;
+     var phn2 = document.getElementById("phn2").value;
+     var phn3 = document.getElementById("phn3").value;
+     var regExpTel1= /^01[016789]$/;
+     if( !regExpTel1.test(tel1) ){
+         alert("010, 011, 016, 017, 018, 019 유효 조건에 맞게 입력해주세요");
+         return false;
+     }
+     var regExpTel2= /^[0-9]{3,4}$/;
+     if( !regExpTel2.test(tel2) ){
+         alert("3-4 자리 유효 조건에 맞게 입력해주세요");
+         return false;
+     }
+     var regExpTel3= /^[0-9]{4}$/;
+     if( !regExpTel3.test(tel3) ){
+         alert("4 자리 유효 조건에 맞게 입력해주세요");
+         return false;
+     }
+
+    
+
+     // 그 외는 action 으로 데이터 전달하면서 이동됨.
+     // {
+     //     var frm1 = document.getElementById("frmId1");
+     //     if(document.getElementById("id").value == "admin"){
+     //         frm1.action = "#관리자페이지";
+     //     } else {
+     //         frm1.action = "#일반페이지";
+     //     }                
+     //     frm1.method = "post";
+     //     frm1.submit();     //submit 매우 중요해
+     //     // return true;
+     // }
+     // 페이지 이동할때 a태그(그냥이동, 실어서 갈 수도 있어)/ form태그(입력받아서 이동) 두가지로 이동 가능
+ }        
 	</script>
 
 <div id="footer">

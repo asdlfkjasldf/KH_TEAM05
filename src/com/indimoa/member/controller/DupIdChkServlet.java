@@ -27,7 +27,7 @@ public class DupIdChkServlet extends HttpServlet {
 
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("WEB-INF/view/newMember.jsp").forward(request, response);		
+		request.getRequestDispatcher("WEB-INF/view/idCheck.jsp").forward(request, response);		
 	}  
     
     
@@ -46,7 +46,6 @@ public class DupIdChkServlet extends HttpServlet {
 		}
 		out.flush();
 		out.close();
-	//TODO test로 확인
 	}
 
 }

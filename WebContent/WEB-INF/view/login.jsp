@@ -188,13 +188,13 @@ li {
                 <input type="password" name="mm_pwd" id="pwd" autocomplete="off" required>
             </p>
             <p class="btn-area">
-                <button id="btn" type="submit" onclick="location.href ='"return loginCheck()'">로그인</button>
+                <button id="btn" type="submit" >로그인</button>
             </p>
             <p class="caption">
-                <a href='WEB-INF/view/findId.jsp'>아이디 찾기</a>
+                <a href="findId">아이디 찾기</a>
             </p>
             <p class="caption">
-                <a href='WEB-INF/view/findPwd.jsp'>비밀번호 찾기</a>
+                <a href="findPwd">비밀번호 찾기</a>
             </p>
         </form>
     </div>

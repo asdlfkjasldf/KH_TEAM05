@@ -30,7 +30,7 @@ public class DupNicknameChkServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("WEB-INF/view/newMember.jsp").forward(request, response);
+		request.getRequestDispatcher("WEB-INF/view/nicknameCheck.jsp").forward(request, response);
 	}
 
 	/**
@@ -38,7 +38,7 @@ public class DupNicknameChkServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		MemberService mservice = new MemberService();
-		int result = mservice.dupNicknameChk(request.getParameter("mm_id"));
+		int result = mservice.dupNicknameChk(request.getParameter("mm_nickname"));
 		PrintWriter out = response.getWriter();
 		
 		if(result > 0) {

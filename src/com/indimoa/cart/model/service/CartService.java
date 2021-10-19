@@ -14,6 +14,14 @@ public class CartService {
 	
 	public CartService() {}
 	
+	public Cart getCart(int ctno) {
+		Cart c = null;
+		Connection conn = JdbcTemplate.getConnection();
+		c = new CartDao().getCart(conn, ctno);
+		JdbcTemplate.close(conn);
+		return c;
+	}
+	
 	//장바구니 들어갈 시 Member id 확인
 	public Cart cartRetrive(String id) {
 		Connection conn = getConnection();

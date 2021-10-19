@@ -6,11 +6,11 @@ public class Cart {
 	private int ct_no;
 	private String mm_id;
 	private String ct_content;
-	private Timestamp ct_date;
+	private String ct_date;
 	private int ct_price;
 	public Cart() {}
 	
-	public Cart(int ct_no, String mm_id, String ct_content, Timestamp ct_date, int ct_price) {
+	public Cart(int ct_no, String mm_id, String ct_content, String ct_date, int ct_price) {
 		super();
 		this.ct_no = ct_no;
 		this.mm_id = mm_id;
@@ -55,11 +55,11 @@ public class Cart {
 		this.ct_content = ct_content;
 	}
 
-	public Timestamp getCt_date() {
+	public String getCt_date() {
 		return ct_date;
 	}
 
-	public void setCt_date(Timestamp ct_date) {
+	public void setCt_date(String ct_date) {
 		this.ct_date = ct_date;
 	}
 	

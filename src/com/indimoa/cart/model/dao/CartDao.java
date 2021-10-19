@@ -31,6 +31,30 @@ public class CartDao {
 //		return ( (JdbcTemplate) ds).getConnection();
 //	}
 	
+	public Cart getCart(Connection conn, int ctno) {
+		Cart c = null;
+		String query = "select ct_no, mm_id, ct_content, ct_date, ct_price from cart where ct_no = ? ";
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, ctno);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				c= new Cart();
+				c.setCt_no(rset.getInt("ct_no"));
+				c.setMm_id(rset.getString("mm_id"));
+				c.setCt_content(rset.getString("ct_content"));
+				c.setCt_date(rset.getString("ct_date"));
+				c.setCt_price(rset.getInt("ct_price"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return c;
+	}
+	
 	
 	public Cart cartRetrieve(String id) {
 		
@@ -48,7 +72,7 @@ public class CartDao {
 				c.setCt_no(rset.getInt("ct_no"));
 				c.setMm_id(rset.getString("mm_id"));
 				c.setCt_content(rset.getString("ct_content"));
-				c.setCt_date(rset.getTimestamp("ct_date"));
+				c.setCt_date(rset.getString("ct_date"));
 				c.setCt_price(rset.getInt("ct_price"));
 			}
 		} catch (SQLException e) {
@@ -70,7 +94,7 @@ public class CartDao {
 				pstmt.setInt(1, c.getCt_no());
 				pstmt.setString(2, c.getMm_id());
 				pstmt.setString(3, c.getCt_content());
-				pstmt.setTimestamp(4, c.getCt_date());
+				pstmt.setString(4, c.getCt_date());
 				pstmt.setInt(5, c.getCt_price());
 				
 				result = pstmt.executeUpdate();
@@ -140,7 +164,7 @@ public class CartDao {
 					vo.setCt_no(rset.getInt("ct_no"));
 					vo.setMm_id(rset.getString("mm_id"));
 					vo.setCt_content(rset.getString("ct_content"));
-					vo.setCt_date(rset.getTimestamp("ct_date"));
+					vo.setCt_date(rset.getString("ct_date"));
 					vo.setCt_price(rset.getInt("ct_price"));
 					volist.add(vo);
 				} while (rset.next());
@@ -178,7 +202,7 @@ public class CartDao {
 					vo.setCt_no(rset.getInt("ct_no"));
 					vo.setMm_id(rset.getString("mm_id"));
 					vo.setCt_content(rset.getString("ct_content"));
-					vo.setCt_date(rset.getTimestamp("ct_date"));
+					vo.setCt_date(rset.getString("ct_date"));
 					vo.setCt_price(rset.getInt("ct_price"));
 					volist.add(vo);
 				} while (rset.next());
