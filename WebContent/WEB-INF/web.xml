@@ -6,7 +6,7 @@
     <!-- TODO encoding filter  -->
  <filter> 
  <filter-name>EncodingFilter</filter-name> 
- <filter-class>common.filter.EncodingFilter</filter-class> 
+ <filter-class>com.indimoa.common.EncodingFilter</filter-class> 
  </filter> 
  
  <filter-mapping>

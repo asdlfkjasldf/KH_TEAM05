@@ -17,7 +17,10 @@ public class JdbcTemplate {
 		Connection conn = null;
 	
 		try {
-			
+			Context initContext = new InitialContext();
+			Context envContext = (Context)initContext.lookup("java:/comp/env");  //Tomcat resource 설정을 찾기 server.xml;
+			DataSource ds = (DataSource)envContext.lookup("jdbc/indimoaDclass");   // jdbc/indimoaDclass   // jdbc/indimoaLocal
+			conn = ds.getConnection();
 			if(conn!=null) System.out.println("2021 10 08 DBCP JNDI 연결성공");
 			
 			else System.out.println("2021 10 08 DBCP JNDI 연결실패");

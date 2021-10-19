@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import com.indimoa.common.JdbcTemplate;
 import com.indimoa.board.model.dao.FbBoardDao;
 import com.indimoa.board.model.vo.FbBoard;
+import com.indimoa.board.model.vo.FbBoardImg;
 import com.indimoa.board.model.vo.FbBoardR;
 
 public class FbBoardService {
@@ -23,6 +24,14 @@ public class FbBoardService {
 		vor = new FbBoardDao().getBoardR(conn, bno);
 		JdbcTemplate.close(conn);
 		return vor;
+	}
+	
+	public FbBoardImg getImage(int bno) {
+		FbBoardImg img = null;
+		Connection conn = JdbcTemplate.getConnection();
+		img = new FbBoardDao().getImage(conn, bno);
+		JdbcTemplate.close(conn);
+		return img;
 	}
 
 	public int getBoardCount() {
@@ -121,6 +130,16 @@ public class FbBoardService {
 		Connection conn = JdbcTemplate.getConnection();
 
 		result = new FbBoardDao().insertRBoard(conn, vo);
+
+		JdbcTemplate.close(conn);
+		return result;
+	}
+	
+	public int insertImage(FbBoardImg img) {
+		int result = -1;
+		Connection conn = JdbcTemplate.getConnection();
+
+		result = new FbBoardDao().insertImage(conn, img);
 
 		JdbcTemplate.close(conn);
 		return result;

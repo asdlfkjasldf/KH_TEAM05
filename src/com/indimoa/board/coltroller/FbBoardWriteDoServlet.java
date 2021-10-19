@@ -14,6 +14,7 @@ import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
 import com.indimoa.board.model.service.FbBoardService;
 import com.indimoa.board.model.vo.FbBoard;
+import com.indimoa.board.model.vo.FbBoardImg;
 import com.indimoa.member.model.vo.Member;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
@@ -39,6 +40,7 @@ public class FbBoardWriteDoServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+
 	}
 
 	/**
@@ -78,16 +80,11 @@ public class FbBoardWriteDoServlet extends HttpServlet {
 				oVo.getFbReply(), oVo.getFbReport(), oVo.getBref(), oVo.getBreLevel(), oVo.getBreStep());
 		System.out.println("vo: " + vo);
 		int result = new FbBoardService().insertBoard(vo);
-
 		// 파일 저장 경로 (web 경로 밑에 해당 폴더를 생성해 주어야 한다)
 		String fileSavePath = "upload";
 		// 파일 크기 10M 제한
-		int uploadSizeLimit = 10 * 1024 * 1024;
+		int uploadSizeLimit = 10 * 2048 * 2048;
 		String encType = "UTF-8";
-
-		// enctype="multipart/form-data" 로 전송되었는지 확인
-		if (!ServletFileUpload.isMultipartContent(request))
-			response.sendRedirect("view/error/Error.jsp");
 
 		ServletContext context = getServletContext();
 		String uploadPath = context.getRealPath(fileSavePath);
@@ -105,9 +102,11 @@ public class FbBoardWriteDoServlet extends HttpServlet {
 		} else {
 			System.out.println("업로드 성공");
 		}
-		
+
+		FbBoardImg img = new FbBoardImg();
+		FbBoardImg voi = new FbBoardImg(uploadPath, img.getFbNo());
+		int result2 = new FbBoardService().insertImage(voi);
+
 		response.sendRedirect("fbboardlist");
-
 	}
-
 }

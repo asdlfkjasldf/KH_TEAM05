@@ -1,3 +1,4 @@
+<%@page import="com.indimoa.board.model.vo.FbBoardImg"%>
 <%@page import="com.indimoa.member.model.vo.Member"%>
 <%@page import="com.indimoa.board.model.vo.FbBoard"%>
 <%@page import="com.indimoa.board.model.vo.FbBoardR"%>
@@ -8,9 +9,8 @@
 
 <%
 	FbBoard vo = (FbBoard) request.getAttribute("boardvo");
-%>
-<%
 	FbBoardR vor = (FbBoardR) request.getAttribute("boardvor");
+	FbBoardImg img = (FbBoardImg) request.getAttribute("uploadfile");
 %>
 
 <!DOCTYPE html>
@@ -40,7 +40,7 @@
 			<td colspan="3"><%=vo.getFbContent()%></td>
 		</tr>
 		<tr>
-			<td></td>
+			<td><%=img.getImgPath()%></td>
 		</tr>
 		<tr>
 			<td>신고수 : <%=vo.getFbReport()%></td>

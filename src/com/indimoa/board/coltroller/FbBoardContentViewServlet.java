@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.indimoa.board.model.service.FbBoardService;
 import com.indimoa.board.model.vo.FbBoard;
+import com.indimoa.board.model.vo.FbBoardImg;
 import com.indimoa.board.model.vo.FbBoardR;
-
 
 /**
  * Servlet implementation class FbBoardContentViewServlet
@@ -35,20 +35,7 @@ public class FbBoardContentViewServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		response.setCharacterEncoding("UTF-8");
-		response.setContentType("text/html; charset=UTF-8");
-		request.setCharacterEncoding("UTF-8");
 
-		String no = request.getParameter("no");
-		int bno = Integer.parseInt(no);
-		FbBoard vo = new FbBoardService().getBoard(bno);
-		FbBoardR vor = new FbBoardService().getBoardR(bno);
-
-		ArrayList<FbBoardR> vorlist = new FbBoardService().selectBoardRList(bno);
-		request.setAttribute("vorlist", vorlist);
-		request.setAttribute("boardvo", vo);
-		request.setAttribute("boardvor", vor);
-		request.getRequestDispatcher("/WEB-INF/view/fbboardcontent.jsp").forward(request, response);
 	}
 
 	/**
@@ -57,7 +44,21 @@ public class FbBoardContentViewServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		doGet(request, response);
-	}
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=UTF-8");
+		request.setCharacterEncoding("UTF-8");
 
+		String no = request.getParameter("no");
+		int bno = Integer.parseInt(no);
+		FbBoard vo = new FbBoardService().getBoard(bno);
+		FbBoardR vor = new FbBoardService().getBoardR(bno);
+		FbBoardImg img = new FbBoardService().getImage(bno);
+
+		ArrayList<FbBoardR> vorlist = new FbBoardService().selectBoardRList(bno);
+		request.setAttribute("vorlist", vorlist);
+		request.setAttribute("boardvo", vo);
+		request.setAttribute("boardvor", vor);
+		request.setAttribute("uploadfile", img);
+		request.getRequestDispatcher("/WEB-INF/view/fbboardcontent.jsp").forward(request, response);
+	}
 }

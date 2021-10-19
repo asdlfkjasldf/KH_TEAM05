@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import com.indimoa.common.JdbcTemplate;
 import com.indimoa.board.model.vo.FbBoard;
+import com.indimoa.board.model.vo.FbBoardImg;
 import com.indimoa.board.model.vo.FbBoardR;
 import com.indimoa.board.model.vo.TipBoard;
 
@@ -73,6 +74,31 @@ public class FbBoardDao {
 			JdbcTemplate.close(pstmt);
 		}
 		return vor;
+	}
+
+	public FbBoardImg getImage(Connection conn, int bno) {
+		FbBoardImg img = null;
+		String sql = "select fbimg.img_path, fbimg.fb_no from fb_board_img fbimg join free_board_m fbboard"
+				+ " on fbimg.fb_no = fbboard.fb_no";
+
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, bno);
+			rset = pstmt.executeQuery();
+			if (rset.next()) {
+				img = new FbBoardImg();
+				img.setFbNo(rset.getInt("FBIMG.FB_NO"));
+				img.setImgPath(rset.getString("FBIMG.IMG_PATH"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JdbcTemplate.close(rset);
+			JdbcTemplate.close(pstmt);
+		}
+		return img;
 	}
 
 	public int getBoardCount(Connection conn) {
@@ -234,11 +260,11 @@ public class FbBoardDao {
 		System.out.println("update 결과 : " + result);
 		return result;
 	}
-		
+
 	public int deleteBoard(Connection conn, int bno) {
 		int result = -1;
 		String sql = "delete from free_board_m where fb_no=?";
-		
+
 		PreparedStatement pstmt = null;
 
 		try {
@@ -253,7 +279,7 @@ public class FbBoardDao {
 		System.out.println("delete 결과 : " + result);
 		return result;
 	}
-	
+
 	public int deleteRBoard(Connection conn, int bno) {
 		int result = -1;
 		String sql = "delete from free_board_m_r where fb_r_no=?";
@@ -288,11 +314,11 @@ public class FbBoardDao {
 		System.out.println("report 결과 : " + result);
 		return result;
 	}
-	
+
 	public int insertBoard(Connection conn, FbBoard vo) {
 		int result = -1;
 
-		String sqlUpdate = "update FREE_BOARD_M set bre_step=bre_step+1 " + "where bref=? and bre_step>?";
+		String sqlUpdate = "update FREE_BOARD_M set bre_step=bre_step+1 where bref=? and bre_step>?";
 
 		String sqlInsert = "INSERT INTO FREE_BOARD_M (FB_NO,MM_ID,FB_TITLE,FB_CONTENT,FB_DATETIME,FB_VISIT,FB_REPLY,FB_REPORT,bref, bre_level, bre_step)"
 				+ " VALUES (?, ?, ?, ?, sysdate, ?, ?, ?, ?, ?, ?)";
@@ -378,6 +404,27 @@ public class FbBoardDao {
 			JdbcTemplate.close(pstmt);
 		}
 		System.out.println("FREE_BOARD_M_R insert 결과 : " + result);
+		return result;
+	}
+
+	public int insertImage(Connection conn, FbBoardImg img) {
+		int result = -1;
+		String sql = "INSERT INTO FB_BOARD_IMG (FB_NO, IMG_PATH) VALUES (?, ?)";
+
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, img.getFbNo());
+			pstmt.setString(2, img.getImgPath());
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JdbcTemplate.close(rset);
+			JdbcTemplate.close(pstmt);
+		}
+		System.out.println("이미지 업로드 결과 : " + result);
 		return result;
 	}
 }
