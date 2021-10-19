@@ -9,14 +9,13 @@
 <meta charset="UTF-8">
 <title>인디모아 공지사항 게시판에 오신것을 환영합니다.</title>
 </head>
-<script type="text/javascript">
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
 
-//console.log(volist);
-console.log("작동확인");
 </script>
 <body>
 
-	<h1>게 시 판</h1>
+	<h1>인디모아 공지사항</h1>
 	<table border="1" collapse="collapse">
 		<tr>
 			<td>번호</td>
@@ -46,9 +45,9 @@ console.log("작동확인");
 
 
 	<br>
-	<a href="boardwrite"> 글쓰기 </a>
-	<a href="boardupdate">글수정 </a>
-	<a href="boarddelete">글삭제 </a>
+	<a href="noticewrite"> 글쓰기 </a>
+	<a href="noticeupdate">글수정 </a>
+	<a href="noticedelete">글삭제 </a>
 	</body>
 </html>
 

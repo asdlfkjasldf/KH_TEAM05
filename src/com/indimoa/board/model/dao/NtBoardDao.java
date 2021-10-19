@@ -103,6 +103,28 @@ public class NtBoardDao {
 		
 		return vo;
 	}
+
+	public int insertNtBoard(Connection conn, NtBoard vo) {
+		int result = -1;
+		String sqlInsert = "insert into notice_board"
+				+ "(nt_no, nt_title, nt_content, ad_id, nt_datetime)"
+				+ "values( SEQ_Notice_Board_NO.nextval ,? ,? ,?, systimestamp)";
+		PreparedStatement pstmt = null;
+		try {
+			pstmt = conn.prepareStatement(sqlInsert);
+			pstmt.setString(1, vo.getNtTitle());
+			pstmt.setString(2, vo.getNtContent());
+			pstmt.setString(3, vo.getAdId());
+			
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JdbcTemplate.close(pstmt);
+		}
+		
+		return result;
+	}
 	
 
 	

@@ -42,4 +42,13 @@ public class NtBoardService {
 		return vo;
 	}
 
+	public int insertNtBoard(NtBoard vo) {
+		int result = -1;
+		Connection conn = JdbcTemplate.getConnection();
+		
+		result = new NtBoardDao().insertNtBoard(conn,vo);
+		
+		return result;
+	}
+
 }

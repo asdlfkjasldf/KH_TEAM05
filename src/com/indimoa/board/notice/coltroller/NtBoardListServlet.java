@@ -1,4 +1,4 @@
-package com.indimoa.board.coltroller;
+package com.indimoa.board.notice.coltroller;
 
 import java.io.IOException;
 import java.sql.Connection;

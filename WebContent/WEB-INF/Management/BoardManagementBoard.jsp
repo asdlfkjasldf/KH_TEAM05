@@ -221,7 +221,7 @@
 <div class="Header"> </div>
 
 <div class="Article">
-<h1> 게시판 </h1>
+<h1> 게시판 관리 </h1>
 <hr>
 <div id="select">
 	

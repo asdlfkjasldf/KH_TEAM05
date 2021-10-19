@@ -1,4 +1,4 @@
-package com.indimoa.board.coltroller;
+package com.indimoa.board.notice.coltroller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -38,7 +38,7 @@ public class NtBoardContentViewServlet extends HttpServlet {
 		// bno는 pk로 결과는 Board 모양 1개일 것임.
 		NtBoard vo = new NtBoardService().getNtBoard(bno);
 		request.setAttribute("boardvo", vo);
-		request.getRequestDispatcher("WEB-INF/view/noticeboardcontent.jsp").forward(request, response);
+		request.getRequestDispatcher("WEB-INF/view/ntboard_content.jsp").forward(request, response);
 		//jsp, todo
 		
 		String t = request.getParameter("t");

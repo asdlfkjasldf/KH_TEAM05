@@ -64,6 +64,12 @@ public class NtBoard {
 		this.ntNo = bno;
 		//게시물관리에서 삭제하기 위해 추가
 	}
+
+	public NtBoard(String title, String content, String writer) {
+		this.ntTitle = title;
+		this.ntContent = content;
+		this.adId = writer;
+	}
 	
 
 
