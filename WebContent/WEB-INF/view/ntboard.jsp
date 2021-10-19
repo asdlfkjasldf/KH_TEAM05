@@ -28,7 +28,7 @@ console.log("작동확인");
 <c:if test="${volist != null }">
 	<c:forEach items="${volist}" var="vo">
 		<tr>
-			<td><a href="#=${vo.ntNo }">${vo.ntNo }</a></td>
+			<td><a href="noticecontentview?no=${vo.ntNo }">${vo.ntNo }</a></td>
 			<td>
 			${vo.ntTitle }
 			</td>
