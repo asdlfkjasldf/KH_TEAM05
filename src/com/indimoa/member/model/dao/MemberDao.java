@@ -33,15 +33,43 @@ public class MemberDao {
 		return instance;
 	}
 	
-	public Connection getConnection() throws Exception {
-		Connection conn = null;
-		Context initContext = new InitialContext();
-		Context envContent = (Context)initContext.lookup("java:/comp/env");   //TODO
-		DataSource ds = (DataSource)envContent.lookup("jdbc/INDIMOA");
-		conn = ds.getConnection();
-		return conn;
-		}
+//	public Connection getConnection() throws Exception {
+//		Connection conn = null;
+//		Context initContext = new InitialContext();
+//		Context envContent = (Context)initContext.lookup("java:/comp/env");   //TODO
+//		DataSource ds = (DataSource)envContent.lookup("jdbc/INDIMOA");
+//		conn = ds.getConnection();
+//		return conn;
+//		}
 
+	
+	public Member getMember(Connection conn, String id) {
+		Member m = null;
+		String query = "select mm_id, mm_pwd, mm_name, mm_email, mm_phn, mm_com, mm_profile, mm_nickname, mm_membership, mm_point from member where mm_id = ?";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, id);
+			rset = pstmt.executeQuery();
+			if (rset.next()) {
+				m = new Member();
+				m.setMm_id(rset.getString("mm_id"));
+				m.setMm_pwd(rset.getString("mm_pwd"));
+				m.setMm_name(rset.getString("mm_name"));
+				m.setMm_email(rset.getString("mm_email"));
+				m.setMm_phn(rset.getString("mm_phn"));
+				m.setMm_com(rset.getString("mm_com"));
+				m.setMm_profile(rset.getString("mm_profile"));
+				m.setMm_nickname(rset.getString("mm_nickname"));
+				m.setMm_membership(rset.getString("mm_membership"));
+				m.setMm_point(rset.getInt("mm_point"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return m;
+	}
 
 	
 	public int userCheck(String id, String pwd) {

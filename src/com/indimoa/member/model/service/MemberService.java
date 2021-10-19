@@ -14,6 +14,16 @@ import com.indimoa.member.model.vo.Member;
 public class MemberService { 
 
 	public MemberService() {} 
+	
+	public Member getMember(String id) {
+		Member m = null;
+		Connection conn = JdbcTemplate.getConnection();
+		m = new MemberDao().getMember(conn, id);
+		JdbcTemplate.close(conn);
+		return m;
+	}
+	
+	
 // 로그인 시 Member 객체를 받아오는 메소드 
  
 	public Member loginMember(String id, String passwd) throws Exception { 
