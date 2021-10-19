@@ -39,7 +39,7 @@ public class NtBoardWriteServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//ajax로 데이터 들어올시
+		// 데이터 들어올시
 		PrintWriter out = response.getWriter();
 		
 		String title = request.getParameter("t");

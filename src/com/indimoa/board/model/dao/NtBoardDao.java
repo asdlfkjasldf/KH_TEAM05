@@ -125,6 +125,65 @@ public class NtBoardDao {
 		
 		return result;
 	}
+
+	public ArrayList<NtBoard> loadNtBoardContent(Connection conn, int bno) {
+		ArrayList<NtBoard> volist = null;
+		
+		String sqlload = "select nt_No, ad_Id , nt_Title , nt_Content , "
+				+ "to_char(nt_Datetime,'YYYY-MM-DD hh:mm') nt_Datetime "
+				+ "from notice_board where nt_No = ?";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sqlload);
+			pstmt.setInt(1, bno);
+			rset = pstmt.executeQuery();
+			volist = new ArrayList<NtBoard>();
+			if (rset.next()) {
+				
+				do {
+					NtBoard vo = new NtBoard();
+					vo.setNtNo(rset.getInt("nt_No"));
+					vo.setAdId(rset.getString("ad_Id"));
+					vo.setNtTitle(rset.getString("nt_Title"));
+					vo.setNtContent(rset.getString("nt_Content"));
+					vo.setNtDatetime(rset.getString("nt_Datetime"));
+					volist.add(vo);
+				} while (rset.next());
+				
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JdbcTemplate.close(rset);
+			JdbcTemplate.close(pstmt);
+		}
+		//System.out.println("[jhseong]-- 공지사항의 현재글 리턴은"+ volist);
+		return volist;
+	}
+
+	public int updateNtBoard(Connection conn, NtBoard vo) {
+		int result = -1;
+		String sqlUpdate = "update notice_board set nt_title = ? , nt_content = ? where nt_no = ? ";
+		PreparedStatement pstmt = null;
+		try {
+			pstmt = conn.prepareStatement(sqlUpdate);
+			pstmt.setString(1, vo.getNtTitle());
+			pstmt.setString(2, vo.getNtContent());
+			pstmt.setInt(3, vo.getNtNo());
+			result = pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JdbcTemplate.close(pstmt);
+		}
+		
+		
+		return result;
+	}
 	
 
 	

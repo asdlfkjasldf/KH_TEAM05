@@ -23,7 +23,7 @@
 <title>관리자페이지  회원관리</title>
 <base href="/">
 <style type="text/css">
-<link href="css/MemberMangement.css">
+<link href='css/defaultstyle.css'>
 @import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
 
 * {

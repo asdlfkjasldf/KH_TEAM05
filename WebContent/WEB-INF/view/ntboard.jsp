@@ -27,9 +27,9 @@
 <c:if test="${volist != null }">
 	<c:forEach items="${volist}" var="vo">
 		<tr>
-			<td><a href="noticecontentview?no=${vo.ntNo }">${vo.ntNo }</a></td>
+			<td>${vo.ntNo }</td>
 			<td>
-			${vo.ntTitle }
+			<a href="noticecontentview?no=${vo.ntNo }">${vo.ntTitle }</a>
 			</td>
 			<td>${vo.adId }</td>
 			<td>${vo.ntDatetime }</td>
@@ -46,8 +46,6 @@
 
 	<br>
 	<a href="noticewrite"> 글쓰기 </a>
-	<a href="noticeupdate">글수정 </a>
-	<a href="noticedelete">글삭제 </a>
 	</body>
 </html>
 

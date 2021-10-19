@@ -10,7 +10,6 @@
 <meta charset="UTF-8">
 <title>${boardvo.ntTitle }</title>
 <script type="text/javascript">
-console.log(boardvo);
 </script>
 </head>
 <body>
@@ -35,5 +34,7 @@ console.log(boardvo);
 </c:if>
 </table>
 <a href="notice">목록</a>
+<a href="noticeupdate?no=${boardvo.ntNo }">글수정 </a>
+<a href="noticedelete?no=${boardvo.ntNo }">글삭제 </a>
 </body>
 </html>

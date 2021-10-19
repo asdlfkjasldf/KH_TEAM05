@@ -50,5 +50,25 @@ public class NtBoardService {
 		
 		return result;
 	}
+	
+	//업데이트 페이지에서 이전 자료를 불러오기
+	public ArrayList<NtBoard> loadNtBoardContent(int bno) {
+		ArrayList<NtBoard> volist = null;
+		Connection conn = JdbcTemplate.getConnection();
+		
+		volist = new NtBoardDao().loadNtBoardContent(conn, bno);
+		
+		return volist;
+	}
+	
+	//업데이트 페이지에서 적용시키깆
+	public int updateNtBoardUpdate(NtBoard vo) {
+		int result = -1;
+		Connection conn = JdbcTemplate.getConnection();
+		
+		result = new NtBoardDao().updateNtBoard(conn,vo);
+		
+		return 0;
+	}
 
 }

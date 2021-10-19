@@ -78,7 +78,7 @@ public class NtBoardListServlet extends HttpServlet {
 		request.setAttribute("endPage", endPage);
 		request.setAttribute("pageCount", pageCount);
 		
-		request.getRequestDispatcher("WEB-INF/view/ntboard.jsp").forward(request, response);;
+		request.getRequestDispatcher("WEB-INF/view/ntboard.jsp").forward(request, response);
 	}
 
 	/**
