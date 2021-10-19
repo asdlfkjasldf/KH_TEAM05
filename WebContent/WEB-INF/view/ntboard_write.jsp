@@ -1,3 +1,4 @@
+<link rel="stylesheet" type="text/css" href="./css/myStyle.css">
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
@@ -6,7 +7,6 @@
 <head>
 <meta charset="UTF-8">
 <title>공지사항 글쓰기</title>
-<link rel='stylesheet' href='/css/defaultstyle.css' type='text/css'> <!-- 현재 링크로 불러오는게 안됌 -->
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <style type="text/css" >
 #textTitle{

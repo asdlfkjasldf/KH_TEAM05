@@ -1,3 +1,4 @@
+<link rel="stylesheet" type="text/css" href="./css/myStyle.css">
 <%@page import="com.indimoa.board.model.vo.NtBoard"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"

@@ -7,8 +7,31 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<style type="text/css">
+.accordion{
+	background: #eee;
+	color: green;
+	cursor: pointer;
+	border: none;
+	text-align: center;
+	transition: 0.4s;
+}
+.ac:active, .accordion:hover {
+	background: #ccc;
+}
+.panel{
+	padding: 0 18px;
+	background: white;
+	max-height: 0;
+	overflow: hidden;
+	transition: max-height 0.2s ease-out;
+}
+</style>
+
 </head>
 <body>
 
@@ -17,9 +40,18 @@
 	<div id="highmenu">
 	 <span>
 	    <ul>
-        <li><a href="#">상점</a></li>
-        <li><a href="#">커뮤니티</a></li>
-        <li><a href="#">뉴스</a></li>
+        <li><a href="./GameList">상점</a></li>
+        <li><button class="accordion">커뮤니티</button>
+        	<div class="panel">
+        	<ul>
+        	<li><a href="./fbboardlist">자유게시판</a></li>
+        	<li><a href="./gbboardlist">개발사게시판</a></li>
+        	<li><a href="./tboardlist">팁게시판</a></li>
+        	</ul>
+        	</div>
+        </li>
+        
+        <li><a href="./notice">뉴스</a></li>
         <li><a href="#">카테고리</a></li>
         <li><a href="#">지원</a></li>
         <li><input type="text" id="btnSearchGame"></li>
@@ -29,10 +61,10 @@
 	</div>
 	<span id="topmenu">
 	<ul>
-        <li><a href="#">회원가입</a></li>
-        <li><a href="#">로그인</a></li>
+        <li><a href="./enrollmember">회원가입</a></li>
+        <li><a href="./memberlogin">로그인</a></li>
         <li><a href="#">마이페이지</a></li>
-        <li><a href="#">장바구니</a></li>
+        <li><a href="./cartlist">장바구니</a></li>
 	</ul>     
 	</span>
 	</div>
@@ -60,5 +92,22 @@
     INDIMOA ｜ 사업자등록번호 : 821-85-00000 ｜ 서울 강남 제2020-01호 ｜ 대표자 : 홍길동 ｜ 책임자 : 홍길동 ｜  개인정보관리책임자 : 홍길동<br><br>
         Copyright © 2020-2021 INDIMOA GAME SHOPPING MALL
 	</div>
+	<script>
+var acc = document.getElementsByClassName("accordion");
+var i;
+
+for (i = 0; i < acc.length; i++) {
+	console.log("메소드 진입확인");
+  acc[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var panel = this.nextElementSibling;
+    if (panel.style.maxHeight) {
+      panel.style.maxHeight = null;
+    } else {
+      panel.style.maxHeight = panel.scrollHeight + "px";
+    } 
+  });
+}
+</script>
 </body>
 </html>
