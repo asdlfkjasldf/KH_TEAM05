@@ -36,6 +36,10 @@ public class Game {
 	private int giNo;
 	//private int ggNo;
 	private String originFileAddress;
+	
+	
+	//상품 이미지 불러오기 연습
+	//private multipartFile file1;
 
 
 

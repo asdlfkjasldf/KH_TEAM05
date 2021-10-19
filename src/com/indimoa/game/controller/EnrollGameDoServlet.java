@@ -47,9 +47,11 @@ public class EnrollGameDoServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 //		doGet(request, response);
-			  	response.setCharacterEncoding("UTF-8");
-		response.setContentType("text/html; charset=UTF-8");
-		request.setCharacterEncoding("UTF-8");
+//		response.setCharacterEncoding("UTF-8");
+//		response.setContentType("text/html; charset=UTF-8");
+//		request.setCharacterEncoding("UTF-8");
+		
+		
 		PrintWriter out = response.getWriter();
 
 		GameService gservice = new GameService();
@@ -94,7 +96,13 @@ public class EnrollGameDoServlet extends HttpServlet {
 		String gPublisher =multi.getParameter("ggPublisher");
 		String gLanguages =multi.getParameter("ggLanguages");
 		String gInfomation =multi.getParameter("ggInfomation");
+		
+		
+		
+		String goriginFileAddress=multi.getParameter("originFileAddress");
 
+		
+		
 //		int gNo = 0;
 //		try {
 //			gNo= Integer.parseInt(gNostr);
@@ -123,6 +131,9 @@ public class EnrollGameDoServlet extends HttpServlet {
 		vo.setGgPublisher(gPublisher);
 		vo.setGgLanguages(gLanguages);
 		vo.setGgInfomation(gInfomation);
+		
+		
+		vo.setOriginFileAddress(goriginFileAddress);
 		
 		System.out.println("여기 데이터 들어오나: " +vo);
 		

@@ -37,9 +37,9 @@ public class GameListServlet extends HttpServlet {
 //	ArrayList<GameVO> volist = new GameListService().selectGameList();
 //	request.setAttribute("volist", volist);		
 //	request.getRequestDispatcher("/WEB-INF/view/gamelist.jsp").forward(request, response);
-		response.setCharacterEncoding("UTF-8");
-		response.setContentType("text/html; charset=UTF-8");
-		request.setCharacterEncoding("UTF-8");
+//		response.setCharacterEncoding("UTF-8");
+//		response.setContentType("text/html; charset=UTF-8");
+//		request.setCharacterEncoding("UTF-8");
 		
 		PrintWriter out  = response.getWriter();
 		

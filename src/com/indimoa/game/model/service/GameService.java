@@ -69,15 +69,7 @@ public class GameService {
 		return volist;
 	}
 	
-//	public ArrayList<Game> selectBoardList() {
-//		ArrayList<Game> volist = null;
-//		Connection conn = JdbcTemplate.getConnection();
-//
-//		volist = new GameDao().selectBoardList(conn);
-//
-//		JdbcTemplate.close(conn);
-//		return volist;
-//	}
+
 	
 //	public Game getBoard(int bno) {
 //		Game vo = null;
@@ -124,6 +116,18 @@ public class GameService {
 //		return result;
 //	}
 	
+	
+	// 기존 GAME 객체의 정보를 수정하는 메소드 
+		 public int updateGame(Game g) { 
+		 Connection conn = JdbcTemplate.getConnection(); 
+		 int result = new GameDao().updateGame(conn, g);
+		 
+		 if(result > 0) commit(conn); 
+		 else rollback(conn); 
+		 JdbcTemplate.close(conn); 
+		 
+		 return result; 
+		 } 
 	
 
 }

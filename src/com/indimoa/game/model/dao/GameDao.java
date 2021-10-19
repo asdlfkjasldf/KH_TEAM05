@@ -1,6 +1,10 @@
 package com.indimoa.game.model.dao;
 
 import com.indimoa.common.JdbcTemplate;
+
+import static com.indimoa.common.JdbcTemplate.commit;
+import static com.indimoa.common.JdbcTemplate.rollback;
+
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -10,6 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.indimoa.game.model.vo.Game;
+import com.indimoa.member.model.dao.MemberDao;
+import com.indimoa.member.model.vo.Member;
 
 public class GameDao {
 
@@ -235,62 +241,46 @@ public class GameDao {
 			JdbcTemplate.close(pstmt);
 		}
 		return result;
-		
-		
-		
+
 	}
-
 	
-//	public Game getGamee(Connection conn, int bno) {
-//		Game vo = null;
-////		String sql = "select TIP_NO,GD_GAMEDEVID,TIP_TITLE,TIP_CONTENT,TO_CHAR(TIP_DATETIME, 'yyyy-mm-dd') TIP_DATETIME, TIP_VISIT,TIP_REPLY,TIP_REPORT,bref, bre_level, Bre_step "
-////				+ " from Tip_Board where TIP_NO = ?";
-//		
-//		String sql = "select GG_NO,GG_TITLE,GG_PRICE,GG_SYSTEM_REQUIREMENTS,GG_GENRE, GG_DEVELOPER, GG_RELEASE_DATE,GG_PUBLISHER,TIP_REPORT,GG_LANGUAGES, GG_INFORMATION "
-//				+ " from GAME where GG_NO = ?";
-//		
-//		
-//		PreparedStatement pstmt = null;
-//		ResultSet rset = null;
-//		try {
-//			pstmt = conn.prepareStatement(sql);
-//			pstmt.setInt(1, bno);
-//			rset = pstmt.executeQuery();
-//			if (rset.next()) {
-//				vo = new Game();
-////				vo.setTipNo(rset.getInt("TIP_NO"));
-////				vo.setGdGamedevid(rset.getString("GD_GAMEDEVID"));
-////				vo.setTipTitle(rset.getString("TIP_TITLE"));
-////				vo.setTipContent(rset.getString("TIP_CONTENT"));
-////				vo.setTipDatetime(rset.getString("TIP_DATETIME"));
-////				vo.setTipVisit(rset.getInt("TIP_VISIT"));
-////				vo.setTipReply(rset.getInt("TIP_REPLY"));
-////				vo.setTipReport(rset.getInt("TIP_REPORT"));
-////				vo.setBref(rset.getInt("BREF"));
-////				vo.setBreLevel(rset.getInt("BRE_LEVEL"));
-////				vo.setBreStep(rset.getInt("BRE_STEP"));
-//				
-//				vo.setGgNo(rset.getInt("GG_NO"));
-//				vo.setGgTitle(rset.getString("GG_TITLE"));
-//				vo.setGgPrice(rset.getInt("GG_PRICE"));
-//				vo.setGgSystemRequirement(rset.getString("GG_SYSTEM_REQUIREMENTS"));
-//				vo.setGgGenre(rset.getString("GG_GENRE"));
-//				vo.setGgDeveloper(rset.getString("GG_DEVELOPER"));
-//				vo.setGgReleaseDate(rset.getString("GG_RELEASE_DATE"));
-//				vo.setGgPublisher(rset.getString("GG_PUBLISHER"));
-//				vo.setGgLanguages(rset.getString("GG_LANGUAGES"));
-//				vo.setGgInfomation(rset.getString("GG_INFORMATION"));
-//			}
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		} finally {
-//			JdbcTemplate.close(rset);
-//			JdbcTemplate.close(pstmt);
-//		}
-//		return vo;
-//	}
-
-
+	public int updateGame(Connection conn, Game g) {
+		int result =0;
+		String sql = "UPDATE GAME SET "
+				+ "GG_TITLE=? ,GG_PRICE=?,GG_SYSTEM_REQUIREMENTS=?, GG_GENRE=?,"
+				+ "GG_DEVELOPER=?, GG_RELEASE_DATE=?, GG_PUBLISHER=?, GG_LANGUAGES=?, GG_INFORMATION=?"
+				+ "where gg_no=?";
+		
+		
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		try {
+			pstmt =conn.prepareStatement(sql);
+			pstmt.setString(1, g.getGgTitle());
+			pstmt.setInt(2, g.getGgPrice());
+			pstmt.setString(3, g.getGgSystemRequirement());
+			pstmt.setString(4, g.getGgGenre());
+			pstmt.setString(5, g.getGgDeveloper());
+			pstmt.setString(6, g.getGgReleaseDate());
+			pstmt.setString(7, g.getGgPublisher());
+			pstmt.setString(8, g.getGgLanguages());
+			pstmt.setString(9, g.getGgInfomation());
+			pstmt.setInt(10, g.getGgNo());
+			result =pstmt.executeUpdate();		
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JdbcTemplate.close(rset);
+			JdbcTemplate.close(pstmt);
+		}
+		System.out.println("update 결과 : " + result);
+		return result;
+	}
+	
+	
 
 	
 

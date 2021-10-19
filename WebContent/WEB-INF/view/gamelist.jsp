@@ -101,13 +101,21 @@ li {
 	width: 85%;
 	font: 15px;
 	float: right;
-	background-color: gray;
+	
 }
 
 .Footer {
 	font: 15px;
 	width: 100%;
 	height: 190px;
+}
+
+#table{
+width: 85%;
+	font: 15px;
+	float: right;
+	
+
 }
 </style>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -153,7 +161,6 @@ li {
 
 <body>
 
-	
 	<div class="Header">
 	<div id="logo">로고추가할곳</div>
 	<div id="highmenu">
@@ -191,83 +198,76 @@ li {
 		</div>
 
 
+<div class="Article">
+<h1>  게임 상점 </h1>
+
+
+	<form method=get action="<c:url value='/GameList'/>" >					
+	<select id="sc" name="sc">
+        <option value="nk">게임타이틀</option>
+        <option value="ik">장르</option>
+        <option value="nik">발매일</option>
+	</select>
+	
+	<input type="text" name="sk" id="sk">
+	<button type="submit" id="btnGameView">조회</button>
+	</form>
 
 
 
-
-
-
-
-
-
-<h1>  게임 리스트</h1>
-<table border="1">
-<tr>
-<td>번호</td>
-			<td>제목</td>
-			<td>게임 이미지</td>			
+<table border="1" collapse="collapse" >
+			<tr>
+			<td>번호</td>
+			<td>게임 이미지</td>
+			<td>게임 제목</td>			
 			<td>가격</td>
 			<td>장르</td>
 			<td>개발사</td>
 			<td>발매일</td>
-						<td>언어</td>
-			
-			
-		</tr>
+			<td>언어</td>
+			</tr>
 <%
 		if(volist != null){
 		for(Game vo : volist){
+			// tr이 volist 갯수 만큼 생기게 됨.
+			// <%= 은 화면에 출력을 위한 표현식을 작성하는 태그, ; 없어야한다.
 %>
 		
 		<tr>
-			<td>
-			<%=vo.getGgNo()%>
-			</td>
+			<td><%=vo.getGgNo()%></td>
+			
+			
+			
+			
 			
 			<td>게임 이미지
-			<%=vo.getOriginFileAddress()%></td>	
+			
+			<!--img alt="#" src="C:\z_worksapce\z_java\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\indimoa\upload/<%=vo.getOriginFileAddress()%>" width="100"-->
+			<!--img alt="#" src="../wtpwebapps/upload/<%=vo.getOriginFileAddress()%>" width="100"-->
+			<%=vo.getOriginFileAddress()%>
+			<!--img src="${vo.imageSavePath}">  -->
+			
+			
+			</td>	
+		
+		
+		
+		
+		
+		
 		
 			<td>
 			<a href="gamecontent?no=<%=vo.getGgNo()%>"> <%=vo.getGgTitle()%> </a>
 			</td>
 			
-			<td>  
-			<%=vo.getGgPrice()%>원
-			</td> 
-			
-			<!--
-			<td>  
-			<%=vo.getGgSystemRequirement()%>
-			</td>
-			-->
-			 
-			<td> 			
-			<%=vo.getGgGenre()%>
-			</td>
-			
-			<td>  
-			<%=vo.getGgDeveloper()%>
-			</td>
-			
-		
-		
-			<td> 
-			<%=vo.getGgReleaseDate()%>
-			</td>
-			<!--
-			<td>  
-			<%=vo.getGgPublisher()%>
-			</td>
-			-->
-			
-			<td> 
-			<%=vo.getGgLanguages()%>
-			</td>
-		<!--		
-			<td>  
-			<%=vo.getGgInfomation()%>
-			</td>
-			-->
+			<td><%=vo.getGgPrice()%>원</td> 
+			<!-- <td><%=vo.getGgSystemRequirement()%></td>	-->
+			<td><%=vo.getGgGenre()%></td>			
+			<td><%=vo.getGgDeveloper()%></td>
+			<td><%=vo.getGgReleaseDate()%></td>
+			<!-- <td><%=vo.getGgPublisher()%></td>	-->
+			<td><%=vo.getGgLanguages()%></td>
+			<!--<td><%=vo.getGgInfomation()%></td>	-->
 			
 		<!--	
 		<td>  
@@ -290,6 +290,10 @@ li {
 %>
 
 	</table>
+
+
+
+
  <!--   EL를 사용할떄  
      <c:if test="${startPage > 1 }"> <a href="GameList?pagenum=${startPage-1 }">이전</a> </c:if>
 		<c:forEach begin="${startPage }" end="${endPage }" step="1" var="i">
