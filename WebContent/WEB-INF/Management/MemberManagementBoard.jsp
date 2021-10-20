@@ -1,3 +1,4 @@
+ <link rel="stylesheet" type="text/css" href="./css/myStyle.css">
  <%@page import="com.indimoa.member.model.vo.Member"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -23,28 +24,8 @@
 <title>관리자페이지  회원관리</title>
 <base href="/">
 <style type="text/css">
-<link href='css/defaultstyle.css'>
-@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
 
-* {
-	font-family: "Noto Sans KR", sans-serif;
-}
 
-body {
-	margin: 20px;
-	font: 15px;
-	
-	
-}
-a:link{
-  text-decoration: none!important;
-  color: green;
-}
-
-li {
-	list-style-type: none;
-	
-}
 #logo{
 	width: 100px;
 	
@@ -102,11 +83,7 @@ li {
 	background-color: gray;
 }
 
-.Footer {
-	font: 15px;
-	width: 100%;
-	height: 190px;
-}
+
 </style>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	
@@ -140,42 +117,61 @@ li {
 </head>
 <body>
 	
-	<div class="Header">
-	<div id="logo">로고추가할곳</div>
-	<div id="highmenu">
-	 <span>
+		<header>
+	<div id="logo"><a href="./"><img src="./image/ex1.png"></a></div>
+	<nav id="highmenu" class="topmenu">
 	    <ul>
-        <li><a href="#">상점</a></li>
-        <li><a href="#">커뮤니티</a></li>
-        <li><a href="#">뉴스</a></li>
+        <li><a href="./GameList">상점</a></li>
+        <li><button class="accordion">커뮤니티</button>
+        	<div class="panel">
+        	<ul>
+        	<li><a href="./fbboardlist">자유게시판</a></li>
+        	<li><a href="./gbboardlist">개발사게시판</a></li>
+        	<li><a href="./tboardlist">팁게시판</a></li>
+        	</ul>
+        	</div>
+        </li>
+        
+        <li><a href="./notice">뉴스</a></li>
         <li><a href="#">카테고리</a></li>
         <li><a href="#">지원</a></li>
-        <li><input type="text" id="btnSearchGame"></li>
-        <li><button type="button" onclick="searchGame()">돋보기그림추가할것</button></li>
+        <li id="textboxli">
+        	<!-- todo 링크는 jstl을 이용해 txt박스의 값을 적어구문작성 -->
+        	<form action="./GameList?" method="get">
+        	<input type="text" id="textSearchGame" name="q">
+        	<button type="submit" id="btnSearchGame"></button>
+        	</form>
+        	
+        </li>
     	</ul>
-	</span>
+	</nav>
+		<nav id="topmenu_tnb">
+		<ul>
+	        <li><a href="./enrollmember">회원가입</a></li>
+	        <li><a href="./memberlogin">로그인</a></li>
+	        <li><a href="#">마이페이지</a></li>
+	        <li><a href="./cartlist">장바구니</a></li>
+		</ul>     
+		</nav>
+	</header>
+	
+	<div id="promotion">
+	
+	
+	
 	</div>
-	<span id="topmenu">
-	<ul>
-        <li><a href="#">회원가입</a></li>
-        <li><a href="#">로그인</a></li>
-        <li><a href="#">마이페이지</a></li>
-        <li><a href="#">장바구니</a></li>
-	</ul>     
-	</span>
-	</div>
-	<div id="Middle-page">
+	
+	
+	
+    <div class="section">
 	<div class="Asside-left">
-			<ul>
-				<li><a href="#">내 정보</a></li>
-				<li><a href="<c:url value='/adminmembers'/>" id="liRedirect">회원</a></li>
-				<li><a href="#">FAQ</a></li>
-				<li><a href="#">게임</a></li>
-				<li><a href="#">통계</a></li>
-				
-			</ul>
-		</div>
-	<div class="Article">
+	
+	<!-- 왼쪽의 서브 메뉴 -->
+	
+	</div>
+    <div class="Article">
+    <!-- 페이지의 메인 아티클 -->
+    
 	<h1>회원</h1>
 	
 	<form method=get action="<c:url value='/adminmembers'/>" >					
@@ -281,8 +277,7 @@ li {
 	
 	
 	<div class="box"></div>
-		</div>
-	</div>
+		
 	<script>
 		$(document).ready(function(){
 			$("#btnGrantPoint").on("click",function() {
@@ -303,6 +298,36 @@ li {
 			})
 		});
 	</script>
+		
+    </div>
+    </div>
+
+	<div class="footer">
+    INDIMOA ｜ 사업자등록번호 : 821-85-00000 ｜ 서울 강남 제2020-01호 ｜ 대표자 : 홍길동 ｜ 책임자 : 홍길동 ｜  개인정보관리책임자 : 홍길동<br><br>
+        Copyright © 2020-2021 INDIMOA GAME SHOPPING MALL
+	</div>
+	<script>
+var acc = document.getElementsByClassName("accordion");
+var i;
+
+for (i = 0; i < acc.length; i++) {
+	console.log("메소드 진입확인");
+  acc[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var panel = this.nextElementSibling;
+    if (panel.style.maxHeight) {
+      panel.style.maxHeight = null;
+    } else {
+      panel.style.maxHeight = panel.scrollHeight + "px";
+    } 
+  });
+}
+</script>
+
+<div hidden="">돋보기아이콘 제작자 <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/kr/" title="Flaticon">www.flaticon.com</a></div>
+
+	
+	
 	</body>
 </html>
 

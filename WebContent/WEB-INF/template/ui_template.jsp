@@ -7,7 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-<!-- todo -->
+<!-- 사용법 아래의 </body>까지 복사 후 본인 body에 붙여넣기 이후  
+<div class="Article"> </div> 사이에 본인이 작성한 페이지 적용-->
 
 	<header>
 	<div id="logo"><a href="./"><img src="./image/ex1.png"></a></div>
