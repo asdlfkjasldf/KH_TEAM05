@@ -252,7 +252,7 @@
 		<ul>
 	        <li><a href="./enrollmember">회원가입</a></li>
 	        <li><a href="./memberlogin">로그인</a></li>
-	        <li><a href="#">마이페이지</a></li>
+	        <li><a href="./myinfo">마이페이지</a></li>
 	        <li><a href="./cartlist">장바구니</a></li>
 		</ul>     
 		</nav>
@@ -274,8 +274,6 @@
 	</div>
     <div class="Article">
     <!-- 페이지의 메인 아티클 -->
-    
-<div class="Header"> </div>
 
 <div class="Article">
 <h1> 게시판 관리 </h1>

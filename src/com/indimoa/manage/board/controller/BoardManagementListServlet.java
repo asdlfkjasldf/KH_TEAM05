@@ -82,7 +82,7 @@ public class BoardManagementListServlet extends HttpServlet {
 		request.setAttribute("startPage", startPage);
 		request.setAttribute("endPage", endPage);
 		request.setAttribute("pageCount", pageCount);
-		request.getRequestDispatcher("WEB-INF/Management/BoardManagementBoard.jsp").forward(request, response);
+		request.getRequestDispatcher("WEB-INF/view/management/BoardManagementBoard.jsp").forward(request, response);
 
 	}
 

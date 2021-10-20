@@ -1,24 +1,40 @@
 <link rel="stylesheet" type="text/css" href="./css/myStyle.css">
-<%@page import="com.indimoa.board.model.vo.NtBoard"%>
-<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>공지 사항 글 수정하기</title>
-<script type="">
-
-</script>
+<title>공지사항 글쓰기</title>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<style type="text/css">
+#textTitle{
+	width: 1000px;
+	height: 1em;
+}
+#textContent{
+	width: 1000px;
+	height: 500px;
+}
+.desc{
+text-align: center;
+}
+.Article{
+	align-content: center;
+	margin: auto;
+}
+#btnSubmit,#hrefCancel,#mainTable{
+	margin:auto;
+    display:block;
+}
+</style>
 </head>
-
-<!-- 대략 흐름도 컨텐츠 부분의 bno를 ajax로 쏴서 타이틀 컨텐츠, 불러오고 success시 ajax로 바꿀 title,content를 보내준다.  -->
 <body>
 
 
-	<header>
+
+<header>
 	<div id="logo"><a href="./"><img src="./image/ex1.png"></a></div>
 	<nav id="highmenu" class="topmenu">
 	    <ul>
@@ -35,7 +51,7 @@
         
         <li><a href="./notice">뉴스</a></li>
         <li><a href="#">카테고리</a></li>
-        <li><a href="#">지원</a></li>
+        <li><a href="./faq">지원</a></li>
         <li id="textboxli">
         	<!-- todo 링크는 jstl을 이용해 txt박스의 값을 적어구문작성 -->
         	<form action="./GameList?" method="get">
@@ -50,7 +66,7 @@
 		<ul>
 	        <li><a href="./enrollmember">회원가입</a></li>
 	        <li><a href="./memberlogin">로그인</a></li>
-	        <li><a href="#">마이페이지</a></li>
+	        <li><a href="./myinfo">마이페이지</a></li>
 	        <li><a href="./cartlist">장바구니</a></li>
 		</ul>     
 		</nav>
@@ -72,33 +88,28 @@
 	</div>
     <div class="Article">
     <!-- 페이지의 메인 아티클 -->
-    
-<table id="mainTable">
-	<c:if test="${loadedboardvo != null }">
-		<c:forEach items="${loadedboardvo}" var="vo">
-		<form action="noticeupdate" method="post">
+    <table id="mainTable">
+<!-- 테스트 area의 공간이 너무 적다 style을 이용해 공간을 넓히고 정렬하는 게  좋을 듯하다 -->
 <tr>
-	<td>글번호 <input type="text" name="no" value="${vo.ntNo }" readonly="readonly"></td>
+
 </tr>
 <tr>
-	
-	
-	
-		<td><span class="desc">제목</span><input type="text" name="t" id="textTitle" value="${vo.ntTitle}"></td>
+	<form action="noticewrite" method="post">
+		<td><span class="desc">제목</span><input type="text" name="t" id="textTitle"></td>
 		
 		
 	
 </tr>
 <tr>
-	<td><span class="desc">내용</span> <input type="text" name="c" id="textContent" value="${vo.ntContent}"></td>
+	<td><span class="desc">내용</span> <input type="text" name="c" id="textContent"></td>
 </tr>
-		</c:forEach>
-	</c:if>
-		
+
 </table>
 	<div class="box">
 		<button type="submit" id="btnSubmit">등록</button>
 		<a href="notice" id="hrefCancel">취소</a>
+	</div>
+	</form>
 		
     </div>
     </div>
@@ -126,8 +137,6 @@ for (i = 0; i < acc.length; i++) {
 </script>
 
 <div hidden="">돋보기아이콘 제작자 <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/kr/" title="Flaticon">www.flaticon.com</a></div>
-
-
 
 </body>
 </html>

@@ -1,10 +1,7 @@
 package com.indimoa.board.notice.coltroller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,7 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.gson.Gson;
 import com.indimoa.board.model.service.NtBoardService;
 import com.indimoa.board.model.vo.NtBoard;
 
@@ -35,7 +31,7 @@ public class NtBoardUpdateServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		PrintWriter out = response.getWriter();
+		//PrintWriter out = response.getWriter();
 		int bno = Integer.parseInt(request.getParameter("no"));
 		
 		
@@ -43,7 +39,7 @@ public class NtBoardUpdateServlet extends HttpServlet {
 		System.out.println(volist);
 		request.setAttribute("loadedboardvo", volist);
 			
-		request.getRequestDispatcher("WEB-INF/view/ntboard_update.jsp").forward(request, response);
+		request.getRequestDispatcher("WEB-INF/view/noticeboard/ntboard_update.jsp").forward(request, response);
 	}
 
 	/**
@@ -55,7 +51,7 @@ public class NtBoardUpdateServlet extends HttpServlet {
 		int bno = Integer.parseInt(request.getParameter("no"));
 //		Map<String, Object> mapNtBoardUpdate = new HashMap<String, Object>();
 		
-		PrintWriter out = response.getWriter();
+		//PrintWriter out = response.getWriter();
 		
 		NtBoard vo = new NtBoard(title, content,bno);
 		

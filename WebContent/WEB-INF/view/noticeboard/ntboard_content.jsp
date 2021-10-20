@@ -32,7 +32,7 @@
         
         <li><a href="./notice">뉴스</a></li>
         <li><a href="#">카테고리</a></li>
-        <li><a href="#">지원</a></li>
+        <li><a href="./faq">지원</a></li>
         <li id="textboxli">
         	<!-- todo 링크는 jstl을 이용해 txt박스의 값을 적어구문작성 -->
         	<form action="./GameList?" method="get">
@@ -47,7 +47,7 @@
 		<ul>
 	        <li><a href="./enrollmember">회원가입</a></li>
 	        <li><a href="./memberlogin">로그인</a></li>
-	        <li><a href="#">마이페이지</a></li>
+	        <li><a href="./myinfo">마이페이지</a></li>
 	        <li><a href="./cartlist">장바구니</a></li>
 		</ul>     
 		</nav>

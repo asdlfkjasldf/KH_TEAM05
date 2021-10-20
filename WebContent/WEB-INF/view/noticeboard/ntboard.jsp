@@ -1,20 +1,22 @@
+<link rel="stylesheet" type="text/css" href="./css/myStyle.css">
+<%@page import="com.indimoa.board.model.vo.NtBoard"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>인디모아 공지사항 게시판에 오신것을 환영합니다.</title>
 </head>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+
+</script>
 <body>
-<!-- 사용법 
-<link rel="stylesheet" type="text/css" href="./css/myStyle.css"> 를 
-본인이 작성한 jsp 맨위에 복사후 붙여넣기
 
-아래의 </body> 이전까지 복사 후 본인 body에 붙여넣기 이후  
-<div class="Article"> </div> 사이에 본인이 작성한 페이지 적용-->
-
-	<header>
+<header>
 	<div id="logo"><a href="./"><img src="./image/ex1.png"></a></div>
 	<nav id="highmenu" class="topmenu">
 	    <ul>
@@ -68,7 +70,37 @@
 	</div>
     <div class="Article">
     <!-- 페이지의 메인 아티클 -->
-    
+    	<h1>인디모아 공지사항</h1>
+	<table border="1" collapse="collapse">
+		<tr>
+			<td>번호</td>
+			<td>제목</td>
+			<td>작성자</td>
+			<td>날짜</td>
+		</tr>
+	
+<c:if test="${volist != null }">
+	<c:forEach items="${volist}" var="vo">
+		<tr>
+			<td>${vo.ntNo }</td>
+			<td>
+			<a href="noticecontentview?no=${vo.ntNo }">${vo.ntTitle }</a>
+			</td>
+			<td>${vo.adId }</td>
+			<td>${vo.ntDatetime }</td>
+		</tr>
+	</c:forEach>
+</c:if>
+</table>
+<c:if test="${startPage > 1 }"> 이전 </c:if>
+	<c:forEach begin="${startPage }" end="${endPage }" step="1" var="i">
+	<a href="notice?p=${i}">${i}</a>
+	</c:forEach>
+<c:if test="${endPage < pageCount }"> 다음 </c:if>
+
+
+	<br>
+	<a href="noticewrite"> 글쓰기 </a>
 		
     </div>
     </div>
@@ -98,5 +130,12 @@ for (i = 0; i < acc.length; i++) {
 <div hidden="">돋보기아이콘 제작자 <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/kr/" title="Flaticon">www.flaticon.com</a></div>
 
 
-</body>
+
+
+
+
+
+
+	</body>
 </html>
+

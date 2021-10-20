@@ -38,10 +38,10 @@ public class NtBoardContentViewServlet extends HttpServlet {
 		// bno는 pk로 결과는 Board 모양 1개일 것임.
 		NtBoard vo = new NtBoardService().getNtBoard(bno);
 		request.setAttribute("boardvo", vo);
-		request.getRequestDispatcher("WEB-INF/view/ntboard_content.jsp").forward(request, response);
+		request.getRequestDispatcher("WEB-INF/view/noticeboard/ntboard_content.jsp").forward(request, response);
 		//jsp, todo
 		
-		String t = request.getParameter("t");
+		
 	}
 
 	/**

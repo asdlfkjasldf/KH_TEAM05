@@ -32,7 +32,7 @@ public class NtBoardWriteServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//글쓰기 페이지로 이동시
-		request.getRequestDispatcher("WEB-INF/view/ntboard_write.jsp").forward(request, response);;
+		request.getRequestDispatcher("WEB-INF/view/noticeboard/ntboard_write.jsp").forward(request, response);;
 	}
 
 	/**

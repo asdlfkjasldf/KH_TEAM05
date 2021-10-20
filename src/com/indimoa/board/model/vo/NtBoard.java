@@ -15,9 +15,9 @@ public class NtBoard {
 	}
 	
 	public String toString() {
-		return "Notice board [ntNo ="+ ntNo + ", adId = "+adId 
-				+ ", ntTitle"+ntTitle + ", ntContent = "+ntContent   
-				+ ", ntDatetime = " +ntDatetime + "]";
+		return "Notice board [ntNo= "+ ntNo + ", adId= "+adId 
+				+ ", ntTitle="+ntTitle + ", ntContent= "+ntContent   
+				+ ", ntDatetime= " +ntDatetime + "]";
 	}
 	public int getNtNo() {
 		return ntNo;

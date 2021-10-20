@@ -4,25 +4,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
         <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-    <%
-    	//이곳은 자바 문법에 따른다.
-        	ArrayList<Member> volist = (ArrayList<Member>)request.getAttribute("boardvolist");
-            int startPage = (int)request.getAttribute("startPage");
-            int endPage = (int)request.getAttribute("endPage");
-            int pageCount = (int)request.getAttribute("pageCount");
-            
-            Member vo2 = new Member();
-            vo2.setSearchCondition(request.getParameter("sc"));
-            vo2.setSearchKeyword(request.getParameter("sk"));
-            
-
-    %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>관리자페이지  회원관리</title>
-<base href="/">
 <style type="text/css">
 
 
@@ -104,13 +90,6 @@
 		members.options.add(objOption);
 	    
 	}
-	
-	function searchGame() {
-		
-	}
-	
-	
-	
 </script>
 	
 	
@@ -134,7 +113,7 @@
         
         <li><a href="./notice">뉴스</a></li>
         <li><a href="#">카테고리</a></li>
-        <li><a href="#">지원</a></li>
+        <li><a href="./faq">지원</a></li>
         <li id="textboxli">
         	<!-- todo 링크는 jstl을 이용해 txt박스의 값을 적어구문작성 -->
         	<form action="./GameList?" method="get">
@@ -149,7 +128,7 @@
 		<ul>
 	        <li><a href="./enrollmember">회원가입</a></li>
 	        <li><a href="./memberlogin">로그인</a></li>
-	        <li><a href="#">마이페이지</a></li>
+	        <li><a href="./myinfo">마이페이지</a></li>
 	        <li><a href="./cartlist">장바구니</a></li>
 		</ul>     
 		</nav>
@@ -198,68 +177,40 @@
 		<td>이름</td>
 		<td>포인트</td>
 		<tr>
-	<%
-		if(volist != null) {
-			for(Member vo : volist){
-			// tr이 volist 갯수 만큼 생기게 됨.
-			// <%= 은 화면에 출력을 위한 표현식을 작성하는 태그, ; 없어야한다.
-	%>
+	
+
+	<c:forEach items="${boardvolist}" var="vo">
+			
+			
+	
 
 	
-		<form method="get" action="<c:url value='/admindeletemembers'/>">
+		<form method="get" action="./admindeletemembers">
 		<tr>
 		
-		<td><input type="checkbox" id="checkName" name="checkName" value="<%=vo.getMm_id() %>">
-		<%=vo.getMm_id() %></td>
+		<td><input type="checkbox" id="checkName" name="checkName" value="${vo.mm_id }">
+		${vo.mm_id }</td>
 
 		<td>
-		<!-- 	<%
-				// 답글 몇단에 따라서 Re: 붙여주기
-				//for(int i = 0; i<vo.(); i++){
-					%>
-					Re:
-			<%
-			//	}
-			%> -->
-		<%=vo.getMm_pwd()%></td>
-		<td><%=vo.getMm_nickname() %></td>
-		<td><%=vo.getMm_enrolldate()%></td>
-		<td><%=vo.getMm_email()%></td>
-		<td><%=vo.getMm_phn()%></td>
-		<td><%=vo.getMm_com()%></td>
-		<td><%=vo.getMm_profile()%></td>
-		<td><%=vo.getMm_membership()%></td>
-		<td><%=vo.getMm_name()%></td>
-		<td><%=vo.getMm_point()%></td>
+		${vo.mm_pwd }</td>
+		<td>${vo.mm_nickname }</td>
+		<td>${vo.mm_enrolldate }</td>
+		<td>${vo.mm_email }</td>
+		<td>${vo.mm_phn }</td>
+		<td>${vo.mm_com }</td>
+		<td>${vo.mm_profile }</td>
+		<td>${vo.mm_membership }</td>
+		<td>${vo.mm_name }</td>
+		<td>${vo.mm_point }</td>
 		<tr>
-		<%
-	} }
-		%>		
+	</c:forEach>		
 	</table>
-			<%
-				if (startPage > 1) {
-			%>
-			이전
-			<%
-				}
-			for (int i = startPage; i <= endPage; i++) {
-			%>
-			<a href="<c:url value='/adminmembers?pagenum='/><%=i%>"> <%=i%>
-			</a>
-			<%
-				if (i != endPage) {
-			%>
-			,
-			<%
-				}
-			}
-			if (endPage < pageCount) {
-			%>
-			다음
-			
-			<%
-			}
-			%>
+	<c:if test="${startPage > 1 }"> 이전 </c:if>
+	<c:forEach begin="${startPage }" end="${endPage }" step="1" var="i">
+	<a href="./adminmembers?pagenum=${i}">${i}</a>
+	</c:forEach>
+<c:if test="${endPage < pageCount }"> 다음 </c:if>
+
 
 	
 	<br>
@@ -283,7 +234,7 @@
 			$("#btnGrantPoint").on("click",function() {
 				$.ajax({
 					type : "get",
-					url : "<c:url value='/adminupdatemembers'/>",
+					url : "./adminupdatemembers",
 					data : {
 						targetid: $("input:checkbox[name='checkName']:checked").val(),
 						pointvalue :  $("#grantPoint").val()

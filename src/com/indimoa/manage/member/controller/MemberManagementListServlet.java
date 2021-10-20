@@ -105,7 +105,7 @@ public class MemberManagementListServlet extends HttpServlet {
 			//Page 이동하면서 Data도 전달함.
 			request.setAttribute("searchKeyword", searchKeyword);
 //				response.sendRedirect("서블릿url");
-				request.getRequestDispatcher("WEB-INF/Management/MemberManagementBoard.jsp").forward(request, response);
+				request.getRequestDispatcher("WEB-INF/view/management/MemberManagementBoard.jsp").forward(request, response);
 			
 				
 				
