@@ -11,33 +11,16 @@
 <meta charset="UTF-8">
 <title>인디모아에 오신 것을 환영합니다.</title>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
-<style type="text/css">
-.accordion{
-	background: #eee;
-	color: green;
-	cursor: pointer;
-	border: none;
-	text-align: center;
-	transition: 0.4s;
-}
-.ac:active, .accordion:hover {
-	background: #ccc;
-}
-.panel{
-	padding: 0 18px;
-	background: white;
-	max-height: 0;
-	overflow: hidden;
-	transition: max-height 0.2s ease-out;
-}
-</style>
+
+
 
 </head>
 <body>
 
 	<header>
-	<div id="logo">로고추가할곳</div>
+	<div id="logo"><a href="./"><img src="./image/ex1.png"></a></div>
 	<nav id="highmenu" class="topmenu">
 	    <ul>
         <li><a href="./GameList">상점</a></li>
@@ -54,8 +37,14 @@
         <li><a href="./notice">뉴스</a></li>
         <li><a href="#">카테고리</a></li>
         <li><a href="#">지원</a></li>
-        <li><input type="text" id="textSearchGame"></li>
-        <li><button type="button" onclick="searchGame()" id="btnSearchGame" style="border: none;" ><img src="./image/free-icon-magnifier-71403.png" class="imgIcon" width="24px" height="24px"> </button></li>
+        <li id="textboxli">
+        	<!-- todo 링크는 jstl을 이용해 txt박스의 값을 적어구문작성 -->
+        	<form action="./GameList?" method="get">
+        	<input type="text" id="textSearchGame" name="q">
+        	<button type="submit" id="btnSearchGame"></button>
+        	</form>
+        	
+        </li>
     	</ul>
 	</nav>
 		<nav id="topmenu_tnb">
@@ -67,6 +56,14 @@
 		</ul>     
 		</nav>
 	</header>
+	
+	<div id="promotion">
+	
+	
+	
+	</div>
+	
+	
 	
     <div class="section">
 	<div class="Asside-left">
@@ -83,7 +80,17 @@
 			</ul>
 	</div>
     <div class="Article">
-		<!-- TODO -->
+    <!-- jstl 반복문으로 게임리스트와 이미지 불러온다 -->
+    
+		<ul>
+			<dl class="search-product-wrap" style="height: 300px;">
+  				<dt class="image">
+  					<img alt="이미지" src="">
+  				</dt>  
+  				<dd class="description"> 설명파트</dd>
+			</dl>
+
+		</ul>
     </div>
     </div>
 

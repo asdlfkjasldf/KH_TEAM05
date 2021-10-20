@@ -22,6 +22,7 @@ li {
 	
 }
 
+
 header {
 	width: 1110px;
 	height: 220px;
@@ -39,10 +40,12 @@ header {
 	position: absolute;
 }
 
-#logo > img {
+#logo > a >img {
+			width: 100px;
+    		height: 50px;
             position: absolute;
             right: 5px;
-            top: 35px;
+            top: 5px;
 }
 
 header > #highmenu{
@@ -51,18 +54,25 @@ header > #highmenu{
     overflow: hidden;
 }
 #highmenu ul li {
-	
+	width: 100px;
 	display: inline-block;
 	margin: 15px;
 	text-align: center;
 	
 }
+
+#highmenu #textboxli{
+	width: 250px;
+}
+
 header #topmenu_tnb{
 	top: 0;
 	right: 0;
     overflow: hidden;
 	position: absolute;
 }
+
+
 
 #topmenu_tnb ul li{
 	display: inline-block;
@@ -91,18 +101,45 @@ header #topmenu_tnb{
 }
 #btnSearchGame{
 	border: none;
+	margin: 0;
+	padding: 0;
+	background-image: url("../image/free-icon-magnifier-71403.png");
+    background-repeat: no-repeat;
+    width: 24px;
+    height: 24px;
+    outline: 0;
 }
 
 .imgIcon {
 	border: none;
 	width: 24px;
 	height: 24px;
+	bottom: 0;
 }
 
 #Middle-page{
 	
 	
 	 
+}
+
+.accordion{
+	background: #eee;
+	color: green;
+	cursor: pointer;
+	border: none;
+	text-align: center;
+	transition: 0.4s;
+}
+.ac:active, .accordion:hover {
+	background: #ccc;
+}
+.panel{
+	padding: 0 18px;
+	background: white;
+	max-height: 0;
+	overflow: hidden;
+	transition: max-height 0.2s ease-out;
 }
 
 .Footer {
