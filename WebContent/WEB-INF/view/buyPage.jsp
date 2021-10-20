@@ -1,4 +1,5 @@
 <link rel="stylesheet" type="text/css" href="./css/myStyle.css">
+<%@page import="com.indimoa.cart.model.vo.Cart"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
@@ -11,7 +12,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     
-    <title>BuyPage</title>
+    <title>결제창</title>
 
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
@@ -64,27 +65,10 @@
 
     </style>
 </head>
+
+
 <body>
-    <!-- modal box -->
-    <div id="modal_01" class="modal">
-        <div class="modal-content">
-                <p class="close"> &times; &nbsp; &#10006;</p>
-            <p>카드결제</p>
-            <form action="ex-01.html" method="get">
-                카드사<select size="1" id="bank" class="input1">
-                    <option value="">선택하세요.</option>
-                    <option value="10">하나은행</option>
-                    <option value="11">신한은행</option>
-                    <option value="12">국민은행</option>
-                </select>
-                카드번호<input type="text" name="a1">
-                <br>
-                결제 비밀번호<input type="text" name="a1">
-                <br>
-                <input type="submit" value="결제">
-            </form>
-        </div>
-    </div>
+    
 
 
    <header>
@@ -124,23 +108,36 @@
 		</ul>     
 		</nav>
 	</header>
+	
+	
+	<!-- modal box -->
+    <div id="modal_01" class="modal">
+        <div class="modal-content">
+                <p class="close"> &times; &nbsp; &#10006;</p>
+            <p>카드결제</p>
+            <form action="ex-01.html" method="get">
+                카드사<select size="1" id="bank" class="input1">
+                    <option value="">선택하세요.</option>
+                    <option value="10">하나은행</option>
+                    <option value="11">신한은행</option>
+                    <option value="12">국민은행</option>
+                </select>
+                카드번호<input type="text" name="a1">
+                <br>
+                결제 비밀번호<input type="text" name="a1">
+                <br>
+                <input type="submit" value="결제">
+            </form>
+        </div>
+    </div>
 
 
 	<div class="section">
     <div class="Article">
+    
     <h1 class="h1">결제창</h1><br><br>
+	
 
-
-        <form action="#" method="get" id="buyform">
-        <p class="t1">
-            <label for="buyobject">구매상품명 : </label>
-            <input type="text" name="gg_title" class="input1" value="<%="m.getGg_title()"%>" readonly="readonly"> <!-- TODO -->
-        </p><br>
-        
-        <p class="int-area">
-            <label for="price">상품가격:</label>
-            <input type="text" name="gg_price" class="input1" value="<%="m.getGg_price()"%>" readonly="readonly"> <!-- TODO -->
-        </p><br>
         
         <p class="int-area">
         <label for="pay">결제 수단</label>
@@ -153,7 +150,7 @@
         </p><br><br>
 
         <p class="btn-area">
-            <button id="pay">결제하기</button>
+            <button type="submit" id="pay">결제하기</button>
         </p>
     </form>
 </div>

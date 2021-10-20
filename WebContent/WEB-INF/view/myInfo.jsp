@@ -77,12 +77,7 @@
 
 </head>
 <body>
-	<%
-	Member m = (Member) session.getAttribute("member");
-	%>
-	<%
-	if (m != null) {
-	%>
+	
     <header>
 	<div id="logo"><a href="./"><img src="./image/ex1.png"></a></div>
 	<nav id="highmenu" class="topmenu">
@@ -139,7 +134,12 @@
 	}
 	</script>
 	
-
+	<%
+	Member m = (Member) session.getAttribute("membervo");
+	%>
+	<%
+	if (m != null) {
+	%>
 	<div class="section">
 	<h1 class="h1">내 정보</h1>
 
