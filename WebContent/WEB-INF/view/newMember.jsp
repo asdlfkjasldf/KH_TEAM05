@@ -77,15 +77,23 @@ li {
     <div id="header">
         <div id="logo">
         로고 추가할 곳
-        <img src=".jpg" width="200px" height="50px">
         </div>     
     
     	<div id="highmenu">
 	 	<span>
 	    	<ul>
-        	<li><a href="#">상점</a></li>
-        	<li><a href="#">커뮤니티</a></li>
-        	<li><a href="#">뉴스</a></li>
+        	<li><a href="./GameList">상점</a></li>
+        	<li><button class="accordion">커뮤니티</button>
+        	<div class="panel">
+        	<ul>
+        	<li><a href="./fbboardlist">자유게시판</a></li>
+        	<li><a href="./gbboardlist">개발사게시판</a></li>
+        	<li><a href="./tboardlist">팁게시판</a></li>
+        	</ul>
+        	</div>
+        	</li>
+        	
+        	<li><a href="./notice">뉴스</a></li>
         	<li><a href="#">카테고리</a></li>
         	<li><a href="#">지원</a></li>
         	<li><input type="text" id="btnSearchGame"></li>
@@ -95,18 +103,18 @@ li {
 		</div>
 		<span id="topmenu">
 	<ul>
-        <li><a href="#">회원가입</a></li>
-        <li><a href="#">로그인</a></li>
-        <li><a href="#">마이페이지</a></li>
-        <li><a href="#">장바구니</a></li>
+        <li><a href="./enrollmember">회원가입</a></li>
+        <li><a href="./memberlogin">로그인</a></li>
+        <li><a href="./myInfo">마이페이지</a></li>
+        <li><a href="./cartlist">장바구니</a></li>
 	</ul>     
 	</span>
 	</div>
-
+	
+	<div id="section">
 	<h2 align="center">회원 가입 하기</h2>
 	<hr>
-	<section id="myinfo">
-		<form action="WEB-INF/view/login.jsp" id="enrollForm" method="post" enctype="multipart/form-data">
+		<form action="/enrollmember" id="enrollForm" method="post" enctype="multipart/form-data">
 			<table align="center">
 				<tr>
 					<td>아이디 :</td>
@@ -161,20 +169,37 @@ li {
 				</tr>
 			</table>
 			<p align="center">
-				<button type="button" id="btn1"  >회원 가입하기</button>
+				<button type="submit" id="btn1"  >회원 가입하기</button>
 				&nbsp; &nbsp;
 				<button type="reset">작성 양식 초기화</button>
 			</p>
 		</form>
-	</section>
 	<br>
 	<br>
 	<p align="center">
-		<button type="button"><a href="index">메인으로</a>
+		<input type="button"><a href="index.jsp">메인으로</a>
 			가기</button>
 	</p>
+</div>
 	
 	<script>
+	var acc = document.getElementsByClassName("accordion");
+	var i;
+
+	for (i = 0; i < acc.length; i++) {
+		console.log("메소드 진입확인");
+	  acc[i].addEventListener("click", function() {
+	    this.classList.toggle("active");
+	    var panel = this.nextElementSibling;
+	    if (panel.style.maxHeight) {
+	      panel.style.maxHeight = null;
+	    } else {
+	      panel.style.maxHeight = panel.scrollHeight + "px";
+	    } 
+	  });
+	}
+	
+	
 		/**
 회원정보 입력 필수 입력 사항 확인
 이름, 아이디, 암호
@@ -225,7 +250,7 @@ re id의 값이 존재하는지 확인하여 중복체크여부를 검사
      var id = document.getElementById("id").value;
      var regExpId = /^[a-zA-Z0-9]{5,15}$/;
      if( !regExpId.test(id) ){
-         alert("영어 대소문자 + 숫자 + 특수문자(_#) 조건에 맞게 입력해주세요");
+         alert("영어 대소문자 + 숫자, 5자이상 15자 이하 조건에 맞게 입력해주세요");
          return false;
      }
      
@@ -284,15 +309,15 @@ re id의 값이 존재하는지 확인하여 중복체크여부를 검사
      // 첫글자는 영어 대문자이고 영문자+ 숫자 + 특수문자(_!) 유효, 8글자이상, 16글자 이하
      var regExp = /^[A-Z][A-Za-z0-9_!]{7,15}$/;
      if( !regExp.test(pw1value) ){
-         alert("영어 대소문자 + 숫자 + 특수문자(_#) 조건에 맞게 입력해주세요");
+         alert("영어 대소문자 + 숫자 + 특수문자(_#), 7자이상 15자 이하 조건에 맞게 입력해주세요");
          return false;
      }
 
      // 이름 입력은 한글입력만 가능 2글자 이상 10글자 이하
      var name = document.getElementById("name").value;
-     var regExpName = /^[가-힣]{2,10}$/;
+     var regExpName = /^[가-힣]{1,15}$/;
      if( !regExpName.test(name) ){
-         alert("영어 대소문자 + 숫자 + 특수문자(_#) 조건에 맞게 입력해주세요");
+         alert("한글 1글자이상, 15글자 이하 조건에 맞게 입력해주세요");
          return false;
      }
 
@@ -338,7 +363,8 @@ re id의 값이 존재하는지 확인하여 중복체크여부를 검사
 	</script>
 
 <div id="footer">
-    <h1>footer</h1>
+     INDIMOA ｜ 사업자등록번호 : 821-85-00000 ｜ 서울 강남 제2020-01호 ｜ 대표자 : 홍길동 ｜ 책임자 : 홍길동 ｜  개인정보관리책임자 : 홍길동<br><br>
+        Copyright © 2020-2021 INDIMOA GAME SHOPPING MALL
 </div>
 </body>
 </html>

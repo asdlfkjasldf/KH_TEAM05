@@ -147,15 +147,25 @@ li {
 
 
     <div id="header">
-        <div id="logo">로고 추가할 곳
-            <img src=".jpg" width="200px" height="50px">
-        </div>
-        <div id="highmenu">
+        <div id="logo">
+        로고 추가할 곳
+        </div>     
+    
+    	<div id="highmenu">
 	 	<span>
 	    	<ul>
-        	<li><a href="#">상점</a></li>
-        	<li><a href="#">커뮤니티</a></li>
-        	<li><a href="#">뉴스</a></li>
+        	<li><a href="./GameList">상점</a></li>
+        	<li><button class="accordion">커뮤니티</button>
+        	<div class="panel">
+        	<ul>
+        	<li><a href="./fbboardlist">자유게시판</a></li>
+        	<li><a href="./gbboardlist">개발사게시판</a></li>
+        	<li><a href="./tboardlist">팁게시판</a></li>
+        	</ul>
+        	</div>
+        	</li>
+        	
+        	<li><a href="./notice">뉴스</a></li>
         	<li><a href="#">카테고리</a></li>
         	<li><a href="#">지원</a></li>
         	<li><input type="text" id="btnSearchGame"></li>
@@ -165,20 +175,18 @@ li {
 		</div>
 		<span id="topmenu">
 	<ul>
-        <li><a href="#">회원가입</a></li>
-        <li><a href="#">로그인</a></li>
-        <li><a href="#">마이페이지</a></li>
-        <li><a href="#">장바구니</a></li>
+        <li><a href="./enrollmember">회원가입</a></li>
+        <li><a href="./memberlogin">로그인</a></li>
+        <li><a href="./myInfo">마이페이지</a></li>
+        <li><a href="./cartlist">장바구니</a></li>
 	</ul>     
 	</span>
-        
-    </div>
+	</div>
 
 
-
+	<div id="section">
     <h1 class="h1">로그인</h1>
-    <div id="section">
-        <form action="/login" method="post">
+        <form action="/memberlogin" method="post">
             <p class="int-area">
                 <label for="id">아이디</label>
                 <input type="text" name="mm_id" id="id" autocomplete="off" required>
@@ -200,6 +208,24 @@ li {
     </div>
 
     <script>
+	var acc = document.getElementsByClassName("accordion");
+	var i;
+
+	for (i = 0; i < acc.length; i++) {
+		console.log("메소드 진입확인");
+	  acc[i].addEventListener("click", function() {
+	    this.classList.toggle("active");
+	    var panel = this.nextElementSibling;
+	    if (panel.style.maxHeight) {
+	      panel.style.maxHeight = null;
+	    } else {
+	      panel.style.maxHeight = panel.scrollHeight + "px";
+	    } 
+	  });
+	}
+    
+    
+    
     function loginCheck(){
     	if (document.loginform.userid.value == ""){
     		alert("아이디를 입력해 주세요.");
@@ -240,7 +266,8 @@ li {
         
     </script>
     <div id="footer">
-        <h1>footer</h1>
+        INDIMOA ｜ 사업자등록번호 : 821-85-00000 ｜ 서울 강남 제2020-01호 ｜ 대표자 : 홍길동 ｜ 책임자 : 홍길동 ｜  개인정보관리책임자 : 홍길동<br><br>
+        Copyright © 2020-2021 INDIMOA GAME SHOPPING MALL
     </div>
 </body>
 </html>

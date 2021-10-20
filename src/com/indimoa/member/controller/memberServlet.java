@@ -15,7 +15,7 @@ import com.indimoa.member.model.vo.Member;
 /**
  * Servlet implementation class memberServlet
  */
-@WebServlet("/memberServlet")
+@WebServlet("/myInfo")
 public class memberServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -32,10 +32,10 @@ public class memberServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String id = request.getParameter("id");
-		int bno = Integer.parseInt(id);
+//		int bno = Integer.parseInt(id);
 		
 		Member m = new MemberService().getMember(id);
-		request.setAttribute("gamevo", m);
+		request.setAttribute("membervo", m);
 		
 		request.getRequestDispatcher("/WEB-INF/view/myInfo.jsp").forward(request, response);
 	}
