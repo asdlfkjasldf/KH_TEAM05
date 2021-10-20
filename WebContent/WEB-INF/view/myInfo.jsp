@@ -1,3 +1,4 @@
+<link rel="stylesheet" type="text/css" href="css/myStyle.css">
 <%@page import="com.indimoa.member.model.vo.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -9,46 +10,27 @@
 <meta charset="UTF-8">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-<style>
-    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
+<title>My Info View</title>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-* {
-	font-family: "Noto Sans KR", sans-serif;
-}
-body {
-    margin: 0;
-}
-
-#header {
-	width: 100%;
-	margin: 0 auto; 
-	height: 220px;
-	position: relative;
-}
-a:link{
-  text-decoration: none!important;
-  color: green;
-}
-li {
-	list-style-type: none;
-}
-#logo{
-	width: 100px;
-	position: absolute;
-}
-#highmenu ul li {
-	float: left;
-	margin: 15px;
+<style type="text/css">
+.accordion{
+	background: #eee;
+	color: green;
+	cursor: pointer;
+	border: none;
 	text-align: center;
-	position: relative;
-	padding-bottom: 0px;
+	transition: 0.4s;
 }
-#topmenu ul li{
-	
-	float: left;
-	margin: 15px;
-	padding: 10px;
-	position: relative;
+.ac:active, .accordion:hover {
+	background: #ccc;
+}
+.panel{
+	padding: 0 18px;
+	background: white;
+	max-height: 0;
+	overflow: hidden;
+	transition: max-height 0.2s ease-out;
 }
 
 .h1 {
@@ -132,7 +114,6 @@ li {
     text-align: center;
 }
 </style>
-<title>My Info View</title>
 
 </head>
 <body>
@@ -142,7 +123,7 @@ li {
 	<%
 	if (m != null) {
 	%>
-    <div id="header">
+    <header>
         <div id="logo">
         로고 추가할 곳
         </div>     
@@ -177,7 +158,7 @@ li {
         <li><a href="./cartlist">장바구니</a></li>
 	</ul>     
 	</span>
-	</div>
+	</header>
 	
 	<script>
 	var acc = document.getElementsByClassName("accordion");
@@ -228,7 +209,7 @@ li {
 				</p>
 				<p class="t2">
 					<label for="profile">프로필 : </label>
-					<input type="file" id="image" name="mm_profile" class="input1" accept="image/*" onchange="setThumbnail(event);">
+					<input type="file" id="image" name="mm_profile" value="<%=m.getMm_profile()%>" onchange="setThumbnail(event);">
 					<div id="image_container"></div>
 				</p>
 				<p class="t1">

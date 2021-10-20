@@ -1,3 +1,4 @@
+<link rel="stylesheet" type="text/css" href="css/myStyle.css">
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
@@ -10,60 +11,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- <link rel="stylesheet" href="style.css"> -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap');
+    <title>아이디 찾기</title>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
- * {
-	font-family: "Noto Sans KR", sans-serif;
-}  
-    body {
-        margin: 0;
-    }
-    #header {
-        width: 100%;
-        margin: 0 auto; 
-        height: 220px;
-        position: relative;
-    }
-     a:link{
-  text-decoration: none!important;
-  color: green;
-}
-li {
-	list-style-type: none;
-}
-#logo{
-	width: 100px;
-	position: absolute;
-}
-#highmenu ul li {
-	float: left;
-	margin: 15px;
+<style type="text/css">
+.accordion{
+	background: #eee;
+	color: green;
+	cursor: pointer;
+	border: none;
 	text-align: center;
-	position: relative;
-	padding-bottom: 0px;
+	transition: 0.4s;
 }
-#topmenu ul li{
-	
-	float: left;
-	margin: 15px;
-	padding: 10px;
-	position: relative;
+.ac:active, .accordion:hover {
+	background: #ccc;
+}
+.panel{
+	padding: 0 18px;
+	background: white;
+	max-height: 0;
+	overflow: hidden;
+	transition: max-height 0.2s ease-out;
 }
 
     .h1 {
         text-align: center;
         height: 50px;
     }
-    #section {
-        position: relative; z-index: 2;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        background-size: cover;
-        padding-bottom: 190px;
-    }
+   
 
     .int-area {
         width: 400px;
@@ -128,10 +103,9 @@ li {
         text-align: center;
     }
     </style>
-    <title>아이디 찾기</title>
 </head>
 <body>
-    <div id="header">
+    <header>
         <div id="logo">
         로고 추가할 곳
         </div>     
@@ -166,11 +140,11 @@ li {
         <li><a href="./cartlist">장바구니</a></li>
 	</ul>     
 	</span>
-	</div>
+	</header>
 
     <h1 class="h1">아이디 찾기</h1>
     
-    <div id="section">
+    <div class="Article">
         <form action="/showid" method="post">
             <p class="int-area">
                 <label for="name">이름</label>

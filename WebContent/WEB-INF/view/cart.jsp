@@ -1,3 +1,4 @@
+<link rel="stylesheet" type="text/css" href="css/myStyle.css">
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.indimoa.cart.model.vo.Cart"%>
 <%@page import="java.text.DecimalFormat"%>
@@ -27,56 +28,34 @@ if(obj == null) {	//세션 정보가 없으면 배열을 생성 : 주문한 제�
 <head>
 <meta charset="UTF-8">
 
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap');
 
-* {
-	font-family: "Noto Sans KR", sans-serif;
-}  
-body {
-    margin: 0;
-}
-#header {
-    width: 100%;
-    margin: 0 auto; 
-    height: 220px;
-    position: relative;
-}
-a:link{
-  text-decoration: none!important;
-  color: green;
-}
-li {
-	list-style-type: none;
-}
-#logo{
-	width: 100px;
-	position: absolute;
-}
-#highmenu ul li {
-	float: left;
-	margin: 15px;
-	text-align: center;
-	position: relative;
-	padding-bottom: 0px;
-}
-#topmenu ul li{
-	
-	float: left;
-	margin: 15px;
-	padding: 10px;
-	position: relative;
-}
-    
-    
-
-</style>
 <title>장바구니</title>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
+<style type="text/css">
+.accordion{
+	background: #eee;
+	color: green;
+	cursor: pointer;
+	border: none;
+	text-align: center;
+	transition: 0.4s;
+}
+.ac:active, .accordion:hover {
+	background: #ccc;
+}
+.panel{
+	padding: 0 18px;
+	background: white;
+	max-height: 0;
+	overflow: hidden;
+	transition: max-height 0.2s ease-out;
+}
+</style>
 
 </head>
 <body>
-    <div id="header">
+    <header>
         <div id="logo">
         로고 추가할 곳
         </div>     
@@ -111,10 +90,10 @@ li {
         <li><a href="./cartlist">장바구니</a></li>
 	</ul>     
 	</span>
-	</div>
+	</header>
 
 
-<div align="center">
+<div align="center" class="Article">
 	<h3>[장바구니 보기]</h3>
 	<table border="1">
 		<tr>
@@ -123,13 +102,18 @@ li {
 			<th>가격</th>
 			<th>총액</th>
 		</tr>
+	
+	
+	
+	
+	
 	<%
 		if(cart.size() == 0) {
 	%>
 		<tr align='center'>
 			<td colspan= '3'>
 				장바구니에 담긴 상품이 없습니다.
-				<a href= 'gameList'>쇼핑하기</a>
+				<a href= '/GameList'>쇼핑하기</a>
 			</td>
 		</tr>
 	<%
@@ -197,19 +181,19 @@ for (i = 0; i < acc.length; i++) {
 
 function fnPay(){
 	if(confirm("결제하시겠습니까?")) {
-        location.href = "WEB-INF/view/buyPage.jsp";
+        location.href = "/cartpay";
     }
 }
 
 function fnClear(){
 	if(confirm("장바구니를 비우시겠습니까?")) {
 		alert("장바구니가 삭제되었습니다.");
-		location.href = "WEB-INF/view/cartClear.jsp";	
+		location.href = "/cartdelete";	
 	}
 }
 
 function fnGo(){
-	location.href = "WEB-INF/view/gamelist.jsp";
+	location.href = "/GameList";
 }
 </script>
 

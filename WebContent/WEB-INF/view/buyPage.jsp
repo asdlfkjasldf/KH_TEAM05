@@ -1,3 +1,4 @@
+<link rel="stylesheet" type="text/css" href="css/myStyle.css">
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
@@ -12,68 +13,26 @@
     
     <title>BuyPage</title>
 
-    <style>
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap');
-    
-* {
-	font-family: "Noto Sans KR", sans-serif;
-}
-body {
-        margin: 0;
-    }
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-.modal {
-        display: none;
-        width: 100%;
-        height: 100%;
-        top: 0;
-        left: 0;
-        position: fixed;
-        z-index: 1;
-        background-color: rgba(12, 12, 12, .3);
-    }
-    .modal-content {
-        width: 200px;
-        height: 300px;
-        top: 50px;
-        margin: auto;
-        position: relative;
-        background-color: lightsteelblue;
-        padding: 10px;
-    }
-
-
-
-#header {
-        width: 100%;
-        margin: 0 auto; 
-        height: 220px;
-        position: relative;
-    }
-a:link{
-  text-decoration: none!important;
-  color: green;
-}
-li {
-	list-style-type: none;
-}
-#logo{
-	width: 100px;
-	position: absolute;
-}
-#highmenu ul li {
-	float: left;
-	margin: 15px;
+<style type="text/css">
+.accordion{
+	background: #eee;
+	color: green;
+	cursor: pointer;
+	border: none;
 	text-align: center;
-	position: relative;
-	padding-bottom: 0px;
+	transition: 0.4s;
 }
-#topmenu ul li{
-	
-	float: left;
-	margin: 15px;
-	padding: 10px;
-	position: relative;
+.ac:active, .accordion:hover {
+	background: #ccc;
+}
+.panel{
+	padding: 0 18px;
+	background: white;
+	max-height: 0;
+	overflow: hidden;
+	transition: max-height 0.2s ease-out;
 }
 
 .h1{
@@ -82,16 +41,7 @@ li {
     height: 150px;
     margin-bottom: 10px;
 }
-#section {
-    position: relative; z-index: 2;
-    font-family: 'Noto Sans KR', sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-size: cover;
-    padding-bottom: 190px;
-}
+
 
 .int-area {
     width: 400px;
@@ -165,7 +115,7 @@ li {
     </div>
 
 
-    <div id="header">
+    <header>
         <div id="logo">
         로고 추가할 곳
         </div>     
@@ -200,11 +150,11 @@ li {
         <li><a href="./cartlist">장바구니</a></li>
 	</ul>     
 	</span>
-	</div>
+	</header>
 
 
 
-    <div id="section">
+    <div class="Article">
     <h1 class="h1">결제창</h1><br><br>
 
 

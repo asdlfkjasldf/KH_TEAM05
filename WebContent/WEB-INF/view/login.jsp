@@ -1,3 +1,4 @@
+<link rel="stylesheet" type="text/css" href="css/myStyle.css">
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
@@ -10,50 +11,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <style>
-    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
+    <title>로그인</title>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-
-* {
-	font-family: "Noto Sans KR", sans-serif;
-}
-body {
-    margin: 0;
-}
-a:link{
-  text-decoration: none!important;
-  color: green;
-}
-li {
-	list-style-type: none;
-}
-#logo{
-	width: 100px;
-	position: absolute;
-}
-#highmenu ul li {
-	float: left;
-	margin: 15px;
+<style type="text/css">
+.accordion{
+	background: #eee;
+	color: green;
+	cursor: pointer;
+	border: none;
 	text-align: center;
-	position: relative;
-	padding-bottom: 0px;
+	transition: 0.4s;
 }
-#topmenu ul li{
-	float: left;
-	margin: 15px;
-	padding: 10px;
-	position: relative;
+.ac:active, .accordion:hover {
+	background: #ccc;
 }
-    #header {
-        width: 100% 
-        margin: 0 auto; 
-        height: 220px;
-        position: relative;
-    }
-
-
-
-* {margin: 0; padding: 0; box-sizing: border-box;}
+.panel{
+	padding: 0 18px;
+	background: white;
+	max-height: 0;
+	overflow: hidden;
+	transition: max-height 0.2s ease-out;
+}
 
 .h1 {
     text-align: center;
@@ -68,7 +47,11 @@ li {
     align-items: center;
     height: 100vh;
     background-size: cover;
+	padding-top: 220px;
+	padding-bottom: 190px;
 }
+
+
 /* .login-form h1{
     font-size: 32px; color: #fff;
     text-align: center;  
@@ -141,12 +124,11 @@ li {
             
     }
     </style>
-    <title>로그인</title>
 </head>
 <body>
 
 
-    <div id="header">
+    <header>
         <div id="logo">
         로고 추가할 곳
         </div>     
@@ -181,7 +163,7 @@ li {
         <li><a href="./cartlist">장바구니</a></li>
 	</ul>     
 	</span>
-	</div>
+	</header>
 
 
 	<div id="section">

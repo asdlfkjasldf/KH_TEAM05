@@ -35,7 +35,7 @@ public class CartDeleteServlet extends HttpServlet {
 			HttpSession session = request.getSession(false);
 			session.invalidate();
 		}
-		response.sendRedirect("");   //TODO
+		response.sendRedirect("/WEB-INF/view/cartClear.jsp");   //TODO
 	}
 
 	/**

@@ -1,3 +1,4 @@
+<link rel="stylesheet" type="text/css" href="css/myStyle.css">
 <%@page import="com.indimoa.member.model.dao.MemberDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -11,44 +12,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap');
+    <title>비밀번호 찾기결과</title>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-* {
-	font-family: "Noto Sans KR", sans-serif;
-}
-body {
-      margin: 0;
-}
-#header {
-    width: 100%;
-    margin: 0 auto; 
-    height: 220px;
-    position: relative;
-}
-a:link{
-  text-decoration: none!important;
-  color: green;
-}
-li {
-	list-style-type: none;
-}
-#logo{
-	width: 100px;
-	position: absolute;
-}
-#highmenu ul li {
-	float: left;
-	margin: 15px;
+<style type="text/css">
+.accordion{
+	background: #eee;
+	color: green;
+	cursor: pointer;
+	border: none;
 	text-align: center;
-	position: relative;
-	padding-bottom: 0px;
+	transition: 0.4s;
 }
-#topmenu ul li{
-	float: left;
-	margin: 15px;
-	padding: 10px;
-	position: relative;
+.ac:active, .accordion:hover {
+	background: #ccc;
+}
+.panel{
+	padding: 0 18px;
+	background: white;
+	max-height: 0;
+	overflow: hidden;
+	transition: max-height 0.2s ease-out;
 }
         
         
@@ -107,7 +91,6 @@ li {
     }
 
     </style>
-    <title>비밀번호 찾기결과</title>
 </head>
 <body>
 <%
@@ -181,13 +164,13 @@ int mm_pwd = dao.selectPwd(mm_name, mm_id, mm_email);   //TODO
 	
 	
 
-<div id = "section">
-    <h1 class="h1">비밀번호 찾기 결과</h1>
     
 	<form action="WEB-INF/view/showPwd.jsp" method="post">
 	<%
 	if (mm_pwd != 0) {
 	%>
+<div id = "section">
+    <h1 class="h1">비밀번호 찾기 결과</h1>
 
     	<div class = "found-success">
             <p class="t1">
@@ -200,14 +183,14 @@ int mm_pwd = dao.selectPwd(mm_name, mm_id, mm_email);   //TODO
                 </p>
         
     	</div>
-	</form> 	
+		
 </div>
     <%
 	} else {
     %>
     <div id="section">
     	<div class="found-fail">
-    		<form action="<c:url value='/selectpwd'/>" method="post">
+    		<form method="post" action="<c:url value='/selectpwd'/>" >
     		<h4> 등록된 정보가 없습니다.</h4>
     		
     		<p class="caption">
@@ -219,7 +202,7 @@ int mm_pwd = dao.selectPwd(mm_name, mm_id, mm_email);   //TODO
      <%
 	}
     %>
-
+</form> 
 
     <div id="footer">
         INDIMOA ｜ 사업자등록번호 : 821-85-00000 ｜ 서울 강남 제2020-01호 ｜ 대표자 : 홍길동 ｜ 책임자 : 홍길동 ｜  개인정보관리책임자 : 홍길동<br><br>
