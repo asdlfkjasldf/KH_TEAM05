@@ -7,7 +7,11 @@
 <title>Insert title here</title>
 </head>
 <body>
-<!-- 사용법 아래의 </body>까지 복사 후 본인 body에 붙여넣기 이후  
+<!-- 사용법 
+<link rel="stylesheet" type="text/css" href="./css/myStyle.css"> 를 
+본인이 작성한 jsp 맨위에 복사후 붙여넣기
+
+아래의 </body>까지 복사 후 본인 body에 붙여넣기 이후  
 <div class="Article"> </div> 사이에 본인이 작성한 페이지 적용-->
 
 	<header>
