@@ -15,7 +15,7 @@ import com.indimoa.member.model.vo.Member;
 /**
  * Servlet implementation class memberServlet
  */
-@WebServlet("/myInfo")
+@WebServlet("/myinfo")
 public class memberServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

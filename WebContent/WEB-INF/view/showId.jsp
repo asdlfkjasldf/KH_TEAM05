@@ -1,4 +1,4 @@
-<link rel="stylesheet" type="text/css" href="css/myStyle.css">
+<link rel="stylesheet" type="text/css" href="./css/myStyle.css">
 <%@page import="com.indimoa.member.model.dao.MemberDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -54,15 +54,11 @@ int mm_id = dao.selectId(mm_name, mm_email);   //TODO
 %>
 
     <header>
-        <div id="logo">
-        로고 추가할 곳
-        </div>     
-    
-    	<div id="highmenu">
-	 	<span>
-	    	<ul>
-        	<li><a href="./GameList">상점</a></li>
-        	<li><button class="accordion">커뮤니티</button>
+	<div id="logo"><a href="./"><img src="./image/ex1.png"></a></div>
+	<nav id="highmenu" class="topmenu">
+	    <ul>
+        <li><a href="./GameList">상점</a></li>
+        <li><button class="accordion">커뮤니티</button>
         	<div class="panel">
         	<ul>
         	<li><a href="./fbboardlist">자유게시판</a></li>
@@ -70,24 +66,29 @@ int mm_id = dao.selectId(mm_name, mm_email);   //TODO
         	<li><a href="./tboardlist">팁게시판</a></li>
         	</ul>
         	</div>
-        	</li>
+        </li>
+        
+        <li><a href="./notice">뉴스</a></li>
+        <li><a href="#">카테고리</a></li>
+        <li><a href="#">지원</a></li>
+        <li id="textboxli">
+        	<!-- todo 링크는 jstl을 이용해 txt박스의 값을 적어구문작성 -->
+        	<form action="./GameList?" method="get">
+        	<input type="text" id="textSearchGame" name="q">
+        	<button type="submit" id="btnSearchGame"></button>
+        	</form>
         	
-        	<li><a href="./notice">뉴스</a></li>
-        	<li><a href="#">카테고리</a></li>
-        	<li><a href="#">지원</a></li>
-        	<li><input type="text" id="btnSearchGame"></li>
-        	<li><button type="button" onclick="searchGame()">돋보기그림추가할것</button></li>
-    		</ul>
-		</span>
-		</div>
-		<span id="topmenu">
-	<ul>
-        <li><a href="./enrollmember">회원가입</a></li>
-        <li><a href="./memberlogin">로그인</a></li>
-        <li><a href="./myInfo">마이페이지</a></li>
-        <li><a href="./cartlist">장바구니</a></li>
-	</ul>     
-	</span>
+        </li>
+    	</ul>
+	</nav>
+		<nav id="topmenu_tnb">
+		<ul>
+	        <li><a href="./enrollmember">회원가입</a></li>
+	        <li><a href="./memberlogin">로그인</a></li>
+	        <li><a href="./myinfo">마이페이지</a></li>
+	        <li><a href="./cartlist">장바구니</a></li>
+		</ul>     
+		</nav>
 	</header>
 	
 	<script>
@@ -159,5 +160,7 @@ int mm_id = dao.selectId(mm_name, mm_email);   //TODO
         INDIMOA ｜ 사업자등록번호 : 821-85-00000 ｜ 서울 강남 제2020-01호 ｜ 대표자 : 홍길동 ｜ 책임자 : 홍길동 ｜  개인정보관리책임자 : 홍길동<br><br>
         Copyright © 2020-2021 INDIMOA GAME SHOPPING MALL
     </div>
+    
+    <div hidden="">돋보기아이콘 제작자 <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/kr/" title="Flaticon">www.flaticon.com</a></div>
 </body>
 </html>
