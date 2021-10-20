@@ -103,10 +103,10 @@
     </div>
     </div>
 
-	<div class="footer">
+	<footer>
     INDIMOA ｜ 사업자등록번호 : 821-85-00000 ｜ 서울 강남 제2020-01호 ｜ 대표자 : 홍길동 ｜ 책임자 : 홍길동 ｜  개인정보관리책임자 : 홍길동<br><br>
         Copyright © 2020-2021 INDIMOA GAME SHOPPING MALL
-	</div>
+	</footer>
 	<script>
 var acc = document.getElementsByClassName("accordion");
 var i;
