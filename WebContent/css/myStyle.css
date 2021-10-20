@@ -12,7 +12,7 @@ body {
 	font: 15px;
 }
 
-a:link{
+a{
   text-decoration: none!important;
   color: green;
 }
@@ -26,12 +26,16 @@ li {
 header {
 	width: 1110px;
 	height: 220px;
-	font: 16px;
-	font-weight: bold;
+	font-size: 16px;
 	background-color: white;
     margin-bottom: 20px;
     position: relative;
 }
+
+:hover{
+	background-color: #ccc;
+}
+
 
 #logo{
 	width: 100px;
@@ -46,17 +50,22 @@ header {
             position: absolute;
             right: 5px;
             top: 5px;
+            
 }
 
 header > #highmenu{
     bottom: 5px;    
     position: absolute;
     overflow: hidden;
+    background-color: gainsboro;
+    border-radius: 5px;
+    display: flex;
+    
 }
 #highmenu ul li {
 	width: 100px;
 	display: inline-block;
-	margin: 15px;
+	margin: 5px;
 	text-align: center;
 	
 }
@@ -70,6 +79,8 @@ header #topmenu_tnb{
 	right: 0;
     overflow: hidden;
 	position: absolute;
+	background-color: gainsboro;
+	border-radius: 5px;
 }
 
 
@@ -77,7 +88,7 @@ header #topmenu_tnb{
 #topmenu_tnb ul li{
 	display: inline-block;
 	float: left;
-	margin: 15px;
+	margin: 5px;
 	padding: 10px;
 	position: relative;
 }
@@ -105,9 +116,13 @@ header #topmenu_tnb{
 	padding: 0;
 	background-image: url("../image/free-icon-magnifier-71403.png");
     background-repeat: no-repeat;
+    background-color: gainsboro;
     width: 24px;
     height: 24px;
     outline: 0;
+}
+#btnSearchGame:active,#btnSearchGame:hover{
+	background-color: #ccc;
 }
 
 .imgIcon {
@@ -115,6 +130,7 @@ header #topmenu_tnb{
 	width: 24px;
 	height: 24px;
 	bottom: 0;
+	
 }
 
 #Middle-page{
@@ -130,16 +146,26 @@ header #topmenu_tnb{
 	border: none;
 	text-align: center;
 	transition: 0.4s;
+	background-color: gainsboro;
+	font-size: 16px;
 }
 .ac:active, .accordion:hover {
 	background: #ccc;
 }
 .panel{
+	display: flex;
 	padding: 0 18px;
-	background: white;
 	max-height: 0;
 	overflow: hidden;
 	transition: max-height 0.2s ease-out;
+	background-color: gainsboro;
+	float: left;
+	width: 500px;
+	align-items: center;
+	
+}
+.panel > ul > li > a{
+	color: black;
 }
 
 footer {
