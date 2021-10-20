@@ -1,4 +1,4 @@
-<link rel="stylesheet" type="text/css" href="./css/myStyle.css">
+<link rel="stylesheet" type="text/css" href="css/myStyle.css">
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
@@ -9,8 +9,9 @@
 <head>
 
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>인디모아에 오신 것을 환영합니다.</title>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
 <style type="text/css">
 .accordion{
 	background: #eee;
@@ -35,10 +36,9 @@
 </head>
 <body>
 
-		<div class="Header">
+	<header>
 	<div id="logo">로고추가할곳</div>
-	<div id="highmenu">
-	 <span>
+	<nav id="highmenu" class="topmenu">
 	    <ul>
         <li><a href="./GameList">상점</a></li>
         <li><button class="accordion">커뮤니티</button>
@@ -54,20 +54,19 @@
         <li><a href="./notice">뉴스</a></li>
         <li><a href="#">카테고리</a></li>
         <li><a href="#">지원</a></li>
-        <li><input type="text" id="btnSearchGame"></li>
-        <li><button type="button" onclick="searchGame()">돋보기그림추가할것</button></li>
+        <li><input type="text" id="textSearchGame"></li>
+        <li><button type="button" onclick="searchGame()" id="btnSearchGame" style="border: none;" ><img src="./image/free-icon-magnifier-71403.png" class="imgIcon" width="24px" height="24px"> </button></li>
     	</ul>
-	</span>
-	</div>
-	<span id="topmenu">
-	<ul>
-        <li><a href="./enrollmember">회원가입</a></li>
-        <li><a href="./memberlogin">로그인</a></li>
-        <li><a href="#">마이페이지</a></li>
-        <li><a href="./cartlist">장바구니</a></li>
-	</ul>     
-	</span>
-	</div>
+	</nav>
+		<nav id="topmenu_tnb">
+		<ul>
+	        <li><a href="./enrollmember">회원가입</a></li>
+	        <li><a href="./memberlogin">로그인</a></li>
+	        <li><a href="#">마이페이지</a></li>
+	        <li><a href="./cartlist">장바구니</a></li>
+		</ul>     
+		</nav>
+	</header>
 	
     <div class="section">
 	<div class="Asside-left">
@@ -109,5 +108,7 @@ for (i = 0; i < acc.length; i++) {
   });
 }
 </script>
+
+<div hidden="">돋보기아이콘 제작자 <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/kr/" title="Flaticon">www.flaticon.com</a></div>
 </body>
 </html>
