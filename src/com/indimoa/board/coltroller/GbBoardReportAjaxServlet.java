@@ -9,19 +9,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.indimoa.board.model.service.FbBoardService;
+import com.indimoa.board.model.service.GbBoardService;
 
 /**
- * Servlet implementation class FbBoardDeleteAjaxServlet
+ * Servlet implementation class GbBoardReportAjaxServlet
  */
-@WebServlet("/fbboarddelete.ajax")
-public class FbBoardDeleteAjaxServlet extends HttpServlet {
+@WebServlet("/gbboardreport.ajax")
+public class GbBoardReportAjaxServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public FbBoardDeleteAjaxServlet() {
+	public GbBoardReportAjaxServlet() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -40,21 +40,21 @@ public class FbBoardDeleteAjaxServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
 		PrintWriter out = response.getWriter();
-		
-		String fbDstr = request.getParameter("fbNo");
-		int fbDelete = 0;
+
+		String gbRstr = request.getParameter("gbNo");
+		int gbReport = 0;
 		try {
-			fbDelete = Integer.parseInt(fbDstr);
+			gbReport = Integer.parseInt(gbRstr);
 		} catch (Exception e) {
 			System.out.println("숫자변경 실패!!!");
 			e.printStackTrace();
 		}
-		System.out.println("fbDelete:"+fbDelete);
+
 		// TODO
 		// String fbRId = request.getSession().getAttribute("로그인 attr 명");
-		int result = new FbBoardService().deleteBoard(fbDelete);
+
+		int result = new GbBoardService().reportBoard(gbReport);
 		if (result > 0) {
 			out.print("OK");
 		} else {
@@ -63,4 +63,5 @@ public class FbBoardDeleteAjaxServlet extends HttpServlet {
 		out.flush();
 		out.close(); // ajax success 에 함수로 호출함.
 	}
+
 }

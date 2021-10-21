@@ -35,19 +35,7 @@ public class FbBoardContentViewServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		response.setCharacterEncoding("UTF-8");
-		response.setContentType("text/html; charset=UTF-8");
-		request.setCharacterEncoding("UTF-8");
-
+		
 		String no = request.getParameter("no");
 		int bno = Integer.parseInt(no);
 		FbBoard vo = new FbBoardService().getBoard(bno);
@@ -60,5 +48,14 @@ public class FbBoardContentViewServlet extends HttpServlet {
 		request.setAttribute("boardvor", vor);
 		request.setAttribute("uploadfile", img);
 		request.getRequestDispatcher("/WEB-INF/view/fbboardcontent.jsp").forward(request, response);
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
 	}
 }

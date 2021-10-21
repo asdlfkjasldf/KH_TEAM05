@@ -115,12 +115,19 @@ public class FbBoardService {
 		return result;
 	}
 	
-	public int insertBoard(FbBoard vo) {
+	public int insertBoard(FbBoard vo, String file) {
 		int result = -1;
 		Connection conn = JdbcTemplate.getConnection();
+		
+		int bno = new FbBoardDao().getNextVal(conn);
+		
+		result = new FbBoardDao().insertBoard(conn, vo, bno);
 
-		result = new FbBoardDao().insertBoard(conn, vo);
-
+		if(result>0) {
+			FbBoardImg img = new FbBoardImg(file, bno);
+			result = new FbBoardDao().insertImage(conn, img);
+		}
+		
 		JdbcTemplate.close(conn);
 		return result;
 	}
@@ -135,13 +142,13 @@ public class FbBoardService {
 		return result;
 	}
 	
-	public int insertImage(FbBoardImg img) {
-		int result = -1;
-		Connection conn = JdbcTemplate.getConnection();
-
-		result = new FbBoardDao().insertImage(conn, img);
-
-		JdbcTemplate.close(conn);
-		return result;
-	}
+//	public int insertImage(FbBoardImg img) {
+//		int result = -1;
+//		Connection conn = JdbcTemplate.getConnection();
+//
+//		result = new FbBoardDao().insertImage(conn, img);
+//
+//		JdbcTemplate.close(conn);
+//		return result;
+//	}
 }

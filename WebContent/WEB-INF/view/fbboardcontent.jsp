@@ -39,9 +39,13 @@
 		<tr>
 			<td colspan="3"><%=vo.getFbContent()%></td>
 		</tr>
+		<%if(img !=null) { %>
+		<%if(img.getImgPath()!=null){ %>
 		<tr>
-			<td><%=img.getImgPath()%></td>
+			<td colspan="3"><img src="<%=img.getImgPath()%>"></td>
 		</tr>
+		<%} %>
+		<%} %>
 		<tr>
 			<td>신고수 : <%=vo.getFbReport()%></td>
 		</tr>

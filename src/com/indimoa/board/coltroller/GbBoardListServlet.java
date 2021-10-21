@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.indimoa.board.model.service.GbBoardService;
 import com.indimoa.board.model.vo.GbBoard;
-import com.indimoa.board.model.vo.TipBoard;
 
 /**
  * Servlet implementation class GbBoardListServlet
@@ -30,14 +29,12 @@ public class GbBoardListServlet extends HttpServlet {
 	}
 
 	/**
+	 * @throws IOException
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		response.setCharacterEncoding("UTF-8");
-		response.setContentType("text/html; charset=UTF-8");
-		request.setCharacterEncoding("UTF-8");
 
 		PrintWriter out = response.getWriter();
 
@@ -77,7 +74,7 @@ public class GbBoardListServlet extends HttpServlet {
 		request.setAttribute("volist", volist);
 		request.setAttribute("startPage", startPage);
 		request.setAttribute("endPage", endPage);
-		request.setAttribute("pageCount", pageCount);	
+		request.setAttribute("pageCount", pageCount);
 		request.setAttribute("currentPage", currentPage);
 		request.getRequestDispatcher("/WEB-INF/view/gbboardlist.jsp").forward(request, response);
 

@@ -9,7 +9,6 @@ import com.indimoa.common.JdbcTemplate;
 import com.indimoa.board.model.vo.FbBoard;
 import com.indimoa.board.model.vo.FbBoardImg;
 import com.indimoa.board.model.vo.FbBoardR;
-import com.indimoa.board.model.vo.TipBoard;
 
 public class FbBoardDao {
 	public FbBoard getBoard(Connection conn, int bno) {
@@ -78,8 +77,7 @@ public class FbBoardDao {
 
 	public FbBoardImg getImage(Connection conn, int bno) {
 		FbBoardImg img = null;
-		String sql = "select fbimg.img_path, fbimg.fb_no from fb_board_img fbimg join free_board_m fbboard"
-				+ " on fbimg.fb_no = fbboard.fb_no";
+		String sql = "select * from fb_board_img where fb_no = ?";
 
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -89,8 +87,8 @@ public class FbBoardDao {
 			rset = pstmt.executeQuery();
 			if (rset.next()) {
 				img = new FbBoardImg();
-				img.setFbNo(rset.getInt("FBIMG.FB_NO"));
-				img.setImgPath(rset.getString("FBIMG.IMG_PATH"));
+				img.setFbNo(rset.getInt("fb_no"));
+				img.setImgPath(rset.getString("img_path"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -314,21 +312,10 @@ public class FbBoardDao {
 		System.out.println("report 결과 : " + result);
 		return result;
 	}
-
-	public int insertBoard(Connection conn, FbBoard vo) {
-		int result = -1;
-
-		String sqlUpdate = "update FREE_BOARD_M set bre_step=bre_step+1 where bref=? and bre_step>?";
-
-		String sqlInsert = "INSERT INTO FREE_BOARD_M (FB_NO,MM_ID,FB_TITLE,FB_CONTENT,FB_DATETIME,FB_VISIT,FB_REPLY,FB_REPORT,bref, bre_level, bre_step)"
-				+ " VALUES (?, ?, ?, ?, sysdate, ?, ?, ?, ?, ?, ?)";
+	
+	public int getNextVal(Connection conn) {
+		int nextVal = -1;
 		String sqlSeqNextVal = "select SEQ_FB_BOARD_NO.nextval from dual";
-
-		int bref = 0;
-		int bre_level = 0;
-		int bre_step = 1;
-		int nextVal = 0;
-
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		try {
@@ -337,8 +324,40 @@ public class FbBoardDao {
 			if (rset.next()) {
 				nextVal = rset.getInt(1);
 			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
 			JdbcTemplate.close(rset);
 			JdbcTemplate.close(pstmt);
+		}
+		System.out.println("insert 결과 : " + nextVal);
+		return nextVal;
+	}
+
+	public int insertBoard(Connection conn, FbBoard vo, int nextVal) {
+		int result = -1;
+
+		String sqlUpdate = "update FREE_BOARD_M set bre_step=bre_step+1 where bref=? and bre_step>?";
+
+		String sqlInsert = "INSERT INTO FREE_BOARD_M (FB_NO,MM_ID,FB_TITLE,FB_CONTENT,FB_DATETIME,FB_VISIT,FB_REPLY,FB_REPORT,bref, bre_level, bre_step)"
+				+ " VALUES (?, ?, ?, ?, sysdate, ?, ?, ?, ?, ?, ?)";
+//		String sqlSeqNextVal = "select SEQ_FB_BOARD_NO.nextval from dual";
+
+		int bref = 0;
+		int bre_level = 0;
+		int bre_step = 1;
+//		int nextVal = 0;
+
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		try {
+//			pstmt = conn.prepareStatement(sqlSeqNextVal);
+//			rset = pstmt.executeQuery();
+//			if (rset.next()) {
+//				nextVal = rset.getInt(1);
+//			}
+//			JdbcTemplate.close(rset);
+//			JdbcTemplate.close(pstmt);
 
 			if (vo.getFbNo() != 0) { // 답글
 				bref = vo.getBref();
@@ -359,7 +378,8 @@ public class FbBoardDao {
 			} else {
 				pstmt.setInt(8, nextVal);
 			}
-
+			System.out.println("sqlInsert: "+ sqlInsert);
+			System.out.println("vo: "+ vo);
 			pstmt.setInt(1, nextVal);
 			pstmt.setString(2, vo.getMmId());
 			pstmt.setString(3, vo.getFbTitle());

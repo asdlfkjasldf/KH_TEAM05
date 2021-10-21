@@ -10,11 +10,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
 import com.indimoa.board.model.service.FbBoardService;
 import com.indimoa.board.model.vo.FbBoard;
-import com.indimoa.board.model.vo.FbBoardImg;
 import com.indimoa.member.model.vo.Member;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
@@ -49,9 +47,7 @@ public class FbBoardWriteDoServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		response.setCharacterEncoding("UTF-8");
-		response.setContentType("text/html; charset=UTF-8");
-		request.setCharacterEncoding("UTF-8");
+
 		PrintWriter out = response.getWriter();
 
 		FbBoard oVo = null;
@@ -65,21 +61,6 @@ public class FbBoardWriteDoServlet extends HttpServlet {
 			oVo = new FbBoardService().getBoard(bno);
 		}
 
-		System.out.println("oVo: " + oVo);
-		String title = request.getParameter("title"); // 내용부분입력된값이지요
-		String content = request.getParameter("content"); // 뭐라해야할지모를제목
-		Member memberSS = (Member) request.getSession().getAttribute("member");
-		String writer = memberSS.getMm_id();
-		// TODO 임시코드로 확인이 필요함
-		if (writer == null || writer.equals("")) {
-			System.out.println("!!!!!임시 아이디!!!! testuser03");
-			writer = "testuser03"; // "user01";
-		}
-
-		FbBoard vo = new FbBoard(oVo.getFbNo(), writer, title, content, oVo.getFbDatetime(), oVo.getFbVisit(),
-				oVo.getFbReply(), oVo.getFbReport(), oVo.getBref(), oVo.getBreLevel(), oVo.getBreStep());
-		System.out.println("vo: " + vo);
-		int result = new FbBoardService().insertBoard(vo);
 		// 파일 저장 경로 (web 경로 밑에 해당 폴더를 생성해 주어야 한다)
 		String fileSavePath = "upload";
 		// 파일 크기 10M 제한
@@ -101,12 +82,35 @@ public class FbBoardWriteDoServlet extends HttpServlet {
 			System.out.println("업로드 실패");
 		} else {
 			System.out.println("업로드 성공");
+			file = fileSavePath +"/" + file;
 		}
 
-		FbBoardImg img = new FbBoardImg();
-		FbBoardImg voi = new FbBoardImg(uploadPath, img.getFbNo());
-		int result2 = new FbBoardService().insertImage(voi);
 
+
+		
+// 여기로 옮김
+		System.out.println("oVo: " + oVo);
+		String title = multi.getParameter("title"); // 내용부분입력된값이지요
+		String content = multi.getParameter("content"); // 뭐라해야할지모를제목
+		String writer = "";
+		Member memberSS = (Member) request.getSession().getAttribute("member");
+		if (memberSS != null && !(memberSS.getMm_id().equals(""))) {
+			writer = memberSS.getMm_id();
+		} else {
+			// TODO 임시코드로 확인이 필요함
+			System.out.println("!!!!!임시 아이디!!!! testuser03");
+			writer = "testuser03"; // "user01";
+		}
+
+		FbBoard vo = new FbBoard(oVo.getFbNo(), writer, title, content, oVo.getFbDatetime(), oVo.getFbVisit(),
+				oVo.getFbReply(), oVo.getFbReport(), oVo.getBref(), oVo.getBreLevel(), oVo.getBreStep());
+		System.out.println("vo: " + vo);
+		int result = new FbBoardService().insertBoard(vo, file);
+		// 불필요 FbBoardImg img = new FbBoardImg();
+//		FbBoardImg voi = new FbBoardImg(uploadPath, result);
+//		int result2 = new FbBoardService().insertImage(voi);
+		
+		
 		response.sendRedirect("fbboardlist");
 	}
 }

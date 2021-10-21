@@ -3,6 +3,7 @@ package com.indimoa.board.coltroller;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.indimoa.board.model.service.TipBoardService;
 import com.indimoa.board.model.vo.TipBoard;
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 /**
  * Servlet implementation class TipBoardWriteServlet
@@ -31,9 +34,13 @@ public class TipBoardWriteDoServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setCharacterEncoding("UTF-8");
-		response.setContentType("text/html; charset=UTF-8");
-		request.setCharacterEncoding("UTF-8");
+
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		PrintWriter out = response.getWriter();
 
 		TipBoard oVo = null;
@@ -46,6 +53,32 @@ public class TipBoardWriteDoServlet extends HttpServlet {
 			// 알아와야함. bref, bre_level, bre_step
 			oVo = new TipBoardService().getBoard(bno);
 		}
+		
+		// 파일 저장 경로 (web 경로 밑에 해당 폴더를 생성해 주어야 한다)
+		String fileSavePath = "upload";
+		// 파일 크기 10M 제한
+		int uploadSizeLimit = 10 * 2048 * 2048;
+		String encType = "UTF-8";
+
+		ServletContext context = getServletContext();
+		String uploadPath = context.getRealPath(fileSavePath);
+		System.out.println(uploadPath);
+		MultipartRequest multi = new MultipartRequest(request, // request 객체
+				uploadPath, // 서버 상 업로드 될 디렉토리
+				uploadSizeLimit, // 업로드 파일 크기 제한
+				encType, // 인코딩 방법
+				new DefaultFileRenamePolicy() // 동일 이름 존재 시 새로운 이름 부여 방식
+		);
+		// 업로드 된 파일 이름 얻어오기
+		String file = multi.getFilesystemName("uploadFile");
+		if (file == null) {
+			System.out.println("업로드 실패");
+		} else {
+			System.out.println("업로드 성공");
+			file = fileSavePath +"/" + file;
+		}
+
+
 		
 		System.out.println("oVo: " + oVo);
 		String title = request.getParameter("title"); // 내용부분입력된값이지요
@@ -67,14 +100,7 @@ public class TipBoardWriteDoServlet extends HttpServlet {
 
 		// request.getRequestDispatcher("boardlist").forward(request, response);
 		response.sendRedirect("tboardlist");
-	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
 	}
 
 }

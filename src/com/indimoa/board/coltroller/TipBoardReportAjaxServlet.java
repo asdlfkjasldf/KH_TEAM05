@@ -1,7 +1,7 @@
 package com.indimoa.board.coltroller;
 
 import java.io.IOException;
-
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,20 +9,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.indimoa.board.model.service.FbBoardService;
-import com.indimoa.board.model.vo.FbBoard;
+import com.indimoa.board.model.service.TipBoardService;
 
 /**
- * Servlet implementation class FbBoardUpdateServlet
+ * Servlet implementation class TipBoardReportAjaxServlet
  */
-@WebServlet("/fbboardupdate")
-public class FbBoardUpdateServlet extends HttpServlet {
+@WebServlet("/tboardreport.ajax")
+public class TipBoardReportAjaxServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FbBoardUpdateServlet() {
+    public TipBoardReportAjaxServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,24 +30,36 @@ public class FbBoardUpdateServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		PrintWriter out = response.getWriter();
 
-		String noStr = request.getParameter("no");
-		int bno = 1;
+		String tipRstr = request.getParameter("tipNo");
+		int tipReport = 0;
 		try {
-			bno = Integer.parseInt(noStr);
+			tipReport = Integer.parseInt(tipRstr);
 		}catch(Exception e) {
-			System.out.println("숫자변환실패");
+			System.out.println("숫자변경 실패!!!");
 			e.printStackTrace();
 		}
-		FbBoard vo = new FbBoardService().getBoard(bno);
-		request.setAttribute("boardvo", vo);
-		request.getRequestDispatcher("/WEB-INF/view/fbboardupdate.jsp").forward(request, response);
+		
+		//TODO
+		//String fbRId = request.getSession().getAttribute("로그인 attr 명");
+
+
+		int result = new TipBoardService().reportBoard(tipReport);
+		if(result > 0) {
+			out.print("OK");
+		} else {
+			out.print("fail");
+		}
+		out.flush();
+		out.close();   // ajax success 에 함수로 호출함.
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

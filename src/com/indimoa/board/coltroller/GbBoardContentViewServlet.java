@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.indimoa.board.model.service.GbBoardService;
 import com.indimoa.board.model.vo.GbBoard;
+import com.indimoa.board.model.vo.GbBoardImg;
 import com.indimoa.board.model.vo.GbBoardR;
 
 /**
@@ -19,39 +20,43 @@ import com.indimoa.board.model.vo.GbBoardR;
 @WebServlet("/gbboardcontent")
 public class GbBoardContentViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public GbBoardContentViewServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setCharacterEncoding("UTF-8");
-		response.setContentType("text/html; charset=UTF-8");
-		request.setCharacterEncoding("UTF-8");
+	public GbBoardContentViewServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
 		String no = request.getParameter("no");
 		int bno = Integer.parseInt(no);
 		GbBoard vo = new GbBoardService().getBoard(bno);
 		GbBoardR vor = new GbBoardService().getBoardR(bno);
-		
+		GbBoardImg img = new GbBoardService().getImage(bno);
+
+
 		ArrayList<GbBoardR> vorlist = new GbBoardService().selectBoardRList(bno);
 		request.setAttribute("vorlist", vorlist);
 		request.setAttribute("boardvo", vo);
 		request.setAttribute("boardvor", vor);
+		request.setAttribute("uploadfile", img);
 		request.getRequestDispatcher("/WEB-INF/view/gbboardcontent.jsp").forward(request, response);
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}

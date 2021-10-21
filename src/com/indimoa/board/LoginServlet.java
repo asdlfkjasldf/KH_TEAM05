@@ -29,7 +29,8 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Member m = new Member();
-		m.setMm_id("testuser01");
+//		m.setMm_id("testuser01");
+		m.setMm_id("testDev00");
 		request.getSession().setAttribute("member", m);
 	}
 

@@ -3,6 +3,7 @@ package com.indimoa.board.coltroller;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,6 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.indimoa.board.model.service.GbBoardService;
 import com.indimoa.board.model.vo.GbBoard;
+import com.indimoa.member.model.vo.Member;
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 /**
  * Servlet implementation class GbBoardWriteDoServlet
@@ -33,9 +37,15 @@ public class GbBoardWriteDoServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		response.setCharacterEncoding("UTF-8");
-		response.setContentType("text/html; charset=UTF-8");
-		request.setCharacterEncoding("UTF-8");
+
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		PrintWriter out = response.getWriter();
 
 		GbBoard oVo = null;
@@ -49,39 +59,55 @@ public class GbBoardWriteDoServlet extends HttpServlet {
 			oVo = new GbBoardService().getBoard(bno);
 		}
 
+		// 파일 저장 경로 (web 경로 밑에 해당 폴더를 생성해 주어야 한다)
+		String fileSavePath = "upload";
+		// 파일 크기 10M 제한
+		int uploadSizeLimit = 10 * 2048 * 2048;
+		String encType = "UTF-8";
+
+		ServletContext context = getServletContext();
+		String uploadPath = context.getRealPath(fileSavePath);
+		System.out.println(uploadPath);
+		MultipartRequest multi = new MultipartRequest(request, // request 객체
+				uploadPath, // 서버 상 업로드 될 디렉토리
+				uploadSizeLimit, // 업로드 파일 크기 제한
+				encType, // 인코딩 방법
+				new DefaultFileRenamePolicy() // 동일 이름 존재 시 새로운 이름 부여 방식
+		);
+		// 업로드 된 파일 이름 얻어오기
+		String file = multi.getFilesystemName("uploadFile");
+		if (file == null) {
+			System.out.println("업로드 실패");
+		} else {
+			System.out.println("업로드 성공");
+			file = fileSavePath + "/" + file;
+		}
+
+// 여기로 옮김
 		System.out.println("oVo: " + oVo);
-		String title = request.getParameter("title"); // 내용부분입력된값이지요
-		String content = request.getParameter("content"); // 뭐라해야할지모를제목
-		String heading = request.getParameter("heading"); // 뭐라해야할지모를제목
-		String writer = (String) request.getSession().getAttribute("memberLoginInfo");
-		// TODO 임시코드로 확인이 필요함
-		if (writer == null || writer.equals("")) {
+		String title = multi.getParameter("title"); // 내용부분입력된값이지요
+		String content = multi.getParameter("content"); // 뭐라해야할지모를제목
+		String heading = multi.getParameter("heading");
+		String writer = "";
+		Member memberSS = (Member) request.getSession().getAttribute("member");
+		if (memberSS != null && !(memberSS.getMm_id().equals(""))) {
+			writer = memberSS.getMm_id();
+		} else {
+			// TODO 임시코드로 확인이 필요함
+			System.out.println("!!!!!임시 아이디!!!! testuser03");
 			writer = "testDev00"; // "user01";
 		}
 
-		GbBoard vo = new GbBoard(oVo.getGbNo(), writer, heading, title, content, oVo.getGbDatetime(), oVo.getGbVisit(), oVo.getGbReply(),
-				oVo.getGbReport(), oVo.getBref(), oVo.getBreLevel(), oVo.getBreStep());
+		GbBoard vo = new GbBoard(oVo.getGbNo(), writer, heading, title, content, oVo.getGbDatetime(), oVo.getGbVisit(),
+				oVo.getGbReply(), oVo.getGbReport(), oVo.getBref(), oVo.getBreLevel(), oVo.getBreStep());
 		System.out.println("vo: " + vo);
-		int result = new GbBoardService().insertBoard(vo);
-//		if(result == 0) {
-//			out.println("<br>게시글 되지 않았습니다. <br>작성된 글에 비속어가 포함되어 있습니다. <br>다시 작성해 주세요.");
-//		} else {
-//			out.println("<br>게시글 입력되었습니다.");
-//		}
+		int result = new GbBoardService().insertBoard(vo,file);
+		// 불필요 FbBoardImg img = new FbBoardImg();
+//		FbBoardImg voi = new FbBoardImg(uploadPath, result);
+//		int result2 = new FbBoardService().insertImage(voi);
 
-		// request.getRequestDispatcher("boardlist").forward(request, response);
 		response.sendRedirect("gbboardlist");
 
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
 	}
 
 }

@@ -1,9 +1,9 @@
-<%@page import="com.indimoa.board.model.vo.FbBoard"%>
+<%@page import="com.indimoa.board.model.vo.TipBoard"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
-	FbBoard vo = (FbBoard) request.getAttribute("boardvo");
+	TipBoard vo = (TipBoard) request.getAttribute("boardvo");
 %>
 <!DOCTYPE html>
 <html>
@@ -14,12 +14,13 @@
 </head>
 <body>
     <h1>게시판</h1>
-<form method="post" action="./fbboardupdate.do">  
+<form method="post" action="./tboardupdate.do">  
     <fieldset>
-        <input type="hidden" name="bno" value="<%=vo.getFbNo()%>" readonly>
-      제목 :  <input type="text"  autofocus name="title" value="<%=vo.getFbTitle()%>" required><br>
-      내용 :  <input type="text"  name="content" value="<%=vo.getFbContent()%>"><br>
+        <input type="hidden" name="bno" value="<%=vo.getTipNo()%>" readonly>
+      제목 :  <input type="text"  autofocus name="title" value="<%=vo.getTipTitle()%>" required><br>
+      내용 :  <input type="text"  name="content" value="<%=vo.getTipContent()%>"><br>
       첨부파일 : <input type="file" name="uploadFile"/><br>
+      
         <input type="submit" value="등록">
         <input type="reset" value="취소">
     </fieldset>

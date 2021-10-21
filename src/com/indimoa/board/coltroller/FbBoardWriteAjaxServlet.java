@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.indimoa.board.model.service.FbBoardService;
-import com.indimoa.board.model.vo.FbBoard;
 import com.indimoa.board.model.vo.FbBoardR;
 
 /**
@@ -36,9 +35,6 @@ public class FbBoardWriteAjaxServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		response.setCharacterEncoding("UTF-8");
-		response.setContentType("text/html; charset=UTF-8");
-		request.setCharacterEncoding("UTF-8");
 		PrintWriter out = response.getWriter();
 
 		String fbRContent = request.getParameter("fbRContent");
@@ -71,7 +67,6 @@ public class FbBoardWriteAjaxServlet extends HttpServlet {
 		}
 		out.flush();
 		out.close();   // ajax success 에 함수로 호출함.
-		
 	}
 
 }

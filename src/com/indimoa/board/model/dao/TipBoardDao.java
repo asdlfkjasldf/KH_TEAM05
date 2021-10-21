@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import com.indimoa.common.JdbcTemplate;
 import com.indimoa.board.model.vo.TipBoard;
+import com.indimoa.board.model.vo.TipBoardImg;
 
 public class TipBoardDao {
 	public TipBoard getBoard(Connection conn, int bno) {
@@ -64,6 +65,30 @@ public class TipBoardDao {
 		return result;
 	}
 
+	public TipBoardImg getImage(Connection conn, int bno) {
+		TipBoardImg img = null;
+		String sql = "select * from TIp_board_img where TIp_no = ?";
+
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, bno);
+			rset = pstmt.executeQuery();
+			if (rset.next()) {
+				img = new TipBoardImg();
+				img.setTipNo(rset.getInt("TIp_no"));
+				img.setImgPath(rset.getString("img_path"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JdbcTemplate.close(rset);
+			JdbcTemplate.close(pstmt);
+		}
+		return img;
+	}
+	
 	public ArrayList<TipBoard> selectBoardList(Connection conn) {
 		ArrayList<TipBoard> volist = null;
 
@@ -153,6 +178,85 @@ public class TipBoardDao {
 		return volist;
 	}
 
+	public int updateBoard(Connection conn, TipBoard vo) {
+		int result = -1;
+		String sql = "update tip_board set tip_title=?, tip_content=? where tip_no=?";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, vo.getTipTitle());
+			pstmt.setString(2, vo.getTipContent());
+			pstmt.setInt(3, vo.getTipNo());
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JdbcTemplate.close(rset);
+			JdbcTemplate.close(pstmt);
+		}
+		System.out.println("update 결과 : " + result);
+		return result;
+	}
+
+	public int deleteBoard(Connection conn, int bno) {
+		int result = -1;
+		String sql = "delete from tip_board where Tip_no=?";
+
+		PreparedStatement pstmt = null;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, bno);
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JdbcTemplate.close(pstmt);
+		}
+		System.out.println("delete 결과 : " + result);
+		return result;
+	}
+
+	public int reportBoard(Connection conn, int bno) {
+		int result = -1;
+		String sql = "update tip_board set tip_report=tip_report+1 where tip_no=?";
+		PreparedStatement pstmt = null;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, bno);
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JdbcTemplate.close(pstmt);
+		}
+		System.out.println("report 결과 : " + result);
+		return result;
+	}
+	
+	public int getNextVal(Connection conn) {
+		int nextVal = -1;
+		String sqlSeqNextVal = "select SEQ_TIP_BOARD_NO.nextval from dual";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		try {
+			pstmt = conn.prepareStatement(sqlSeqNextVal);
+			rset = pstmt.executeQuery();
+			if (rset.next()) {
+				nextVal = rset.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JdbcTemplate.close(rset);
+			JdbcTemplate.close(pstmt);
+		}
+		System.out.println("insert 결과 : " + nextVal);
+		return nextVal;
+	}
+	
 	public int insertBoard(Connection conn, TipBoard vo) {
 		int result = -1;
 
