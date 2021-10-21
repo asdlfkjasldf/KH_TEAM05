@@ -41,7 +41,7 @@ public class EnrollMemberDoServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	request.getRequestDispatcher("/WEB-INF/view/newMember.jsp").forward(request, response);
+//    	request.getRequestDispatcher("/WEB-INF/view/newMember.jsp").forward(request, response);
     }
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
@@ -75,7 +75,6 @@ public class EnrollMemberDoServlet extends HttpServlet {
 					String file =(String) files.nextElement();
 					String fileName = multi.getFilesystemName(file);
 					
-					//이거 못쓰는거 아냐????
 					out.println("<br> 첨부파일명 : " + fileName);
 					fileNames.add(fileName);
 				}
@@ -88,10 +87,11 @@ public class EnrollMemberDoServlet extends HttpServlet {
 		String email = request.getParameter("mm_email");
 		String phn = request.getParameter("mm_phn");
 		String com = request.getParameter("mm_com");
-		String profile = request.getParameter("mm_profile");
 		String nickname = request.getParameter("mm_nickname");
 		String membership = request.getParameter("mm_membership");
 		String point = request.getParameter("mm_point");
+		
+		String profile = request.getParameter("mm_profile");
 		
 		//입력받는 값은 스트링이지만 이걸 숫자로 바꿀거야 만약에 숫자가 아니면 0이 뜨고 걸릴거야 하지만 작업은 쭉쭉 진행되
 				int mm_point = 0;
@@ -113,10 +113,11 @@ public class EnrollMemberDoServlet extends HttpServlet {
 		vo.setMm_email(email);
 		vo.setMm_phn(phn);
 		vo.setMm_com(com);
-		vo.setMm_profile(profile);
 		vo.setMm_nickname(nickname);
 		vo.setMm_membership(membership);
 		vo.setMm_point(mm_point);
+		
+		vo.setMm_profile(profile);
 		
 		System.out.println("여기 데이터 들어오나: " +vo);
 		
@@ -134,7 +135,7 @@ public class EnrollMemberDoServlet extends HttpServlet {
 		
 
 //		request.getRequestDispatcher("WEB-INF/view/login.jsp").forward(request, response);
-
+		response.sendRedirect("myinfo");
 		
 	}
 }
