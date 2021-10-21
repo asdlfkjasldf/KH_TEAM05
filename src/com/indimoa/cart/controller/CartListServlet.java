@@ -39,7 +39,7 @@ public class CartListServlet extends HttpServlet {
 		
 		PrintWriter out = response.getWriter();
 		
-		final int PAGE_SIZE = 5;  // 한 페이지 당 글수
+		final int PAGE_SIZE = 3;  // 한 페이지 당 글수
 		final int PAGE_BLOCK = 3;  // 한 화면에 나타날 페이지 링크 수
 		int cCount = 0;  // 총 글수
 		int pageCount = 0;  // 총 페이지수
@@ -60,7 +60,7 @@ public class CartListServlet extends HttpServlet {
 		// 총 페이지수 = (총글개수 / 페이지당글수) + (총글개수에서 페이지당글수로 나눈 나머지가 0이 아니라면 페이지개수를 1 증가)
 		pageCount = (cCount / PAGE_SIZE) + (cCount % PAGE_SIZE == 0 ? 0 : 1);
 		// rownum 조건 계산
-		startRnum = (currentPage - 1) * PAGE_SIZE + 1; // 1//6//11/16//21
+		startRnum = (currentPage - 1) * PAGE_SIZE + 1; //1/4/7/10/13
 		endRnum = startRnum + PAGE_SIZE - 1;
 		if (endRnum > cCount)
 			endRnum = cCount;

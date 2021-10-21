@@ -18,6 +18,12 @@
 
 <style type="text/css">
 
+.modal {
+	width : "100%";
+	height : "100%";
+	position: fixed; 
+	z-index : "1";
+}
 
 .h1{
     font-size: 32px; color: black;
@@ -68,7 +74,26 @@
 
 
 <body>
-    
+    <!-- modal box -->
+    <div id="modal_01" class="modal">
+        <div class="modal-content">
+                <p class="close"> &times; &nbsp; &#10006;</p>
+            <p>카드결제</p>
+            <form action="ex-01.html" method="get">
+                카드사<select size="1" id="bank" class="input1">
+                    <option value="">선택하세요.</option>
+                    <option value="10">하나은행</option>
+                    <option value="11">신한은행</option>
+                    <option value="12">국민은행</option>
+                </select>
+                카드번호<input type="text" name="a1">
+                <br>
+                결제 비밀번호<input type="text" name="a1">
+                <br>
+                <input type="submit" value="결제">
+            </form>
+        </div>
+    </div>
 
 
    <header>
@@ -110,26 +135,7 @@
 	</header>
 	
 	
-	<!-- modal box -->
-    <div id="modal_01" class="modal">
-        <div class="modal-content">
-                <p class="close"> &times; &nbsp; &#10006;</p>
-            <p>카드결제</p>
-            <form action="ex-01.html" method="get">
-                카드사<select size="1" id="bank" class="input1">
-                    <option value="">선택하세요.</option>
-                    <option value="10">하나은행</option>
-                    <option value="11">신한은행</option>
-                    <option value="12">국민은행</option>
-                </select>
-                카드번호<input type="text" name="a1">
-                <br>
-                결제 비밀번호<input type="text" name="a1">
-                <br>
-                <input type="submit" value="결제">
-            </form>
-        </div>
-    </div>
+	
 
 
 	<div class="section">
