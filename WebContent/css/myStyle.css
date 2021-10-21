@@ -24,12 +24,13 @@ li {
 
 
 header {
-	width: 1110px;
+	width: 1000px;
 	height: 220px;
 	font-size: 16px;
 	background-color: white;
     margin-bottom: 20px;
     position: relative;
+    margin: 0 auto;
 }
 
 :hover{
@@ -93,9 +94,12 @@ header #topmenu_tnb{
 	position: relative;
 }
 
+
+
 /* section */
 .section {
-    width: 1110px;
+    width: 1000px;
+    margin: 0 auto;
     margin-bottom: 20px;
 }
 
@@ -170,9 +174,10 @@ header #topmenu_tnb{
 
 footer {
     clear: both;
-    width: 1110px;
+    width: 1000px;
     height: 190px;
     background-color: #eee;
     text-align: center;
     padding: 20px;
+    margin: 0 auto;
 }

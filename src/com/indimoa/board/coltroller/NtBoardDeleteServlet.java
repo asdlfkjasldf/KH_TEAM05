@@ -1,4 +1,4 @@
-package com.indimoa.board.notice.coltroller;
+package com.indimoa.board.coltroller;
 
 import java.io.IOException;
 import java.io.PrintWriter;

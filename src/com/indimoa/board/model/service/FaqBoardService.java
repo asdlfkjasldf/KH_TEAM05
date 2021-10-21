@@ -26,4 +26,12 @@ public class FaqBoardService {
 		return volist;
 	}
 
+	public FaqBoard getFaqBoard(int bno) {
+		FaqBoard vo = null;
+		Connection conn = JdbcTemplate.getConnection();
+		vo = new FaqBoardDao().getFaqBoard(conn,bno);
+		JdbcTemplate.close(conn);
+		return vo;
+	}
+
 }

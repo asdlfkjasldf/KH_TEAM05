@@ -1,4 +1,4 @@
-package com.indimoa.board.faq.coltroller;
+package com.indimoa.board.coltroller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -9,21 +9,24 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.indimoa.board.model.service.FaqBoardService;
-import com.indimoa.board.model.vo.FaqBoard;
+import com.indimoa.board.model.service.NtBoardService;
+import com.indimoa.board.model.vo.NtBoard;
 
 
+
+
+//공지사항 게시판의 리스트 서블릿
 /**
- * Servlet implementation class FaqBoardListServlet
+ * Servlet implementation class NtBoardListServlet
  */
-@WebServlet("/faq")
-public class FaqBoardListServlet extends HttpServlet {
+@WebServlet("/notice")
+public class NtBoardListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FaqBoardListServlet() {
+    public NtBoardListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,7 +35,10 @@ public class FaqBoardListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("faq게시판 진입");
+//		response.setCharacterEncoding("UTF-8");
+//		response.setContentType("text/html; charset=UTF-8");
+//		request.setCharacterEncoding("UTF-8");
+		System.out.println("공지사항 게시판 리스트서블릿진입확인");
 		
 		final int PAGE_SIZE = 5;
 		final int PAGE_BLOCK = 3;
@@ -48,7 +54,7 @@ public class FaqBoardListServlet extends HttpServlet {
 		if (pageNum != null) {
 			currentPage = Integer.parseInt(pageNum);
 		}
-		bCount = new FaqBoardService().getFaqBoardCount();
+		bCount = new NtBoardService().getNtBoardCount();
 		pageCount = (bCount / PAGE_SIZE) + (bCount % PAGE_SIZE == 0 ? 0 : 1);
 		startRnum = (currentPage - 1) * PAGE_SIZE + 1;
 		endRnum = startRnum + PAGE_SIZE - 1;
@@ -62,14 +68,14 @@ public class FaqBoardListServlet extends HttpServlet {
 		endPage = startPage + PAGE_BLOCK -1;
 		if (endPage > pageCount) endPage=pageCount;
 		
-		ArrayList<FaqBoard> volist = new FaqBoardService().selectFaqBoardList(startRnum, endRnum);
+		ArrayList<NtBoard> volist = new NtBoardService().selectNtBoardList(startRnum, endRnum);
 		
 		request.setAttribute("volist", volist);
 		request.setAttribute("startPage", startPage);
 		request.setAttribute("endPage", endPage);
 		request.setAttribute("pageCount", pageCount);
-		System.out.println(volist);
-		request.getRequestDispatcher("WEB-INF/view/faqboard/faqboard.jsp").forward(request, response);
+		
+		request.getRequestDispatcher("WEB-INF/view/noticeboard/ntboard.jsp").forward(request, response);
 	}
 
 	/**
