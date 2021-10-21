@@ -123,9 +123,8 @@ public class MemberDao {
 	}
 	
 	
-	public Member loginMember( String id, String passwd) throws Exception {
+	public Member loginMember(Connection conn, String id, String pwd)  {
 		Member m = null;
-		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		String query = "select * from member where mm_id = ? and mm_pwd = ?";
@@ -134,7 +133,7 @@ public class MemberDao {
 			conn = getConnection(); // DB 연결 시도
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, id); // 첫번째 ‘?’ 에 id 값 대입
-			pstmt.setString(2, passwd); // 두번째 ‘?’ 에 passwd 값 대입
+			pstmt.setString(2, pwd); // 두번째 ‘?’ 에 passwd 값 대입
 			rset = pstmt.executeQuery();
 			if (rset.next()) { // 첫 열은 head 컬럼이므로 next() 로 실제 컬럼값을 가져온다.
 				m = new Member();

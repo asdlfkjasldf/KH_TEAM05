@@ -42,9 +42,9 @@ public class MemberUpdateServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 기존의 생성된 세션과 세션에 담겨있던 “loginInfo” 객체를 불러온다.
+		// 기존의 생성된 세션과 세션에 담겨있던 “memberLoginInfo” 객체를 불러온다.
 				HttpSession session = request.getSession(false);
-				Member m = (Member) session.getAttribute("loginInfo");
+				Member m = (Member) session.getAttribute("memberLoginInfo");
 				MemberService mservice = new MemberService();
 				String id = request.getParameter("mm_id");
 				String pwd = request.getParameter("mm_pwd");
@@ -67,8 +67,8 @@ public class MemberUpdateServlet extends HttpServlet {
 					
 					
 					if (mservice.updateMember(m) > 0) {
-						session.setAttribute("loginInfo", m);
-						response.sendRedirect("WEB-INF/view/myInfo.jsp");
+						session.setAttribute("memberLoginInfo", m);
+						response.sendRedirect("myinfo");
 					} else {
 						out.append("<script>alert('회원 정보 수정 오류!\n'+ '관리자에게 문의하세요!');</script>");
 					}

@@ -26,9 +26,9 @@ public class MemberService {
 	
 // 로그인 시 Member 객체를 받아오는 메소드 
  
-	public Member loginMember(String id, String passwd) throws Exception { 
+	public Member loginMember(String id, String pwd)  { 
 		Connection conn = JdbcTemplate.getConnection(); 
-		Member m = new MemberDao().loginMember( id, passwd);
+		Member m = new MemberDao().loginMember(conn, id, pwd);
 		JdbcTemplate.close(conn);
 		return m; 
 	} 
