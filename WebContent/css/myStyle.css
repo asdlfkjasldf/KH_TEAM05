@@ -142,6 +142,11 @@ header #topmenu_tnb{
 	
 	 
 }
+#btnBoardDelete{
+	color: green;
+	cursor: pointer;
+	border: none;
+}
 
 .accordion{
 	background: #eee;

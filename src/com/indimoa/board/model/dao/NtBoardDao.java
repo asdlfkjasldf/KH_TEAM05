@@ -196,6 +196,8 @@ public class NtBoardDao {
 			result = pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
+		} finally {
+			JdbcTemplate.close(pstmt);
 		}
 		
 		

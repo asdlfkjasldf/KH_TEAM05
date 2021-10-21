@@ -4,13 +4,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <!DOCTYPE html>
 <!-- jhSeong -->
 <html>
 <head>
 <meta charset="UTF-8">
 <title>${boardvo.fqTitle }</title>
-<script type="text/javascript">
+
+<script>
+$(document).ready(function(){
+	$("#btnBoardDelete").on("click",function() {
+		var confirmDelete = confirm("정말로 삭제하시겠습니까?");
+		var url = "./faqdelete?no="+${ boardvo.fqNo };
+		if (confirmDelete == true){
+			$(location).attr('href', url);
+		}
+			
+	});
+});
 </script>
 </head>
 <body>
@@ -73,8 +85,8 @@
      <table border="1">
  <c:if test="${boardvo != null }">
 	 <tr>
-	 	<td>글번호</td>
-		<td>${boardvo.fqNo }</td>
+	 	<td >글번호</td>
+		<td id="boardNo">${boardvo.fqNo }</td>
 		<td>${boardvo.fqDatetime }	
 		<td>조회수</td>
 		<td>${boardvo.fqVisit }</td>
@@ -92,7 +104,7 @@
  <a href="faq">목록</a>
  <!-- 이 부분은 어드민한테만 보이도록 수정 필요 -->
  <a href="faqupdate?no=${boardvo.fqNo }">글수정</a>
- <a href="faqdelete?no=${boardvo.fqNo }">글삭제</a>
+ <button id="btnBoardDelete">글삭제</button>
  
 		
     </div>

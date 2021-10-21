@@ -10,6 +10,16 @@
 <head>
 <meta charset="UTF-8">
 <title>faq 글 수정하기</title>
+<style type="text/css">
+#textTitle{
+	width: 1000px;
+	height: 2em;
+}
+#textContent{
+	width: 1000px;
+	padding:0 5px 500px;
+}
+</style>
 </head>
 <body>
 

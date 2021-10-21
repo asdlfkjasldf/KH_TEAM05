@@ -4,14 +4,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <!DOCTYPE html>
 <!-- jhSeong -->
 <html>
 <head>
 <meta charset="UTF-8">
 <title>${boardvo.ntTitle }</title>
-<script type="text/javascript">
+
+<script>
+$(document).ready(function(){
+	$("#btnBoardDelete").on("click",function() {
+		var confirmDelete = confirm("정말로 삭제하시겠습니까?");
+		var url = "./noticedelete?no="+${ boardvo.ntNo };
+		if (confirmDelete == true){
+			$(location).attr('href', url);
+		}	
+	});
+});
 </script>
 </head>
 <body>
@@ -93,7 +103,7 @@
 </table>
 <a href="notice">목록</a>
 <a href="noticeupdate?no=${boardvo.ntNo }">글수정 </a>
-<a href="noticedelete?no=${boardvo.ntNo }">글삭제 </a>
+<button id="btnBoardDelete">글삭제</button> 
 		
     </div>
     </div>

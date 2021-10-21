@@ -203,4 +203,23 @@ public class FaqBoardDao {
 		return result;
 	}
 
+	public int deleteFaqBoard(Connection conn, FaqBoard vo) {
+		int result = -1;
+		String sqlDelete = "delete from faq_board where fq_No = ?";
+		PreparedStatement pstmt = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sqlDelete);
+			pstmt.setInt(1, vo.getFqNo());
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JdbcTemplate.close(pstmt);
+		}
+		
+		
+		return result;
+	}
+
 }

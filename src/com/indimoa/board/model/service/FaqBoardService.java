@@ -62,6 +62,15 @@ public class FaqBoardService {
 		return result;
 	}
 
+	public int deleteFaqBoard(FaqBoard vo) {
+		int result = -1;
+		Connection conn = JdbcTemplate.getConnection();
+		
+		result = new FaqBoardDao().deleteFaqBoard(conn, vo);
+		
+		return result;
+	}
+
 	
 
 }

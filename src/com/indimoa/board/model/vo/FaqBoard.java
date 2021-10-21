@@ -75,6 +75,11 @@ public class FaqBoard {
 		this.fqContent = content;
 		this.fqNo = bno;
 	}
+
+
+	public FaqBoard(int bno) {
+		this.fqNo = bno;
+	}
 	
 	
 }
