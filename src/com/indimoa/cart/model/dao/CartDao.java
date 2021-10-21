@@ -110,7 +110,7 @@ public class CartDao {
 	public int cartDelete(Connection conn, String id) {
 		PreparedStatement pstmt = null;
 		int result = 0;
-		String query = "delete from cart where mm_id like ?";
+		String query = "delete from cart where mm_id = ?";
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, id);
