@@ -83,10 +83,8 @@ public class FaqBoardDao {
 //		private int fqVisit;
 //		private int fqReply;
 		
-		String sqlUpdateView = "update set faq_board fq_visit = fq_visit+1 where fq_no = ?";
-		String sql = "select fq_No, ad_Id, fq_Title, fq_Content, "
-				+ "to_char(fq_DateTime, 'YYYY-MM-DD hh:mi') fq_DateTime , fq_Visit"
-				+ "from Faq_board where fq_No = ?";
+		String sqlUpdateView = "update faq_board set fq_visit = fq_visit+1 where fq_no = ?";
+		String sql = "SELECT fq_No, ad_Id, fq_Title, fq_Content, to_char(fq_DateTime, 'YYYY-MM-DD hh:mi') fq_DateTime , fq_Visit FROM Faq_board WHERE fq_No = ?";
 		PreparedStatement pstmt = null;
 		
 		ResultSet rset = null;

@@ -82,7 +82,9 @@
         <c:forEach items="${volist}" var="vo">
         <tr>
             <td>${vo.fqNo}</td>
-            <td>${vo.fqTitle}</td>
+            <td>
+            <a href="faqcontentview?no=${vo.fqNo }">${vo.fqTitle}</a>
+            </td>
             <td>${vo.adId}</td>
             <td>${vo.fqDatetime}</td>
             <td>${vo.fqVisit}</td>

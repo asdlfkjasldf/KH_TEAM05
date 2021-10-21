@@ -28,9 +28,9 @@ header {
 	height: 220px;
 	font-size: 16px;
 	background-color: white;
-    margin-bottom: 20px;
     position: relative;
     margin: 0 auto;
+    margin-bottom: 20px;
 }
 
 :hover{
