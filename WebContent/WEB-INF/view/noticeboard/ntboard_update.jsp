@@ -5,6 +5,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
+<!-- jhSeong -->
 <html>
 <head>
 <meta charset="UTF-8">
@@ -82,29 +83,29 @@
 	</div>
     <div class="Article">
     <!-- 페이지의 메인 아티클 -->
-    
+<form action="noticeupdate" method="post">
 <table id="mainTable">
 	<c:if test="${loadedboardvo != null }">
 		<c:forEach items="${loadedboardvo}" var="vo">
-		<form action="noticeupdate" method="post">
-<tr>
-	<td>글번호 <input type="text" name="no" value="${vo.ntNo }" readonly="readonly"></td>
-</tr>
-<tr>
-	<td><span class="desc">제목</span><input type="text" name="t" id="textTitle" value="${vo.ntTitle}"></td>
-
-</tr>
-<tr>
-	<td><span class="desc">내용</span> <input type="text" name="c" id="textContent" value="${vo.ntContent}"></td>
-</tr>
+		<tr>
+			<td>글번호 <input type="text" name="no" value="${vo.ntNo }" readonly></td>
+		</tr>
+		<tr>
+			<td><span class="desc">제목</span><input type="text" name="t" id="textTitle" value="${vo.ntTitle}"></td>
+		
+		</tr>
+		<tr>
+			<td><span class="desc">내용</span> <input type="text" name="c" id="textContent" value="${vo.ntContent}"></td>
+		</tr>
 		</c:forEach>
 	</c:if>
 		
 </table>
 	<div class="box">
 		<button type="submit" id="btnSubmit">등록</button>
-		<a href="notice" id="hrefCancel">취소</a>
-		
+</form>
+		<a href="./notice" id="hrefCancel">취소</a>
+	
     </div>
     </div>
 

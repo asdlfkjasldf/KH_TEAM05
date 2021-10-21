@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.indimoa.board.model.service.NtBoardService;
 import com.indimoa.board.model.vo.NtBoard;
-
+//jhSeong 
 /**
  * Servlet implementation class NtBoardUpdateServlet
  */
@@ -63,7 +63,7 @@ public class NtBoardUpdateServlet extends HttpServlet {
 		}
 		
 		
-		request.getRequestDispatcher("/noticecontentview?no="+Integer.toString(bno)).forward(request, response);
+		request.getRequestDispatcher("./noticecontentview?no="+Integer.toString(bno)).forward(request, response);
 		
 //		Gson gsonNtBoardUpdate = new Gson();
 //		String gobStr = gsonNtBoardUpdate.toJson(mapNtBoardUpdate);

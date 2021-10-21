@@ -68,6 +68,13 @@ public class FaqBoard {
 		this.fqContent = content;
 		this.adId = writer;
 	}
+
+
+	public FaqBoard(String title, String content, int bno) {
+		this.fqTitle = title;
+		this.fqContent = content;
+		this.fqNo = bno;
+	}
 	
 	
 }

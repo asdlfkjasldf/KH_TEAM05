@@ -3,6 +3,7 @@ package com.indimoa.board.model.service;
 import java.sql.Connection;
 import java.util.ArrayList;
 
+
 import com.indimoa.board.model.dao.FaqBoardDao;
 import com.indimoa.board.model.vo.FaqBoard;
 import com.indimoa.common.JdbcTemplate;
@@ -42,5 +43,25 @@ public class FaqBoardService {
 		
 		return result;
 	}
+	
+	public ArrayList<FaqBoard> loadFaqBoardContent(int bno) {
+		ArrayList<FaqBoard> volist = null;
+		Connection conn = JdbcTemplate.getConnection();
+		
+		volist = new FaqBoardDao().loadFaqBoardContent(conn , bno);
+		
+		return volist;
+	}
+
+	public int updateFaqBoard(FaqBoard vo) {
+		int result = -1;
+		Connection conn = JdbcTemplate.getConnection();
+		
+		result = new FaqBoardDao().updateFaqBoard(conn, vo);
+		
+		return result;
+	}
+
+	
 
 }

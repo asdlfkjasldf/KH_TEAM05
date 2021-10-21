@@ -3,14 +3,13 @@
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <!-- jhSeong -->
 <html>
 <head>
 <meta charset="UTF-8">
-<title>인디모아 지원 Faq 게시판</title>
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<title>faq 글 수정하기</title>
 </head>
 <body>
 
@@ -70,40 +69,29 @@
     <div class="Article">
     <!-- 페이지의 메인 아티클 -->
     
-    <table border="1" collapse="collapse">
-	<tr>
-        <td>번호</td>
-        <td>제목</td>
-        <td>글쓴이</td>
-        <td>작성일자</td>
-        <td>조회수</td>
-        <td>댓글수</td>
-	</tr>
-    <c:if test="${volist != null}">
-        <c:forEach items="${volist}" var="vo">
-        <tr>
-            <td>${vo.fqNo}</td>
-            <td>
-            <a href="faqcontentview?no=${vo.fqNo }">${vo.fqTitle}</a>
-            </td>
-            <td>${vo.adId}</td>
-            <td>${vo.fqDatetime}</td>
-            <td>${vo.fqVisit}</td>
-            <td>${vo.fqReply}</td>
-        </tr>
-        </c:forEach>
-    </c:if>
-</table>
-<c:if test="{startPage > 1 }"> 이전 </c:if>
-    <c:forEach begin="${startPage}" end="${endPage}" step="1" var="i">
-        <a href="faq?p=${i}">${i}</a>
-    </c:forEach>
-    <c:if test="${endPage < PageCount}"> 다음 </c:if>
+<form action="faqupdate" method="post">
+<table id="mainTable">
+	<c:if test="${loadedboardvo != null }">
+		<c:forEach items="${loadedboardvo }" var="vo">
+		<tr>
+			<td>글번호<input type="text" name="no" value="${vo.fqNo}" readonly></td>
+		</tr>
+		<tr>
+			<td><span class="desc">제목</span><input type="text" name="t" id="textTitle" value="${vo.fqTitle}"></td>
+		
+		</tr>
+		<tr>
+			<td><span class="desc">내용</span> <input type="text" name="c" id="textContent" value="${vo.fqContent}"></td>
+		</tr>
+		</c:forEach>
+	</c:if>
 
-    <!-- 어드민만 쓸 수 있게 확인 필요함-->
-    <br>
-    <a href="faqwrite"> 글쓰기 </a>
-    
+</table>
+	<div class="box">
+		<button type="submit" id="btnSubmit">등록</button>
+</form>
+		<a href="./faq" id="hrefCancel">취소</a>
+	</div>
 		
     </div>
     </div>
@@ -131,8 +119,5 @@ for (i = 0; i < acc.length; i++) {
 </script>
 
 <div hidden="">돋보기아이콘 제작자 <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/kr/" title="Flaticon">www.flaticon.com</a></div>
-
-
-
 </body>
 </html>

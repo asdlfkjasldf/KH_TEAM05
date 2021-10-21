@@ -146,4 +146,61 @@ public class FaqBoardDao {
 		return result;
 	}
 
+	public ArrayList<FaqBoard> loadFaqBoardContent(Connection conn, int bno) {
+		ArrayList<FaqBoard> volist = null;
+		
+		String sqlload = "select fq_no, ad_Id, fq_title, fq_content, to_char(fq_Datetime, 'YYYY-MM-DD hh:mm') fq_Datetime, fq_visit, fq_reply FROM faq_board where fq_no = ?";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sqlload);
+			pstmt.setInt(1, bno);
+			rset = pstmt.executeQuery();
+			volist = new ArrayList<FaqBoard>();
+			if (rset.next()) {
+				do {
+					FaqBoard vo = new FaqBoard();
+					vo.setFqNo(rset.getInt("fq_No"));
+					vo.setAdId(rset.getString("ad_Id"));
+					vo.setFqTitle(rset.getString("fq_Title"));
+					vo.setFqContent(rset.getString("fq_Content"));
+					vo.setFqDatetime(rset.getString("fq_Datetime"));
+					vo.setFqVisit(rset.getInt("fq_visit"));
+					vo.setFqReply(rset.getInt("fq_reply"));
+					volist.add(vo);
+				} while (rset.next());
+				
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JdbcTemplate.close(rset);
+			JdbcTemplate.close(pstmt);
+		}
+		
+		System.out.println("[jhseong]-- FAQ의 리턴은"+ volist);
+		return volist;
+	}
+
+	public int updateFaqBoard(Connection conn, FaqBoard vo) {
+		int result = -1;
+		String sqlUpdate = "update faq_board set fq_title = ?, fq_content = ? where fq_no = ?";
+		PreparedStatement pstmt = null;
+		try {
+			pstmt = conn.prepareStatement(sqlUpdate);
+			pstmt.setString(1, vo.getFqTitle());
+			pstmt.setString(2, vo.getFqContent());
+			pstmt.setInt(3, vo.getFqNo());
+			result = pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JdbcTemplate.close(pstmt);
+		}
+		
+		return result;
+	}
+
 }
