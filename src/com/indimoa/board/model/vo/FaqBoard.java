@@ -9,6 +9,11 @@ public class FaqBoard {
 	private int fqVisit;
 	private int fqReply;
 	
+	public FaqBoard() {
+		super();
+	}
+	
+	
 	public int getFqNo() {
 		return fqNo;
 	}
@@ -58,5 +63,11 @@ public class FaqBoard {
 				+ ", fqDatetime= " +fqDatetime + ", fqVisit= " + fqVisit 
 				+ ", fQReply" + fqReply + "]";
 	}
+	public FaqBoard(String title, String content, String writer) {
+		this.fqTitle = title;
+		this.fqContent = content;
+		this.adId = writer;
+	}
+	
 	
 }

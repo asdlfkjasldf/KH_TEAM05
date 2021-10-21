@@ -1,12 +1,11 @@
 <link rel="stylesheet" type="text/css" href="./css/myStyle.css">
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>공지사항 글쓰기</title>
+<title>faq 글쓰기</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <style type="text/css">
 #textTitle{
@@ -18,7 +17,7 @@
 	padding:0 5px 500px;
 }
 .desc{
-text-align: title;
+text-align: center;
 }
 .Article{
 	align-content: center;
@@ -35,16 +34,14 @@ width: 2em;
 </style>
 <script>
 //jhSeong todo 엔터키 누를시 submit연결 막기안먹힘
-$('input[type="text"]').keydown(function() {
-    if (event.keyCode === 13) {
-        event.preventDefault();
+$('input[type="text"]').keydown(function(e) {
+    if (e.keyCode === 13) {
+        e.preventDefault();
     }
 });
 </script>
 </head>
 <body>
-
-
 
 <header>
 	<div id="logo"><a href="./"><img src="./image/ex1.png"></a></div>
@@ -102,30 +99,26 @@ $('input[type="text"]').keydown(function() {
     <!-- 페이지의 메인 아티클 -->
     <table id="mainTable">
 <!-- jhSeong todo
-정렬하는 게  좋을 듯하다 -->
-<tr>
-
-</tr>
-<tr>
-	<form action="noticewrite" method="post">
-		<td>
-			<span class="desc title">제목</span>
-			<input type="text" name="t" id="textTitle">
+정렬하는 게  좋을 듯하다 -->	
+	<tr>
+	<form action="faqwrite" method="post" >
+		<td><span class="desc title">제목</span>
+		<input type="text" name="t" id="textTitle">
 		</td>
-</tr>
-<tr>
-	<td>
-		<span class="desc content">내용</span>
-		<input type="text" name="c" id="textContent">
-	</td>
-</tr>
-
+	</tr>
+		<td>
+			<span class="desc content">내용</span>
+			<input type="text" name="c" id="textContent">
+		</td>
+	<tr>
+	
 </table>
 	<div class="box">
 		<button type="submit" id="btnSubmit">등록</button>
-		<a href="notice" id="hrefCancel">취소</a>
+		<a href="faq" id="hrefCancel">취소</a>
 	</div>
 	</form>
+    
 		
     </div>
     </div>

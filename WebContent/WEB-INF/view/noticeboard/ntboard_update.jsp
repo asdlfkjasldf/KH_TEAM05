@@ -12,6 +12,16 @@
 <script type="">
 
 </script>
+<style type="text/css">
+#textTitle{
+	width: 1000px;
+	height: 2em;
+}
+#textContent{
+	width: 1000px;
+	padding:0 5px 500px;
+}
+</style>
 </head>
 
 <!-- 대략 흐름도 컨텐츠 부분의 bno를 ajax로 쏴서 타이틀 컨텐츠, 불러오고 success시 ajax로 바꿀 title,content를 보내준다.  -->
@@ -81,13 +91,8 @@
 	<td>글번호 <input type="text" name="no" value="${vo.ntNo }" readonly="readonly"></td>
 </tr>
 <tr>
-	
-	
-	
-		<td><span class="desc">제목</span><input type="text" name="t" id="textTitle" value="${vo.ntTitle}"></td>
-		
-		
-	
+	<td><span class="desc">제목</span><input type="text" name="t" id="textTitle" value="${vo.ntTitle}"></td>
+
 </tr>
 <tr>
 	<td><span class="desc">내용</span> <input type="text" name="c" id="textContent" value="${vo.ntContent}"></td>

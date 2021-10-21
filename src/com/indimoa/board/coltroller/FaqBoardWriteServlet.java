@@ -9,20 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.indimoa.board.model.service.NtBoardService;
-import com.indimoa.board.model.vo.NtBoard;
+import com.indimoa.board.model.service.FaqBoardService;
+import com.indimoa.board.model.vo.FaqBoard;
 
 /**
- * Servlet implementation class NtBoardWriteServlet
+ * Servlet implementation class FaqBoardWriteServlet
  */
-@WebServlet("/noticewrite")
-public class NtBoardWriteServlet extends HttpServlet {
+@WebServlet("/faqwrite")
+public class FaqBoardWriteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public NtBoardWriteServlet() {
+    public FaqBoardWriteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,15 +31,14 @@ public class NtBoardWriteServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//글쓰기 페이지로 이동시
-		request.getRequestDispatcher("WEB-INF/view/noticeboard/ntboard_write.jsp").forward(request, response);
+		// TODO Auto-generated method stub
+		request.getRequestDispatcher("WEB-INF/view/faqboard/faqboard_write.jsp").forward(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 데이터 들어올시
 		PrintWriter out = response.getWriter();
 		
 		String title = request.getParameter("t");
@@ -49,21 +48,18 @@ public class NtBoardWriteServlet extends HttpServlet {
 		if( writer == null) {
 			writer = "ADMIN";
 		}
-		
 		out.println("입력된 title: " + title);
 		out.println("입력된 content: " + content);
 		
-		NtBoard vo = new NtBoard(title,content, writer);
+		FaqBoard vo = new FaqBoard(title, content, writer);
 		
-		int result = new NtBoardService().insertNtBoard(vo);
+		int result = new FaqBoardService().insertFaqBoard(vo);
 		if (result == -1) {
 			out.println("<br>게시글 입력 실패");
 		}else {
 			out.println("<br>게시글 입력되었습니다.");
 		}
-		out.print("<a href='./notice'>목록</a>");
-		
-		
+		out.print("<a href='./faq'>목록</a>");
 	}
 
 }

@@ -34,4 +34,13 @@ public class FaqBoardService {
 		return vo;
 	}
 
+	public int insertFaqBoard(FaqBoard vo) {
+		int result = -1;
+		Connection conn = JdbcTemplate.getConnection();
+		
+		result = new FaqBoardDao().insertFaqBoard(conn,vo);
+		
+		return result;
+	}
+
 }

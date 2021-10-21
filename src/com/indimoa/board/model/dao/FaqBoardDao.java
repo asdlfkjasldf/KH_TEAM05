@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 import com.indimoa.board.model.vo.FaqBoard;
 import com.indimoa.common.JdbcTemplate;
-
+//jhSeong 작성
 public class FaqBoardDao {
 
 	public int getBoardCount(Connection conn) {
@@ -93,6 +93,7 @@ public class FaqBoardDao {
 			pstmt = conn.prepareStatement(sqlUpdateView);
 			pstmt.setInt(1, bno);
 			rset = pstmt.executeQuery();
+			JdbcTemplate.close(pstmt);
 			
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, bno);
@@ -119,6 +120,30 @@ public class FaqBoardDao {
 		
 		
 		return vo;
+	}
+
+	public int insertFaqBoard(Connection conn, FaqBoard vo) {
+		int result = -1;
+		String sqlInsert = "INSERT INTO faq_board"
+				+ "(fq_no, fq_title, fq_content, ad_id, fq_datetime, fq_visit, fq_reply) "
+				+ "values(SEQ_Faq_Board_NO.nextval, ? ,? ,? ,systimestamp,0 ,0)";
+		PreparedStatement pstmt = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sqlInsert);
+			pstmt.setString(1, vo.getFqTitle());
+			pstmt.setString(2, vo.getFqContent());
+			pstmt.setString(3, vo.getAdId());
+			
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JdbcTemplate.close(pstmt);
+		}
+		
+		
+		return result;
 	}
 
 }
