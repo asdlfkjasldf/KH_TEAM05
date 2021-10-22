@@ -17,10 +17,15 @@
  	table{
  	border: 1px solid black;
  	}
+ 	#newTextTitle{
+ 	width: 800px;
+ 	height: 2em;
+ 	}
  	
- 	.description input[type="text"]{
+ 	#newTextContent{
  	width: 800px;
  	height: 300px;
+ 	padding-bottom: 286px;
  	}
  	.description, #btnBoardWriteBox{
  	text-align: center;
