@@ -34,6 +34,18 @@ public class GameDao {
 //	    GG_PUBLISHER VARCHAR(20) NOT NULL,
 //	    GG_LANGUAGES VARCHAR(30) NOT NULL,
 //	    GG_INFORMATION VARCHAR(2000) NOT NULL,
+		
+		Game vo = null;
+		
+		//game 테이블에만 있는 자료
+		//String sql = "select GG_NO,GG_TITLE,GG_PRICE,GG_SYSTEM_REQUIREMENTS,GG_GENRE,GG_DEVELOPER,GG_RELEASE_DATE,GG_PUBLISHER,GG_LANGUAGES,GG_INFORMATION from Game where GG_NO = ?";
+		
+		//1차 > 실패
+		//String sql ="select * from game g, game_image i where g.gg_no= i.gg_no=?";
+		//String sql ="select * from game t1 left outer join game_image t2 using (gg_no) order by gg_no=?";
+		
+		//오오 해결!
+		String sql="select *  from game t1 left outer join game_image t2 using (gg_no) WHERE GG_NO=?";
 
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -53,6 +65,9 @@ public class GameDao {
 				vo.setGgPublisher(rset.getString("GG_PUBLISHER"));
 				vo.setGgLanguages(rset.getString("GG_LANGUAGES"));
 				vo.setGgInfomation(rset.getString("GG_INFORMATION"));
+				
+				vo.setGiNo(rset.getInt("GI_NO"));
+				vo.setOriginFileAddress(rset.getString("ORIGIN_FILE_ADDRESS"));
 
 			}
 		} catch (Exception e) {
@@ -60,7 +75,51 @@ public class GameDao {
 		}
 		return vo;
 	}
+	
+	
+	//이미지 불러오기 따로 DAO 만들어 보기
+	public ArrayList<Game> getGameImage(Connection conn, int bno) {
+		ArrayList<Game> ivolist = null;
+//		GI_NO               NOT NULL NUMBER(11)    
+//		GG_NO               NOT NULL NUMBER(11)    
+//		ORIGIN_FILE_ADDRESS NOT NULL VARCHAR2(300) 
 
+		String sql="SELECT * FROM game_image WHERE GG_NO=?";
+
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, bno);
+			
+			rset = pstmt.executeQuery();
+			ivolist = new ArrayList<Game>();
+			if (rset.next()) {
+				do {
+					Game ivo = new Game();
+				
+					ivo.setGiNo(rset.getInt("GI_NO"));
+					ivo.setGgNo(rset.getInt("GG_NO"));
+				    ivo.setOriginFileAddress(rset.getString("ORIGIN_FILE_ADDRESS"));
+				    
+					ivolist.add(ivo);
+					
+				} while (rset.next());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				rset.close();
+				pstmt.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		System.out.println("[gameDao getGameImage일껄?]--" + ivolist);
+		return ivolist;
+	}
 	
 
 	
@@ -71,7 +130,16 @@ public class GameDao {
 		//게임이미지 테이블과 조인한것
 		//String sql ="select * from game t1 left outer join game_image t2 on t1.gg_no = t2.gg_no";
 		
-		String sql ="select * from (select Rownum r, t1.* from (select * from game t1 left outer join game_image t2 using (gg_no) order by gg_no desc) t1 ) t2 where r between ? and ?";
+		//리스트에 이미지가 4개가 나오는 현상
+		String sql ="select * from (select row_number() over(order by gg_no desc) r, t1.* from (select t1.* " +  
+				"                     , (select gi_no from game_image where gg_no = t1.gg_no and rownum = 1) as GI_NO " +  
+				"                     , (select ORIGIN_FILE_ADDRESS from game_image where gg_no = t1.gg_no and rownum = 1) as ORIGIN_FILE_ADDRESS from game t1 order by gg_no desc) t1 ) t2 where r between ? and ?";
+		
+		//distinct FIRST_VALUE를 사용해 중복 번호 묶음
+		//근데 이거 하면 대표 이미지가 무조건 1개로 나옴
+		//String sql   ="select * from (select Rownum r, t1.* from (select * from game t1 left outer join (select distinct FIRST_VALUE(ORIGIN_FILE_ADDRESS) OVER() AS ORIGIN_FILE_ADDRESS, gg_no from game_image) t2 using (gg_no) order by gg_no desc) t1 ) t2 where r between ? and ?";
+		
+		
 		//String sql ="select * from (select Rownum r, t1.* from (select * from game order by gg_no asc) t1 ) t2 where r between ? and ?";
 		//이게 뭘 의미 할까?????????????????
 		
@@ -104,7 +172,7 @@ public class GameDao {
 					vo.setGgInfomation(rset.getString("GG_INFORMATION"));
 					
 					//파일관ㄴ련해서넣ㄹ어야되
-					vo.setGiNo(rset.getInt("GI_NO"));
+					//vo.setGiNo(rset.getInt("GI_NO"));
 				    vo.setOriginFileAddress(rset.getString("ORIGIN_FILE_ADDRESS"));
 				    
 					volist.add(vo);
@@ -245,14 +313,21 @@ public class GameDao {
 
 	}
 	
-	public int updateGame(Connection conn, Game g) {
+	public int updateGame(Connection conn, Game g, List<String> fileNamess, int[] giNos ) {
 		int result =0;
+		
 		String sql = "UPDATE GAME SET "
 				+ "GG_TITLE=? ,GG_PRICE=?,GG_SYSTEM_REQUIREMENTS=?, GG_GENRE=?,"
 				+ "GG_DEVELOPER=?, GG_RELEASE_DATE=?, GG_PUBLISHER=?, GG_LANGUAGES=?, GG_INFORMATION=?"
-				+ "where gg_no=?";
+				+ "where GG_NO=?";
 		
+		String sql2 ="DELETE FROM game_image WHERE gi_no=?";
+
 		
+		//이미지랑 함께 수정해야 될 텐데....?
+		String sql3 = "INSERT INTO GAME_IMAGE"	 
+				+ "(GI_NO,GG_NO,ORIGIN_FILE_ADDRESS)"
+				+ "values (SEQ_GAME_IMAGE_GI_NO.nextval,?,?)";
 		
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -269,7 +344,46 @@ public class GameDao {
 			pstmt.setString(8, g.getGgLanguages());
 			pstmt.setString(9, g.getGgInfomation());
 			pstmt.setInt(10, g.getGgNo());
+			
 			result =pstmt.executeUpdate();		
+			
+			
+			
+		
+			for(int i=0; i<giNos.length; i++) {
+//				if(giNos[i] == null) {
+//					continue;	
+//				}
+				pstmt = conn.prepareStatement(sql2);
+				pstmt.setInt(1,giNos[i]);
+				
+
+				result = pstmt.executeUpdate();
+				System.out.println("game_image 첨부파일 delete 성공");
+				JdbcTemplate.close(pstmt);
+			
+			}
+			
+			
+		
+			
+			
+			System.out.println("fileNames: " + fileNamess);
+			for(String filename :  fileNamess) {
+				if(filename == null) {
+					continue;	
+				}
+				pstmt = conn.prepareStatement(sql3);
+				pstmt.setInt(1,g.getGgNo());
+				pstmt.setString(2, filename);
+
+				result = pstmt.executeUpdate();
+				System.out.println("game_image table에 update 성공");
+				JdbcTemplate.close(pstmt);
+			}
+			
+			
+			
 			
 		} catch (SQLException e) {
 			e.printStackTrace();

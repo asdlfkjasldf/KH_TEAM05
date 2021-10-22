@@ -1,23 +1,40 @@
 <%@page import="com.indimoa.game.model.vo.Game"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-   <%--@ taglib prefix=”c” uri="http://java.sun.com/jstl/core"--%> 
+	pageEncoding="UTF-8"%>
+<%--@ taglib prefix=”c” uri="http://java.sun.com/jstl/core"--%>
 
 
 
- <% Game vo = (Game)request.getAttribute("gamevo"); %>
+<%
+	Game vo = (Game) request.getAttribute("gamevo");
+%>
+
+<%
+ArrayList<Game> ivo = (ArrayList<Game>) request.getAttribute("imagevo");
+
+%>
 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>게임 정보</title>
 
 
 
 <style type="text/css">
-<link href="css/MemberMangement.css">
+<
+link
+ 
+href
+="
+css
+/
+MemberMangement
+.css
+"
+>
 @import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
 
 * {
@@ -27,19 +44,31 @@
 body {
 	margin: 20px;
 	font: 15px;
-	
-	
 }
-a:link{
-  text-decoration: none!important;
-  color: green;
+
+a:link {
+	text-decoration: none !important;
+	color: green;
 }
 
 li {
 	list-style-type: none;
-	
 }
-#logo{
+table#gamecontent {
+	border-collapse: collapse;
+	width: 500px;
+	margin: 0 auto;
+	text-align: left;
+} 
+table#gamecontent td{
+	padding: 5px 10px;
+}
+table#gamecontent td:nth-of-type(1) {
+	width: 100px;
+	text-align: center;
+}
+
+#logo {
 	width: 100px;
 	
 	position: absolute;
@@ -102,18 +131,14 @@ li {
 	height: 190px;
 }
 </style>
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	
-	
-	<script type="text/javascript"> 
-	
+<script type="text/javascript"
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-	
-	
 
-	function memberView(){
-	    console.log("view 진입");
-	    let members = document.querySelector(".members");
+<script type="text/javascript">
+	function memberView() {
+		console.log("view 진입");
+		let members = document.querySelector(".members");
 		var objOption = document.createElement("option");
 		
 		objOption.text = members.length+1 + "번";
@@ -193,84 +218,105 @@ li {
 
 
 
+		<div class="Article">
+			<h1>게임 정보</h1>
 
+			<table border="1" id="gamecontent">
+               
+                <tr>
+                    <td>no</td>
+                    <td ><%=vo.getGgNo()%></td>
+                    
+                </tr>
+                <tr>
+                    <td colspan="2">게임 이미지</td>
+                 </tr>
+                 <tr>
+                    <td colspan="2">
+<%
+if(ivo != null) {
+	int i=1;
+	
+for(Game voimg : ivo) {
+%>
+ 						<%=i %>
+ 						<%i++; %> 
+                    	<img src="<%=request.getContextPath()%>/upload/<%=voimg.getOriginFileAddress()%>" width="100">
+<%}} %>
+                    </td>
+                </tr>
 
+			<!--	<tr>
+					<td>게임 이미지</td>
+					<td>
+					<img src="<%=request.getContextPath()%>/upload/<%=vo.getOriginFileAddress()%>" width="100">
+				</tr>
+                -->
+				<tr>
+					<td>게임 제목</td>
+					<td><%=vo.getGgTitle()%></td>
+				</tr>
 
+				<tr>
+					<td>가격</td>
+					<td ><%=vo.getGgPrice()%> 원</td>
+				</tr>
 
+				<tr>
+					<td>시스템사양</td>
+					<td ><%=vo.getGgSystemRequirement()%></td>
+				</tr>
 
-<div class="Article">
-<h1> 게임  정보</h1>
+				<tr>
+					<td>장르</td>
+					<td ><%=vo.getGgGenre()%></td>
+				</tr>
 
-    <table border="1"> 
-   
-        <tr>
-            <td>no </td>
-            <td><%=vo.getGgNo()%> </td>
-        </tr>
-        
-        <tr>
-            <td>게임 이미지 </td>
-            <td><%=vo.getOriginFileAddress()%>게임 이미지를 불러 와야 합니다!!!!!!!!!! </td>
-        </tr>
-       
-        <tr>
-            <td> 게임 제목 </td>
-            <td>  <%=vo.getGgTitle()%></td>
-        </tr>
-        
-        <tr>
-            <td> 가격 </td>
-            <td> <%=vo.getGgPrice()%> 원 </td>
-        </tr>
-        
-        <tr>
-            <td>시스템사양 </td>
-            <td> <%=vo.getGgSystemRequirement()%></td>
-        </tr>
-        
-        <tr>
-            <td>장르 </td>
-            <td>  <%=vo.getGgGenre()%> </td>
-        </tr>
-        
-        <tr>
-            <td>개발사 </td>
-            <td> <%=vo.getGgDeveloper()%></td>
-        </tr>
-        
-        <tr>
-            <td>발매일</td>
-            <td> <%=vo.getGgReleaseDate()%></td>
-        </tr>
-        
-        <tr>
-            <td>공급사 </td>
-            <td> <%=vo.getGgPublisher()%></td>
-        </tr>
-        
-        <tr>
-            <td>언어 </td>
-            <td>  <%=vo.getGgLanguages()%></td>
-        </tr>
-        
-        <tr>
-            <td>정보 </td>
-            <td> <%=vo.getGgInfomation()%> </td>
-        </tr>
+				<tr>
+					<td>개발사</td>
+					<td ><%=vo.getGgDeveloper()%></td>
+				</tr>
 
-<div>
-    <button type="button">바로 구매</button> 
-    <button type="button">장바 구니</button>
-    <button type="button"><a href="GameList">취소</a></button>
-       <!-- a href="GameList" 은 GameListServlet으로 연결됨요>  -->
-</div>
-       
-    </table>
+				<tr>
+					<td>발매일</td>
+					<td ><%=vo.getGgReleaseDate()%></td>
+				</tr>
 
-</div>
+				<tr>
+					<td>공급사</td>
+					<td ><%=vo.getGgPublisher()%></td>
+				</tr>
 
-  
+				<tr>
+					<td>언어</td>
+					<td ><%=vo.getGgLanguages()%></td>
+				</tr>
 
+				<tr >
+					<td>정보</td>
+					<td ><%=vo.getGgInfomation()%></td>
+				</tr>
+				<tr > 
+
+					<td colspan="2">
+					<div>
+                <button type="button"><a href="GameUpdate?no=<%=vo.getGgNo()%>">게임 정보 수정</a></button>
+					<button type="button">바로 구매</button>
+					<button type="button">장바 구니</button>
+					<button type="button">
+						<a href="GameList">취소</a>
+					</button>
+					<!-- a href="GameList" 은 GameListServlet으로 연결됨요>  -->
+					</div>
+					</td>
+				</tr>
+			</table>
+			<div>
+			
+			</div>
+			
+
+		</div>
 </body>
 
 

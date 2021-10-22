@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
+import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -78,12 +79,12 @@ public class GameListServlet extends HttpServlet {
 				if (endPage > pageCount)
 					endPage = pageCount;
 				
-				//System.out.println("startRnum : " + startRnum);
-				//System.out.println("endRnum : "+ endRnum);
+				System.out.println("startRnum : " + startRnum);
+				System.out.println("endRnum : "+ endRnum);
 				
 				
 				
-				ArrayList<Game> volist = new GameService().selectGameList(startRnum,endRnum );
+				ArrayList<Game> volist = new GameService().selectGameList(startRnum,endRnum);
 				//System.out.println("GameServlet:"+volist);
 				
 				
@@ -94,7 +95,8 @@ public class GameListServlet extends HttpServlet {
 				request.setAttribute("pageCount", pageCount);
 				request.setAttribute("currentPage", currentPage);
 				request.getRequestDispatcher("/WEB-INF/view/gamelist.jsp").forward(request, response);
-			}
+		
+	}
 				
 				
 				

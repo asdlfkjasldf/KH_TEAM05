@@ -214,6 +214,7 @@ width: 85%;
 	</form>
 
 
+<div>
 
 <table border="1" collapse="collapse" >
 			<tr>
@@ -228,7 +229,24 @@ width: 85%;
 			</tr>
 <%
 		if(volist != null){
+			
+			boolean flag = false;
+			int no = 0;
+			int i =1;
+			
 		for(Game vo : volist){
+			
+// 			if (no == vo.getGgNo()){
+// 				flag = true;
+// 			}else {
+// 				flag = false;
+// 				no=vo.getGgNo();
+// 			}
+// 			if(flag){
+// 				continue;
+// 			}
+			
+			
 			// tr이 volist 갯수 만큼 생기게 됨.
 			// <%= 은 화면에 출력을 위한 표현식을 작성하는 태그, ; 없어야한다.
 %>
@@ -236,15 +254,10 @@ width: 85%;
 		<tr>
 			<td><%=vo.getGgNo()%></td>
 			
-			
-			
-			
-			
-			<td>게임 이미지
-			
+			<td>
 			<!--img alt="#" src="C:\z_worksapce\z_java\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\indimoa\upload/<%=vo.getOriginFileAddress()%>" width="100"-->
 			<!--img alt="#" src="../wtpwebapps/upload/<%=vo.getOriginFileAddress()%>" width="100"-->
-			<%=vo.getOriginFileAddress()%>
+			<img src="<%=request.getContextPath()%>/upload/<%=vo.getOriginFileAddress()%>" width="100"> 
 			<!--img src="${vo.imageSavePath}">  -->
 			
 			
@@ -324,6 +337,17 @@ width: 85%;
 <a href=EnrollGame>게임등록하러 가기!</a>
 
 <!--  a href= get 방식으로 보냄 servlet에서 무조건 get으로 받아야됨!!-->
+
+</div>
+
+
+<div> 
+<h1> 게시물 정렬 테스트 1</h1>
+</div>
+
+
+
+
 
 </body>
 </html>

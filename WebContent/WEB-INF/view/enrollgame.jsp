@@ -47,7 +47,22 @@
 
 				<tr>
 					<td>장르 :</td>
-					<td><input type="text" name="ggGenre"></td>
+					<td>
+					<!-- input type="text" name="ggGenre"> -->
+					<select id="" name="ggGenre">
+        			<option value="액션/슈팅">액션/슈팅</option>
+        			<option value="스포츠">스포츠</option>
+        			<option value="보드게임">보드게임</option>
+        			<option value="아케이드">아케이드</option>
+        			<option value="대전/격투">대전/격투</option>
+        			<option value="RPG">RPG</option>
+        			<option value="어드벤처">어드벤처</option>
+        			<option value="시뮬레이션">시뮬레이션</option>
+        			<option value="기타장르">기타장르</option>
+        			<!--  <option value="인기게임">인기게임</option>-->
+					</select>
+					</td>
+					
 				</tr>
 
 				<tr>

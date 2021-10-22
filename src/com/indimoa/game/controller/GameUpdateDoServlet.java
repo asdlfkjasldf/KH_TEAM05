@@ -2,6 +2,7 @@ package com.indimoa.game.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
@@ -19,16 +20,16 @@ import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 /**
- * Servlet implementation class EnrollGameServletDo
+ * Servlet implementation class GameUpdateDoServlet
  */
-@WebServlet("/EnrollGameDo")
-public class EnrollGameDoServlet extends HttpServlet {
+@WebServlet("/GameUpdate.do")
+public class GameUpdateDoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public EnrollGameDoServlet() {
+    public GameUpdateDoServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -38,31 +39,18 @@ public class EnrollGameDoServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-//		doGet(request, response);
-//		response.setCharacterEncoding("UTF-8");
-//		response.setContentType("text/html; charset=UTF-8");
-//		request.setCharacterEncoding("UTF-8");
-		
+	
 		
 		PrintWriter out = response.getWriter();
-
 		
-
-				//화면에서 받아 올 데이터
-		//String gNostr =request.getParameter("ggNo"); ///번호 연습
-
-		//첨부 파일 업로드 부분
-		
-		// 파일 경로
-		String imageSavePath = "upload";
+String imageSavePath = "upload";
 		
 		int uploadSizeLimit = 100*1024*1024;
 		String encType ="UTF-8";
@@ -70,23 +58,23 @@ public class EnrollGameDoServlet extends HttpServlet {
 		ServletContext context = getServletContext();
 		String uploadPath = context.getRealPath(imageSavePath);
 		
+		
 		MultipartRequest multi = new MultipartRequest(request, uploadPath,uploadSizeLimit,encType,new DefaultFileRenamePolicy());
-		//request >  request 객체 
-		 //uploadPath > 서버 상 업로드 될 디렉토리 
-		 //uploadSizeLimit > 업로드 파일 크기 제한 
-		 //encType > 인코딩 방법 
-		 //new DefaultFileRenamePolicy() > 동일 이름 존재 시 새로운 이름 부여 방식 
+		
+		
 		Enumeration files = multi.getFileNames();
-		List<String> fileNames = new ArrayList<String>();
+		List<String> fileNamess = new ArrayList<String>();
 		while(files.hasMoreElements()) {
 			String file =(String) files.nextElement();
 			String fileName = multi.getFilesystemName(file);
 			
 			//이거 못쓰는거 아냐????
+			System.out.println(fileName);
 			out.println("<br> 첨부파일명 : " + fileName);
-			fileNames.add(fileName);
+			fileNamess.add(fileName);
 		}
 		
+		String gNostr= multi.getParameter("ggNo");
 		String gTitle = multi.getParameter("ggTitle");  //null   ""
 		String gPriceStr =multi.getParameter("ggPrice");
 		String gSystemRequirement =multi.getParameter("ggSystemRequirement");
@@ -97,20 +85,29 @@ public class EnrollGameDoServlet extends HttpServlet {
 		String gLanguages =multi.getParameter("ggLanguages");
 		String gInfomation =multi.getParameter("ggInfomation");
 		
-		
-		
+
 		String goriginFileAddress=multi.getParameter("originFileAddress");
-
+		
+		String[] giNosStr = multi.getParameterValues("giNos");
+		
+		int[] giNos = new int[4];
+		try {
+			for(int i=0; i < giNosStr.length; i++) {
+				giNos[i]= Integer.parseInt(giNosStr[i]);				
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 		
-//		int gNo = 0;
-//		try {
-//			gNo= Integer.parseInt(gNostr);
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
+		int gNo = 0;
+		try {
+			gNo= Integer.parseInt(gNostr);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
-		//입력받는 값은 스트링이지만 이걸 숫자로 바꿀거야 만약에 숫자가 아니면 0이 뜨고 걸릴거야 하지만 작업은 쭉쭉 진행되
+		
 		int agPrice =0;
 		try {
 			agPrice =Integer.parseInt(gPriceStr);   // null 또는 "" 또는 "아1332ㅊ"
@@ -120,40 +117,25 @@ public class EnrollGameDoServlet extends HttpServlet {
 		}
 		
 
-		Game vo = new Game();
-		//vo.setGgNo(gNo);
-		vo.setGgTitle(gTitle);
-		vo.setGgPrice(agPrice);
-		vo.setGgSystemRequirement(gSystemRequirement);
-		vo.setGgGenre(gGenre);
-		vo.setGgDeveloper(gDeveloper);
-		vo.setGgReleaseDate(gReleaseDate);
-		vo.setGgPublisher(gPublisher);
-		vo.setGgLanguages(gLanguages);
-		vo.setGgInfomation(gInfomation);
+		Game voo = new Game();
+		voo.setGgNo(gNo);
+		//voo.setGgNo(Integer.parseInt(gNo));
+		voo.setGgTitle(gTitle);
+		voo.setGgPrice(agPrice);
+		voo.setGgSystemRequirement(gSystemRequirement);
+		voo.setGgGenre(gGenre);
+		voo.setGgDeveloper(gDeveloper);
+		voo.setGgReleaseDate(gReleaseDate);
+		voo.setGgPublisher(gPublisher);
+		voo.setGgLanguages(gLanguages);
+		voo.setGgInfomation(gInfomation);
 		
+		voo.setOriginFileAddress(goriginFileAddress);
 		
-		vo.setOriginFileAddress(goriginFileAddress);
+		int result = new GameService().updateGame(voo, fileNamess, giNos );
 		
-		System.out.println("여기 데이터 들어오나: " +vo);
-		
-
-		int result = new GameService().insertGame(vo, fileNames);
-//		if(result == 1 ) {
-//			out.println(gTitle+"님 등록 되었습니다.");
-//		} else if(result == 2) {
-//			out.println("기존회원 id가 존재합니다. ");
-//		} else {  // 오류발생:-1,그외 등등, 가입실패:0
-//			out.println("예기치 못한 오류 발생. 다시 시도해 주세요. ");
-//		}
-		
-		
-		response.sendRedirect("GameList");
-
+	response.sendRedirect("gamecontent?no=" + voo.getGgNo());
 		
 	}
 
 }
-
-
-

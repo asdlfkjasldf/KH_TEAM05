@@ -44,16 +44,10 @@ public class gamecontent extends HttpServlet {
 		request.setAttribute("gamevo", vo);
 		
 		
+		//이미지 불러오기 위해
 		
-//		ArrayList<Game> volist = new GameService().readGameListAll();
-//		
-//		for (Game vo : volist) {
-////			System.out.println("<p>"+vo.toString()+"</p>");
-//			
-//			request.setAttribute("volist", volist);
-//			
-//		}
-		
+		ArrayList<Game> ivo = new GameService().getGameImage(bno);
+		request.setAttribute("imagevo", ivo);
 		
 		
 		request.getRequestDispatcher("/WEB-INF/view/gamecontent.jsp").forward(request, response);
