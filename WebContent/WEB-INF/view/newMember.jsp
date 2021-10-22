@@ -35,7 +35,7 @@
         
         <li><a href="./notice">뉴스</a></li>
         <li><a href="#">카테고리</a></li>
-        <li><a href="#">지원</a></li>
+        <li><a href="./faq">지원</a></li>
         <li id="textboxli">
         	<!-- todo 링크는 jstl을 이용해 txt박스의 값을 적어구문작성 -->
         	<form action="./search?" method="get">
@@ -63,7 +63,7 @@
 			<table align="center">
 				<tr>
 					<td>아이디 :</td>
-					<td><input type="text" name="mm_id" id="id"><input type="hidden" name="reid" class="input"><input type="button" value="중복확인" onclick="return idCheck()"></td>
+					<td><input type="text" name="mm_id" id="id"><input type="hidden" name="reid" class="input"><input type="button" value="중복확인" id="idCheck"></td>
 				</tr>
 				<tr>
 					<td>비밀번호 :</td>
@@ -142,6 +142,8 @@
 	    } 
 	  });
 	}
+	
+	
 	
 	
 		/**
@@ -262,7 +264,33 @@ re id의 값이 존재하는지 확인하여 중복체크여부를 검사
      //     // return true;
      // }
      // 페이지 이동할때 a태그(그냥이동, 실어서 갈 수도 있어)/ form태그(입력받아서 이동) 두가지로 이동 가능
- }        
+ }
+ 
+//아이디 중복확인 ajax로 통신 , EnrollMemberServlet post로 검사후 값을 반환받음
+$('#idCheck').click(function(){
+	console.log("중복 체크 함수로 들옴");
+	$.ajax({
+		url : "./enrollmember",
+		type : "post",
+		data : {
+			inputId : $("#id").val()
+		},dataType : 'json',
+		success : function(data) {
+			if (data.result == -1) {
+				alert("사용할 수 있는 ID입니다.");
+			}else if (data.result == 1) {
+				alert("사용불가 ID입니다.");
+			}else{
+				alert("알 수 없는 오류입니다.");
+			}
+		},error : function(request,status,error) {
+			 alert("code:"+request.status+"\n"+"message:"+request.responseText+
+						"\n"+"error:"+error);
+			} 
+	});
+});
+ 
+ 
 	</script>
 
 <footer>

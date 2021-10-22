@@ -4,7 +4,9 @@ import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.io.PrintWriter;
 
 import javax.servlet.ServletContext;
@@ -15,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.google.gson.Gson;
 import com.indimoa.member.model.service.MemberService;
 import com.indimoa.member.model.vo.Member;
 import com.oreilly.servlet.MultipartRequest;
@@ -48,7 +51,27 @@ public class EnrollMemberServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
+		
+		String inputId = request.getParameter("inputId");
+		PrintWriter out = response.getWriter();
+		Map<String, Object> map1 = new HashMap<String,Object>();
+		
+		
+		
+		int result = new MemberService().dupIdChk(inputId);
+		if (("ADMIN".equals(inputId)) || ("admin".equals(inputId)) ) {
+			//운영자 계정 ID와 같을 경우 무조건 사용불가로 반환 DAO에서 SQL을 작성해 검사할건지 고려해봐야할 듯
+			result = 1;
+		}
+		
+		//1일 경우 중복id 있음 -1일경우 중복아님
+		map1.put("result", result);
+		
+		Gson gson1 = new Gson();
+		String gobStr = gson1.toJson(map1);
+		out.print(gobStr);
+		out.flush();
+		out.close();
 	}
 	
 }

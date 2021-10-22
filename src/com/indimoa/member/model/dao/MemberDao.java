@@ -16,6 +16,7 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+import com.indimoa.common.JdbcTemplate;
 import com.indimoa.member.model.vo.Member;
 
 public class MemberDao {
@@ -166,12 +167,10 @@ public class MemberDao {
 		String sql = "select mm_id from member where mm_id=?";
 
 		try {
-			conn = getConnection(); // DB 연결 시도
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1,id);
-
 			rs = pstmt.executeQuery();
-
+			
 			if (rs.next()) { // 조회 결과가 있으면 id가 존재한다는 의미
 				result = 1;
 			} else {
@@ -182,19 +181,8 @@ public class MemberDao {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			try {
-				if (conn != null) {
-					conn.close();
-				}
-				if (pstmt != null) {
-					pstmt.close();
-				}
-				if (rs != null) {
-					rs.close();
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+			JdbcTemplate.close(rs);
+			JdbcTemplate.close(pstmt);
 		}
 		return result;
 	}
