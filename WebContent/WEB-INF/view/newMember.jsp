@@ -63,11 +63,15 @@
 			<table align="center">
 				<tr>
 					<td>아이디 :</td>
-					<td><input type="text" name="mm_id" id="id"><input type="hidden" name="reid" class="input"><input type="button" value="중복확인" id="idCheck"></td>
+					<td><input type="text" name="mm_id" id="id"><input type="hidden" name="reid" class="input">
+					<input type="button" value="중복확인" id="idCheck"></td>
+					<td style="font-size: 6px; color: gray;">영어 대소문자 + 숫자, 5자이상 15자 이하 조건에 맞게 입력해주세요</td>
+					
 				</tr>
 				<tr>
 					<td>비밀번호 :</td>
 					<td><input type="password" id="pwd" name="mm_pwd" class="input"></td>
+					<td style="font-size: 6px; color: gray;">영어 대문자로 시작, 대소문자 + 숫자 + 특수문자(_#), 7자이상 15자 이하 조건에 맞게 입력해주세요</td>
 				</tr>
 				<tr>
 					<td>비밀번호 확인 :</td>
