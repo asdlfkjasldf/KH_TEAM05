@@ -1,8 +1,12 @@
+<%@page import="com.indimoa.member.model.vo.Member"%>
 <link rel="stylesheet" type="text/css" href="./css/myStyle.css">
 <%@page import="com.indimoa.member.model.dao.MemberDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
+<%
+	Member m = (Member) session.getAttribute("membervo");
+%> 
     
 <!DOCTYPE html>
 <html lang="en">
@@ -93,7 +97,7 @@ int mm_pwd = dao.selectPwd(mm_name, mm_id, mm_email);   //TODO
         <li><a href="#">지원</a></li>
         <li id="textboxli">
         	<!-- todo 링크는 jstl을 이용해 txt박스의 값을 적어구문작성 -->
-        	<form action="./GameList?" method="get">
+        	<form action="./search?" method="get">
         	<input type="text" id="textSearchGame" name="q">
         	<button type="submit" id="btnSearchGame"></button>
         	</form>
@@ -132,7 +136,7 @@ int mm_pwd = dao.selectPwd(mm_name, mm_id, mm_email);   //TODO
 	
 
     
-	<form action="WEB-INF/view/showPwd.jsp" method="post">
+	<form action="showpwd" method="post">
 	<%
 	if (mm_pwd != 0) {
 	%>
@@ -142,7 +146,7 @@ int mm_pwd = dao.selectPwd(mm_name, mm_id, mm_email);   //TODO
     	<div class = "found-success">
             <p class="t1">
                 <label for="pwd">비밀번호 : </label>
-                <div class="find-pwd"><%=mm_pwd%></div>
+                <div class="find-pwd"><%=m.getMm_pwd()%></div>
             </p>
 
                 <p class="caption">
@@ -157,13 +161,11 @@ int mm_pwd = dao.selectPwd(mm_name, mm_id, mm_email);   //TODO
     %>
     <div class="section">
     	<div class="found-fail">
-    		<form method="post" action="<c:url value='/selectpwd'/>" >
     		<h4> 등록된 정보가 없습니다.</h4>
     		
     		<p class="caption">
     			<input type="button" id="btnback" value="다시 찾기" onClick = "history.back()"/>
     		</p>
-    		</form>
     	</div>
     </div>
      <%

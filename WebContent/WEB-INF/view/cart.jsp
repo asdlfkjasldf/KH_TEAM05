@@ -56,7 +56,7 @@ if(obj == null) {	//세션 정보가 없으면 배열을 생성 : 주문한 제�
         <li><a href="#">지원</a></li>
         <li id="textboxli">
         	<!-- todo 링크는 jstl을 이용해 txt박스의 값을 적어구문작성 -->
-        	<form action="./GameList?" method="get">
+        	<form action="./search?" method="get">
         	<input type="text" id="textSearchGame" name="q">
         	<button type="submit" id="btnSearchGame"></button>
         	</form>
@@ -73,7 +73,8 @@ if(obj == null) {	//세션 정보가 없으면 배열을 생성 : 주문한 제�
 		</ul>     
 		</nav>
 	</header>
-
+	
+<!-- section -->
 <div class="section">
 <div align="center" class="Article">
 	<h3>[장바구니 보기]</h3>
@@ -91,7 +92,7 @@ if(obj == null) {	//세션 정보가 없으면 배열을 생성 : 주문한 제�
 		<tr align='center'>
 			<td colspan= '3'>
 				장바구니에 담긴 상품이 없습니다.
-				<a href= '/GameList'>쇼핑하기</a>
+				<a href= './GameList'>쇼핑하기</a>
 			</td>
 		</tr>
 	<%
@@ -151,18 +152,18 @@ for (i = 0; i < acc.length; i++) {
 
 function fnPay(){
 	if(confirm("결제하시겠습니까?")) {
-        location.href = "/cartpay";
+        location.href = "./cartpay";
     }
 }
 function fnClear(){
 	if(confirm("장바구니를 비우시겠습니까?")) {
 		alert("장바구니가 삭제되었습니다.");
-		location.href = "/cartdelete";	
+		location.href = "./cartlist";	
 	}
 }
 function fnGo(){
 	if(confirm("쇼핑을 계속하시겠습니까?")) {
-		location.href = "/GameList";
+		location.href = "./GameList";
 	}
 }
 </script>

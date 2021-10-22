@@ -38,7 +38,7 @@
         <li><a href="#">지원</a></li>
         <li id="textboxli">
         	<!-- todo 링크는 jstl을 이용해 txt박스의 값을 적어구문작성 -->
-        	<form action="./GameList?" method="get">
+        	<form action="./search?" method="get">
         	<input type="text" id="textSearchGame" name="q">
         	<button type="submit" id="btnSearchGame"></button>
         	</form>
@@ -59,7 +59,7 @@
 	<div class="section">
 	<h2 align="center">회원 가입 하기</h2>
 	<hr>
-		<form action="/enrollmemberdo" id="enrollForm" method="post" enctype="multipart/form-data">
+		<form action="enrollmemberdo" id="enrollForm" method="post" enctype="multipart/form-data">
 			<table align="center">
 				<tr>
 					<td>아이디 :</td>
@@ -110,7 +110,7 @@
 				</tr>
                 <tr>
 					<td>닉네임 :</td>
-					<td><input type="text" id="nickname" name="mm_nickname" placeholder="개발사는 회사 이름을 작성" class="input"><input type="hidden" name="renickname"></td>
+					<td><input type="text" id="nickname" name="mm_nickname" placeholder="개발사는 회사 이름을 작성" class="input"><input type="hidden" name="renickname"><input type="button" value="중복확인" onclick="return nicknameCheck()"></td>
 				</tr>
 			</table>
 			<p align="center">
@@ -122,8 +122,7 @@
 	<br>
 	<br>
 	<p align="center">
-		<input type="button"><a href="index.jsp">메인으로</a>
-			가기</button>
+		<input type="button"><a href="/WEB-INF/view/index.jsp">메인으로 가기</a>
 	</p>
 </div>
 	
@@ -199,52 +198,6 @@ re id의 값이 존재하는지 확인하여 중복체크여부를 검사
          return false;
      }
      
-     
-     // 방법 2
-     // var cnv = checkNullValue(document.getElementById("id"));
-     // if(cnv == false){ return false; }
-     // var cnv = checkNullValue(document.getElementById("pwd"));
-     // if(cnv == false){ return false; }
-     // var cnv = checkNullValue(document.getElementById("repwd"));
-     // if(cnv == false){ return false; }
-     // var cnv = checkNullValue(document.getElementById("name"));
-     // if(cnv == false){ return false; }
-
-     // 방법 1
-     // if(document.getElementById("id").value.length == 0) {
-     //     alert("입력해주세요.");
-     //     document.getElementById("id").focus();
-     //     return false;
-     // }
-     // if(document.getElementById("pwd").value.length == 0) {
-     //     alert("입력해주세요.");
-     //     document.getElementById("pwd").focus();
-     //     return false;
-     // }
-     // if(document.getElementById("repwd").value.length == 0) {
-     //     alert("입력해주세요.");
-     //     document.getElementById("repwd").focus();
-     //     return false;
-     // }
-     // if(document.getElementById("name").value.length == 0) {
-     //     alert("입력해주세요.");
-     //     document.getElementById("name").focus();
-     //     return false;
-     // }
-
-     // 비밀번호 6글자이상, 12글자 이하  ==> 정상
-     // 경고 popup “조건에 맞게 입력해주세요”  // action 으로 이동되지 않음.
-     // if(pw1value.length < 6 || pw1value.length > 12) {
-     //     alert("6~12자 조건에 맞게 입력해주세요");
-     //     return false;
-     // } 
-     // 비밀번호와 비밀번호 확인란이 
-     // 동일하지 않으면 alert창으로 “동일하게 입력해주세요”  // action 으로 이동되지 않음.
-     if(pw1value != pw2value) {
-         alert("동일하게 입력해주세요");
-         return false;
-     } 
-     // 영어 대소문자 + 숫자 + 특수문자(_#) 유효, 6글자이상, 12글자 이하
      // 정규표현식 RegExp 
      // /패턴/ 
      // ^ 시작문자, $ 끝부분
@@ -254,10 +207,15 @@ re id의 값이 존재하는지 확인하여 중복체크여부를 검사
      // 첫글자는 영어 대문자이고 영문자+ 숫자 + 특수문자(_!) 유효, 8글자이상, 16글자 이하
      var regExp = /^[A-Z][A-Za-z0-9_!]{7,15}$/;
      if( !regExp.test(pw1value) ){
-         alert("영어 대소문자 + 숫자 + 특수문자(_#), 7자이상 15자 이하 조건에 맞게 입력해주세요");
+         alert("영어 대문자로 시작, 대소문자 + 숫자 + 특수문자(_#), 7자이상 15자 이하 조건에 맞게 입력해주세요");
          return false;
      }
-
+     // 비밀번호와 비밀번호 확인란이 
+     // 동일하지 않으면 alert창으로 “동일하게 입력해주세요”  // action 으로 이동되지 않음.
+     if(pw1value != pw2value) {
+         alert("동일하게 입력해주세요");
+         return false;
+     } 
      // 이름 입력은 한글입력만 가능 2글자 이상 10글자 이하
      var name = document.getElementById("name").value;
      var regExpName = /^[가-힣]{1,15}$/;

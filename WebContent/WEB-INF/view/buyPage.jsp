@@ -79,7 +79,7 @@
         <div class="modal-content">
                 <p class="close"> &times; &nbsp; &#10006;</p>
             <p>카드결제</p>
-            <form action="ex-01.html" method="get">
+            <form action="#" method="get">
                 카드사<select size="1" id="bank" class="input1">
                     <option value="">선택하세요.</option>
                     <option value="10">하나은행</option>
@@ -116,7 +116,7 @@
         <li><a href="#">지원</a></li>
         <li id="textboxli">
         	<!-- todo 링크는 jstl을 이용해 txt박스의 값을 적어구문작성 -->
-        	<form action="./GameList?" method="get">
+        	<form action="./search?" method="get">
         	<input type="text" id="textSearchGame" name="q">
         	<button type="submit" id="btnSearchGame"></button>
         	</form>
@@ -140,7 +140,7 @@
 
 	<div class="section">
     <div class="Article">
-    
+    <form method="post" action="cartpay">
     <h1 class="h1">결제창</h1><br><br>
 	
 

@@ -14,7 +14,7 @@ import com.indimoa.member.model.service.MemberService;
 /**
  * Servlet implementation class DupNicknameChkServlet
  */
-@WebServlet("/DupNicknameChkServlet")
+@WebServlet("/dupnicknamechk")
 public class DupNicknameChkServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

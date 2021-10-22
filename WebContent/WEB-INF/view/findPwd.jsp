@@ -96,7 +96,7 @@
         <li><a href="#">지원</a></li>
         <li id="textboxli">
         	<!-- todo 링크는 jstl을 이용해 txt박스의 값을 적어구문작성 -->
-        	<form action="./GameList?" method="get">
+        	<form action="./search?" method="get">
         	<input type="text" id="textSearchGame" name="q">
         	<button type="submit" id="btnSearchGame"></button>
         	</form>
@@ -119,7 +119,7 @@
     <h1 class="h1">비밀번호 찾기</h1>
     
     <div class="Article">
-        <form action="/showpwd" method="post">
+        <form action="findpwd" method="post">
             <p class="int-area">
                 <label for="name">이름</label>
                 <input type="text" name="mm_name" id="name"  autocomplete="off" required>
@@ -138,7 +138,7 @@
             </p>
             
             <p class="caption">
-                <a href='/memberlogin'>로그인하기</a>
+                <a href='./memberlogin'>로그인하기</a>
             </p>
         </form>     
     </div>

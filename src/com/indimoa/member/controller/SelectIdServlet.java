@@ -54,11 +54,11 @@ public class SelectIdServlet extends HttpServlet {
 		System.out.println("mm_id : " + id);
 		String page = "";
 		if (email.equals(email)) {
-			page = "/WEB-INF/view/showId.jsp";
+			response.sendRedirect("showid");
 			request.setAttribute("mm_id", id);
 		} else {
 			//TODO
-			page = "/WEB-INF/view/findId.jsp";
+			response.sendRedirect("selectid");
 		}
 		RequestDispatcher view = request.getRequestDispatcher(page);
 		view.forward(request, response);

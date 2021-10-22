@@ -51,11 +51,11 @@ public class SelectPwdServlet extends HttpServlet {
 		System.out.println("mm_pwd : " + pwd);
 		String page = "";
 		if (id.equals(id)) {
-			page = "/WEB-INF/view/showPwd.jsp";
+			response.sendRedirect("showpwd");
 			request.setAttribute("mm_pwd", pwd);
 		}else {
 			//TODO
-			page = "/WEB-INF/view/findPwd.jsp";
+			response.sendRedirect("selectpwd");
 		}
 		RequestDispatcher view = request.getRequestDispatcher(page);
 		view.forward(request, response);

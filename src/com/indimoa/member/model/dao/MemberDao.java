@@ -274,7 +274,7 @@ public class MemberDao {
 	public int updateMember(Connection conn, Member m) {
 		PreparedStatement pstmt = null;
 		int result = 0;
-		String query = "update member set " + "mm_pwd = ?, mm_email = ?, mm_phn = ?, mm_com = ?, mm_enroll_date = ?, mm_profile = ?, mm_nickname = ?, mm_membership = ?, mm_point = ? where mm_id = ?";
+		String query = "update member set mm_pwd = ?, mm_email = ?, mm_phn = ?, mm_com = ?, mm_enroll_date = ?, mm_profile = ?, mm_nickname = ?, mm_membership = ?, mm_point = ? where mm_id = ?";
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, m.getMm_pwd());

@@ -37,6 +37,7 @@ public class memberServlet extends HttpServlet {
 		Member m = new MemberService().getMember(id);
 		request.setAttribute("membervo", m);
 		
+		
 		request.getRequestDispatcher("/WEB-INF/view/myInfo.jsp").forward(request, response);
 	}
 

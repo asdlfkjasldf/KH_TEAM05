@@ -46,8 +46,10 @@ public class MemberInsertServlet extends HttpServlet {
 		
 		int result = mservice.insertMember(new Member());
 		if(result > 0) {
-			response.sendRedirect("");
-		}else {}
+			response.sendRedirect("myinfo");
+		}else {
+			response.sendRedirect("memberlogin");
+		}
 	}
 
 }

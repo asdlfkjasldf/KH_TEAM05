@@ -1,9 +1,12 @@
+<%@page import="com.indimoa.member.model.vo.Member"%>
 <link rel="stylesheet" type="text/css" href="./css/myStyle.css">
 <%@page import="com.indimoa.member.model.dao.MemberDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
-    
+<%
+	Member m = (Member) session.getAttribute("membervo");
+%>    
     
 
 <!DOCTYPE html>
@@ -73,7 +76,7 @@ int mm_id = dao.selectId(mm_name, mm_email);   //TODO
         <li><a href="#">지원</a></li>
         <li id="textboxli">
         	<!-- todo 링크는 jstl을 이용해 txt박스의 값을 적어구문작성 -->
-        	<form action="./GameList?" method="get">
+        	<form action="./search?" method="get">
         	<input type="text" id="textSearchGame" name="q">
         	<button type="submit" id="btnSearchGame"></button>
         	</form>
@@ -113,7 +116,7 @@ int mm_id = dao.selectId(mm_name, mm_email);   //TODO
 
     <h1 class="h1">아이디 찾기 결과</h1>
 
-<form action="WEB-INF/view/showId.jsp" method="post">
+<form action="showid" method="post">
 	<%
 	if (mm_id != 0) {
 	%>
@@ -121,7 +124,7 @@ int mm_id = dao.selectId(mm_name, mm_email);   //TODO
     	<div class = "found-success">
 				<p class="t1">
 					<label for="id">아이디: </label>
-					<div class="find-id"><%=mm_id%></div>
+					<div class="find-id"><%=m.getMm_id()%></div>
 				</p>
 				<p class="caption">
 					<button type="button" id="btnLogin"/><a href="/memberlogin">로그인</a>
@@ -140,7 +143,6 @@ int mm_id = dao.selectId(mm_name, mm_email);   //TODO
     
     
    <div id="section">
-    <form method="post" action="<c:url value='/showid'/>" >
     	<div class="found-fail">
     		<h4> 등록된 정보가 없습니다.</h4>
     		
@@ -149,7 +151,6 @@ int mm_id = dao.selectId(mm_name, mm_email);   //TODO
     			<input type="button" id="btnjoin" value="회원가입" onClick="location.href='WEB-INF/view/newMember.jsp';"/>
     		</p>
     	</div>
-    </form>
    </div>
     
     <%

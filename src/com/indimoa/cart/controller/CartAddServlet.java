@@ -93,11 +93,12 @@ public class CartAddServlet extends HttpServlet {
 
 		
 		int result1 = cservice.cartAdd(new Cart());   //TODO
-		if (result1 > 1) {
+		if (result1 > 0) {
 			out.println("장바구니에 들어갔습니다.");
-			response.sendRedirect("cart.jsp");
+			response.sendRedirect("cartlist");
 		}else {
-			
+			out.println("장바구니가 비어있습니다.");
+			response.sendRedirect("cartlist");
 		}
 		
 		
