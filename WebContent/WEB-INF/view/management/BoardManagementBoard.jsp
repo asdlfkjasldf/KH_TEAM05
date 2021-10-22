@@ -224,7 +224,7 @@
 	<div id="logo"><a href="./"><img src="./image/ex1.png"></a></div>
 	<nav id="highmenu" class="topmenu">
 	    <ul>
-        <li><a href="./GameList">상점</a></li>
+        <li><a href="./search?">상점</a></li>
         <li><button class="accordion">커뮤니티</button>
         	<div class="panel">
         	<ul>

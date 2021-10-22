@@ -84,11 +84,7 @@ if(obj == null) {	//세션 정보가 없으면 배열을 생성 : 주문한 제�
 			<th>가격</th>
 			<th>총액</th>
 		</tr>
-	
-	
-	
-	
-	
+		
 	<%
 		if(cart.size() == 0) {
 	%>
@@ -106,29 +102,22 @@ if(obj == null) {	//세션 정보가 없으면 배열을 생성 : 주문한 제�
 				Cart ct = cart.get(i);
 	%>
 		<tr align= 'center'>
-			<td><%=ct.getCt_no() %></td>
-			<td><%=ct.getCt_content() %></td>
-			<td><%=df.format(ct.getCt_price()) %></td>
+			<td><%=ct.getCt_no()%></td>
+			<td><%=ct.getCt_content()%></td>
+			<td><%=df.format(ct.getCt_price())%></td>
 			<% 
 				total = ct.getCt_price();
 			%>
-			<td><%=df.format(total) %></td>
+			<td><%=df.format(total)%></td>
 		</tr>
 		<% 
 			totalSum += total;
 		}
 		%>
-		<tr align = 'center'>
-			
-			
-			
-		<!--    <input type='button' value='결제하기' onclick='fnPay()' />
-				<input type='button' value='장바구니 비우기' onclick='fnClear()' />
-				<input type='button' value='쇼핑 계속하기' onclick='fnGo()' />    -->
-			</td>
-		<td>
-		 <%=df.format(totalSum) %>
-		 </td>
+		<tr align = 'center'>	
+			<td>
+		 	<%=df.format(totalSum)%>
+		 	</td>
 		</tr>
 		<% 
 			}//if else
@@ -139,7 +128,6 @@ if(obj == null) {	//세션 정보가 없으면 배열을 생성 : 주문한 제�
 				<button id="btn" onclick='fnClear()'>장바구니 비우기</button>
 				<button id="btn" onclick='fnGo()'>쇼핑 계속하기</button>
 			</div>
-			
 </div>
 </div>
 
@@ -161,23 +149,21 @@ for (i = 0; i < acc.length; i++) {
 }
 
 
-
-
 function fnPay(){
 	if(confirm("결제하시겠습니까?")) {
         location.href = "/cartpay";
     }
 }
-
 function fnClear(){
 	if(confirm("장바구니를 비우시겠습니까?")) {
 		alert("장바구니가 삭제되었습니다.");
 		location.href = "/cartdelete";	
 	}
 }
-
 function fnGo(){
-	location.href = "/GameList";
+	if(confirm("쇼핑을 계속하시겠습니까?")) {
+		location.href = "/GameList";
+	}
 }
 </script>
 

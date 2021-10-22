@@ -127,7 +127,16 @@ public class GameService {
 		 JdbcTemplate.close(conn); 
 		 
 		 return result; 
-		 } 
+		 }
+
+		public ArrayList<Game> searchGame(Game vo) {
+			ArrayList<Game> vosearchresult = null;
+			Connection conn = JdbcTemplate.getConnection();
+			vosearchresult = new GameDao().searchGame(conn,vo);
+			
+			JdbcTemplate.close(conn);
+			return vosearchresult;
+		} 
 	
 
 }

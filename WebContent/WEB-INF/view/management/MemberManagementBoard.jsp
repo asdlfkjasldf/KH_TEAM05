@@ -116,7 +116,7 @@
         <li><a href="./faq">지원</a></li>
         <li id="textboxli">
         	<!-- todo 링크는 jstl을 이용해 txt박스의 값을 적어구문작성 -->
-        	<form action="./GameList?" method="get">
+        	<form action="./search?" method="get">
         	<input type="text" id="textSearchGame" name="q">
         	<button type="submit" id="btnSearchGame"></button>
         	</form>

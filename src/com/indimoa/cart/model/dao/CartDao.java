@@ -126,7 +126,7 @@ public class CartDao {
 	
 	public int getCartCount(Connection conn) {
 		int result = 0;
-		String query = "select count(ct_no) from CART";
+		String query = "select count(ct_no) from cart";
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		try {
@@ -149,7 +149,7 @@ public class CartDao {
 	public ArrayList<Cart> selectCartList(Connection conn) {
 		ArrayList<Cart> volist = null;
 
-		String query = "select * from Cart where mm_id = ?";
+		String query = "select * from cart where mm_id = ?";
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 
@@ -183,8 +183,8 @@ public class CartDao {
 		ArrayList<Cart> volist = null;
 		Connection conn = null;
 		
-		String query = "select * from (select Rownum r, t1.* from "
-				+ "(select * from Cart order by CT_NO desc) t1 ) t2 where r between ? and ?";
+		String query = "select * from (select rownum r, t1.* from "
+				+ "(select * from cart order by ct_no desc) t1 ) t2 where r between ? and ?";
 
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;

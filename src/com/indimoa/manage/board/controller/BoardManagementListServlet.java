@@ -90,9 +90,9 @@ public class BoardManagementListServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setCharacterEncoding("UTF-8");
-		response.setContentType("text/html; charset=UTF-8");
-		request.setCharacterEncoding("UTF-8");
+//		response.setCharacterEncoding("UTF-8");
+//		response.setContentType("text/html; charset=UTF-8");
+//		request.setCharacterEncoding("UTF-8");
 		String bmselect = request.getParameter("bmselect"); //선택 옵션 파라미터 받기
 		
 		PrintWriter out = response.getWriter();

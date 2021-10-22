@@ -24,7 +24,7 @@ int pos = -1; //등록된 제품 없을 경우
 if(pos == -1) {
 	Cart c = new Cart();
 	c.setCt_content(content);
-	c.setCt_price(Integer.parseInt(price.replace(",", "")));
+	c.setCt_price(Integer.parseInt(price.replace(",", "")));  //1,500이라면 1500으로 쉼표 제거 후 정수형으로 랩핑
 	cart.add(c);
 }
 

@@ -1,5 +1,6 @@
 package com.indimoa.game.model.dao;
 
+import com.indimoa.board.model.vo.FaqBoard;
 import com.indimoa.common.JdbcTemplate;
 
 import static com.indimoa.common.JdbcTemplate.commit;
@@ -278,6 +279,45 @@ public class GameDao {
 		}
 		System.out.println("update 결과 : " + result);
 		return result;
+	}
+
+
+
+
+	public ArrayList<Game> searchGame(Connection conn, Game vo) {
+		ArrayList<Game> vosearchresult = null;
+		String sqlSearchwithGameTitle = "select * from GAME where LOWER(gg_title) like LOWER('%'||?||'%')";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		try {
+			pstmt = conn.prepareStatement(sqlSearchwithGameTitle);
+			pstmt.setString(1, vo.getGgTitle());
+			rset = pstmt.executeQuery();
+			vosearchresult = new ArrayList<Game>();
+			if (rset.next()) {
+				do {
+					Game vosearch = new Game();
+					vosearch.setGgNo(rset.getInt("GG_NO"));
+					vosearch.setGgTitle(rset.getString("GG_TITLE"));
+					vosearch.setGgPrice(rset.getInt("GG_PRICE"));
+					vosearch.setGgSystemRequirement(rset.getString("GG_SYSTEM_REQUIREMENTS"));
+					vosearch.setGgGenre(rset.getString("GG_GENRE"));
+					vosearch.setGgDeveloper(rset.getString("GG_DEVELOPER"));
+					vosearch.setGgReleaseDate(rset.getString("GG_RELEASE_DATE"));
+					vosearch.setGgPublisher(rset.getString("GG_PUBLISHER"));
+					vosearch.setGgLanguages(rset.getString("GG_LANGUAGES"));
+					vosearch.setGgInfomation(rset.getString("GG_INFORMATION"));
+					vosearchresult.add(vosearch);
+				} while (rset.next());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JdbcTemplate.close(rset);
+			JdbcTemplate.close(pstmt);
+		}
+		System.out.println("[jhseong]-- 게임의 검색결과는"+ vosearchresult);
+		return vosearchresult;
 	}
 	
 	

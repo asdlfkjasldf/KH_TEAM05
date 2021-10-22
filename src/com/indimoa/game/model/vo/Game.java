@@ -247,6 +247,11 @@ public class Game {
 				+ ggReleaseDate + ", ggPublisher=" + ggPublisher + ", ggLanguages=" + ggLanguages + ", ggInfomation="
 				+ ggInfomation + ", giNo=" + giNo + ", originFileAddress=" + originFileAddress + "]";
 	}
+	
+public Game(String gametitle) {
+		this.ggTitle = gametitle;
+		//검색을 위해 추가한 설정자 
+	}
 
 	
 }
