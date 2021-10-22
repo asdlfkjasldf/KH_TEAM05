@@ -4,8 +4,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.util.ArrayList;
 
+import com.indimoa.board.model.vo.FaqBoard;
 import com.indimoa.board.model.vo.FbBoard;
 import com.indimoa.board.model.vo.GbBoard;
+import com.indimoa.board.model.vo.NtBoard;
 import com.indimoa.board.model.vo.TipBoard;
 import com.indimoa.common.JdbcTemplate;;
 
@@ -76,6 +78,50 @@ public class BoardManageMentDao {
 		
 		return result;
 	}
+	
+	public int updateNtBoardList(Connection conn, NtBoard vo) {
+		int result = -1;
+
+		String sqlUpdate = "UPDATE notice_board SET NT_TITLE = ? , NT_CONTENT = ? WHERE NT_NO = ?";
+		PreparedStatement pstmt = null;
+		try {
+			pstmt = conn.prepareStatement(sqlUpdate);
+			pstmt.setString(1, vo.getNtTitle());
+			pstmt.setString(2, vo.getNtContent());
+			pstmt.setInt(3, vo.getNtNo());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			JdbcTemplate.close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int updateFaqBoardList(Connection conn, FaqBoard vo) {
+		int result = -1;
+
+		String sqlUpdate = "UPDATE faq_board SET FQ_TITLE = ? , FQ_CONTENT = ? WHERE FQ_NO = ?";
+		PreparedStatement pstmt = null;
+		try {
+			pstmt = conn.prepareStatement(sqlUpdate);
+			pstmt.setString(1, vo.getFqTitle());
+			pstmt.setString(2, vo.getFqContent());
+			pstmt.setInt(3, vo.getFqNo());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			JdbcTemplate.close(pstmt);
+		}
+		
+		return result;
+	}
 
 	public int deleteFBoard(Connection conn, FbBoard vo) {
 		int result = -1;
@@ -121,6 +167,44 @@ public class BoardManageMentDao {
 		try {
 			pstmt = conn.prepareStatement(sqlDelete);
 			pstmt.setInt(1, vo.getTipNo());
+			result = pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JdbcTemplate.close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int deleteNtBoard(Connection conn, NtBoard vo) {
+		int result = -1;
+		
+		String sqlDelete = "DELETE FROM notice_board WHERE NT_NO = ?";
+		PreparedStatement pstmt = null;
+		try {
+			pstmt = conn.prepareStatement(sqlDelete);
+			pstmt.setInt(1, vo.getNtNo());
+			result = pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JdbcTemplate.close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	public int deleteNtBoard(Connection conn, FaqBoard vo) {
+		int result = -1;
+		
+		String sqlDelete = "DELETE FROM faq_board WHERE FQ_NO = ?";
+		PreparedStatement pstmt = null;
+		try {
+			pstmt = conn.prepareStatement(sqlDelete);
+			pstmt.setInt(1, vo.getFqNo());
 			result = pstmt.executeUpdate();
 			
 		} catch (Exception e) {

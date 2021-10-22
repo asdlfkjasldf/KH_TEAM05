@@ -16,8 +16,10 @@ import com.google.gson.Gson;
 import com.indimoa.board.model.service.FbBoardService;
 import com.indimoa.board.model.service.GbBoardService;
 import com.indimoa.board.model.service.TipBoardService;
+import com.indimoa.board.model.vo.FaqBoard;
 import com.indimoa.board.model.vo.FbBoard;
 import com.indimoa.board.model.vo.GbBoard;
+import com.indimoa.board.model.vo.NtBoard;
 import com.indimoa.board.model.vo.TipBoard;
 import com.indimoa.manage.board.service.BoardManagementUpdateService;
 
@@ -88,6 +90,26 @@ public class BoardManagementUpdateServlet extends HttpServlet {
 			TipBoard vo = new TipBoard(title, content,bno);		
 			
 			int result = new BoardManagementUpdateService().updateTipBoardList(vo);
+			if(result == -1) {
+				mapBoardUpdate.put("result", -1);
+			} else {
+				mapBoardUpdate.put("result", 0);
+			}
+		}else if("ntb".equals(bmselect)) {
+//			System.out.println("진입3");
+			NtBoard vo = new NtBoard(title, content,bno);		
+			
+			int result = new BoardManagementUpdateService().updateNtBoardList(vo);
+			if(result == -1) {
+				mapBoardUpdate.put("result", -1);
+			} else {
+				mapBoardUpdate.put("result", 0);
+			}
+		}else if("faqb".equals(bmselect)) {
+//			System.out.println("진입3");
+			FaqBoard vo = new FaqBoard(title, content,bno);		
+			
+			int result = new BoardManagementUpdateService().updateFaqBoardList(vo);
 			if(result == -1) {
 				mapBoardUpdate.put("result", -1);
 			} else {

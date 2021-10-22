@@ -13,8 +13,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
+import com.indimoa.board.model.service.FaqBoardService;
 import com.indimoa.board.model.service.FbBoardService;
 import com.indimoa.board.model.service.GbBoardService;
+import com.indimoa.board.model.service.NtBoardService;
 import com.indimoa.board.model.service.TipBoardService;
 import com.indimoa.board.model.vo.*;
 import com.indimoa.manage.board.service.BManagementService;
@@ -156,7 +158,16 @@ public class BoardManagementListServlet extends HttpServlet {
 //			System.out.println("진입3");
 			ArrayList<TipBoard> volist = new TipBoardService().selectBoardList(startRnum, endRnum);
 			map1.put("volist", volist);
+		}else if("ntb".equals(bmselect)) {
+//			System.out.println("진입3");
+			ArrayList<NtBoard> volist = new NtBoardService().selectNtBoardList(startRnum, endRnum);
+			map1.put("volist", volist);
+		}else if("faqb".equals(bmselect)) {
+//			System.out.println("진입3");
+			ArrayList<FaqBoard> volist = new FaqBoardService().selectFaqBoardList(startRnum, endRnum);
+			map1.put("volist", volist);
 		}
+		
 			
 		map1.put("startPage", startPage);
 		map1.put("endPage", endPage);

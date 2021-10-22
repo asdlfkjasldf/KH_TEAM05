@@ -53,29 +53,46 @@
 			
 			//테이블 비우기
 			tabEle.innerHTML = "";
-			tabEle.innerHTML += ('<tr>');
+			tabEle.innerHTML += ('<tr style="border: 1px;">');
 			  for (var j = 0; j < columnCnt; j++)  {
 				  
 				  
 				  if (!(data.volist[j].fbTitle == null)) {
 					  //여러줄로 나뉘니 테그도 원하는대로 되지 않다가 한줄로 만들어서 +로 이어주니 원하는 대로 테그가 속해졌다.
 					  tabEle.innerHTML += ('<td class="boardNo">' + data.volist[j].fbNo+ " ");
-					  tabEle.innerHTML += ('</td><td class="boardTitle">' + data.volist[j].fbTitle + " " 
+					  tabEle.innerHTML += ('</td><td class="boardTitle">' + data.volist[j].fbTitle + " ");
+					  tabEle.innerHTML += ('</td><td class="boardContent">' + data.volist[j].fbContent + " " 
 							 	+ '<button  class="btnUpdate">수정</button>'
 							  	+ '<button class="btnDelete">삭제</button>'
 							  	+ '</td>');
 				}else if (!(data.volist[j].gbTitle == null)) {
-					tabEle.innerHTML += ('<td class="boardNo">' + data.volist[j].gbNo+" " );
-					tabEle.innerHTML += ('</td><td class="boardTitle">' + data.volist[j].gbTitle + " " 
+					tabEle.innerHTML += ('<td class="boardNo">' + data.volist[j].gbNo+" ");
+					tabEle.innerHTML += ('</td><td class="boardTitle">' + data.volist[j].gbTitle + " ");
+					tabEle.innerHTML += ('</td><td class="boardContent">' + data.volist[j].gbContent + " " 
 								+ '<button  class="btnUpdate">수정</button>'
 								+ '<button class="btnDelete">삭제</button>'
 								+ '</td>');
 				}else if (!(data.volist[j].tipTitle == null)) {
 					tabEle.innerHTML += ('<td class="boardNo">' + data.volist[j].tipNo+" ");
-							tabEle.innerHTML += ('</td><td class="boardTitle">' + data.volist[j].tipTitle+" "
+					tabEle.innerHTML += ('</td><td class="boardTitle">' + data.volist[j].tipTitle + " ");
+					tabEle.innerHTML += ('</td><td class="boardContent">' + data.volist[j].tipContent+" "
 								+ '<button  class="btnUpdate">수정</button>'
 								+ '<button class="btnDelete">삭제</button>'
 								+ '</td>');
+				}else if (!(data.volist[j].ntTitle == null)) {
+					tabEle.innerHTML += ('<td class="boardNo">' + data.volist[j].ntNo+" ");
+					tabEle.innerHTML += ('</td><td class="boardTitle">' + data.volist[j].ntTitle + " ");
+					tabEle.innerHTML += ('</td><td class="boardContent">' + data.volist[j].ntContent+" "
+						+ '<button  class="btnUpdate">수정</button>'
+						+ '<button class="btnDelete">삭제</button>'
+						+ '</td>');
+				}else if (!(data.volist[j].fqTitle == null)) {
+					tabEle.innerHTML += ('<td class="boardNo">' + data.volist[j].fqNo+" ");
+					tabEle.innerHTML += ('</td><td class="boardTitle">' + data.volist[j].fqTitle + " ");
+					tabEle.innerHTML += ('</td><td class="boardContent">' + data.volist[j].fqContent+" "
+						+ '<button  class="btnUpdate">수정</button>'
+						+ '<button class="btnDelete">삭제</button>'
+						+ '</td>');
 				}
 				  
 				  
@@ -91,11 +108,10 @@
 			
 			//기존 (엘리먼트).click을 사용했을 때 ajax가 생성된 엘리먼트의 버튼 생성자를 인지하지 못해서 변경
 			$(document).on('click', ".btnUpdate", function (){ 
-				  //$(this).text("수정중인 게시물");
-				  $(this).parents("tbody").prev().find(".boardNo").css("color","red");
+				  //jhSeong 수정중인 검색페이지의 글번호를 빨갛게 해준다.
+				  $(this).parents("tbody").prev().prev().find(".boardNo").css("color","red");
 				  console.log("수정할 글 번호 : " +$(this).parent().parent().parent().prev().children().children(".boardNo").html()); //작동확인
-				  //console.log(typeof(btnUpdateValue));
-				  btnUpdateValue =  $(this).parents("tbody").prev().find(".boardNo").html().trim();
+				  btnUpdateValue =  $(this).parents("tbody").prev().prev().find(".boardNo").html().trim();
 		
 				  $('.Board-Article').empty();
 				  $('#btnBoardWriteBox').empty();
@@ -284,6 +300,8 @@
 		<option value="fb">자유게시판(회원)</option>
 		<option value="gdb">개발사게시판</option>
 		<option value="tipb">팁게시판</option>
+		<option value="ntb">공지사항게시판</option>
+		<option value="faqb">지원게시판</option>
 	</select>
 	<button type="button" id="btnBoardView">조회</button>
 	
@@ -295,7 +313,7 @@
 
 <div class="Board-list">
 <!--  jstl을 이용해 ajax를 거친 데이터를 테이블로 보이게한다. -->
-	<table id="listTable">
+	<table id="listTable" style="border: 1px solid black; background-color: gainsboro">
 
 	</table>
 	<!-- 페이지 확인은 일단 보류
