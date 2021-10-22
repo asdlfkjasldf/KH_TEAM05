@@ -197,7 +197,7 @@ public class BoardManageMentDao {
 		return result;
 	}
 	
-	public int deleteNtBoard(Connection conn, FaqBoard vo) {
+	public int deleteFaqBoard(Connection conn, FaqBoard vo) {
 		int result = -1;
 		
 		String sqlDelete = "DELETE FROM faq_board WHERE FQ_NO = ?";

@@ -183,7 +183,7 @@
 			
 			
 			if (confirmDelete == true) {
-				var btnDeleteValue = $(this).parents("tbody").prev().find(".boardNo").html().trim();
+				var btnDeleteValue = $(this).parents("tbody").prev().prev().find(".boardNo").html().trim();
 				//삭제여부가 확인,취소창이 뜨며 확인은 그대로 진행, 취소 누를시 return으로 메소드 탈출
 				console.log("삭제할 글 번호 : " + $(this).parent().parent().parent().prev().children().children(".boardNo").html()); 
 				  $.ajax({

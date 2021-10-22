@@ -2,8 +2,10 @@ package com.indimoa.manage.board.service;
 
 import java.sql.Connection;
 
+import com.indimoa.board.model.vo.FaqBoard;
 import com.indimoa.board.model.vo.FbBoard;
 import com.indimoa.board.model.vo.GbBoard;
+import com.indimoa.board.model.vo.NtBoard;
 import com.indimoa.board.model.vo.TipBoard;
 import com.indimoa.common.JdbcTemplate;
 import com.indimoa.manage.board.dao.BoardManageMentDao;
@@ -35,6 +37,26 @@ public class BoardManagementDeleteService {
 		Connection conn = JdbcTemplate.getConnection();
 		
 		result = new BoardManageMentDao().deleteTipBoard(conn,vo);
+		
+		JdbcTemplate.close(conn);
+		return result;
+	}
+
+	public int deleteNtBoardList(NtBoard vo) {
+		int result = -1;
+		Connection conn = JdbcTemplate.getConnection();
+		
+		result = new BoardManageMentDao().deleteNtBoard(conn, vo);
+		
+		JdbcTemplate.close(conn);
+		return result;
+	}
+
+	public int deleteFaqBoardList(FaqBoard vo) {
+		int result = -1;
+		Connection conn = JdbcTemplate.getConnection();
+		
+		result = new BoardManageMentDao().deleteFaqBoard(conn, vo);
 		
 		JdbcTemplate.close(conn);
 		return result;

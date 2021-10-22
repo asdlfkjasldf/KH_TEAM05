@@ -12,8 +12,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
+import com.indimoa.board.model.vo.FaqBoard;
 import com.indimoa.board.model.vo.FbBoard;
 import com.indimoa.board.model.vo.GbBoard;
+import com.indimoa.board.model.vo.NtBoard;
 import com.indimoa.board.model.vo.TipBoard;
 import com.indimoa.manage.board.service.BoardManagementDeleteService;
 
@@ -77,6 +79,24 @@ public class BoardManagementDeleteServlet extends HttpServlet {
 		}else if("tipb".equals(bmselect)) {
 			TipBoard vo = new TipBoard(bno);
 			int result = new BoardManagementDeleteService().deleteTipBoardList(vo);
+		if (result == -1) {
+			mapBoardDelete.put("result", -1);
+		}else {
+			mapBoardDelete.put("result", 0);
+		}
+		
+		}else if("ntb".equals(bmselect)) {
+			NtBoard vo = new NtBoard(bno);
+			int result = new BoardManagementDeleteService().deleteNtBoardList(vo);
+		if (result == -1) {
+			mapBoardDelete.put("result", -1);
+		}else {
+			mapBoardDelete.put("result", 0);
+		}
+		
+		}else if("faqb".equals(bmselect)) {
+			FaqBoard vo = new FaqBoard(bno);
+			int result = new BoardManagementDeleteService().deleteFaqBoardList(vo);
 		if (result == -1) {
 			mapBoardDelete.put("result", -1);
 		}else {
