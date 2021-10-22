@@ -66,7 +66,7 @@
 	</div>
     <div class="Article">
     <!-- 페이지의 메인 아티클 -->
-    	<h1>자 유 게 시 판</h1>
+    	<h2>팁게시판</h2>
 	<table>
 		<tr>
 			<td>번호</td>
@@ -80,10 +80,13 @@
 		<tr>
 			<td><a href="tboardcontent?no=${vo.tipNo }">${vo.tipNo } </a></td>
 			<td>
-			${vo.tipTitle }
+			<c:forEach begin="1" end="${vo.breLevel }" step="1">
+			ㄴRe :
+			</c:forEach>
 			</td>
-			<td>${vo.gdGamedevid }</td>
-			<td>${vo.tipDatetime }</td>
+			<td>${vo.tipTitle}</td>
+			<td>${vo.gdGamedevid}</td>
+			<td>${vo.tipDatetime}</td>
 		</tr>
 	</c:forEach>
 </c:if>	
@@ -110,15 +113,15 @@ var i;
 
 for (i = 0; i < acc.length; i++) {
 	console.log("메소드 진입확인");
-  acc[i].addEventListener("click", function() {
-    this.classList.toggle("active");
-    var panel = this.nextElementSibling;
-    if (panel.style.maxHeight) {
-      panel.style.maxHeight = null;
-    } else {
-      panel.style.maxHeight = panel.scrollHeight + "px";
-    } 
-  });
+  	acc[i].addEventListener("click", function() {
+	    this.classList.toggle("active");
+	    var panel = this.nextElementSibling;
+	    if (panel.style.maxHeight) {
+	      panel.style.maxHeight = null;
+	    } else {
+	      panel.style.maxHeight = panel.scrollHeight + "px";
+	    } 
+  	});
 }
 </script>
 

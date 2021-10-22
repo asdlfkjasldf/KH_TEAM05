@@ -1,5 +1,8 @@
 @charset "UTF-8";
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap');
+
+@import
+	url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap')
+	;
 
 * {
 	font-family: "Noto Sans KR", sans-serif;
@@ -8,125 +11,109 @@
 }
 
 body {
-	margin: 20px;
 	font: 15px;
+	margin: 20px;
 }
 
-a{
-  text-decoration: none!important;
-  color: green;
+ul {
+	overflow: hidden;
+	margin: 0 auto;
+}
+
+a {
+	text-decoration: none !important;
+	color: black;
 }
 
 li {
 	list-style-type: none;
-	
 }
-
 
 header {
-	width: 1000px;
-	height: 220px;
+	width: auto;
+	height: 200px;
 	font-size: 16px;
-	background-color: white;
-    position: relative;
-    margin: 0 auto;
-    margin-bottom: 20px;
+	margin-bottom: 20px;
+	position: relative;
+	margin: 0 auto;
 }
 
-:hover{
-	background-color: #ccc;
-}
-
-
-#logo{
-	width: 100px;
-    height: 100px;
-	float: left;
+#logo>a>img {
+	width: 180px;
+	height: 50px;
 	position: absolute;
+	padding-left: 200px;
+	padding-top: 60px;
 }
 
-#logo > a >img {
-			width: 100px;
-    		height: 50px;
-            position: absolute;
-            right: 5px;
-            top: 5px;
-            
+#highmenu {
+	bottom: 5px;
+	position: absolute;
+	overflow: hidden;
+	display: flex;
+	margin: 0 auto;
+	width: 100%;
 }
 
-header > #highmenu{
-    bottom: 5px;    
-    position: absolute;
-    overflow: hidden;
-    background-color: gainsboro;
-    border-radius: 5px;
-    display: flex;
-    
-}
-#highmenu ul li {
+#highmenu > ul > li {
 	width: 100px;
 	display: inline-block;
-	margin: 5px;
+	margin: 0 auto;
 	text-align: center;
-	
 }
 
-#highmenu #textboxli{
+#highmenu #textboxli {
 	width: 250px;
 }
 
-header #topmenu_tnb{
+header #topmenu_tnb {
 	top: 0;
 	right: 0;
-    overflow: hidden;
+	overflow: hidden;
 	position: absolute;
-	background-color: gainsboro;
 	border-radius: 5px;
+	margin: 15px;
+	padding: 5px;
+	font-size: 14px;
 }
 
-
-
-#topmenu_tnb ul li{
+#topmenu_tnb ul li {
 	display: inline-block;
-	float: left;
 	margin: 5px;
-	padding: 10px;
+	margin-top: 0px;
 	position: relative;
 }
 
-
-
 /* section */
 .section {
-    width: 1000px;
-    margin: 0 auto;
-    margin-bottom: 20px;
+	width: 1000px;
+	margin: 0 auto;
+	margin-bottom: 20px;
 }
 
 .Asside-left {
 	width: 200px;
 	font: 16px;
 	float: left;
-    margin-right: 20px;
-	background-color: gainsboro;	 
+	margin-right: 20px;
 }
-.Article {
-    width: 890px;
 
+.Article {
+	width: 890px;
+	min-height: 100%;
+	padding: 50px;
+	margin: 0 auto -190px;
 }
-#btnSearchGame{
+
+#btnSearchGame {
 	border: none;
-	margin: 0;
-	padding: 0;
 	background-image: url("../image/free-icon-magnifier-71403.png");
-    background-repeat: no-repeat;
-    background-color: gainsboro;
-    width: 24px;
-    height: 24px;
-    outline: 0;
-}
-#btnSearchGame:active,#btnSearchGame:hover{
-	background-color: #ccc;
+	background-repeat: no-repeat;
+	width: 24px;
+	height: 24px;
+	outline: 0;
+	background-image: url("../image/free-icon-magnifier-71403.png");
+	background-color: white;
 }
 
 .imgIcon {
@@ -134,55 +121,53 @@ header #topmenu_tnb{
 	width: 24px;
 	height: 24px;
 	bottom: 0;
+}
+
+#Middle-page {
 	
 }
 
-#Middle-page{
-	
-	
-	 
-}
-#btnBoardDelete{
-	color: green;
+.accordion {
+	color: black;
 	cursor: pointer;
 	border: none;
-}
-
-.accordion{
-	background: #eee;
-	color: green;
-	cursor: pointer;
-	border: none;
-	text-align: center;
+	text-align: left;
 	transition: 0.4s;
-	background-color: gainsboro;
 	font-size: 16px;
+	background-color: white;
 }
-.ac:active, .accordion:hover {
-	background: #ccc;
-}
-.panel{
-	display: flex;
+
+.panel {
 	padding: 0 18px;
-	max-height: 0;
+	max-height: 0px;
 	overflow: hidden;
 	transition: max-height 0.2s ease-out;
-	background-color: gainsboro;
 	float: left;
-	width: 500px;
-	align-items: center;
-	
+	/* width: 500px; */
 }
-.panel > ul > li > a{
-	color: black;
+.panel > ul{
+	overflow: hidden;
+	text-align: left;
+}
+.panel > ul > li {
+	width: 100px;
+	display: inline-block;
+	margin-right: 20px;
+}
+.panel>ul>li>a {
+	color: #8DA0C5;
+}
+
+.push {
+	height: 190px;
 }
 
 footer {
-    clear: both;
-    width: 1000px;
-    height: 190px;
-    background-color: #eee;
-    text-align: center;
-    padding: 20px;
-    margin: 0 auto;
+	clear: both;
+	width: 100%;
+	height: 190px;
+	background-color: #ccc;
+	text-align: center;
+	padding-top: 40px;
+	font-size: 13px;
 }
