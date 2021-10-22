@@ -62,12 +62,12 @@
 	
 	
     <div class="section">
-	<div class="Asside-left">
+	<div class="aside-left">
 	
 	<!-- 왼쪽의 서브 메뉴 -->
 	
 	</div>
-    <div class="Article">
+    <div class="article">
     <!-- 페이지의 메인 아티클 -->
     
 		

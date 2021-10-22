@@ -12,7 +12,6 @@
 
 body {
 	font: 15px;
-	margin: 20px;
 }
 
 ul {
@@ -31,7 +30,7 @@ li {
 
 header {
 	width: auto;
-	height: 200px;
+	height: 140px;
 	font-size: 16px;
 	margin-bottom: 20px;
 	position: relative;
@@ -40,10 +39,10 @@ header {
 
 #logo>a>img {
 	width: 180px;
-	height: 50px;
+	height: 90px;
 	position: absolute;
-	padding-left: 200px;
-	padding-top: 60px;
+	padding-left: 300px;
+	padding-top: 65px;
 }
 
 #highmenu {
@@ -55,7 +54,11 @@ header {
 	width: 100%;
 }
 
-#highmenu > ul > li {
+.panel a:hover {
+	color: #919191;
+}
+
+#highmenu>ul>li {
 	width: 100px;
 	display: inline-block;
 	margin: 0 auto;
@@ -86,23 +89,31 @@ header #topmenu_tnb {
 
 /* section */
 .section {
-	width: 1000px;
+	width: 100%;
 	margin: 0 auto;
-	margin-bottom: 20px;
 }
 
-.Asside-left {
-	width: 200px;
+.aside-left {
+	width: 300px;
 	font: 16px;
 	float: left;
-	margin-right: 20px;
+	padding: 80px 20px 20px 310px;
 }
 
-.Article {
-	width: 890px;
+.aside-left a:hover {
+	color: #919191;
+}
+
+.article {
+	width: 900px;
 	min-height: 100%;
-	padding: 50px;
-	margin: 0 auto -190px;
+	padding: 50px 50px 50px 20px;
+	margin: 0 auto;
+}
+
+#textSearchGame {
+	height: 30px;
+	padding-top: 9px;
 }
 
 #btnSearchGame {
@@ -114,6 +125,7 @@ header #topmenu_tnb {
 	outline: 0;
 	background-image: url("../image/free-icon-magnifier-71403.png");
 	background-color: white;
+	margin: 10px;
 }
 
 .imgIcon {
@@ -121,10 +133,6 @@ header #topmenu_tnb {
 	width: 24px;
 	height: 24px;
 	bottom: 0;
-}
-
-#Middle-page {
-	
 }
 
 .accordion {
@@ -145,27 +153,26 @@ header #topmenu_tnb {
 	float: left;
 	/* width: 500px; */
 }
-.panel > ul{
+
+.panel>ul {
 	overflow: hidden;
 	text-align: left;
 }
-.panel > ul > li {
+
+.panel>ul>li {
 	width: 100px;
 	display: inline-block;
 	margin-right: 20px;
 }
-.panel>ul>li>a {
-	color: #8DA0C5;
-}
 
 .push {
-	height: 190px;
+	height: 100px;
 }
 
 footer {
 	clear: both;
 	width: 100%;
-	height: 190px;
+	height: 100px;
 	background-color: #ccc;
 	text-align: center;
 	padding-top: 40px;
