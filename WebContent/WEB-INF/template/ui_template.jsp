@@ -16,8 +16,8 @@
 <div class="Article"> </div> 사이에 본인이 작성한 페이지 적용-->
 
 	<header>
-	<div id="logo"><a href="./"><img src="./image/ex1.png"></a></div>
 	<nav id="highmenu" class="topmenu">
+	<div id="logo"><a href="./"><img src="./image/ex1.png"></a></div>
 	    <ul>
         <li><a href="./GameList">상점</a></li>
         <li><button class="accordion">커뮤니티</button>

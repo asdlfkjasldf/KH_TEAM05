@@ -30,19 +30,22 @@ li {
 
 header {
 	width: auto;
-	height: 140px;
+	height: 130px;
 	font-size: 16px;
-	margin-bottom: 20px;
 	position: relative;
 	margin: 0 auto;
 }
 
+#logo {
+	margin-left: 300px;
+	padding-bottom:40px;
+	float:left;
+}
+
 #logo>a>img {
 	width: 180px;
-	height: 90px;
-	position: absolute;
-	padding-left: 300px;
-	padding-top: 65px;
+	height: 45px;
+	position: relative;
 }
 
 #highmenu {
@@ -51,7 +54,7 @@ header {
 	overflow: hidden;
 	display: flex;
 	margin: 0 auto;
-	width: 100%;
+	width: 70%;
 }
 
 .panel a:hover {
@@ -71,7 +74,7 @@ header {
 
 header #topmenu_tnb {
 	top: 0;
-	right: 0;
+	right: 100px;
 	overflow: hidden;
 	position: absolute;
 	border-radius: 5px;
@@ -98,6 +101,7 @@ header #topmenu_tnb {
 	font: 16px;
 	float: left;
 	padding: 80px 20px 20px 310px;
+	margin: 0 auto;
 }
 
 .aside-left a:hover {
@@ -109,6 +113,7 @@ header #topmenu_tnb {
 	min-height: 100%;
 	padding: 50px 50px 50px 20px;
 	margin: 0 auto;
+	float:left;
 }
 
 #textSearchGame {
@@ -163,10 +168,6 @@ header #topmenu_tnb {
 	width: 100px;
 	display: inline-block;
 	margin-right: 20px;
-}
-
-.push {
-	height: 100px;
 }
 
 footer {
