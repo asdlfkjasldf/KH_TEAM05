@@ -41,47 +41,20 @@ public class EnrollMemberDoServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//    	request.getRequestDispatcher("/WEB-INF/view/newMember.jsp").forward(request, response);
+
+		//request.getRequestDispatcher("/WEB-INF/view/newMember.jsp").forward(request, response);
+    	
     }
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+//    	request.getRequestDispatcher("/WEB-INF/view/newMember.jsp").forward(request, response);
+    	
+    	System.out.println("DO페이지 진입");
 		PrintWriter out = response.getWriter();
-		
-		MemberService mservice = new MemberService();
-		
-		//첨부 파일 업로드 부분
-		
-				// 파일 경로
-				String imageSavePath = "upload";
-				
-				int uploadSizeLimit = 100*1024*1024;
-				String encType ="UTF-8";
-				
-				ServletContext context = getServletContext();
-				String uploadPath = context.getRealPath(imageSavePath);
-				
-				MultipartRequest multi = new MultipartRequest(request, uploadPath,uploadSizeLimit,encType,new DefaultFileRenamePolicy());
-				//request >  request 객체 
-				 //uploadPath > 서버 상 업로드 될 디렉토리 
-				 //uploadSizeLimit > 업로드 파일 크기 제한 
-				 //encType > 인코딩 방법 
-				 //new DefaultFileRenamePolicy() > 동일 이름 존재 시 새로운 이름 부여 방식 
-				Enumeration files = multi.getFileNames();
-				List<String> fileNames = new ArrayList<String>();
-				while(files.hasMoreElements()) {
-					String file =(String) files.nextElement();
-					String fileName = multi.getFilesystemName(file);
-					
-					out.println("<br> 첨부파일명 : " + fileName);
-					fileNames.add(fileName);
-				}
-		
-		
-		// 전달 받은 파라미터 값을 변수에 담아 새로운 객체를 생성한다
 		String id = request.getParameter("mm_id");
+		System.out.println(id);
 		String pwd = request.getParameter("mm_pwd");
 		String name = request.getParameter("mm_name");
 		String email = request.getParameter("mm_email");
@@ -92,9 +65,42 @@ public class EnrollMemberDoServlet extends HttpServlet {
 		String point = request.getParameter("mm_point");
 		
 		String profile = request.getParameter("mm_profile");
-		
+		MemberService mservice = new MemberService();
+//		
+//		//첨부 파일 업로드 부분
+//		
+//				// 파일 경로
+//				String imageSavePath = "upload";
+//				
+//				int uploadSizeLimit = 100*1024*1024;
+//				String encType ="UTF-8";
+//				
+//				ServletContext context = getServletContext();
+//				String uploadPath = context.getRealPath(imageSavePath);
+//				
+//				MultipartRequest multi = new MultipartRequest(request, uploadPath,uploadSizeLimit,encType,new DefaultFileRenamePolicy());
+//				//request >  request 객체 
+//				 //uploadPath > 서버 상 업로드 될 디렉토리 
+//				 //uploadSizeLimit > 업로드 파일 크기 제한 
+//				 //encType > 인코딩 방법 
+//				 //new DefaultFileRenamePolicy() > 동일 이름 존재 시 새로운 이름 부여 방식 
+//				Enumeration files = multi.getFileNames();
+//				List<String> fileNames = new ArrayList<String>();
+//				while(files.hasMoreElements()) {
+//					String file =(String) files.nextElement();
+//					String fileName = multi.getFilesystemName(file);
+//					
+//					out.println("<br> 첨부파일명 : " + fileName);
+//					fileNames.add(fileName);
+//				}
+//		
+//		
+//		// 전달 받은 파라미터 값을 변수에 담아 새로운 객체를 생성한다
+//		
+//		
 		//입력받는 값은 스트링이지만 이걸 숫자로 바꿀거야 만약에 숫자가 아니면 0이 뜨고 걸릴거야 하지만 작업은 쭉쭉 진행되
 				int mm_point = 0;
+				point = "0";
 				try {
 					mm_point =Integer.parseInt(point);// null 또는 "" 또는 "아1332ㅊ"
 				} catch (Exception e) {
@@ -106,20 +112,9 @@ public class EnrollMemberDoServlet extends HttpServlet {
 		
 		
 		
-		Member vo = new Member();
-		vo.setMm_id(id);
-		vo.setMm_pwd(pwd);
-		vo.setMm_name(name);
-		vo.setMm_email(email);
-		vo.setMm_phn(phn);
-		vo.setMm_com(com);
-		vo.setMm_nickname(nickname);
-		vo.setMm_membership(membership);
-		vo.setMm_point(mm_point);
+		Member vo = new Member(id,pwd,name,email,phn,com,nickname,membership,mm_point,profile);
 		
-		vo.setMm_profile(profile);
-		
-		System.out.println("여기 데이터 들어오나: " +vo);
+		System.out.println("데이터: " +vo);
 		
 		
 		int result = mservice.insertMember(vo);
@@ -132,10 +127,9 @@ public class EnrollMemberDoServlet extends HttpServlet {
 			request.setAttribute("message2", "회원 가입 실패");
 			response.sendRedirect("enrollmember");
 		}
-		
 
 //		request.getRequestDispatcher("WEB-INF/view/login.jsp").forward(request, response);
-		response.sendRedirect("myinfo");
+		//response.sendRedirect("myinfo");
 		
 	}
 }

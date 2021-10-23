@@ -59,7 +59,7 @@
 	<div class="section">
 	<h2 align="center">회원 가입 하기</h2>
 	<hr>
-		<form action="enrollmemberdo" id="enrollForm" method="post" enctype="multipart/form-data">
+		<form action="enrollmemberdo" id="enrollForm" method="post">
 			<table align="center">
 				<tr>
 					<td>아이디 :</td>

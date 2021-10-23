@@ -65,6 +65,19 @@ public class Member {
 		this.searchKeyword = searchKeyword;
 	}
 
+	public Member(String id, String pwd, String name, String email, String phn, String com, String nickname,
+			String membership, int mm_point, String profile) {
+		this.mm_id = id;
+		this.mm_pwd = pwd;
+		this.mm_name = name;
+		this.mm_email = email;
+		this.mm_phn = phn;
+		this.mm_com = com;
+		this.mm_nickname = nickname;
+		this.mm_membership = membership;
+		this.mm_point = mm_point;
+	}
+
 	@Override
 	public String toString() {
 		return "Member [mm_id=" + mm_id + ", mm_pwd=" + mm_pwd + ", mm_email=" + mm_email + ", mm_phn="

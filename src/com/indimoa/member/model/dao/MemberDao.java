@@ -233,7 +233,7 @@ public class MemberDao {
 	public int insertMember(Connection conn, Member m) {
 		PreparedStatement pstmt = null;
 		int result = 0;
-		String query = "insert into member values (?, ?, ?, ?, ?, ?, sysdate, ?, ?, ?, ?)";
+		String query = "insert into member values (?, ?, ?, ?, ?, ?, systimestamp, ?, ?, ?, ?)";
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, m.getMm_id());
