@@ -1,7 +1,7 @@
 <link rel="stylesheet" type="text/css" href="./css/myStyle.css">
 <%@page import="com.indimoa.member.model.vo.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" errorPage="error.jsp"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
     
 <!DOCTYPE html>
@@ -203,7 +203,8 @@
 	<br>
 	<br>
 	<p class="btn2">
-		<input type="button"><a href="/WEB-INF/view/index.jsp">메인으로가기</a>
+		<input type="button"><a href="/
+		WEB-INF/view/index.jsp">메인으로가기</a>
 	</p>
 	
 	

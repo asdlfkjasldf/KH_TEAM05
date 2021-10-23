@@ -7,7 +7,7 @@
 <title>Error Pagee</title>
 </head>
 <body>
-	Error 발생!!<br> 
+	404Error 발생!!<br> 
 	입력 사항을 확인해주세요!! <hr> 
 	ERROR Info :: <%= exception.getClass().getName() %> 
 	<a href="../index.jsp">뒤로가기</a>

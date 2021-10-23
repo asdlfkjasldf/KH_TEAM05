@@ -3,7 +3,7 @@
 <%@page import="com.indimoa.cart.model.vo.Cart"%>
 <%@page import="java.text.DecimalFormat"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" errorPage="error.jsp"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
     
     
@@ -158,7 +158,7 @@ function fnPay(){
 function fnClear(){
 	if(confirm("장바구니를 비우시겠습니까?")) {
 		alert("장바구니가 삭제되었습니다.");
-		location.href = "./cartlist";	
+		location.href = "./cartdelete";
 	}
 }
 function fnGo(){

@@ -1,7 +1,7 @@
 <link rel="stylesheet" type="text/css" href="./css/myStyle.css">
 <%@page import="com.indimoa.cart.model.vo.Cart"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" errorPage="error.jsp"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
 
 <!DOCTYPE html>
@@ -85,8 +85,9 @@
                     <option value="10">하나은행</option>
                     <option value="11">신한은행</option>
                     <option value="12">국민은행</option>
+                    <option value="13">카카오뱅크</option>
                 </select>
-                카드번호<input type="text" name="a1">
+                카드번호<input type="text" name="a1" placeholder="-는 제외하고 입력">
                 <br>
                 결제 비밀번호<input type="text" name="a1">
                 <br>

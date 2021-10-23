@@ -2,7 +2,7 @@
 <link rel="stylesheet" type="text/css" href="./css/myStyle.css">
 <%@page import="com.indimoa.member.model.dao.MemberDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" errorPage="error.jsp"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
 <%
 	Member m = (Member) session.getAttribute("membervo");
@@ -127,11 +127,11 @@ int mm_id = dao.selectId(mm_name, mm_email);   //TODO
 					<div class="find-id"><%=m.getMm_id()%></div>
 				</p>
 				<p class="caption">
-					<button type="button" id="btnLogin"/><a href="/memberlogin">로그인</a>
+					<button type="button" id="btnLogin"/><a href="./memberlogin">로그인</a>
 				</p>
 
                 <p class="caption">
-                    <a href='/findpwd'>비밀번호 찾기</a>
+                    <a href='./findpwd'>비밀번호 찾기</a>
                 </p>
         
         </div>
