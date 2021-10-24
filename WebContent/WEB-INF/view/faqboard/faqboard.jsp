@@ -102,8 +102,9 @@
 
     <!-- 어드민만 쓸 수 있게 확인 필요함-->
     <br>
+    <c:if test="${memberInfo.mmid != null}">
     <a href="faqwrite"> 글쓰기 </a>
-    
+    </c:if>
 		
     </div>
     </div>

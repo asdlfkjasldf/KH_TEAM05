@@ -101,8 +101,10 @@
 
 
 	<br>
-	<a href="noticewrite"> 글쓰기 </a>
-		
+	<!-- 로그인 사용자만 글쓰기 버튼 활성화 다만 관리자 계정인걸 확인해야함 todo -->
+	<c:if test="${memberInfo.mmid != null}">
+		<a href="noticewrite"> 글쓰기 </a>
+	</c:if>
     </div>
     </div>
 
