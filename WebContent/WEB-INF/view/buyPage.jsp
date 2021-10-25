@@ -19,11 +19,25 @@
 <style type="text/css">
 
 .modal {
-	width : "100%";
-	height : "100%";
-	position: fixed; 
-	z-index : "1";
+    display: none;
+            
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            position: fixed;
+            z-index: 1;
+            background-color: rgba(12, 12, 12, .3);
 }
+.modal-content {
+            width: 200px;
+            height: 300px;
+            top: 50px;
+            margin: auto;
+            position: relative;
+            background-color: lightsteelblue;
+            padding: 10px;
+        }
 
 .h1{
     font-size: 32px; color: black;
@@ -91,12 +105,12 @@
                 <br>
                 결제 비밀번호<input type="text" name="a1">
                 <br>
-                <input type="submit" value="결제">
+                <input type="button" value="결제">
             </form>
         </div>
     </div>
 
-
+<!-- buyPage 기본 화면-->
    <header>
 	<nav id="highmenu" class="topmenu">
 	<div id="logo"><a href="./"><img src="./image/ex1.png"></a></div>
@@ -157,12 +171,19 @@
         </p><br><br>
 
         <p class="btn-area">
-            <button type="submit" id="pay">결제하기</button>
+            <button type="button" id="pay">결제하기</button>
         </p>
     </form>
 </div>
 </div>
 
+        
+
+
+<footer>    
+    INDIMOA ｜ 사업자등록번호 : 821-85-00000 ｜ 서울 강남 제2020-01호 ｜ 대표자 : 홍길동 ｜ 책임자 : 홍길동 ｜  개인정보관리책임자 : 홍길동<br><br>
+        Copyright © 2020-2021 INDIMOA GAME SHOPPING MALL
+</footer>
     <script>
     var acc = document.getElementsByClassName("accordion");
 	var i;
@@ -187,14 +208,13 @@
         $(".close").click(function() {
             $(".modal").hide();
         });
+
+        $(window).on("click", function(e){
+            if(e.target == $(".modal").get(0)){
+                $(".modal").hide();
+            }
+        });
     </script>
-        
-
-
-<footer>    
-    INDIMOA ｜ 사업자등록번호 : 821-85-00000 ｜ 서울 강남 제2020-01호 ｜ 대표자 : 홍길동 ｜ 책임자 : 홍길동 ｜  개인정보관리책임자 : 홍길동<br><br>
-        Copyright © 2020-2021 INDIMOA GAME SHOPPING MALL
-</footer>
 
 <div hidden="">돋보기아이콘 제작자 <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/kr/" title="Flaticon">www.flaticon.com</a></div>
 </body>
