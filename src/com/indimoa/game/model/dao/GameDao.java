@@ -35,7 +35,7 @@ public class GameDao {
 //	    GG_LANGUAGES VARCHAR(30) NOT NULL,
 //	    GG_INFORMATION VARCHAR(2000) NOT NULL,
 		
-		Game vo = null;
+		
 		
 		//game 테이블에만 있는 자료
 		//String sql = "select GG_NO,GG_TITLE,GG_PRICE,GG_SYSTEM_REQUIREMENTS,GG_GENRE,GG_DEVELOPER,GG_RELEASE_DATE,GG_PUBLISHER,GG_LANGUAGES,GG_INFORMATION from Game where GG_NO = ?";
@@ -45,12 +45,12 @@ public class GameDao {
 		//String sql ="select * from game t1 left outer join game_image t2 using (gg_no) order by gg_no=?";
 		
 		//오오 해결!
-		String sql="select *  from game t1 left outer join game_image t2 using (gg_no) WHERE GG_NO=?";
+		String sql1="select *  from game t1 left outer join game_image t2 using (gg_no) WHERE GG_NO=?";
 
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		try {
-			pstmt = conn.prepareStatement(sql);
+			pstmt = conn.prepareStatement(sql1);
 			pstmt.setInt(1, bno);
 			rset = pstmt.executeQuery();
 			if (rset.next()) {
@@ -193,14 +193,7 @@ public class GameDao {
 		return volist;
 	}
 
-	
-	
-	
-	
 
-	
-	
-	
 	// DataBase에 Member 객체를 추가하는 메소드
 	public int insertGame(Connection conn, Game g, List<String> fileNames) { 
 		int result = -1;
@@ -363,10 +356,7 @@ public class GameDao {
 				JdbcTemplate.close(pstmt);
 			
 			}
-			
-			
-		
-			
+	
 			
 			System.out.println("fileNames: " + fileNamess);
 			for(String filename :  fileNamess) {
@@ -394,9 +384,53 @@ public class GameDao {
 		System.out.println("update 결과 : " + result);
 		return result;
 	}
+	
+	
+	
+	
+	public int deleteGame(Connection conn, Game g ) {
+		int result=0;
+		
+		String sql ="DELETE FROM GAME_IMAGE WHERE GG_NO=?";
+		String sql2 ="DELETE FROM game WHERE gg_no=?";
+
+	
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		try {
+
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1,g.getGgNo());
+				
+				result = pstmt.executeUpdate();
+				System.out.println("game_image 첨부파일 delete 성공");
+				JdbcTemplate.close(pstmt);
+				
+				
+				
+				pstmt = conn.prepareStatement(sql2);
+				pstmt.setInt(1,g.getGgNo());
+				
+				result = pstmt.executeUpdate();
+				System.out.println("game 내용 delete 성공");
+				JdbcTemplate.close(pstmt);
+
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JdbcTemplate.close(rset);
+			JdbcTemplate.close(pstmt);
+		}
+		System.out.println("delete 결과:"+result);
+		return result;
+	}
 
 
-
+	
+	
+	
 
 	public ArrayList<Game> searchGame(Connection conn, Game vo) {
 		ArrayList<Game> vosearchresult = null;

@@ -2,7 +2,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
+
+<%@page import="com.indimoa.game.model.vo.Game"%>
+<%@page import="java.util.ArrayList"%>
     
+     <%
+    
+	ArrayList<Game> volist = (ArrayList<Game>)request.getAttribute("volist");
+	
+ 	int startPage = (int) request.getAttribute("startPage");
+	int endPage = (int) request.getAttribute("endPage");
+	int pageCount = (int) request.getAttribute("pageCount"); 
+
+%>
     
 <!DOCTYPE html>
 <html>
@@ -87,13 +99,54 @@
 	</div>
     <div class="Article">
     <!-- jstl 반복문으로 게임리스트와 이미지 불러온다 -->
+<%
+		if(volist != null){
+			
+			boolean flag = false;
+			int no = 0;
+			int i =1;
+		for(Game vo : volist){
+%>
+
     
 		<ul>
 			<dl class="search-product-wrap" style="height: 300px;">
   				<dt class="image">
-  					<img alt="이미지" src="">
+
+			<img src="<%=request.getContextPath()%>/upload/<%=vo.getOriginFileAddress()%>" width="100">
   				</dt>  
-  				<dd class="description"> 설명파트</dd>
+  				<dd class="description"> 
+  				<a href="gamecontent?no=<%=vo.getGgNo()%>"> <%=vo.getGgTitle()%></a>
+  				  
+  				  
+  				  
+  				    <table border="1" collapse="collapse" >
+			<tr>
+			<td>번호</td>		
+			<td>가격</td>
+			<td>장르</td>
+			<td>개발사</td>
+			<td>발매일</td>
+			<td>언어</td>
+			</tr>
+		
+		<tr>
+			<td><%=vo.getGgNo()%></td>
+			<td><%=vo.getGgPrice()%>원</td> 
+			<td><%=vo.getGgGenre()%></td>			
+			<td><%=vo.getGgDeveloper()%></td>
+			<td><%=vo.getGgReleaseDate()%></td>
+			<td><%=vo.getGgLanguages()%></td>
+			
+		</tr>	
+
+	</table>
+  				
+<%
+		}}
+%>
+  				
+  				</dd>
 			</dl>
 
 		</ul>

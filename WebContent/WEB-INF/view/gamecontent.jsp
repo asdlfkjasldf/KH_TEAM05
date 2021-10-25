@@ -20,156 +20,203 @@ ArrayList<Game> ivo = (ArrayList<Game>) request.getAttribute("imagevo");
 <head>
 <meta charset="UTF-8">
 <title>게임 정보</title>
-
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
 
 <style type="text/css">
-<
-link
- 
-href
-="
-css
-/
-MemberMangement
-.css
-"
->
-@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+@charset "UTF-8";
+
+@import
+	url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap')
+	;
 
 * {
 	font-family: "Noto Sans KR", sans-serif;
+	margin: 0;
+	padding: 0;
 }
 
 body {
-	margin: 20px;
 	font: 15px;
 }
 
-a:link {
+ul {
+	overflow: hidden;
+	margin: 0 auto;
+}
+
+a {
 	text-decoration: none !important;
-	color: green;
+	color: black;
 }
 
 li {
 	list-style-type: none;
 }
-table#gamecontent {
-	border-collapse: collapse;
-	width: 500px;
+
+header {
+	width: auto;
+	height: 130px;
+	font-size: 16px;
+	position: relative;
 	margin: 0 auto;
-	text-align: left;
-} 
-table#gamecontent td{
-	padding: 5px 10px;
-}
-table#gamecontent td:nth-of-type(1) {
-	width: 100px;
-	text-align: center;
 }
 
 #logo {
-	width: 100px;
-	
+	margin-left: 300px;
+	padding-bottom:40px;
+	float:left;
+}
+
+#logo>a>img {
+	width: 180px;
+	height: 45px;
+	position: relative;
+}
+
+#highmenu {
+	bottom: 5px;
 	position: absolute;
-	
+	overflow: hidden;
+	display: flex;
+	margin: 0 auto;
+	width: 70%;
 }
-#highmenu ul li {
-	
+
+.panel a:hover {
+	color: #919191;
+}
+
+#highmenu>ul>li {
+	width: 100px;
 	display: inline-block;
-	float: left;
-	margin: 15px;
+	margin: 0 auto;
 	text-align: center;
-	position: relative;
-	padding-bottom: 0px;
 }
-#topmenu ul li{
-	display: inline-block;
-	float: left;
+
+#highmenu #textboxli {
+	width: 250px;
+}
+
+header #topmenu_tnb {
+	top: 0;
+	right: 100px;
+	overflow: hidden;
+	position: absolute;
+	border-radius: 5px;
 	margin: 15px;
-	padding: 10px;
+	padding: 5px;
+	font-size: 14px;
+}
+
+#topmenu_tnb ul li {
+	display: inline-block;
+	margin: 5px;
+	margin-top: 0px;
 	position: relative;
 }
 
-
-
-.Header {
+/* section */
+.section {
 	width: 100%;
-	height: 220px;
+	margin: 0 auto;
+}
+
+.aside-left {
+	width: 300px;
 	font: 16px;
-	font-weight: bold;
+	float: left;
+	padding: 80px 20px 20px 310px;
+	margin: 0 auto;
+}
+
+.aside-left a:hover {
+	color: #919191;
+}
+
+.article {
+	width: 900px;
+	min-height: 100%;
+	padding: 50px 50px 50px 20px;
+	margin: 0 auto;
+	float:left;
+}
+
+#textSearchGame {
+	height: 30px;
+	padding-top: 9px;
+}
+
+#btnSearchGame {
+	border: none;
+	background-image: url("../image/free-icon-magnifier-71403.png");
+	background-repeat: no-repeat;
+	width: 24px;
+	height: 24px;
+	outline: 0;
+	background-image: url("../image/free-icon-magnifier-71403.png");
+	background-color: white;
+	margin: 10px;
+}
+
+.imgIcon {
+	border: none;
+	width: 24px;
+	height: 24px;
+	bottom: 0;
+}
+
+.accordion {
+	color: black;
+	cursor: pointer;
+	border: none;
+	text-align: left;
+	transition: 0.4s;
+	font-size: 16px;
 	background-color: white;
 }
 
-.Asside-left {
-	width: 15%;
-	font: 16px;
+.panel {
+	padding: 0 18px;
+	max-height: 0px;
+	overflow: hidden;
+	transition: max-height 0.2s ease-out;
 	float: left;
-	background-color: gainsboro;
-	
-	 
-}
-#Middle-page{
-	
-	
-	 
-}
-#liRedirect{
-	color: white;
+	/* width: 500px; */
 }
 
-.Article {
-	width: 85%;
-	font: 15px;
-	float: right;
-	
+.panel>ul {
+	overflow: hidden;
+	text-align: left;
 }
 
-.Footer {
-	font: 15px;
+.panel>ul>li {
+	width: 100px;
+	display: inline-block;
+	margin-right: 20px;
+}
+
+footer {
+	clear: both;
 	width: 100%;
-	height: 190px;
+	height: 100px;
+	background-color: #ccc;
+	text-align: center;
+	padding-top: 40px;
+	font-size: 13px;
 }
 </style>
-<script type="text/javascript"
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-
-<script type="text/javascript">
-	function memberView() {
-		console.log("view 진입");
-		let members = document.querySelector(".members");
-		var objOption = document.createElement("option");
-		
-		objOption.text = members.length+1 + "번";
-		objOption.value = members.length+1;
-		members.options.add(objOption);
-	    
-	}
-	
-	function searchGame() {
-		
-	}
-	
-	
-	
-</script>
-	
-	
 
 
 
 
-
-
-
-
-
-
-
-
-
-
+<style type="text/css">
+.promotion{
+	width: 1000px;
+	margin: 0 auto;
+}
+</style>
 
 </head>
 
@@ -178,45 +225,64 @@ table#gamecontent td:nth-of-type(1) {
 
 <body>
 
-
-	<div class="Header">
-	<div id="logo">로고추가할곳</div>
-	<div id="highmenu">
-	 <span>
+<header>
+	<div id="logo"><a href="./"><img src="./image/ex1.png"></a></div>
+	<nav id="highmenu" class="topmenu">
 	    <ul>
-        <li><a href="#">상점</a></li>
-        <li><a href="#">커뮤니티</a></li>
-        <li><a href="#">뉴스</a></li>
+        <li><a href="./GameList">상점</a></li>
+        <li><button class="accordion">커뮤니티</button>
+        	<div class="panel">
+        	<ul>
+        	<li><a href="./fbboardlist">자유게시판</a></li>
+        	<li><a href="./gbboardlist">개발사게시판</a></li>
+        	<li><a href="./tboardlist">팁게시판</a></li>
+        	</ul>
+        	</div>
+        </li>
+        
+        <li><a href="./notice">뉴스</a></li>
         <li><a href="#">카테고리</a></li>
-        <li><a href="#">지원</a></li>
-        <li><input type="text" id="btnSearchGame"></li>
-        <li><button type="button" onclick="searchGame()">돋보기그림추가할것</button></li>
+        <li><a href="./faq">지원</a></li>
+        <li id="textboxli">
+        	<!-- todo 링크는 jstl을 이용해 txt박스의 값을 적어구문작성 -->
+        	<form action="./search?" method="get">
+        	<input type="text" id="textSearchGame" name="q">
+        	<button type="submit" id="btnSearchGame"></button>
+        	</form>
+        	
+        </li>
     	</ul>
-	</span>
+	</nav>
+		<nav id="topmenu_tnb">
+		<ul>
+	        <li><a href="./enrollmember">회원가입</a></li>
+	        <li><a href="./memberlogin">로그인</a></li>
+	        <li><a href="#">마이페이지</a></li>
+	        <li><a href="./cartlist">장바구니</a></li>
+		</ul>     
+		</nav>
+	</header>
+	
+	<div id="promotion">
+	
 	</div>
-	<span id="topmenu">
-	<ul>
-        <li><a href="#">회원가입</a></li>
-        <li><a href="#">로그인</a></li>
-        <li><a href="#">마이페이지</a></li>
-        <li><a href="#">장바구니</a></li>
-	</ul>     
-	</span>
-	</div>
-	<div id="Middle-page">
+	
+	<div class="section"> 
 	<div class="Asside-left">
 			<ul>
-				<li><a href="#">내 정보</a></li>
-				<li><a href="indimoa/membermanagement" id="liRedirect">회원</a></li>
-				<li><a href="#">FAQ</a></li>
-				<li><a href="GameList">게임</a></li>
-				<li><a href="#">통계</a></li>
-				
+				<li><a href="#">액션/슈팅</a></li>
+				<li><a href="#">스포츠</a></li>
+				<li><a href="#">보드게임</a></li>
+				<li><a href="#">아케이드</a></li>
+				<li><a href="#">대전/격투</a></li>
+				<li><a href="#">RPG</a></li>
+				<li><a href="#">어드벤처</a></li>
+				<li><a href="#">시뮬레이션</a></li>
+				<li><a href="#">인기 게임</a></li>
 			</ul>
-		</div>
-
-
-
+	</div>
+	
+	 <div class="Article">
 
 		<div class="Article">
 			<h1>게임 정보</h1>
@@ -226,7 +292,7 @@ table#gamecontent td:nth-of-type(1) {
                 <tr>
                     <td>no</td>
                     <td ><%=vo.getGgNo()%></td>
-                    
+           
                 </tr>
                 <tr>
                     <td colspan="2">게임 이미지</td>
@@ -296,11 +362,18 @@ for(Game voimg : ivo) {
 					<td>정보</td>
 					<td ><%=vo.getGgInfomation()%></td>
 				</tr>
-				<tr > 
-
+				<tr >
+				<tr >
+					<td colspan="2">
+                <button type="button"><a href="GameUpdate?no=<%=vo.getGgNo()%>">게임 정보 수정</a></button>
+                <button type="button"><a href="GameDelete.do">게임 삭제</a></button>
+					
+					</td>
+				
+				</tr>
+				<tr>
 					<td colspan="2">
 					<div>
-                <button type="button"><a href="GameUpdate?no=<%=vo.getGgNo()%>">게임 정보 수정</a></button>
 					<button type="button">바로 구매</button>
 					<button type="button">장바 구니</button>
 					<button type="button">
@@ -311,12 +384,41 @@ for(Game voimg : ivo) {
 					</td>
 				</tr>
 			</table>
-			<div>
-			
-			</div>
-			
-
+</div>
 		</div>
+		
+		
+		<footer>
+		INDIMOA ｜ 사업자등록번호 : 821-85-00000 ｜ 서울 강남 제2020-01호 ｜ 대표자 : 홍길동 ｜ 책임자 :
+		홍길동 ｜ 개인정보관리책임자 : 홍길동<br> <br> Copyright © 2020-2021 INDIMOA
+		GAME SHOPPING MALL
+	</footer>
+
+	<script>
+    var acc = document.getElementsByClassName("accordion");
+    var i;
+ 
+    for (i = 0; i < acc.length; i++) {
+        acc[i].addEventListener("click", function () {
+            this.classList.toggle("active");
+            var panel = this.nextElementSibling;
+            if (panel.style.maxHeight) {
+                panel.style.maxHeight = null;
+            } else {
+                panel.style.maxHeight = panel.scrollHeight + "px";
+            }
+        });
+    }
+	</script>
+
+	<div hidden="">
+		돋보기아이콘 제작자 <a href="https://www.freepik.com" title="Freepik">Freepik</a>
+		from <a href="https://www.flaticon.com/kr/" title="Flaticon">www.flaticon.com</a>
+	</div>
+
+
+		
+		
 </body>
 
 
