@@ -1,4 +1,6 @@
 <link rel="stylesheet" type="text/css" href="./css/myStyle.css">
+<link rel="stylesheet" type="text/css" href="./css/boardStyle.css">
+
 <%@page import="com.indimoa.game.model.vo.Game"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -61,19 +63,8 @@
 	</nav>
 		<nav id="topmenu_tnb">
 		<ul>
-		<!-- 맨위 쪽에 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 필요하며		
-		아래의 choose문으로 세션에 따라서 회원가입,로그인이 보이도록 작동합니다.-->
-	    <c:choose>
-		<c:when test="${voList == null }">
-			<li><a href="./enrollmember">회원가입</a></li>
-		    <li><a href="./memberlogin">로그인</a></li>
-		</c:when>
-        <c:when test="${voList != null }">
-	        <c:forEach items="${voList}" var="vo">
-	        	${vo.mm_id }님
-	        </c:forEach>
-        </c:when>
-    	</c:choose>
+	        <li><a href="./enrollmember">회원가입</a></li>
+	        <li><a href="./memberlogin">로그인</a></li>
 	        <li><a href="./myinfo">마이페이지</a></li>
 	        <li><a href="./cartlist">장바구니</a></li>
 		</ul>     
@@ -103,7 +94,7 @@
 	<button type="submit" id="btnGameView">조회</button>
 	</form>
 
-<table border="1" collapse="collapse" >
+<table>
 			<tr>
 			<td>번호</td>
 			<td>게임 이미지</td>
@@ -192,7 +183,7 @@
 %>
 
 <br>
-<a href=EnrollGame>게임등록하러 가기!</a>
+<a href=EnrollGame>게임등록</a>
 
 <!--  a href= get 방식으로 보냄 servlet에서 무조건 get으로 받아야됨!!-->
 
