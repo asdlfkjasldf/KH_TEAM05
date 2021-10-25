@@ -102,10 +102,9 @@ $(document).ready(function(){
 </c:if>
 </table>
 <a href="notice">목록</a>
-	<c:if test="${voList.mm_id eq 'ADMIN'}"> 
 		<a href="noticeupdate?no=${boardvo.ntNo }">글수정 </a>
 		<button id="btnBoardDelete">글삭제</button> 
-	</c:if>
+	
 		
     </div>
     </div>
