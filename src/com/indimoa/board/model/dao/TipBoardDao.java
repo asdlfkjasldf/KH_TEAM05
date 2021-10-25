@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 
 import com.indimoa.common.JdbcTemplate;
+import com.indimoa.board.model.vo.FbBoardImg;
 import com.indimoa.board.model.vo.TipBoard;
 import com.indimoa.board.model.vo.TipBoardImg;
 
@@ -13,8 +14,7 @@ public class TipBoardDao {
 	public TipBoard getBoard(Connection conn, int bno) {
 		TipBoard vo = null;
 		String sql = "select TIP_NO,GD_GAMEDEVID,TIP_TITLE,TIP_CONTENT,TO_CHAR(TIP_DATETIME, 'yyyy-mm-dd') TIP_DATETIME,"
-				+ " TIP_VISIT,TIP_REPLY,TIP_REPORT,bref, bre_level, Bre_step "
-				+ " from Tip_Board where TIP_NO = ?";
+				+ " TIP_VISIT,TIP_REPLY,TIP_REPORT,bref, bre_level, Bre_step " + " from Tip_Board where TIP_NO = ?";
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		try {
@@ -88,7 +88,7 @@ public class TipBoardDao {
 		}
 		return img;
 	}
-	
+
 	public ArrayList<TipBoard> selectBoardList(Connection conn) {
 		ArrayList<TipBoard> volist = null;
 
@@ -235,7 +235,7 @@ public class TipBoardDao {
 		System.out.println("report 결과 : " + result);
 		return result;
 	}
-	
+
 	public int getNextVal(Connection conn) {
 		int nextVal = -1;
 		String sqlSeqNextVal = "select SEQ_TIP_BOARD_NO.nextval from dual";
@@ -256,7 +256,7 @@ public class TipBoardDao {
 		System.out.println("insert 결과 : " + nextVal);
 		return nextVal;
 	}
-	
+
 	public int insertBoard(Connection conn, TipBoard vo) {
 		int result = -1;
 
@@ -282,7 +282,7 @@ public class TipBoardDao {
 			JdbcTemplate.close(rset);
 			JdbcTemplate.close(pstmt);
 
-			System.out.println("nextVal: "+ nextVal);
+			System.out.println("nextVal: " + nextVal);
 			if (vo.getTipNo() != 0) { // 답글
 				bref = vo.getBref();
 				bre_step = vo.getBreStep();
@@ -296,7 +296,6 @@ public class TipBoardDao {
 				bre_step++;
 			}
 
-			
 			pstmt = conn.prepareStatement(sqlInsert);
 			if (vo.getTipNo() != 0) {
 				pstmt.setInt(8, bref);
@@ -320,8 +319,28 @@ public class TipBoardDao {
 			JdbcTemplate.close(rset);
 			JdbcTemplate.close(pstmt);
 		}
-		System.out.println("insert 결과 : "+ result);
+		System.out.println("insert 결과 : " + result);
 		return result;
 	}
 
+	public int insertImage(Connection conn, TipBoardImg img) {
+		int result = -1;
+		String sql = "INSERT INTO TIP_BOARD_IMG (TIP_NO, IMG_PATH) VALUES (?, ?)";
+
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, img.getTipNo());
+			pstmt.setString(2, img.getImgPath());
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JdbcTemplate.close(rset);
+			JdbcTemplate.close(pstmt);
+		}
+		System.out.println("이미지 업로드 결과 : " + result);
+		return result;
+	}
 }

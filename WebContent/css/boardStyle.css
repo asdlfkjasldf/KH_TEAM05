@@ -1,0 +1,119 @@
+@charset "UTF-8";
+
+.title {
+	margin-top: 10px;
+	margin-bottom: 20px;
+}
+
+.content {
+	margin-bottom: 15px;
+	text-align: left;
+}
+
+.paging {
+	
+}
+
+input {
+	margin-bottom: 8px;
+}
+
+textarea {
+	margin-bottom: 8px;
+}
+
+.article>table>tr {
+	margin: 10px;
+}
+
+.writetitle {
+	width: 500px;
+	height: 25px;
+	border: none;
+	background-color: #f5f5f5;
+}
+
+.writecontent {
+	width: 500px;
+	height: 300px;
+	border: none;
+	background-color: #f5f5f5;
+}
+
+.submit {
+	width: 80px;
+	height: 25px;
+	border: 0;
+	outline: 0;
+	background-color: #d4d4d4;
+}
+
+.cancel {
+	width: 80px;
+	height: 25px;
+	border: 0;
+	outline: 0;
+	background-color: #d4d4d4;
+}
+
+textarea {
+	border: 0;
+	outline: 0;
+}
+
+form input::file-selector-button {
+	width: 80px;
+	height: 25px;
+	border: 0;
+	outline: 0;
+}
+
+#select {
+	width: 80px;
+	height: 25px;
+	border: 0;
+	outline: 0;
+	margin-bottom: 10px;
+	background-color: #f5f5f5;
+}
+
+#btnUpdate {
+	width: 80px;
+	height: 25px;
+	border: 0;
+	outline: 0;
+	background-color: #d4d4d4;
+}
+
+#btnReport {
+	width: 80px;
+	height: 25px;
+	border: 0;
+	outline: 0;
+	background-color: #d4d4d4;
+}
+
+#btnDelete {
+	width: 80px;
+	height: 25px;
+	border: 0;
+	outline: 0;
+	background-color: #d4d4d4;
+}
+
+#btnInsert {
+	width: 80px;
+	height: 25px;
+	border: 0;
+	outline: 0;
+	background-color: #d4d4d4;
+}
+
+#inputTxt {
+	width: 500px;
+	height: 80px;
+	border: 0;
+	outline: 0;
+	background-color: #f5f5f5;
+	margin-top: 30px;
+}

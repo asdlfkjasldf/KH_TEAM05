@@ -96,11 +96,11 @@ public class FbBoardWriteDoServlet extends HttpServlet {
 		Member memberSS = (Member) request.getSession().getAttribute("member");
 		if (memberSS != null && !(memberSS.getMm_id().equals(""))) {
 			writer = memberSS.getMm_id();
-		} else {
-			// TODO 임시코드로 확인이 필요함
-			System.out.println("!!!!!임시 아이디!!!! testuser03");
-			writer = "testuser03"; // "user01";
-		}
+		} /*
+			 * else { // TODO 임시코드로 확인이 필요함
+			 * System.out.println("!!!!!임시 아이디!!!! testuser03"); writer = "testuser03"; //
+			 * "user01"; }
+			 */
 
 		FbBoard vo = new FbBoard(oVo.getFbNo(), writer, title, content, oVo.getFbDatetime(), oVo.getFbVisit(),
 				oVo.getFbReply(), oVo.getFbReport(), oVo.getBref(), oVo.getBreLevel(), oVo.getBreStep());

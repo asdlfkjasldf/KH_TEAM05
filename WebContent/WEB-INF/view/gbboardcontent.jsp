@@ -1,3 +1,5 @@
+<link rel="stylesheet" type="text/css" href="./css/boardStyle.css">
+<link rel="stylesheet" type="text/css" href="./css/myStyle.css">
 <%@page import="com.indimoa.board.model.vo.GbBoardImg"%>
 <%@page import="com.indimoa.member.model.vo.Member"%>
 <%@page import="com.indimoa.board.model.vo.GbBoard"%>
@@ -9,8 +11,8 @@
 
 <%
 	GbBoard vo = (GbBoard) request.getAttribute("boardvo");
-	GbBoardR vor = (GbBoardR) request.getAttribute("boardvor");
-	GbBoardImg img = (GbBoardImg) request.getAttribute("uploadfile");
+GbBoardR vor = (GbBoardR) request.getAttribute("boardvor");
+GbBoardImg img = (GbBoardImg) request.getAttribute("uploadfile");
 %>
 
 <!DOCTYPE html>
@@ -21,72 +23,137 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-	<table>
-		<tr>
-			<td>글번호</td>
-			<td><%=vo.getGbNo()%></td>
-			<td><%=vo.getGbDatetime()%></td>
-			<td>
-				<c:if test="${sessionScope.member.mm_id != null && sessionScope.member.mm_id == boardvo.gdGamedevid }">
-				<input type="button" value="삭제" id="btnDelete">
-				</c:if>
-			</td>
-		</tr>
-		<tr>
-			<td>제목</td>
-			<td colspan="2"><%=vo.getGbTitle()%></td>
-		</tr>
-		<tr>
-			<td colspan="3"><%=vo.getGbContent()%></td>
-		</tr>
-		<%if(img !=null) { %>
-		<%if(img.getImgPath()!=null){ %>
-		<tr>
-			<td colspan="3"><img src="<%=img.getImgPath()%>"></td>
-		</tr>
-		<%} %>
-		<%} %>
-		<tr>
-			<td>신고수 : <%=vo.getGbReport()%></td>
-		</tr>
-		<tr>		
-			<td>
-				<c:if test="${sessionScope.member.mm_id != null && sessionScope.member.mm_id == boardvo.gdGamedevid }">
-				<input type="button" value="수정" id="btnUpdate">
-				</c:if>
-			</td>
-			<td>
-				<input type="button" value="신고" id="btnReport">
-			</td>
-		</tr>
-	</table>
+	<header>
+		<nav id="highmenu" class="topmenu">
+			<div id="logo">
+				<a href="./"><img src="./image/ex1.png"></a>
+			</div>
+			<ul>
+				<li><a href="./GameList">상점</a></li>
+				<li><button class="accordion">커뮤니티</button>
+					<div class="panel">
+						<ul>
+							<li><a href="./fbboardlist">자유게시판</a></li>
+							<li><a href="./gbboardlist">개발사게시판</a></li>
+							<li><a href="./tboardlist">팁게시판</a></li>
+						</ul>
+					</div></li>
+
+				<li><a href="./notice">뉴스</a></li>
+				<li><a href="#">카테고리</a></li>
+				<li><a href="./faq">지원</a></li>
+				<li id="textboxli">
+					<!-- todo 링크는 jstl을 이용해 txt박스의 값을 적어구문작성 -->
+					<form action="./search?" method="get">
+						<input type="text" id="textSearchGame" name="q">
+						<button type="submit" id="btnSearchGame"></button>
+					</form>
+
+				</li>
+			</ul>
+		</nav>
+		<nav id="topmenu_tnb">
+			<ul>
+				<li><a href="./enrollmember">회원가입</a></li>
+				<li><a href="./memberlogin">로그인</a></li>
+				<li><a href="./myinfo">마이페이지</a></li>
+				<li><a href="./cartlist">장바구니</a></li>
+			</ul>
+		</nav>
+	</header>
+
+	<div id="promotion"></div>
 
 
-	<table>
-		<tr>
-			<td><input type="text" name="reply" placeholder="댓글을 작성해주세요."
-				id="inputTxt" autofocus></td>
-		</tr>
-		<tr>
-			<td><input type="button" value="작성" id="bntInsert"></td>
-		</tr>
-	</table>
 
-	<table>
-		<c:if test="${vorlist != null}">
-			<c:forEach items="${vorlist}" var="vor">
+	<div class="section">
+		<div class="aside-left">
+
+			<ul>
+				<li><a href="./fbboardlist">자유게시판</a></li>
+				<li><a href="./gbboardlist">개발사게시판</a></li>
+				<li><a href="./tboardlist">팁게시판</a></li>
+			</ul>
+		</div>
+		<div class="article">
+			<!-- 페이지의 메인 아티클 -->
+			<table>
 				<tr>
-					<td>${vor.gbRId}</td>
-					<td>${vor.gbRContent }</td>
-					<td>${vor.gbRDatetime }</td>
+					<td><%=vo.getGbDatetime()%></td>
+					<td><c:if
+							test="${sessionScope.member.mm_id != null && sessionScope.member.mm_id == boardvo.gdGamedevid }">
+							<input type="button" value="삭제" id="btnDelete">
+						</c:if></td>
 				</tr>
-			</c:forEach>
-		</c:if>
+				<tr>
+					<td colspan="2"><%=vo.getGbTitle()%></td>
+				</tr>
+				<tr>
+					<td colspan="3"><textarea cols="50" rows="20" readonly><%=vo.getGbContent()%></textarea></td>
+				</tr>
+				<%
+					if (img != null) {
+				%>
+				<%
+					if (img.getImgPath() != null) {
+				%>
+				<tr>
+					<td colspan="3"><img src="<%=img.getImgPath()%>"></td>
+				</tr>
+				<%
+					}
+				%>
+				<%
+					}
+				%>
+				<tr>
+					<td>신고수 : <%=vo.getGbReport()%></td>
+				</tr>
+				<tr>
+					<td><input type="button" value="신고" id="btnReport"></td>
+					<td><c:if
+							test="${sessionScope.member.mm_id != null && sessionScope.member.mm_id == boardvo.gdGamedevid }">
+							<input type="button" value="수정" id="btnUpdate">
+						</c:if></td>
+				</tr>
+			</table>
 
-	</table>
 
+			<table>
+				<tr>
+					<td><input type="text" name="reply" placeholder="댓글을 작성해주세요."
+						id="inputTxt" autofocus></td>
+				</tr>
+				<tr>
+					<td><input type="button" value="작성" id="btnInsert"></td>
+				</tr>
+			</table>
+
+			<table>
+				<c:if test="${vorlist != null}">
+					<c:forEach items="${vorlist}" var="vor">
+						<tr>
+							<td>${vor.gbRId}</td>
+							<td>${vor.gbRContent }</td>
+							<td>${vor.gbRDatetime }</td>
+						</tr>
+					</c:forEach>
+				</c:if>
+
+			</table>
+
+
+
+		</div>
+	</div>
+
+	<footer>
+		INDIMOA ｜ 사업자등록번호 : 821-85-00000 ｜ 서울 강남 제2020-01호 ｜ 대표자 : 홍길동 ｜ 책임자 :
+		홍길동 ｜ 개인정보관리책임자 : 홍길동<br> <br> Copyright © 2020-2021 INDIMOA
+		GAME SHOPPING MALL
+	</footer>
 	<script>
-		$("#bntInsert").click(ajaxInsert);
+		$("#btnInsert").click(ajaxInsert);
 		$("#btnReport").click(ajaxReport);
 		$("#btnDelete").click(ajaxDelete);
 		$("#btnUpdate").click(goUpdate);
@@ -163,6 +230,27 @@
 		function goUpdate() {
 			location.href = "gbboardupdate?no=${boardvo.gbNo}";
 		}
+
+		var acc = document.getElementsByClassName("accordion");
+		var i;
+
+		for (i = 0; i < acc.length; i++) {
+			acc[i].addEventListener("click", function() {
+				this.classList.toggle("active");
+				var panel = this.nextElementSibling;
+				if (panel.style.maxHeight) {
+					panel.style.maxHeight = null;
+				} else {
+					panel.style.maxHeight = panel.scrollHeight + "px";
+				}
+			});
+		}
 	</script>
+
+	<div hidden="">
+		돋보기아이콘 제작자 <a href="https://www.freepik.com" title="Freepik">Freepik</a>
+		from <a href="https://www.flaticon.com/kr/" title="Flaticon">www.flaticon.com</a>
+	</div>
+
 </body>
 </html>

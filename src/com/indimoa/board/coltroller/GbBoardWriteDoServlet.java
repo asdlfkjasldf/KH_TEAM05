@@ -92,11 +92,12 @@ public class GbBoardWriteDoServlet extends HttpServlet {
 		Member memberSS = (Member) request.getSession().getAttribute("member");
 		if (memberSS != null && !(memberSS.getMm_id().equals(""))) {
 			writer = memberSS.getMm_id();
-		} else {
-			// TODO 임시코드로 확인이 필요함
-			System.out.println("!!!!!임시 아이디!!!! testuser03");
-			writer = "testDev00"; // "user01";
 		}
+		/*
+		 * else { // TODO 임시코드로 확인이 필요함
+		 * System.out.println("!!!!!임시 아이디!!!! testuser03"); writer = "testDev00"; //
+		 * "user01"; }
+		 */
 
 		GbBoard vo = new GbBoard(oVo.getGbNo(), writer, heading, title, content, oVo.getGbDatetime(), oVo.getGbVisit(),
 				oVo.getGbReply(), oVo.getGbReport(), oVo.getBref(), oVo.getBreLevel(), oVo.getBreStep());
