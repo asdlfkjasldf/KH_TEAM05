@@ -1,5 +1,5 @@
-<%@page import="com.indimoa.member.model.vo.Member"%>
 <link rel="stylesheet" type="text/css" href="./css/myStyle.css">
+<%@page import="com.indimoa.member.model.vo.Member"%>
 <%@page import="com.indimoa.member.model.dao.MemberDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" errorPage="error.jsp"%>
@@ -78,8 +78,8 @@ int mm_pwd = dao.selectPwd(mm_name, mm_id, mm_email);   //TODO
 
 
     <header>
-	<div id="logo"><a href="./"><img src="./image/ex1.png"></a></div>
 	<nav id="highmenu" class="topmenu">
+	<div id="logo"><a href="./main"><img src="./image/ex1.png"></a></div>
 	    <ul>
         <li><a href="./GameList">상점</a></li>
         <li><button class="accordion">커뮤니티</button>
@@ -94,7 +94,7 @@ int mm_pwd = dao.selectPwd(mm_name, mm_id, mm_email);   //TODO
         
         <li><a href="./notice">뉴스</a></li>
         <li><a href="#">카테고리</a></li>
-        <li><a href="#">지원</a></li>
+        <li><a href="./faq">지원</a></li>
         <li id="textboxli">
         	<!-- todo 링크는 jstl을 이용해 txt박스의 값을 적어구문작성 -->
         	<form action="./search?" method="get">

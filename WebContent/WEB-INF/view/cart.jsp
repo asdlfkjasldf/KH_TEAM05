@@ -38,7 +38,7 @@ if(obj == null) {	//세션 정보가 없으면 배열을 생성 : 주문한 제�
 <body>
    <header>
 	<nav id="highmenu" class="topmenu">
-	<div id="logo"><a href="./"><img src="./image/ex1.png"></a></div>
+	<div id="logo"><a href="./main"><img src="./image/ex1.png"></a></div>
 	    <ul>
         <li><a href="./GameList">상점</a></li>
         <li><button class="accordion">커뮤니티</button>
@@ -53,7 +53,7 @@ if(obj == null) {	//세션 정보가 없으면 배열을 생성 : 주문한 제�
         
         <li><a href="./notice">뉴스</a></li>
         <li><a href="#">카테고리</a></li>
-        <li><a href="#">지원</a></li>
+        <li><a href="./faq">지원</a></li>
         <li id="textboxli">
         	<!-- todo 링크는 jstl을 이용해 txt박스의 값을 적어구문작성 -->
         	<form action="./search?" method="get">

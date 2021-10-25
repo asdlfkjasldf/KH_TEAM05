@@ -62,6 +62,7 @@ public class MemberLoginServlet extends HttpServlet {
 		String gobStr = "";
 		
 		// 입력받은 사용자의 ID와 비밀번호를 인자로 하여 Service의 loginMember() 호출
+//		List<Member> voList = new ArrayList<Member>();
 		
 		if ("ADMIN".equals(id)) {
 			if ("adminpwd1234".equals(pwd)) {
@@ -92,7 +93,11 @@ public class MemberLoginServlet extends HttpServlet {
 			}
 			
 			System.out.println(m);
-			request.getRequestDispatcher("WEB-INF/view/login.jsp").forward(request, response);
+			
+//			voList.add(m);
+			System.out.println("로그인성공~~~~~~~~~~~~~~~~~");
+			response.sendRedirect("main");
+			//request.getRequestDispatcher("WEB-INF/view/login.jsp").forward(request, response);
 		} else {			//로그인 실패
 			
 //			//예시1
