@@ -2,7 +2,7 @@
 <%@page import="com.indimoa.cart.model.vo.Cart"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" errorPage="error.jsp"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -127,8 +127,17 @@
 	</nav>
 		<nav id="topmenu_tnb">
 		<ul>
-	        <li><a href="./enrollmember">회원가입</a></li>
-	        <li><a href="./memberlogin">로그인</a></li>
+	<c:choose>
+		<c:when test="${voList == null }">
+			<li><a href="./enrollmember">회원가입</a></li>
+		    <li><a href="./memberlogin">로그인</a></li>
+		</c:when>
+        <c:when test="${voList != null }">
+        <c:forEach items="${voList}" var="vo">
+        	${vo.mm_id }님
+        </c:forEach>
+        </c:when>
+    </c:choose>
 	        <li><a href="./myinfo">마이페이지</a></li>
 	        <li><a href="./cartlist">장바구니</a></li>
 		</ul>     

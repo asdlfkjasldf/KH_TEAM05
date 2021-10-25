@@ -114,7 +114,8 @@
 				</tr>
                 <tr>
 					<td>닉네임 :</td>
-					<td><input type="text" id="nickname" name="mm_nickname" placeholder="개발사는 회사 이름을 작성" class="input"><input type="hidden" name="renickname"><input type="button" value="중복확인" onclick="return nicknameCheck()"></td>
+					<td><input type="text" id="nickname" name="mm_nickname" placeholder="개발사는 회사 이름을 작성" class="input"><input type="hidden" name="renickname">
+					<input type="button" value="중복확인" id="nicknameCheck"></td>
 				</tr>
 			</table>
 			<p align="center">
@@ -293,7 +294,30 @@ $('#idCheck').click(function(){
 			} 
 	});
 });
- 
+
+
+$('#nicknameCheck').click(function(){
+	console.log("중복 체크 함수로 들옴");
+	$.ajax({
+		url : "./enrollmember",
+		type : "post",
+		data : {
+			inputId : $("#nickname").val()
+		},dataType : 'json',
+		success : function(data) {
+			if (data.result == -1) {
+				alert("사용할 수 있는 nickname입니다.");
+			}else if (data.result == 1) {
+				alert("사용불가 nickname입니다.");
+			}else{
+				alert("알 수 없는 오류입니다.");
+			}
+		},error : function(request,status,error) {
+			 alert("code:"+request.status+"\n"+"message:"+request.responseText+
+						"\n"+"error:"+error);
+			} 
+	});
+});
  
 	</script>
 

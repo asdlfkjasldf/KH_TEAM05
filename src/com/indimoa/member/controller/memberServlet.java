@@ -1,11 +1,15 @@
 package com.indimoa.member.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.indimoa.game.model.service.GameService;
 import com.indimoa.game.model.vo.Game;
@@ -34,10 +38,14 @@ public class memberServlet extends HttpServlet {
 		String id = request.getParameter("id");
 //		int bno = Integer.parseInt(id);
 		
+		List<Member> voList = new ArrayList<Member>();
 		Member m = new MemberService().getMember(id);
+		HttpSession session = request.getSession();
+		
 		request.setAttribute("membervo", m);
+		session.setAttribute("voList", voList);
 		
-		
+		voList.add(m);
 		request.getRequestDispatcher("/WEB-INF/view/myInfo.jsp").forward(request, response);
 	}
 

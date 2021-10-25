@@ -11,7 +11,7 @@
 <body>
 	
 
-
+	<div class="Article">
 	<h3>닉네임 중복 확인</h3>
 	<form method="get" action="${pageContext.request.contextPath }/nicknameCheck" name="frm">
 		<table>
@@ -29,6 +29,7 @@
 			</tr>
 		</table>
 	</form>
+	</div>
 	
 	<script>
 	function nicknameOk(){
@@ -39,9 +40,7 @@
 	}
 	</script>
 	
-	<div id="footer">
-     INDIMOA ｜ 사업자등록번호 : 821-85-00000 ｜ 서울 강남 제2020-01호 ｜ 대표자 : 홍길동 ｜ 책임자 : 홍길동 ｜  개인정보관리책임자 : 홍길동<br><br>
-        Copyright © 2020-2021 INDIMOA GAME SHOPPING MALL
+	
 </div>
 </body>
 </html>
