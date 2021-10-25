@@ -18,7 +18,7 @@
 
 </head>
 <body>
-    	<header>
+    <header>
 	<nav id="highmenu" class="topmenu">
 	<div id="logo"><a href="./main"><img src="./image/ex1.png"></a></div>
 	    <ul>

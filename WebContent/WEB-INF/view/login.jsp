@@ -78,9 +78,9 @@
 <body>
 
 
-    <header>
-	<div id="logo"><a href="./"><img src="./image/ex1.png"></a></div>
+	<header>
 	<nav id="highmenu" class="topmenu">
+	<div id="logo"><a href="./main"><img src="./image/ex1.png"></a></div>
 	    <ul>
         <li><a href="./GameList">상점</a></li>
         <li><button class="accordion">커뮤니티</button>
@@ -119,7 +119,7 @@
         </c:forEach>
         </c:when>
     </c:choose>
-	        <li><a href="./myinfo">마이페이지</a></li>
+	         <li><a href="./myinfo">마이페이지</a></li>
 	        <li><a href="./cartlist">장바구니</a></li>
 		</ul>     
 		</nav>
