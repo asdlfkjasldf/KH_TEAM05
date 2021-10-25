@@ -103,9 +103,7 @@
 				</tr>
                 <tr>
 					<td>전화번호 :</td>
-					<td><input type="text" name="mm_phn1" id="phn1" class="input" required></td> -
-					<td><input type="text" name="mm_phn2" id="phn2" class="input" required></td> -
-					<td><input type="text" name="mm_phn3" id="phn3" class="input" required></td> -
+					<td><input type="text" name="mm_phn1" id="phn1" class="input" required></td>
 				</tr>
                 <tr>
 					<td>OS :</td>
@@ -249,26 +247,13 @@ re id의 값이 존재하는지 확인하여 중복체크여부를 검사
 
      // 휴대폰번호 입력은 
      // 첫번째 입력란에 010, 011, 016, 017, 018, 019 유효, 
-     // 두번째 입력란은 숫자 3-4글자 입력
-     // 세번째 입력란은 숫자 4글자 입력
      var phn1 = document.getElementById("phn1").value;
-     var phn2 = document.getElementById("phn2").value;
-     var phn3 = document.getElementById("phn3").value;
-     var regExpTel1= /^01[016789]$/;
+     var regExpTel1= /^010[0-9]{10,11}$/;
      if( !regExpTel1.test(tel1) ){
          alert("010, 011, 016, 017, 018, 019 유효 조건에 맞게 입력해주세요");
          return false;
      }
-     var regExpTel2= /^[0-9]{3,4}$/;
-     if( !regExpTel2.test(tel2) ){
-         alert("3-4 자리 유효 조건에 맞게 입력해주세요");
-         return false;
-     }
-     var regExpTel3= /^[0-9]{4}$/;
-     if( !regExpTel3.test(tel3) ){
-         alert("4 자리 유효 조건에 맞게 입력해주세요");
-         return false;
-     }
+     
 
     
 
