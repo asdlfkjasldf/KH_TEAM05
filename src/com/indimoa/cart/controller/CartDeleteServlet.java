@@ -33,7 +33,6 @@ public class CartDeleteServlet extends HttpServlet {
 		int result = cservice.cartDelete(request.getParameter("mm_id"));
 		if(result > 0) {
 			HttpSession session = request.getSession(false);
-			session.invalidate();
 		}
 		response.sendRedirect("cartlist");   //TODO
 	}
