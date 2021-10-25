@@ -73,7 +73,7 @@ public class MemberLoginServlet extends HttpServlet {
 				//session.setAttribute("memberLoginInfo", admin);
 				session.setAttribute("voList", admin);
 				System.out.println(admin);
-				response.sendRedirect("./boardmanagement");
+				request.getRequestDispatcher("WEB-INF/view/management/BoardManagementBoard.jsp").forward(request, response);
 			}
 		}
 		
