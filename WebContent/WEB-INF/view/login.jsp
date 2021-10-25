@@ -1,8 +1,7 @@
 <link rel="stylesheet" type="text/css" href="./css/myStyle.css">
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" errorPage="error.jsp"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
-    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -96,7 +95,7 @@
         
         <li><a href="./notice">뉴스</a></li>
         <li><a href="#">카테고리</a></li>
-        <li><a href="#">지원</a></li>
+        <li><a href="./faq">지원</a></li>
         <li id="textboxli">
         	<!-- todo 링크는 jstl을 이용해 txt박스의 값을 적어구문작성 -->
         	<form action="./search?" method="get">
@@ -109,8 +108,17 @@
 	</nav>
 		<nav id="topmenu_tnb">
 		<ul>
-	        <li><a href="./enrollmember">회원가입</a></li>
-	        <li><a href="./memberlogin">로그인</a></li>
+    <c:choose>
+		<c:when test="${voList == null }">
+			<li><a href="./enrollmember">회원가입</a></li>
+		    <li><a href="./memberlogin">로그인</a></li>
+		</c:when>
+        <c:when test="${voList != null }">
+        <c:forEach items="${voList}" var="vo">
+        	${vo.mm_id }님
+        </c:forEach>
+        </c:when>
+    </c:choose>
 	        <li><a href="./myinfo">마이페이지</a></li>
 	        <li><a href="./cartlist">장바구니</a></li>
 		</ul>     

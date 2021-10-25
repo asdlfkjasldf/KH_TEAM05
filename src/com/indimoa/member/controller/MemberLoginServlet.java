@@ -67,17 +67,22 @@ public class MemberLoginServlet extends HttpServlet {
 		if (m != null) { 			// 로그인 성공
 			System.out.println("로그인성공");
 			HttpSession session = request.getSession();
+			
+			
 			session.setAttribute("memberLoginInfo", m);
+			session.setAttribute("voList", voList);
+			System.out.println(m);
 			
 			voList.add(m);
-			voList.add(m);
-			
-			Map<String, Object> map2 = new HashMap<String, Object>();
-			map2.put("result", "ok");
-			map2.put("name", m.getMm_name());
-			map2.put("memberInfo", m);
-			
-			gobStr = gob.toJson(map2);
+			request.getRequestDispatcher("WEB-INF/view/login.jsp").forward(request, response);
+//			voList.add(m);
+//			
+//			Map<String, Object> map2 = new HashMap<String, Object>();
+//			map2.put("result", "ok");
+//			map2.put("name", m.getMm_name());
+//			map2.put("memberInfo", m);
+//			
+//			gobStr = gob.toJson(map2);
 			
 		} else {			//로그인 실패
 			System.out.println("로그인 실패");
@@ -86,10 +91,12 @@ public class MemberLoginServlet extends HttpServlet {
 			map2.put("result","fail");
 			gobStr = gob.toJson(map2);
 		}
-		System.out.println("gobStr : " + gobStr);
-		out.println(gobStr);
-		out.flush();
-		out.close();
+//		System.out.println("gobStr : " + gobStr);
+//		out.println(gobStr);
+//		out.flush();
+//		out.close();
+		
+		
 	}
 }
 
