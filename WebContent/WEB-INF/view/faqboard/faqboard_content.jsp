@@ -102,11 +102,9 @@ $(document).ready(function(){
  </c:if>
  </table>
  <a href="faq">목록</a>
- <!-- 관리자아이디일때만 보이도록 조건 -->
-	 <c:if test="${voList.mm_id eq 'ADMIN'}">    
 		 <a href="faqupdate?no=${boardvo.fqNo }">글수정</a>
 		 <button id="btnBoardDelete">글삭제</button>
-	 </c:if>
+	 
  
 		
     </div>
