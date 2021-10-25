@@ -72,14 +72,16 @@ public class MemberLoginServlet extends HttpServlet {
 				HttpSession session = request.getSession();
 				//session.setAttribute("memberLoginInfo", admin);
 				session.setAttribute("voList", admin);
-				System.out.println(admin);
-				request.getRequestDispatcher("WEB-INF/view/management/BoardManagementBoard.jsp").forward(request, response);
+				response.sendRedirect("adminmembers");
+				return;
+				
+				
 			}
 		}
 		
 		Member m = mservice.loginMember(id, pwd);
 		System.out.println("로그인 성공?????");
-		if (m != null) { 			// 로그인 성공
+		if (m != null &&  !("ADMIN".equals(id))) { 			// 로그인 성공
 			HttpSession session = request.getSession();
 			System.out.println("로그인 성공!!!!!!!!");
 			session.setAttribute("memberLoginInfo", m);
@@ -98,8 +100,8 @@ public class MemberLoginServlet extends HttpServlet {
 			System.out.println("로그인성공~~~~~~~~~~~~~~~~~");
 			response.sendRedirect("main");
 			//request.getRequestDispatcher("WEB-INF/view/login.jsp").forward(request, response);
-		} else {			//로그인 실패
-			
+		} else if (m == null)  {			//로그인 실패
+
 //			//예시1
 //			Map<String, Object> map2 = new HashMap<String, Object>();
 //			map2.put("result","fail");
