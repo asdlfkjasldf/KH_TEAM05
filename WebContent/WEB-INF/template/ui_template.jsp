@@ -45,17 +45,8 @@
 	</nav>
 		<nav id="topmenu_tnb">
 		<ul>
-		<!-- 맨위 쪽에 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 필요하며		
-		아래의 choose문으로 세션에 따라서 회원가입,로그인이 보이도록 작동합니다.-->
-	    <c:choose>
-		<c:when test="${voList == null }">
-			<li><a href="./enrollmember">회원가입</a></li>
-		    <li><a href="./memberlogin">로그인</a></li>
-		</c:when>
-        <c:when test="${voList != null }">
-	        	${voList.mm_id }님
-        </c:when>
-    	</c:choose>
+	        <li><a href="./enrollmember">회원가입</a></li>
+	        <li><a href="./memberlogin">로그인</a></li>
 	        <li><a href="./myinfo">마이페이지</a></li>
 	        <li><a href="./cartlist">장바구니</a></li>
 		</ul>     

@@ -2,7 +2,7 @@
 <link rel="stylesheet" type="text/css" href="./css/myStyle.css">
 <%@page import="com.indimoa.board.model.vo.FbBoard"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8" errorPage="error.jsp"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 	FbBoard vo = (FbBoard) request.getAttribute("boardvo");
@@ -18,7 +18,7 @@
 	<header>
 		<nav id="highmenu" class="topmenu">
 			<div id="logo">
-				<a href="./"><img src="./image/ex1.png"></a>
+				<a href="./main"><img src="./image/ex1.png"></a>
 			</div>
 			<ul>
 				<li><a href="./GameList">상점</a></li>
@@ -75,7 +75,7 @@
 			<form method="post" action="./fbboardupdate.do">
 				<input type="hidden" name="bno" value="<%=vo.getFbNo()%>" readonly>
 				<input type="text" class="writetitle" autofocus name="title"
-					value="<%=vo.getFbTitle()%>" required><br> <textarea class="writecontent" name="content" required value="<%=vo.getFbContent()%>"></textarea><br>
+					value="<%=vo.getFbTitle()%>" required><br> <textarea class="writecontent" name="content" required><%=vo.getFbContent()%></textarea><br>
 				<input type="file" name="uploadFile" /><br>
 				<input class="submit" type="submit" value="등록"> <input
 					class="cancel" type="reset" value="취소">

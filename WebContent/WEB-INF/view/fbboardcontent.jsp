@@ -6,7 +6,7 @@
 <%@page import="com.indimoa.board.model.vo.FbBoardR"%>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8" errorPage="error.jsp"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <%
@@ -26,7 +26,7 @@ FbBoardImg img = (FbBoardImg) request.getAttribute("uploadfile");
 	<header>
 		<nav id="highmenu" class="topmenu">
 			<div id="logo">
-				<a href="./"><img src="./image/ex1.png"></a>
+				<a href="./main"><img src="./image/ex1.png"></a>
 			</div>
 			<ul>
 				<li><a href="./GameList">상점</a></li>
@@ -80,11 +80,6 @@ FbBoardImg img = (FbBoardImg) request.getAttribute("uploadfile");
 			<table>
 				<tr>
 					<td><%=vo.getFbNo()%></td>
-					<td><%=vo.getFbDatetime()%></td>
-					<td><c:if
-							test="${sessionScope.member.mm_id != null && sessionScope.member.mm_id == boardvo.mmId }">
-							<input type="button" value="삭제" id="btnDelete">
-						</c:if></td>
 				</tr>
 				<tr>
 					<td colspan="2"><%=vo.getFbTitle()%></td>
@@ -113,8 +108,9 @@ FbBoardImg img = (FbBoardImg) request.getAttribute("uploadfile");
 				<tr>
 					<td><input type="button" value="신고" id="btnReport"></td>
 					<td><c:if
-							test="${sessionScope.member.mm_id != null && sessionScope.member.mm_id == boardvo.mmId }">
+							test="${sessionScope.member.mm_id != null && sessionScope.member.mm_id == boardvo.mmId  || sessionScope.member.mm_id == admin}">
 							<input type="button" value="수정" id="btnUpdate">
+							<input type="button" value="삭제" id="btnDelete">
 						</c:if></td>
 				</tr>
 			</table>
@@ -122,8 +118,8 @@ FbBoardImg img = (FbBoardImg) request.getAttribute("uploadfile");
 
 			<table>
 				<tr>
-					<td><input type="text" name="reply"
-						placeholder="댓글을 작성해주세요." id="inputTxt" autofocus></td>
+					<td><input type="text" name="reply" placeholder="댓글을 작성해주세요."
+						id="inputTxt" autofocus></td>
 				</tr>
 				<tr>
 					<td><input type="button" value="작성" id="btnInsert"></td>

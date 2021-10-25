@@ -2,7 +2,7 @@
 <link rel="stylesheet" type="text/css" href="./css/myStyle.css">
 <%@page import="com.indimoa.board.model.vo.TipBoard"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8" errorPage="error.jsp"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 	TipBoard vo = (TipBoard) request.getAttribute("boardvo");
@@ -18,7 +18,7 @@
 	<header>
 		<nav id="highmenu" class="topmenu">
 			<div id="logo">
-				<a href="./"><img src="./image/ex1.png"></a>
+				<a href="./main"><img src="./image/ex1.png"></a>
 			</div>
 			<ul>
 				<li><a href="./GameList">상점</a></li>
@@ -80,8 +80,7 @@
 				<input type="hidden" name="bno" value="<%=vo.getTipNo()%>" readonly>
 				<input type="text" class="writetitle" autofocus name="title"
 					value="<%=vo.getTipTitle()%>" required><br> 
-					<textarea class="writecontent" name="content"
-					value="<%=vo.getTipContent()%>" required></textarea><br> <input
+					<textarea class="writecontent" name="content" required><%=vo.getTipContent()%></textarea><br> <input
 					type="file" name="uploadFile" /><br> <input class="submit"
 					type="submit" value="등록"> <input class="cancel"
 					type="reset" value="취소">

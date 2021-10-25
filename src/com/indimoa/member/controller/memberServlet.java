@@ -42,7 +42,7 @@ public class memberServlet extends HttpServlet {
 		Member m = new MemberService().getMember(id);
 		HttpSession session = request.getSession();
 		
-		request.setAttribute("membervo", m);
+		request.setAttribute("memberLoginInfo", m);
 		session.setAttribute("voList", voList);
 		
 		voList.add(m);

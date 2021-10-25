@@ -38,8 +38,8 @@ header {
 
 #logo {
 	margin-left: 300px;
-	padding-bottom:40px;
-	float:left;
+	padding-bottom: 40px;
+	float: left;
 }
 
 #logo>a>img {
@@ -100,7 +100,7 @@ header #topmenu_tnb {
 	width: 300px;
 	font: 16px;
 	float: left;
-	padding: 80px 20px 20px 310px;
+	padding: 80px 0px 20px 310px;
 	margin: 0 auto;
 }
 
@@ -113,7 +113,7 @@ header #topmenu_tnb {
 	min-height: 100%;
 	padding: 50px 50px 50px 20px;
 	margin: 0 auto;
-	float:left;
+	float: left;
 }
 
 #textSearchGame {

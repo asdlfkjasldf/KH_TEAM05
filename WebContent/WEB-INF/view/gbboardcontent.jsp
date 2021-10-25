@@ -6,7 +6,7 @@
 <%@page import="com.indimoa.board.model.vo.GbBoardR"%>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8" errorPage="error.jsp"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <%
@@ -26,7 +26,7 @@ GbBoardImg img = (GbBoardImg) request.getAttribute("uploadfile");
 	<header>
 		<nav id="highmenu" class="topmenu">
 			<div id="logo">
-				<a href="./"><img src="./image/ex1.png"></a>
+				<a href="./main"><img src="./image/ex1.png"></a>
 			</div>
 			<ul>
 				<li><a href="./GameList">상점</a></li>
@@ -80,10 +80,6 @@ GbBoardImg img = (GbBoardImg) request.getAttribute("uploadfile");
 			<table>
 				<tr>
 					<td><%=vo.getGbDatetime()%></td>
-					<td><c:if
-							test="${sessionScope.member.mm_id != null && sessionScope.member.mm_id == boardvo.gdGamedevid }">
-							<input type="button" value="삭제" id="btnDelete">
-						</c:if></td>
 				</tr>
 				<tr>
 					<td colspan="2"><%=vo.getGbTitle()%></td>
@@ -112,8 +108,9 @@ GbBoardImg img = (GbBoardImg) request.getAttribute("uploadfile");
 				<tr>
 					<td><input type="button" value="신고" id="btnReport"></td>
 					<td><c:if
-							test="${sessionScope.member.mm_id != null && sessionScope.member.mm_id == boardvo.gdGamedevid }">
+							test="${sessionScope.member.mm_id != null && sessionScope.member.mm_id == boardvo.gdGamedevid || sessionScope.member.mm_id == admin}">
 							<input type="button" value="수정" id="btnUpdate">
+							<input type="button" value="삭제" id="btnDelete">
 						</c:if></td>
 				</tr>
 			</table>

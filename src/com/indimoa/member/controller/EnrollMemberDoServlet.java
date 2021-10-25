@@ -121,6 +121,7 @@ public class EnrollMemberDoServlet extends HttpServlet {
 		if(result == 1) {
 			HttpSession session = request.getSession();
 			session.setAttribute("userid", id);
+			//TODO : 	session.setAttribute("memberLoginInfo", m);
 			request.setAttribute("message1", "회원 가입 성공");
 			response.sendRedirect("memberlogin");
 		}else {

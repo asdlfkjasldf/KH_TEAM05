@@ -93,10 +93,16 @@ public class FbBoardWriteDoServlet extends HttpServlet {
 		String title = multi.getParameter("title"); // 내용부분입력된값이지요
 		String content = multi.getParameter("content"); // 뭐라해야할지모를제목
 		String writer = "";
-		Member memberSS = (Member) request.getSession().getAttribute("member");
+		Member memberSS = (Member) request.getSession().getAttribute("memberLoginInfo");
+		System.out.println("로그인SS: " +memberSS);
 		if (memberSS != null && !(memberSS.getMm_id().equals(""))) {
 			writer = memberSS.getMm_id();
-		} /*
+			System.out.println("writer:"+writer);
+		} else {
+			response.sendRedirect("/memberlogin");
+			return;
+		}
+		/*
 			 * else { // TODO 임시코드로 확인이 필요함
 			 * System.out.println("!!!!!임시 아이디!!!! testuser03"); writer = "testuser03"; //
 			 * "user01"; }

@@ -4,7 +4,7 @@
 <%@page import="com.indimoa.board.model.vo.GbBoard"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8" errorPage="error.jsp"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
@@ -17,7 +17,7 @@
 	<header>
 		<nav id="highmenu" class="topmenu">
 			<div id="logo">
-				<a href="./"><img src="./image/ex1.png"></a>
+				<a href="./main"><img src="./image/ex1.png"></a>
 			</div>
 			<ul>
 				<li><a href="./GameList">상점</a></li>

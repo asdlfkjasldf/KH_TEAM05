@@ -89,9 +89,12 @@ public class GbBoardWriteDoServlet extends HttpServlet {
 		String content = multi.getParameter("content"); // 뭐라해야할지모를제목
 		String heading = multi.getParameter("heading");
 		String writer = "";
-		Member memberSS = (Member) request.getSession().getAttribute("member");
-		if (memberSS != null && !(memberSS.getMm_id().equals(""))) {
-			writer = memberSS.getMm_id();
+		String gameDevId = (String) request.getSession().getAttribute("memberGameDevIdSS");
+		if (gameDevId != null && !(gameDevId.equals(""))) {
+			writer = gameDevId;
+		} else {
+			response.sendRedirect("/memberlogin");
+			return;
 		}
 		/*
 		 * else { // TODO 임시코드로 확인이 필요함

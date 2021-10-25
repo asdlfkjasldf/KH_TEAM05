@@ -1,7 +1,7 @@
 <link rel="stylesheet" type="text/css" href="./css/boardStyle.css">
 <link rel="stylesheet" type="text/css" href="./css/myStyle.css">
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8" errorPage="error.jsp"%>
 <%
 	String bno = request.getParameter("bno");
 if (bno == null || bno.equals("")) {
@@ -18,7 +18,7 @@ if (bno == null || bno.equals("")) {
 	<header>
 		<nav id="highmenu" class="topmenu">
 			<div id="logo">
-				<a href="./"><img src="./image/ex1.png"></a>
+				<a href="./main"><img src="./image/ex1.png"></a>
 			</div>
 			<ul>
 				<li><a href="./GameList">상점</a></li>
@@ -75,7 +75,7 @@ if (bno == null || bno.equals("")) {
 				enctype="multipart/form-data">
 				<input type="hidden" name="bno" value="<%=bno%>" readonly>
 				<input type="text" class="writetitle" autofocus name="title" placeholder="제목을 작성해주세요."
-					required><br><textarea class="writecontent" placeholder="내용을 작성해주세요." name="content" requiredrequired></textarea><br>
+					required><br><textarea class="writecontent" placeholder="내용을 작성해주세요." name="content" required></textarea><br>
 				<input type="file" name="uploadFile" /><br>
 				<input class="submit" type="submit" value="등록"> <input
 					class="cancel" type="reset" value="취소">

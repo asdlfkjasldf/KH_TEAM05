@@ -1,7 +1,7 @@
 <link rel="stylesheet" type="text/css" href="./css/boardStyle.css">
 <link rel="stylesheet" type="text/css" href="./css/myStyle.css">
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8" errorPage="error.jsp"%>
 <%
 	String bno = request.getParameter("bno");
 if (bno == null || bno.equals("")) {
@@ -18,7 +18,7 @@ if (bno == null || bno.equals("")) {
 	<header>
 		<nav id="highmenu" class="topmenu">
 			<div id="logo">
-				<a href="./"><img src="./image/ex1.png"></a>
+				<a href="./main"><img src="./image/ex1.png"></a>
 			</div>
 			<ul>
 				<li><a href="./GameList">상점</a></li>
