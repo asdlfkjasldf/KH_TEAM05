@@ -72,7 +72,7 @@ public class MemberLoginServlet extends HttpServlet {
 				//session.setAttribute("memberLoginInfo", admin);
 				session.setAttribute("voList", admin);
 				System.out.println(admin);
-				//response.sendRedirect("./boardmanagement");
+				response.sendRedirect("./boardmanagement");
 			}
 		}
 		
