@@ -64,9 +64,7 @@ $(document).ready(function(){
 		    <li><a href="./memberlogin">로그인</a></li>
 		</c:when>
         <c:when test="${voList != null }">
-	        <c:forEach items="${voList}" var="vo">
-	        	${vo.mm_id }님
-	        </c:forEach>
+	        	${voList.mm_id }님
         </c:when>
     	</c:choose>
 	        <li><a href="./myinfo">마이페이지</a></li>
@@ -111,9 +109,11 @@ $(document).ready(function(){
  </c:if>
  </table>
  <a href="faq">목록</a>
- <!-- 이 부분은 어드민한테만 보이도록 수정 필요 -->
- <a href="faqupdate?no=${boardvo.fqNo }">글수정</a>
- <button id="btnBoardDelete">글삭제</button>
+ <!-- 관리자아이디일때만 보이도록 조건 -->
+	 <c:if test="${voList.mm_id eq 'ADMIN'}">    
+		 <a href="faqupdate?no=${boardvo.fqNo }">글수정</a>
+		 <button id="btnBoardDelete">글삭제</button>
+	 </c:if>
  
 		
     </div>

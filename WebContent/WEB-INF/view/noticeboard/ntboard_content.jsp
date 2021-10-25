@@ -62,9 +62,7 @@ $(document).ready(function(){
 		    <li><a href="./memberlogin">로그인</a></li>
 		</c:when>
         <c:when test="${voList != null }">
-	        <c:forEach items="${voList}" var="vo">
-	        	${vo.mm_id }님
-	        </c:forEach>
+	        	${voList.mm_id }님
         </c:when>
     	</c:choose>
 	        <li><a href="./myinfo">마이페이지</a></li>
@@ -111,8 +109,10 @@ $(document).ready(function(){
 </c:if>
 </table>
 <a href="notice">목록</a>
-<a href="noticeupdate?no=${boardvo.ntNo }">글수정 </a>
-<button id="btnBoardDelete">글삭제</button> 
+	<c:if test="${voList.mm_id eq 'ADMIN'}"> 
+		<a href="noticeupdate?no=${boardvo.ntNo }">글수정 </a>
+		<button id="btnBoardDelete">글삭제</button> 
+	</c:if>
 		
     </div>
     </div>

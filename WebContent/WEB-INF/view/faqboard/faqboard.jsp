@@ -51,9 +51,7 @@
 		    <li><a href="./memberlogin">로그인</a></li>
 		</c:when>
         <c:when test="${voList != null }">
-	        <c:forEach items="${voList}" var="vo">
-	        	${vo.mm_id }님
-	        </c:forEach>
+	        	${voList.mm_id }님
         </c:when>
     	</c:choose>
 	        <li><a href="./myinfo">마이페이지</a></li>
@@ -111,8 +109,8 @@
 
     <!-- 어드민만 쓸 수 있게 확인 필요함-->
     <br>
-    <c:if test="${memberInfo.mmid != null}">
-    <a href="faqwrite"> 글쓰기 </a>
+    <c:if test="${voList.mm_id eq 'ADMIN'}">
+    	<a href="faqwrite"> 글쓰기 </a>
     </c:if>
 		
     </div>

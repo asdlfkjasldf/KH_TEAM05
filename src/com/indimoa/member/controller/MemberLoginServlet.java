@@ -63,11 +63,23 @@ public class MemberLoginServlet extends HttpServlet {
 		
 		// 입력받은 사용자의 ID와 비밀번호를 인자로 하여 Service의 loginMember() 호출
 		List<Member> voList = new ArrayList<Member>(); 
+		
+		if ("ADMIN".equals(id)) {
+			if ("adminpwd1234".equals(pwd)) {
+				//아디,비번이 어드민일 경우 관리자 페이지로 이동
+				System.out.println("ADMIN이니까 이동");
+				Member admin = mservice.loginAdmin(id, pwd);
+				HttpSession session = request.getSession();
+				//session.setAttribute("memberLoginInfo", admin);
+				session.setAttribute("voList", admin);
+				System.out.println(admin);
+				response.sendRedirect("./boardmanagement");
+			}
+		}
+		
 		Member m = mservice.loginMember(id, pwd);
 		if (m != null) { 			// 로그인 성공
-			System.out.println("로그인성공");
 			HttpSession session = request.getSession();
-			
 			
 			session.setAttribute("memberLoginInfo", m);
 			session.setAttribute("voList", voList);
@@ -75,26 +87,15 @@ public class MemberLoginServlet extends HttpServlet {
 			
 			voList.add(m);
 			request.getRequestDispatcher("WEB-INF/view/login.jsp").forward(request, response);
-//			voList.add(m);
-//			
-//			Map<String, Object> map2 = new HashMap<String, Object>();
-//			map2.put("result", "ok");
-//			map2.put("name", m.getMm_name());
-//			map2.put("memberInfo", m);
-//			
-//			gobStr = gob.toJson(map2);
+
 			
 		} else {			//로그인 실패
-			System.out.println("로그인 실패");
+			
 			//예시1
 			Map<String, Object> map2 = new HashMap<String, Object>();
 			map2.put("result","fail");
 			gobStr = gob.toJson(map2);
 		}
-//		System.out.println("gobStr : " + gobStr);
-//		out.println(gobStr);
-//		out.flush();
-//		out.close();
 		
 		
 	}

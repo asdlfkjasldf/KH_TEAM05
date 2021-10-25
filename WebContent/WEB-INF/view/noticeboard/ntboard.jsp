@@ -53,9 +53,7 @@
 		    <li><a href="./memberlogin">로그인</a></li>
 		</c:when>
         <c:when test="${voList != null }">
-	        <c:forEach items="${voList}" var="vo">
-	        	${vo.mm_id }님
-	        </c:forEach>
+	        	${voList.mm_id }님
         </c:when>
     	</c:choose>
 	        <li><a href="./myinfo">마이페이지</a></li>
@@ -110,8 +108,7 @@
 
 
 	<br>
-	<!-- 로그인 사용자만 글쓰기 버튼 활성화 다만 관리자 계정인걸 확인해야함 todo -->
-	<c:if test="${memberInfo.mmid != null}">
+	 <c:if test="${voList.mm_id eq 'ADMIN'}"> 
 		<a href="noticewrite"> 글쓰기 </a>
 	</c:if>
     </div>

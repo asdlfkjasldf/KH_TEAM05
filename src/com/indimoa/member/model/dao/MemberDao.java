@@ -374,5 +374,32 @@ public class MemberDao {
 
 		return result;
 	}
+
+	public Member loginAdmin(Connection conn, String id, String pwd) {
+		Member admin = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = "select * from admin where ad_id = ? and ad_pwd = ?";
+		try {
+			
+			conn = getConnection(); // DB 연결 시도
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, id); // 첫번째 ‘?’ 에 id 값 대입
+			pstmt.setString(2, pwd); // 두번째 ‘?’ 에 passwd 값 대입
+			rset = pstmt.executeQuery();
+			if (rset.next()) { // 첫 열은 head 컬럼이므로 next() 로 실제 컬럼값을 가져온다.
+				admin = new Member();
+				admin.setMm_id(rset.getString("ad_id")); // 받아온 ID 컬럼 값을 member변수에 대입
+				admin.setMm_pwd(rset.getString("ad_pwd"));
+				admin.setMm_name(rset.getString("ad_logintime"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally { // ResultSet과 PreparedStatement 리소스를 반환
+			close(rset);
+			close(pstmt);
+		}
+		return admin; // 조회하여 가져온 admin 객체를 반환한다
+	}
 	
 }

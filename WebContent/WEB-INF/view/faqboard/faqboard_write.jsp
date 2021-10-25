@@ -80,9 +80,7 @@ $('input[type="text"]').keydown(function(e) {
 		    <li><a href="./memberlogin">로그인</a></li>
 		</c:when>
         <c:when test="${voList != null }">
-	        <c:forEach items="${voList}" var="vo">
-	        	${vo.mm_id }님
-	        </c:forEach>
+	        	${voList.mm_id }님
         </c:when>
     	</c:choose>
 	        <li><a href="./myinfo">마이페이지</a></li>

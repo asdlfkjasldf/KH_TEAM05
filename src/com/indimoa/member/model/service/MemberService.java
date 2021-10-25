@@ -97,6 +97,13 @@ public class MemberService {
 				JdbcTemplate.close(conn);
 				return userPwd;
 		}
+
+		public Member loginAdmin(String id, String pwd) {
+			Connection conn = JdbcTemplate.getConnection(); 
+			Member m = new MemberDao().loginAdmin(conn, id, pwd);
+			JdbcTemplate.close(conn);
+			return m; 
+		}
 		
 		 
 		 

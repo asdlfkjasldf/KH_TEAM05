@@ -128,13 +128,12 @@
 		<ul>
 	    <c:choose>
 		<c:when test="${voList == null }">
-			<li><a href="./enrollmember">회원가입</a></li>
-		    <li><a href="./memberlogin">로그인</a></li>
+			<script>
+				location.href="./";
+			</script>
 		</c:when>
         <c:when test="${voList != null }">
-	        <c:forEach items="${voList}" var="vo">
-	        	${vo.mm_id }님
-	        </c:forEach>
+	        	${voList.mm_id }님
         </c:when>
     	</c:choose>
 	        <li><a href="./myinfo">마이페이지</a></li>
@@ -153,8 +152,11 @@
 	
     <div class="section">
 	<div class="Asside-left">
-	
-	<!-- 왼쪽의 서브 메뉴 -->
+		<ul>
+			<li><a href="#">내 정보</a></li>
+			<li><a href="./adminmembers" id="liRedirect">회원</a></li>
+			<li><a href="./boardmanagement">FAQ</a></li>	
+		</ul>
 	
 	</div>
     <div class="Article">

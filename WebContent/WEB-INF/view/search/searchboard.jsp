@@ -134,8 +134,15 @@ td#info{
 	</nav>
 		<nav id="topmenu_tnb">
 		<ul>
-	        <li><a href="./enrollmember">회원가입</a></li>
-	        <li><a href="./memberlogin">로그인</a></li>
+        <c:choose>
+		<c:when test="${voList == null }">
+			<li><a href="./enrollmember">회원가입</a></li>
+		    <li><a href="./memberlogin">로그인</a></li>
+		</c:when>
+        <c:when test="${voList != null }">
+	        	${voList.mm_id }님
+        </c:when>
+    	</c:choose>
 	        <li><a href="./myinfo">마이페이지</a></li>
 	        <li><a href="./cartlist">장바구니</a></li>
 		</ul>     
