@@ -98,8 +98,8 @@
 
 
    <header>
-	<div id="logo"><a href="./"><img src="./image/ex1.png"></a></div>
 	<nav id="highmenu" class="topmenu">
+	<div id="logo"><a href="./"><img src="./image/ex1.png"></a></div>
 	    <ul>
         <li><a href="./GameList">상점</a></li>
         <li><button class="accordion">커뮤니티</button>
@@ -127,17 +127,8 @@
 	</nav>
 		<nav id="topmenu_tnb">
 		<ul>
-	<c:choose>
-		<c:when test="${voList == null }">
-			<li><a href="./enrollmember">회원가입</a></li>
-		    <li><a href="./memberlogin">로그인</a></li>
-		</c:when>
-        <c:when test="${voList != null }">
-        <c:forEach items="${voList}" var="vo">
-        	${vo.mm_id }님
-        </c:forEach>
-        </c:when>
-    </c:choose>
+	        <li><a href="./enrollmember">회원가입</a></li>
+	        <li><a href="./memberlogin">로그인</a></li>
 	        <li><a href="./myinfo">마이페이지</a></li>
 	        <li><a href="./cartlist">장바구니</a></li>
 		</ul>     
