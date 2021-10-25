@@ -140,12 +140,6 @@
             <p class="btn-area">
                 <button id="btn" type="submit" >로그인</button>
             </p>
-            <p class="caption">
-                <a href="./findId">아이디 찾기</a>
-            </p>
-            <p class="caption">
-                <a href="./findPwd">비밀번호 찾기</a>
-            </p>
         </form>
     </div>
 

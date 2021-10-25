@@ -51,7 +51,6 @@
 		    <li><a href="./memberlogin">로그인</a></li>
 		</c:when>
         <c:when test="${voList != null }">
-	        
 	        	${voList.mm_id }님
         </c:when>
     	</c:choose>
@@ -110,8 +109,8 @@
 
     <!-- 어드민만 쓸 수 있게 확인 필요함-->
     <br>
-    <c:if test="${memberInfo.mmid != null}">
-    <a href="faqwrite"> 글쓰기 </a>
+    <c:if test="${voList.mm_id eq 'ADMIN'}">
+    	<a href="faqwrite"> 글쓰기 </a>
     </c:if>
 		
     </div>
