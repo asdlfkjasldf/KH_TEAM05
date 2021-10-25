@@ -77,7 +77,6 @@
         <td>글쓴이</td>
         <td>작성일자</td>
         <td>조회수</td>
-        <td>댓글수</td>
 	</tr>
     <c:if test="${volist != null}">
         <c:forEach items="${volist}" var="vo">
@@ -89,7 +88,6 @@
             <td>${vo.adId}</td>
             <td>${vo.fqDatetime}</td>
             <td>${vo.fqVisit}</td>
-            <td>${vo.fqReply}</td>
         </tr>
         </c:forEach>
     </c:if>

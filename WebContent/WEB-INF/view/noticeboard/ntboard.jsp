@@ -100,10 +100,9 @@
 <c:if test="${endPage < pageCount }"> 다음 </c:if>
 
 
-	<br>
-	 <c:if test="${voList.mm_id eq 'ADMIN'}"> 
-		<a href="noticewrite"> 글쓰기 </a>
-	</c:if>
+	<br>  
+	<a href="noticewrite"> 글쓰기 </a>
+	
     </div>
     </div>
 
