@@ -46,8 +46,7 @@
 		<nav id="topmenu_tnb">
 		<ul>
 		<!-- 맨위 쪽에 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 필요하며		
-		아래의 choose문으로 세션에 따라서 회원가입,로그인이 보이게하며 서블릿파일에 session.setAttribute("voList", voList);와
-		 request.getRequestDispatcher("jsp경로").forward(request, response);가 있어야 작동합니다.-->
+		아래의 choose문으로 세션에 따라서 회원가입,로그인이 보이도록 작동합니다.-->
 	    <c:choose>
 		<c:when test="${voList == null }">
 			<li><a href="./enrollmember">회원가입</a></li>
