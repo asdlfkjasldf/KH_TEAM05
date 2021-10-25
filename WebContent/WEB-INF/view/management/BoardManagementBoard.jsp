@@ -242,10 +242,10 @@
 <body>
 
 	<header>
-	<div id="logo"><a href="./"><img src="./image/ex1.png"></a></div>
 	<nav id="highmenu" class="topmenu">
+	<div id="logo"><a href="./main"><img src="./image/ex1.png"></a></div>
 	    <ul>
-        <li><a href="./search?">상점</a></li>
+        <li><a href="./GameList">상점</a></li>
         <li><button class="accordion">커뮤니티</button>
         	<div class="panel">
         	<ul>
@@ -271,16 +271,8 @@
 	</nav>
 		<nav id="topmenu_tnb">
 		<ul>
-	    <c:choose>
-		<c:when test="${voList == null }">
-			<script>
-				location.href="./";
-			</script>
-		</c:when>
-        <c:when test="${voList != null }">
-	        	${voList.mm_id }님
-        </c:when>
-    	</c:choose>
+	        <li><a href="./enrollmember">회원가입</a></li>
+	        <li><a href="./memberlogin">로그인</a></li>
 	        <li><a href="./myinfo">마이페이지</a></li>
 	        <li><a href="./cartlist">장바구니</a></li>
 		</ul>     
@@ -296,14 +288,15 @@
 	
 	
     <div class="section">
-	<div class="Asside-left">
-			<ul>
-				<li><a href="#">내 정보</a></li>
-				<li><a href="./adminmembers" id="liRedirect">회원</a></li>
-				<li><a href="./boardmanagement">FAQ</a></li>
-			</ul>
+	<div class="aside-left">
+		<ul>
+			<li><a href="#">내 정보</a></li>
+			<li><a href="./adminmembers" >회원</a></li>
+			<li><a href="./boardmanagement" id="liRedirect">FAQ</a></li>	
+		</ul>
+	
 	</div>
-    <div class="Article">
+    <div class="article">
     <!-- 페이지의 메인 아티클 -->
 
 <div class="Article">

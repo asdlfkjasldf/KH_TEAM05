@@ -18,9 +18,9 @@
 
 </head>
 <body>
-    <header>
-	<div id="logo"><a href="./"><img src="./image/ex1.png"></a></div>
+    	<header>
 	<nav id="highmenu" class="topmenu">
+	<div id="logo"><a href="./main"><img src="./image/ex1.png"></a></div>
 	    <ul>
         <li><a href="./GameList">상점</a></li>
         <li><button class="accordion">커뮤니티</button>
@@ -55,6 +55,22 @@
 		</ul>     
 		</nav>
 	</header>
+	
+	<div id="promotion">
+	
+	
+	
+	</div>
+	
+	
+	
+    <div class="section">
+	<div class="aside-left">
+	
+	<!-- 왼쪽의 서브 메뉴 -->
+	
+	</div>
+    <div class="article">
 	
 	<div class="section">
 	<h2 align="center">회원 가입 하기</h2>
@@ -127,7 +143,7 @@
 	<br>
 	<br>
 	<p align="center">
-		<input type="button"><a href="/WEB-INF/view/index.jsp">메인으로 가기</a>
+		<input type="button"><a href="./main">메인으로 가기</a>
 	</p>
 </div>
 	

@@ -12,62 +12,7 @@
 <style type="text/css">
 
 
-#logo{
-	width: 100px;
-	
-	position: absolute;
-	
-}
-#highmenu ul li {
-	
-	display: inline-block;
-	float: left;
-	margin: 15px;
-	text-align: center;
-	position: relative;
-	padding-bottom: 0px;
-}
-#topmenu ul li{
-	display: inline-block;
-	float: left;
-	margin: 15px;
-	padding: 10px;
-	position: relative;
-}
 
-
-
-.Header {
-	width: 100%;
-	height: 220px;
-	font: 16px;
-	font-weight: bold;
-	background-color: white;
-}
-
-.Asside-left {
-	width: 15%;
-	font: 16px;
-	float: left;
-	background-color: gainsboro;
-	
-	 
-}
-#Middle-page{
-	
-	
-	 
-}
-#liRedirect{
-	color: white;
-}
-
-.Article {
-	width: 85%;
-	font: 15px;
-	float: right;
-	background-color: gray;
-}
 
 
 </style>
@@ -96,9 +41,9 @@
 </head>
 <body>
 	
-		<header>
-	<div id="logo"><a href="./"><img src="./image/ex1.png"></a></div>
+			<header>
 	<nav id="highmenu" class="topmenu">
+	<div id="logo"><a href="./main"><img src="./image/ex1.png"></a></div>
 	    <ul>
         <li><a href="./GameList">상점</a></li>
         <li><button class="accordion">커뮤니티</button>
@@ -126,16 +71,8 @@
 	</nav>
 		<nav id="topmenu_tnb">
 		<ul>
-	    <c:choose>
-		<c:when test="${voList == null }">
-			<script>
-				location.href="./";
-			</script>
-		</c:when>
-        <c:when test="${voList != null }">
-	        	${voList.mm_id }님
-        </c:when>
-    	</c:choose>
+	        <li><a href="./enrollmember">회원가입</a></li>
+	        <li><a href="./memberlogin">로그인</a></li>
 	        <li><a href="./myinfo">마이페이지</a></li>
 	        <li><a href="./cartlist">장바구니</a></li>
 		</ul>     
@@ -151,7 +88,7 @@
 	
 	
     <div class="section">
-	<div class="Asside-left">
+	<div class="aside-left">
 		<ul>
 			<li><a href="#">내 정보</a></li>
 			<li><a href="./adminmembers" id="liRedirect">회원</a></li>
@@ -159,7 +96,7 @@
 		</ul>
 	
 	</div>
-    <div class="Article">
+    <div class="article">
     <!-- 페이지의 메인 아티클 -->
     
 	<h1>회원</h1>
