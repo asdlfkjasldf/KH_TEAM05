@@ -108,8 +108,8 @@
                 <tr>
 					<td>프로필 :</td>
 					<td>
-                        <input type="file" id="profile" name="mm_profile" class="input" accept="image/*" onchange="setThumbnail(event);">
-                        <img id="profile_img" src="" width="200px">
+                        
+                        <img id="profile_img" src="image/profilesybol.jpg" width="200px" style="background-color: white">
                     </td>
 				</tr>
                 <tr>
