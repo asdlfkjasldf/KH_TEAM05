@@ -224,7 +224,7 @@ footer {
 
 <body>
 <header>
-	<div id="logo"><a href="./"><img src="./image/ex1.png"></a></div>
+	<div id="logo"><a href="./main"><img src="./image/ex1.png"></a></div>
 	<nav id="highmenu" class="topmenu">
 	    <ul>
         <li><a href="./GameList">상점</a></li>
